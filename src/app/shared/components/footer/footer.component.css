@@ -1,0 +1,15 @@
+.footer {
+  line-height: 20px;
+}
+
+.footer-opacity {
+  background-color: #0e0e0e73;
+}
+
+.footer .copyright {
+  color: #777777;
+  padding: 10px 15px;
+  margin: 10px 3px;
+  line-height: 20px;
+  font-size: 14px;
+}

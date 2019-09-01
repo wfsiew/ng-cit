@@ -2,8 +2,13 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+const server = {
+  cloud: 'http://139.59.221.42:8001',
+};
+
 export const environment = {
-  production: false
+  production: false,
+  baseUrl: server.cloud
 };
 
 /*

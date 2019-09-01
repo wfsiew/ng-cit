@@ -1,0 +1,125 @@
+<div class="wrapper">
+  <header class="main-header">
+    <a href="#" class="logo">
+      <!-- mini logo for sidebar mini 50x50 pixels -->
+      <span class="logo-mini"><b></b></span>
+      <!-- logo for regular state and mobile devices -->
+      <span class="logo-lg">
+        <img src="assets/img/FMXLOGO.png" alt="logo_image" style="width: 100px; margin-left: 45px;">
+      </span>
+    </a>
+    <nav class="navbar navbar-static-top">
+      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+          <li class="dropdown user user-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <span class="hidden-xs">Alexander Pierce</span>
+            </a>
+            <ul class="dropdown-menu">
+              <!-- User image -->
+              <li class="user-header">
+                <p>
+                  Alexander Pierce - Web Developer
+                  <small>Member since Nov. 2012</small>
+                </p>
+              </li>
+              <!-- Menu Body -->
+              <li class="user-body">
+                <div class="row">
+                  <div class="col-xs-4 text-center">
+                    <a href="#">Followers</a>
+                  </div>
+                  <div class="col-xs-4 text-center">
+                    <a href="#">Sales</a>
+                  </div>
+                  <div class="col-xs-4 text-center">
+                    <a href="#">Friends</a>
+                  </div>
+                </div>
+                <!-- /.row -->
+              </li>
+              <!-- Menu Footer-->
+              <li class="user-footer">
+                <div class="pull-left">
+                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+                </div>
+                <div class="pull-right">
+                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <aside class="main-sidebar">
+    <section class="sidebar">
+      <ul class="sidebar-menu" data-widget="tree">
+        <li [ngClass]="{'active': menu === 'dashboard'}">
+          <a href="#" (click)="goto('dashboard', 'dashboard')">
+            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+          </a>
+        </li>
+        <li [ngClass]="{'active': menu === 'user-profile'}">
+          <a href="#" (click)="goto('user-profile', 'user-profile')">
+            <i class="fa fa-user-circle-o"></i> <span>User Profile</span>
+          </a>
+        </li>
+        <li [ngClass]="{'active': menu === 'company-profile'}">
+          <a href="#" (click)="goto('company-profile', 'company-profile')">
+            <i class="fa fa-user-circle-o"></i> <span>Company Profile</span>
+          </a>
+        </li>
+        
+        <li class="treeview" [ngClass]="{'active': shipment === true}">
+          <a href="#">
+            <i class="fa fa-truck"></i> <span>Shipment</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li [ngClass]="{'active': menu === 'shipment-create'}"><a href="#" (click)="goto('shipment-create', 'shipment/create')"><i class="fa fa-barcode"></i> Create New Shipment</a></li>
+            <li><a href="#"><i class="fa fa-list-alt"></i> Shipment List</a></li>
+            <li><a href="#"><i class="fa fa-upload"></i> Upload Bulk Shipment</a></li>
+            <li><a href="#"><i class="fa fa-edit"></i> Edit Shipment</a></li>
+          </ul>
+        </li>
+
+        <li class="treeview" [ngClass]="{'active': address_book === true}">
+          <a href="#">
+            <i class="fa fa-truck"></i> <span>Address Book</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li [ngClass]="{'active': menu === 'address-book-create'}"><a href="#"
+                (click)="goto('address-book-create', 'address-book/create')"><i class="fa fa-address-card"></i> Create New Address Book</a></li>
+            <li [ngClass]="{'active': menu === 'address-book-list'}"><a href="#"
+                (click)="goto('address-book-list', 'address-book/list')"><i class="fa fa-list-alt"></i> Address Book List</a></li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+  </aside>
+
+  <div class="content-wrapper">
+    <router-outlet></router-outlet>
+  </div>
+
+  <footer class="main-footer">
+    <p class="copyright pull-right">© 2019 <a href="#" style="color: rgb(0, 82, 155);">Freight Mark Express</a>,
+      Delivering Perfection</p>
+    <div style="color: white">text</div>
+  </footer>
+</div>
