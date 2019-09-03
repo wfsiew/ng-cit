@@ -13,6 +13,7 @@ import { Helper } from '../../../shared/utils/helper';
 })
 export class AddressBookModalComponent implements OnInit {
 
+  title: string;
   closeBtnName: string;
   list = [];
   itemsCount: number;
@@ -59,5 +60,9 @@ export class AddressBookModalComponent implements OnInit {
   onHide() {
     this.onClose.next({ result: false, data: null });
     this.bsModalRef.hide();
+  }
+
+  pageChanged(event: any) {
+    this.page = event.page;
   }
 }
