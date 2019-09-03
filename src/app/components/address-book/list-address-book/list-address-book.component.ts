@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AddressBookService } from '../../../services/address-book.service';
+import { MessageService } from '../../../services/message.service';
 import _ from 'lodash';
 import { ToastrService } from 'ngx-toastr';
 import { Helper } from '../../../shared/utils/helper';
@@ -19,7 +21,9 @@ export class ListAddressBookComponent implements OnInit {
   readonly isEmpty = Helper.isEmpty;
 
   constructor(
+    private router: Router,
     private addressBookService: AddressBookService,
+    private msService: MessageService,
     private toastr: ToastrService
   ) { }
 
@@ -79,5 +83,10 @@ export class ListAddressBookComponent implements OnInit {
     (error) => {
       this.toastr.error('Delete Address Book Failed', 'Delete Address Book');
     });
+  }
+
+  onEdit(o) {
+    this.msService.send('edit-address-book', o);
+    this.router.navigate(['/cit/address-book/create'], { queryParams: { edit: 1 }});
   }
 }

@@ -1,0 +1,121 @@
+<section class="content-header">
+  <h1>Company Profile</h1>
+</section>
+<section class="content">
+  <div class="box">
+    <div class="box-header with-border">
+      <h3 class="box-title">Company Profile</h3>
+    </div>
+    <form [formGroup]="mform">
+      <div class="box-body">
+        <div class="form-group">
+          <div class="row">
+            <div class="col-xs-2">
+              <label>Company Code</label>
+            </div>
+            <div class="col-xs-4">
+              <label>Company Name</label>
+            </div>
+            <div class="col-xs-3">
+              <label>Display Name</label>
+            </div>
+            <div class="col-xs-3">
+              <label>Parent Company Name</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-2">
+              <p class="form-control-static">{{ data.company_code }}</p>
+            </div>
+            <div class="col-xs-4">
+              <p class="form-control-static">{{ data.company_name }}</p>
+            </div>
+            <div class="col-xs-3">
+              <p class="form-control-static">{{ data.display_name }}</p>
+            </div>
+            <div class="col-xs-3">
+              <p class="form-control-static">{{ data.parent_company_name }}</p>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-2">
+              <label>Company Phone</label>
+            </div>
+            <div class="col-xs-4">
+              <label>Is COD</label>
+            </div>
+            <div class="col-xs-3">
+              <label>Is DO</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-2">
+              <p class="form-control-static">{{ data.company_phone_number }}</p>
+            </div>
+            <div class="col-xs-4">
+              <i class="fa" [ngClass]="{'fa-check': data.is_cod, 'fa-close': !data.is_cod}"></i>
+            </div>
+            <div class="col-xs-3">
+              <i class="fa" [ngClass]="{'fa-check': data.is_do, 'fa-close': !data.is_do}"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12">
+            <label>Address 1</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <p class="form-control-static">{{ data.company_address1 }}</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <label>Address 2</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <p class="form-control-static">{{ data.company_address2 }}</p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-3">
+            <label>City</label>
+          </div>
+          <div class="col-xs-3">
+            <label>State</label>
+          </div>
+          <div class="col-xs-3">
+            <label>District</label>
+          </div>
+          <div class="col-xs-3">
+            <label>Country</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-3">
+            <p class="form-control-static">{{ data.company_city }}</p>
+          </div>
+          <div class="col-xs-3">
+            <p class="form-control-static">{{ data.company_state_province }}</p>
+          </div>
+          <div class="col-xs-3">
+            <p class="form-control-static">{{ data.company_district }}</p>
+          </div>
+          <div class="col-xs-3">
+            <p class="form-control-static">{{ data.company_country }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="box-footer">
+        <button type="submit" class="btn btn-primary" [disabled]="mform.invalid">Submit</button>
+      </div>
+    </form>
+  </div>
+</section>"

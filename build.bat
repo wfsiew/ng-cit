@@ -1,0 +1,1 @@
+ng build --prod --base-href https://wfsiew.github.io/ng-cit/ --output-path docs

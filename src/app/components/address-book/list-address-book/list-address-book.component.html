@@ -28,6 +28,7 @@
                 <th>City</th>
                 <th>State</th>
                 <th>Country</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -42,6 +43,11 @@
                 <td>{{ o.city }}</td>
                 <td>{{ o.state_province }}</td>
                 <td>{{ o.country }}</td>
+                <td>
+                  <button type="button" class="btn btn-primary" (click)="onEdit(o)">
+                    <i class="fa fa-edit"></i> Edit
+                  </button>
+                </td>
               </tr>
             </tbody>
           </table>

@@ -11,6 +11,6 @@ export class DashboardComponent implements OnInit {
   constructor(private messageService: MessageService) { }
 
   ngOnInit() {
-    this.messageService.sendMessage('menu', { name: 'dashboard' });
+    this.messageService.send('menu', { name: 'dashboard' });
   }
 }

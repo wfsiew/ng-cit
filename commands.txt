@@ -1,0 +1,3 @@
+ng build --prod --base-href https://wfsiew.github.io/ng-cit/ --output-path docs
+
+https://shermandigital.com/blog/fix-404-errors-from-angular-projects-hosted-on-github-pages/

@@ -29,6 +29,7 @@ import { CreateShipmentComponent } from './components/shipment/create-shipment/c
 import { ListShipmentComponent } from './components/shipment/list-shipment/list-shipment.component';
 import { CreateAddressBookComponent } from './components/address-book/create-address-book/create-address-book.component';
 import { ListAddressBookComponent } from './components/address-book/list-address-book/list-address-book.component';
+import { CompanyProfileComponent } from './components/company-profile/company-profile.component';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   bgsColor: 'blue',
@@ -60,7 +61,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     CreateShipmentComponent,
     ListShipmentComponent,
     CreateAddressBookComponent,
-    ListAddressBookComponent
+    ListAddressBookComponent,
+    CompanyProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -72,7 +74,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     NgSelectModule,
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
     NgxUiLoaderRouterModule,
-    NgxUiLoaderHttpModule,
+    NgxUiLoaderHttpModule.forRoot({ showForeground: true }),
     ToastrModule.forRoot()
   ],
   providers: [

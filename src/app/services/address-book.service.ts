@@ -27,4 +27,8 @@ export class AddressBookService {
     });
     return this.http.post(`${this.baseUrl}/api/address/delete`, ls);
   }
+
+  updateAddressBook(o) {
+    return this.http.put(`${this.baseUrl}/api/address/update`, o);
+  }
 }

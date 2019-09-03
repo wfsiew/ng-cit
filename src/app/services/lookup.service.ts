@@ -15,4 +15,12 @@ export class LookupService {
   listCountryInfo() {
     return this.http.get(`${this.baseUrl}/api/lookup/country-info`);
   }
+
+  listService() {
+    return this.http.get(`${this.baseUrl}/api/lookup/generic_master?master_type=service`);
+  }
+
+  listUOM() {
+    return this.http.get(`${this.baseUrl}/api/lookup/generic_master?master_type=uom`);
+  }
 }
