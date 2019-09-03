@@ -17,6 +17,7 @@ export class ListAddressBookComponent implements OnInit {
   itemsCount: number;
   selectAll = false;
   listSelected = [];
+  page = 1;
 
   readonly isEmpty = Helper.isEmpty;
 
@@ -88,5 +89,9 @@ export class ListAddressBookComponent implements OnInit {
   onEdit(o) {
     this.msService.send('edit-address-book', o);
     this.router.navigate(['/cit/address-book/create'], { queryParams: { edit: 1 }});
+  }
+
+  pageChanged(event: any) {
+    this.page = event.page;
   }
 }

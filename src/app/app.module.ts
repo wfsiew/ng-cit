@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { PaginationModule, ModalModule  } from 'ngx-bootstrap';
 import {
   NgxUiLoaderModule, NgxUiLoaderConfig, SPINNER, POSITION,
   PB_DIRECTION, NgxUiLoaderRouterModule, NgxUiLoaderHttpModule
@@ -30,6 +31,7 @@ import { ListShipmentComponent } from './components/shipment/list-shipment/list-
 import { CreateAddressBookComponent } from './components/address-book/create-address-book/create-address-book.component';
 import { ListAddressBookComponent } from './components/address-book/list-address-book/list-address-book.component';
 import { CompanyProfileComponent } from './components/company-profile/company-profile.component';
+import { AddressBookModalComponent } from './shared/components/address-book-modal/address-book-modal.component';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   bgsColor: 'blue',
@@ -62,7 +64,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     ListShipmentComponent,
     CreateAddressBookComponent,
     ListAddressBookComponent,
-    CompanyProfileComponent
+    CompanyProfileComponent,
+    AddressBookModalComponent
   ],
   imports: [
     BrowserModule,
@@ -72,6 +75,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     FormsModule,
     ReactiveFormsModule,
     NgSelectModule,
+    PaginationModule.forRoot(),
+    ModalModule .forRoot(),
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
     NgxUiLoaderRouterModule,
     NgxUiLoaderHttpModule.forRoot({ showForeground: true }),
@@ -92,6 +97,9 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
       useClass: HttpTimeoutInterceptor,
       multi: true
     }
+  ],
+  entryComponents: [
+    AddressBookModalComponent
   ],
   bootstrap: [AppComponent]
 })

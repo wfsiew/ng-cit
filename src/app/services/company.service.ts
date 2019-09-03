@@ -21,7 +21,7 @@ export class CompanyService {
     return this.http.post(`${this.baseUrl}/api/company/add_service`, o);
   }
 
-  deleteCompanyAndService(o) {
-    return this.http.post(`${this.baseUrl}/api/company/delete_service`, o);
+  updateCompanyAndService(o) {
+    return this.http.post(`${this.baseUrl}/api/company/update`, o);
   }
 }

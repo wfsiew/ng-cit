@@ -61,19 +61,8 @@ export class AuthService {
     return this.token;
   }
 
-  getUserDetails(): Observable<UserDetail[]> {
-    return this.http.get(this.userDetailsUrl).pipe(
-      map((res: any) => {
-        const o = res.data;
-        localStorage.setItem('user-detail', JSON.stringify(o));
-        let lx: UserDetail[] = [];
-        _.each(o, (x) => {
-          let k: UserDetail = Object.assign(new UserDetail(), x);
-          lx.push(k);
-        });
-        return lx;
-      })
-    );
+  getUserDetails() {
+    return this.http.get(this.userDetailsUrl);
   }
 
   loadUser(): User {
@@ -84,15 +73,5 @@ export class AuthService {
     }
 
     return user;
-  }
-
-  loadUserDetails() {
-    const o = localStorage.getItem('user-detail');
-    let x = null;
-    if (!_.isNull(o)) {
-      x = JSON.parse(o);
-    }
-
-    return x;
   }
 }

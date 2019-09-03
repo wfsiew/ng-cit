@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CompanyService } from '../../services/company.service';
 import _ from 'lodash';
 import { ToastrService } from 'ngx-toastr';
+import { Helper } from '../../shared/utils/helper';
 
 @Component({
   selector: 'app-company-profile',
@@ -13,6 +14,10 @@ export class CompanyProfileComponent implements OnInit {
 
   mform: FormGroup;
   data: any;
+  selectAll = false;
+  listSelected = [];
+
+  readonly isEmpty = Helper.isEmpty;
 
   constructor(
     private fb: FormBuilder,
@@ -50,9 +55,51 @@ export class CompanyProfileComponent implements OnInit {
       this.data = !_.isEmpty(res.data) ? res.data[0] : {};
       this.setForm();
     },
-      (error) => {
-        this.toastr.error('Load Company Detail Failed', 'Company Detail');
-      });
+    (error) => {
+      this.toastr.error('Load Company Detail Failed', 'Company Detail');
+    });
+  }
+
+  onChangeSelectAll() {
+    this.selectAll = !this.selectAll;
+    this.listSelected = [];
+    _.each(this.data.company_service_list, (o) => {
+      o.selected = this.selectAll;
+      if (!o.selected) {
+        this.listSelected = this.listSelected.filter(x => x !== o.service_id);
+      }
+
+      else {
+        this.listSelected.push(o.service_id);
+      }
+    });
+  }
+
+  onChangeSelect(o) {
+    o.selected = !o.selected;
+    if (!o.selected) {
+      this.listSelected = this.listSelected.filter(x => x !== o.service_id);
+    }
+
+    else {
+      this.listSelected.push(o.service_id);
+    }
+  }
+
+  onDeleteSelected() {
+    const x = this.data;
+    // const o = {
+    //   company_id: x.company_id,
+    //   service_list: this.listSelected
+    // };
+    // this.companyService.updateCompanyAndService(o).subscribe(res => {
+    //   this.selectAll = false;
+    //   this.listSelected = [];
+    //   this.load();
+    // },
+    // (error) => {
+    //   this.toastr.error('Delete Service Failed', 'Delete Company Service');
+    // });
   }
 
   get f() {

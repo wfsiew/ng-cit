@@ -111,11 +111,44 @@
             <p class="form-control-static">{{ data.company_country }}</p>
           </div>
         </div>
+
+        <br />
+        <div class="row">
+          <div class="col-xs-2">
+            <label>Services</label>
+          </div>
+          <div class="col-xs-3">
+            <button type="button" class="btn btn-danger" (click)="onDeleteSelected()" [disabled]="isEmpty(listSelected)"
+              *ngIf="!isEmpty(data.company_service_list)">Delete</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 table-responsive">
+            <table class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th>
+                    <input type="checkbox" [checked]="selectAll" (change)="onChangeSelectAll()" />
+                  </th>
+                  <th>Service Code</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let o of data.company_service_list">
+                  <td>
+                    <input type="checkbox" [checked]="o.selected" (change)="onChangeSelect(o)" />
+                  </td>
+                  <td>{{ o.service_code }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
 
       <div class="box-footer">
-        <button type="submit" class="btn btn-primary" [disabled]="mform.invalid">Submit</button>
+        <!-- <button type="submit" class="btn btn-primary" [disabled]="mform.invalid">Submit</button> -->
       </div>
     </form>
   </div>
-</section>"
+</section>

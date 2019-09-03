@@ -6,51 +6,74 @@
     <div class="col-xs-12">
       <div class="box">
         <div class="box-header">
-          <button type="button" class="btn btn-danger" 
-            (click)="onDeleteSelected()" 
-            [disabled]="isEmpty(listSelected)"
-            *ngIf="!isEmpty(list)">Delete</button>
+          <div class="pull-left">
+            <button type="button" class="btn btn-danger" 
+              (click)="onDeleteSelected()" 
+              [disabled]="isEmpty(listSelected)"
+              *ngIf="!isEmpty(list)">Delete</button>
+          </div>
+          
+          <div class="pull-right">
+            <div class="input-group">
+              <input type="text" name="q" class="form-control" placeholder="Search...">
+              <span class="input-group-btn">
+                <button type="button" name="search" class="btn btn-flat"><i class="fa fa-search"></i>
+                </button>
+              </span>
+            </div>
+          </div>
         </div>
         <div class="box-body">
           <div class="text-center" *ngIf="isEmpty(list)">
             <h4 class="box-title">No records found</h4>
           </div>
-          <table class="table table-bordered table-hover" *ngIf="!isEmpty(list)">
-            <thead>
-              <tr>
-                <th>
-                  <input type="checkbox" [checked]="selectAll" (change)="onChangeSelectAll()" />
-                </th>
-                <th>Name</th>
-                <th>Address 1</th>
-                <th>Address 2</th>
-                <th>Postcode</th>
-                <th>City</th>
-                <th>State</th>
-                <th>Country</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let o of list">
-                <td>
-                  <input type="checkbox" [checked]="o.selected" (change)="onChangeSelect(o)" />
-                </td>
-                <td>{{ o.full_name }}</td>
-                <td>{{ o.address1 }}</td>
-                <td>{{ o.address2 }}</td>
-                <td>{{ o.postcode }}</td>
-                <td>{{ o.city }}</td>
-                <td>{{ o.state_province }}</td>
-                <td>{{ o.country }}</td>
-                <td>
-                  <button type="button" class="btn btn-primary" (click)="onEdit(o)">
-                    <i class="fa fa-edit"></i> Edit
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover" *ngIf="!isEmpty(list)">
+              <thead>
+                <tr>
+                  <th>
+                    <input type="checkbox" [checked]="selectAll" (change)="onChangeSelectAll()" />
+                  </th>
+                  <th>Name</th>
+                  <th>Address 1</th>
+                  <th>Address 2</th>
+                  <th>Postcode</th>
+                  <th>City</th>
+                  <th>State</th>
+                  <th>Country</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let o of list">
+                  <td>
+                    <input type="checkbox" [checked]="o.selected" (change)="onChangeSelect(o)" />
+                  </td>
+                  <td>{{ o.full_name }}</td>
+                  <td>{{ o.address1 }}</td>
+                  <td>{{ o.address2 }}</td>
+                  <td>{{ o.postcode }}</td>
+                  <td>{{ o.city }}</td>
+                  <td>{{ o.state_province }}</td>
+                  <td>{{ o.country }}</td>
+                  <td>
+                    <button type="button" class="btn btn-primary" (click)="onEdit(o)">
+                      <i class="fa fa-edit"></i> Edit
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="9">
+                    <div class="pull-right">
+                      <pagination [totalItems]="itemsCount" [(ngModel)]="page" (pageChanged)="pageChanged($event)"></pagination>
+                    </div>
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
         </div>
       </div>
     </div>
