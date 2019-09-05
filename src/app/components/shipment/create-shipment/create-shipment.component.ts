@@ -239,6 +239,11 @@ export class CreateShipmentComponent implements OnInit {
       currency: f.currency.value
     };
     this.listGood.push(o);
+    this.gform.patchValue({
+      description: '',
+      quantity: '1',
+      value: '0.00'
+    });
   }
 
   onRemoveGoods() {
@@ -251,7 +256,82 @@ export class CreateShipmentComponent implements OnInit {
   }
 
   onSubmit() {
-    
+    /*
+{
+	    "customer_reference": "MH01",
+	    "origin_address_id": "ADC01",
+	    "origin_shipper_address1": "No 136, Hala Lapangan Peradana, Hala Lapangan Panorama",
+	    "origin_shipper_address2": "",
+	    "origin_shipper_address3": "",
+	    "origin_shipper_address4": "",
+	    "origin_shipper_postcode": "31650",
+	    "origin_shipper_city": "Puchong",
+	    "origin_shipper_state_province": "Selangor",
+	    "origin_shipper_district": "",
+	    "origin_shipper_country": "MY",
+	    "origin_shipper_name": "Kong Mun Hoe",
+	    "origin_shipper_phone_no": "0165324876",
+	    "origin_shipper_mobile_no": "0165324876",
+	    "origin_shipper_email": "haseo2408@gmail.com",
+	    "dest_address_id": "ADC02",
+	    "dest_receiver_address1": "No 16, Jalan Bahagia, Taman ABC",
+	    "dest_receiver_address2": "",
+	    "dest_receiver_address3": "",
+	    "dest_receiver_address4": "",
+	    "dest_receiver_postcode": "47500",
+	    "dest_receiver_city": "Petaling Jaya",
+	    "dest_receiver_state_province": "Selangor",
+	    "dest_receiver_district": "",
+	    "dest_receiver_country": "MY",
+	    "dest_receiver_phone_no": "0125529182",
+	    "dest_receiver_mobile_no": "0125529182",
+	    "dest_receiver_email": "haseo2409@gmail.com",
+	    "dest_receiver_name": "Kong Zai",
+	    "cod": true,
+	    "cod_value": 9.30,
+	    "carton_box_code": "XL",
+	    "total_package_no": 1,
+	    "service_type": "EXP",
+	    "order_amount" : 25.00,
+	    "insurance_amount": 30.00,
+	    "chargeable_weight": 5.00,
+	    "chargeable_weight_uom": "KG",
+	    "order_amount_currency": "MY",
+	    "shipment_package_list":
+	    [{
+	    	"description" : "This is a good book to read",
+	    	"weight": 4.2,
+	    	"volume": 5.2,
+	    	"height": 6.32,
+	    	"length": 7.9,
+	    	"width": 10.0,
+	    	"value": 10.45,
+	    	"currency": "MY",
+	    	"quantity": 6,
+	    	"uom":"PAS",
+	    	"product_list": [{
+	    		"product_name": "Magazine",
+	    		"product_code": "Pieces",
+	    		"value":"2",
+	    		"currency":"MY",
+	    		"quantity" : "2"
+	    	}]
+	    }]
+}
+    */
+   const f = this.f;
+    const o = {
+      customer_reference: f.customer_reference.value,
+      origin_address_id: '',
+      origin_shipper_address1: f.origin_shipper_address1.value,
+      origin_shipper_address2: f.origin_shipper_address2.value,
+      origin_shipper_postcode: f.origin_shipper_postcode.value,
+      origin_shipper_city: f.origin_shipper_city.value,
+      origin_shipper_state_province: f.origin_shipper_state_province.value,
+      origin_shipper_country: f.origin_shipper_country.value,
+      
+    };
+    alert(Helper.getDateStr(this.f.pickup_date.value));
   }
 
   onBack() {
