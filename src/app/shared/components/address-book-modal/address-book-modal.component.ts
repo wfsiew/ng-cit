@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { AddressBookService } from '../../../services/address-book.service';
+import { AppConstant } from '../../../shared/constants/app.constant';
 import _ from 'lodash';
 import { ToastrService } from 'ngx-toastr';
 import { Helper } from '../../../shared/utils/helper';
@@ -16,12 +17,16 @@ export class AddressBookModalComponent implements OnInit {
   title: string;
   closeBtnName: string;
   list = [];
-  itemsCount: number;
+  itemsCount = 0;
   page = 1;
+  search = '';
+  sort = 'full_name';
+  sort_dir = '';
 
   public onClose: Subject<any>;
 
   readonly isEmpty = Helper.isEmpty;
+  readonly PAGE_SIZE = AppConstant.PAGE_SIZE;
 
   constructor(
     public bsModalRef: BsModalRef,
@@ -35,7 +40,7 @@ export class AddressBookModalComponent implements OnInit {
   }
 
   load() {
-    this.addressBookService.listAddressBook().subscribe((res: any) => {
+    this.addressBookService.listAddressBook(this.page, AppConstant.PAGE_SIZE, this.sort, this.sort_dir, this.search).subscribe((res: any) => {
       this.list = res.status ? res.data : [];
       this.itemsCount = res.status ? res.recordsTotal : 0;
     },
@@ -64,5 +69,31 @@ export class AddressBookModalComponent implements OnInit {
 
   pageChanged(event: any) {
     this.page = event.page;
+  }
+
+  sortBy(s) {
+    if (s !== this.sort) {
+      this.sort_dir = '';
+      this.sort = s;
+    }
+
+    else {
+      this.sort_dir = this.sort_dir === '' ? 'desc' : '';
+    }
+    this.load();
+
+    return false;
+  }
+
+  isSortBy(s, dir) {
+    return this.sort === s && this.sort_dir === dir;
+  }
+
+  onSearch() {
+    this.load();
+  }
+
+  onSearchKeypress(event) {
+    this.load();
   }
 }

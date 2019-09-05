@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpParams, HttpResponse, HttpHeaders } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
-import { User, UserDetail } from '../models/user';
+import { User } from '../shared/models/user';
 import { environment } from '../../environments/environment';
 import _ from 'lodash';
 
@@ -13,7 +13,6 @@ export class AuthService {
 
   private baseUrl = environment.baseUrl;
   private tokenUrl = `${this.baseUrl}/api/user/login`;
-  private userDetailsUrl = `${this.baseUrl}/api/user/details`;
   private token: string;
 
   constructor(private http: HttpClient) { }
@@ -62,7 +61,7 @@ export class AuthService {
   }
 
   getUserDetails() {
-    return this.http.get(this.userDetailsUrl);
+    return this.http.get(`${this.baseUrl}/api/user/details`);
   }
 
   loadUser(): User {

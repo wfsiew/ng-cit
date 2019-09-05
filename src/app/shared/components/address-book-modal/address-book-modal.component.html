@@ -5,21 +5,55 @@
   </button>
 </div>
 <div class="modal-body">
+  <div class="row">
+    <div class="col-xs-6 col-xs-offset-6">
+      <div class="input-group">
+        <input type="text" [(ngModel)]="search" (keydown.enter)="onSearchKeypress($event)" name="q" class="form-control"
+          placeholder="Search...">
+        <span class="input-group-btn">
+          <button type="button" name="search" class="btn btn-flat" (click)="onSearch()"><i class="fa fa-search"></i>
+          </button>
+        </span>
+      </div>
+    </div>
+  </div>
+  <br />
   <div class="text-center" *ngIf="isEmpty(list)">
     <h4 class="box-title">No records found</h4>
   </div>
   <div class="table-responsive">
-    <table class="table table-bordered table-hover table-sm" *ngIf="!isEmpty(list)">
+    <table class="table table-bordered table-condensed table-striped table-hover table-sm" *ngIf="!isEmpty(list)">
       <thead>
         <tr>
           <th></th>
-          <th>Name</th>
-          <th>Address 1</th>
-          <th>Address 2</th>
-          <th>Postcode</th>
-          <th>City</th>
-          <th>State</th>
-          <th>Country</th>
+          <th>
+            <a href="#" (click)="sortBy('full_name')">Name</a> <i *ngIf="sort === 'full_name'" class="fa"
+              [ngClass]="{'fa-chevron-up': isSortBy('full_name', ''), 'fa-chevron-down': isSortBy('full_name', 'desc')}"></i>
+          </th>
+          <th>
+            <a href="#" (click)="sortBy('address1')">Address 1</a> <i *ngIf="sort === 'address1'" class="fa"
+              [ngClass]="{'fa-chevron-up': isSortBy('address1', ''), 'fa-chevron-down': isSortBy('address1', 'desc')}"></i>
+          </th>
+          <th>
+            <a href="#" (click)="sortBy('address2')">Address 2</a> <i *ngIf="sort === 'address2'" class="fa"
+              [ngClass]="{'fa-chevron-up': isSortBy('address2', ''), 'fa-chevron-down': isSortBy('address2', 'desc')}"></i>
+          </th>
+          <th>
+            <a href="#" (click)="sortBy('postcode')">Postcode</a> <i *ngIf="sort === 'postcode'" class="fa"
+              [ngClass]="{'fa-chevron-up': isSortBy('postcode', ''), 'fa-chevron-down': isSortBy('postcode', 'desc')}"></i>
+          </th>
+          <th>
+            <a href="#" (click)="sortBy('city')">City</a> <i *ngIf="sort === 'city'" class="fa"
+              [ngClass]="{'fa-chevron-up': isSortBy('city', ''), 'fa-chevron-down': isSortBy('city', 'desc')}"></i>
+          </th>
+          <th>
+            <a href="#" (click)="sortBy('state_province')">State</a> <i *ngIf="sort === 'state_province'" class="fa"
+              [ngClass]="{'fa-chevron-up': isSortBy('state_province', ''), 'fa-chevron-down': isSortBy('state_province', 'desc')}"></i>
+          </th>
+          <th>
+            <a href="#" (click)="sortBy('country')">Country</a> <i *ngIf="sort === 'country'" class="fa"
+              [ngClass]="{'fa-chevron-up': isSortBy('country', ''), 'fa-chevron-down': isSortBy('country', 'desc')}"></i>
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -40,7 +74,7 @@
         <tr>
           <td colspan="9">
             <div class="pull-right">
-              <pagination [totalItems]="10" [(ngModel)]="page" (pageChanged)="pageChanged($event)"></pagination>
+              <pagination [totalItems]="itemsCount" [itemsPerPage]="PAGE_SIZE" [(ngModel)]="page" (pageChanged)="pageChanged($event)"></pagination>
             </div>
           </td>
         </tr>

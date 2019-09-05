@@ -13,4 +13,8 @@ export class Helper {
     });
     return o['Regex'];
   }
+
+  public static getStart(page, limit) {
+    return (page - 1) * limit;
+  }
 }

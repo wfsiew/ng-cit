@@ -1,415 +1,422 @@
 <section class="content-header">
-  <h1>
-    Create Shipment
-  </h1>
+  <h1>Create Shipment</h1>
 </section>
-
 <section class="content">
   <div class="box">
     <div class="box-header with-border">
-      <h3 class="box-title">Shipper Address</h3>
+      <h3 class="box-title"></h3>
+      <button type="button" class="btn btn-default" (click)="onBack()">
+        <i class="fa fa-chevron-left"></i> Back
+      </button>
     </div>
-
-    <form>
+    <form [formGroup]="mform" class="form-horizontal">
       <div class="box-body">
         <div class="form-group">
-          <div class="row">
-            <div class="col-xs-2">
-              <label for="inputEmail3">Customer Reference</label>
-            </div>
-            <div class="col-xs-8">
-              <label for="inputEmail3">Sender name</label>
-            </div>
-            <div class="col-xs-2">
-              <label for="inputEmail3">Office number</label>
-            </div>
+          <label class="col-sm-2 control-label">Company Account</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" placeholder="Company Account" formControlName="company_account_code"
+              name="company_account_code">
           </div>
-          <div class="row">
-            <div class="col-xs-2">
-              <input type="text" class="form-control" id="inputEmail3" placeholder="Customer Reference">
-            </div>
-            <div class="col-xs-8">
-              <input type="text" class="form-control" id="inputEmail3" placeholder="Sender name">
-            </div>
-            <div class="col-xs-2">
-              <input type="text" class="form-control" id="inputEmail3" placeholder="Office number">
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-xs-2">
-              <label for="inputEmail3">Origin Add ID</label>
-            </div>
-            <div class="col-xs-8">
-              <label for="inputEmail3">Email</label>
-            </div>
-            <div class="col-xs-2">
-              <label for="inputEmail3">Mobile number</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-xs-2">
-              <input type="text" class="form-control" id="inputEmail3" placeholder="Origin Add ID">
-            </div>
-            <div class="col-xs-8">
-              <input type="text" class="form-control" id="inputEmail3" placeholder="Email">
-            </div>
-            <div class="col-xs-2">
-              <input type="text" class="form-control" id="inputEmail3" placeholder="Mobile number">
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-xs-12">
-              <label for="inputEmail3">Address 1</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-xs-12">
-              <input type="text" class="form-control" id="inputEmail3" placeholder="Address 1">
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-xs-12">
-              <label for="inputEmail3">Address 2</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-xs-12">
-              <input type="text" class="form-control" id="inputEmail3" placeholder="Address 2">
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-xs-4">
-              <label for="inputEmail3">City</label>
-            </div>
-            <div class="col-xs-4">
-              <label for="inputEmail3">Postcode</label>
-            </div>
-            <div class="col-xs-4">
-              <label for="inputEmail3">Country</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-xs-4">
-              <input type="text" class="form-control" id="inputEmail3" placeholder="City">
-            </div>
-            <div class="col-xs-4">
-              <input type="text" class="form-control" id="inputEmail3" placeholder="Postcode">
-            </div>
-            <div class="col-xs-4">
-              <input type="text" class="form-control" id="inputEmail3" placeholder="Country">
-            </div>
-          </div>
-        </div>
-      </div>
-    </form>
-  </div>
-
-  <div class="box">
-    <div class="box-header with-border">
-      <h3 class="box-title">Receiver Address</h3>
-    </div>
-
-    <form>
-      <div class="box-body">
-        <div class="form-group">
-          <div class="row">
-            <div class="col-xs-2">
-              <label for="inputEmail3">Customer Reference</label>
-            </div>
-            <div class="col-xs-8">
-              <label for="inputEmail3">Receiver name</label>
-            </div>
-            <div class="col-xs-2">
-              <label for="inputEmail3">Office number</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-xs-2">
-              <input type="text" class="form-control" id="inputEmail3" placeholder="Customer Reference">
-            </div>
-            <div class="col-xs-8">
-              <input type="text" class="form-control" id="inputEmail3" placeholder="Receiver name">
-            </div>
-            <div class="col-xs-2">
-              <input type="text" class="form-control" id="inputEmail3" placeholder="Office number">
-            </div>
-          </div>
-  
-          <div class="row">
-            <div class="col-xs-2">
-              <label for="inputEmail3">Destination Add ID</label>
-            </div>
-            <div class="col-xs-8">
-              <label for="inputEmail3">Email</label>
-            </div>
-            <div class="col-xs-2">
-              <label for="inputEmail3">Mobile number</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-xs-2">
-              <input type="text" class="form-control" id="inputEmail3" placeholder="Destination Add ID">
-            </div>
-            <div class="col-xs-8">
-              <input type="text" class="form-control" id="inputEmail3" placeholder="Email">
-            </div>
-            <div class="col-xs-2">
-              <input type="text" class="form-control" id="inputEmail3" placeholder="Mobile number">
-            </div>
-          </div>
-  
-          <div class="row">
-            <div class="col-xs-12">
-              <label for="inputEmail3">Address 1</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-xs-12">
-              <input type="text" class="form-control" id="inputEmail3" placeholder="Address 1">
-            </div>
-          </div>
-  
-          <div class="row">
-            <div class="col-xs-12">
-              <label for="inputEmail3">Address 2</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-xs-12">
-              <input type="text" class="form-control" id="inputEmail3" placeholder="Address 2">
-            </div>
-          </div>
-  
-          <div class="row">
-            <div class="col-xs-4">
-              <label for="inputEmail3">City</label>
-            </div>
-            <div class="col-xs-4">
-              <label for="inputEmail3">Postcode</label>
-            </div>
-            <div class="col-xs-4">
-              <label for="inputEmail3">Country</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-xs-4">
-              <input type="text" class="form-control" id="inputEmail3" placeholder="City">
-            </div>
-            <div class="col-xs-4">
-              <input type="text" class="form-control" id="inputEmail3" placeholder="Postcode">
-            </div>
-            <div class="col-xs-4">
-              <input type="text" class="form-control" id="inputEmail3" placeholder="Country">
-            </div>
+          <label class="col-sm-2 control-label">Company Name</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" placeholder="Company Name" formControlName="company_name"
+              name="company_name">
           </div>
         </div>
 
-
-      </div>
-    </form>
-  </div>  
-  
-  <div class="box">
-    <div class="box-header with-border">
-      <h3 class="box-title">Parcel Details</h3>
-    </div>
-  
-    <form>
-      <div class="box-body">
-        <div class="form-group">
-          <div class="row">
-            <div class="col-xs-1">
-              <label for="inputEmail3">COD</label>
-            </div>
-            <div class="col-xs-3">
-              <label for="inputEmail3">COD Value</label>
-            </div>
-            <div class="col-xs-4">
-              <label for="inputEmail3">Service Type</label>
-            </div>
-            <div class="col-xs-4">
-              <label for="inputEmail3">Carton Box Code</label>
-            </div>
-
-          </div>
-          <div class="row">
-            <div class="col-xs-1">
-              <input type="text" class="form-control" id="inputEmail3" placeholder="true">
-            </div>
-            <div class="col-xs-3">
-              <input type="text" class="form-control" id="inputEmail3" placeholder="">
-            </div>
-            <div class="col-xs-4">
-              <input type="text" class="form-control" id="inputEmail3" placeholder="Express">
-            </div>
-            <div class="col-xs-4">
-              <input type="text" class="form-control" id="inputEmail3" placeholder="S/M/L/XL">
-            </div>
-          </div>
-  
-          <div class="row">
-            <div class="col-xs-4">
-              <label for="inputEmail3">Quantity</label>
-            </div>
-            <div class="col-xs-4">
-              <label for="inputEmail3">Currency</label>
-            </div>
-            <div class="col-xs-4">
-              <label for="inputEmail3">Amount</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-xs-4">
-              <input type="text" class="form-control" id="inputEmail3" placeholder="Quantity">
-            </div>
-            <div class="col-xs-4">
-              <input type="text" class="form-control" id="inputEmail3" placeholder="MYR">
-            </div>
-            <div class="col-xs-4">
-              <input type="text" class="form-control" id="inputEmail3" placeholder="MYR">
-            </div>
-          </div>
+        <div class="callout callout-info">
+          <h4>Shipment Information</h4>
         </div>
-      </div>
-    </form>
-  </div>
 
-  <div class="box">
-    <div class="box-header with-border">
-      <h3 class="box-title">Packing List</h3>
-    </div>
-  
-    <form>
-      <div class="box-body">
         <div class="form-group">
-          <div class="row">
-            <div class="col-xs-10">
-              <label for="inputEmail3">Description</label>
-            </div>
-            <div class="col-xs-1">
-              <label for="inputEmail3">Weight</label>
-            </div>
-            <div class="col-xs-1">
-              <label for="inputEmail3">Volume</label>
-            </div>
+          <label class="col-sm-2 control-label">* Delivery Service</label>
+          <div class="col-sm-4">
+            <ng-select 
+              [items]="serviceList" 
+              bindLabel="description" 
+              bindValue="code"
+              placeholder="Please select"
+              formControlName="service_type"
+              name="service_type"></ng-select>
           </div>
-
-          <div class="row">
-            <div class="col-xs-10">
-              <input type="text" class="form-control" id="inputEmail3" placeholder="">
-            </div>
-            <div class="col-xs-1">
-              <input type="text" class="form-control" id="inputEmail3" placeholder="Kg">
-            </div>
-            <div class="col-xs-1">
-              <input type="text" class="form-control" id="inputEmail3" placeholder="m3">
-            </div>
-          </div>
-  
-          <div class="row">
-            <div class="col-xs-4">
-              <label for="inputEmail3">Height</label>
-            </div>
-            <div class="col-xs-4">
-              <label for="inputEmail3">Length</label>
-            </div>
-            <div class="col-xs-4">
-              <label for="inputEmail3">Width</label>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-xs-4">
-              <input type="text" class="form-control" id="inputEmail3" placeholder="Height">
-            </div>
-            <div class="col-xs-4">
-              <input type="text" class="form-control" id="inputEmail3" placeholder="Length">
-            </div>
-            <div class="col-xs-4">
-              <input type="text" class="form-control" id="inputEmail3" placeholder="Width">
-            </div>
-          </div>
-  
-          <div class="row">
-            <div class="col-xs-3">
-              <label for="inputEmail3">Currency</label>
-            </div>
-            <div class="col-xs-3">
-              <label for="inputEmail3">Value</label>
-            </div>
-            <div class="col-xs-3">
-              <label for="inputEmail3">Quantity</label>
-            </div>
-            <div class="col-xs-3">
-              <label for="inputEmail3">UOM</label>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-xs-3">
-              <input type="text" class="form-control" id="inputEmail3" placeholder="MYR">
-            </div>
-            <div class="col-xs-3">
-              <input type="text" class="form-control" id="inputEmail3" placeholder="Value">
-            </div>
-            <div class="col-xs-3">
-              <input type="text" class="form-control" id="inputEmail3" placeholder="Quantity">
-            </div>
-            <div class="col-xs-3">
-              <input type="text" class="form-control" id="inputEmail3" placeholder="UOM">
-            </div>
-          </div>
-  
-          <div class="row">
-            <div class="col-xs-3">
-              <label for="inputEmail3">Product Code</label>
-            </div>
-            <div class="col-xs-9">
-              <label for="inputEmail3">Product Name</label>
-            </div>
-            
-            
-          </div>
-          <div class="row">
-            <div class="col-xs-3">
-              <input type="text" class="form-control" id="inputEmail3" placeholder="Product Code">
-            </div>
-            <div class="col-xs-9">
-              <input type="text" class="form-control" id="inputEmail3" placeholder="Product Name">
-            </div>
-            
+          <div class="col-sm-3">
+            <label class="control-label">Requested Pickup Date</label><br />
+            <i>*This will be the pickup date</i>
           </div>
           
-          <div class="row">
-            <div class="col-xs-3">
-              <label for="inputEmail3">Currency</label>
-            </div>
-            <div class="col-xs-3">
-              <label for="inputEmail3">Value</label>
-            </div>
-            <div class="col-xs-3">
-              <label for="inputEmail3">Quantity</label>
+          <div class="col-sm-3">
+            <div class="input-group">
+              <input type="text" class="form-control" formControlName="pickup_date" name="pickup_date" bsDatepicker #dp="bsDatepicker"
+                [bsConfig]="{ containerClass: 'theme-blue', dateInputFormat: 'YYYY-MM-DD' }">
+              <div class="input-group-btn">
+                <button class="btn btn-default" (click)="dp.show()" [attr.aria-expanded]="dp.isOpen">
+                  <i class="fa fa-calendar"></i>
+                </button>
+              </div>
             </div>
           </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label">* Order Reference</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" placeholder="Order Reference" formControlName="customer_reference" 
+              name="customer_reference">
+            <small class="label label-danger" *ngIf="invalid('customer_reference') && f.customer_reference.hasError('required')">Order Reference is required</small>
+          </div>
+          <div class="col-sm-6">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" formControlName="is_insurance_req" name="is_insurance_req"> Additional Insurance Required
+              </label>
+            </div>
+            <i>*Please contact our Customer Service</i>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-2">
+            <div class="checkbox pull-right">
+              <label>
+                <input type="checkbox" formControlName="is_do" name="is_do"> DO Required
+              </label>
+            </div>
+          </div>
+          <div class="col-sm-4">
             
-          <div class="row">
-            <div class="col-xs-3">
-              <input type="text" class="form-control" id="inputEmail3" placeholder="MYR">
-            </div>
-            <div class="col-xs-3">
-              <input type="text" class="form-control" id="inputEmail3" placeholder="Value">
-            </div>
-            <div class="col-xs-3">
-              <input type="text" class="form-control" id="inputEmail3" placeholder="Quantity">
+          </div>
+          <div class="col-sm-2">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" formControlName="is_cod" name="is_cod"> COD Required
+              </label>
             </div>
           </div>
-        </div>  
+          <label class="col-sm-2 control-label">COD Value</label>
+          <div class="col-sm-2">
+            <input type="text" class="form-control" placeholder="COD Value" formControlName="cod_value" name="cod_value">
+            <small class="label label-danger" *ngIf="invalid('cod_value') && f.cod_value.hasError('required')">COD Value is required</small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label">* Packaging Type</label>
+          <div class="col-sm-4">
+            <select class="form-control">
+              <option>Parcel</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label">*Total Package Quantity</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" placeholder="Total Package Quantity" formControlName="total_package_no"
+              name="total_package_no">
+            <small class="label label-danger" *ngIf="invalid('total_package_no') && f.total_package_no.hasError('required')">Total Package Quantity is required</small>
+            <small class="label label-danger" *ngIf="invalid('total_package_no') && f.total_package_no.hasError('pattern')">Total Package Quantity is
+              invalid</small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label">*Total Weight (KG)</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" placeholder="Total Weight (KG)" formControlName="total_weight"
+              name="total_weight">
+            <small class="label label-danger" *ngIf="invalid('total_weight') && f.total_weight.hasError('required')">Total
+              Weight is required</small>
+            <small class="label label-danger" *ngIf="invalid('total_weight') && f.total_weight.hasError('pattern')">Total
+              Weight is invalid</small>
+          </div>
+        </div>
+
+        <div class="callout callout-info">
+          <h4>Goods Information</h4>
+        </div>
+
+        <form [formGroup]="gform" class="form-horizontal">
+          <div class="form-group">
+            <label class="col-sm-2 control-label">*Goods Descriptions</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" placeholder="Goods Descriptions" formControlName="description"
+                name="description">
+              <small class="label label-danger" 
+                *ngIf="invalidg('description') && fg.description.hasError('required')">
+                Description is required</small>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="col-sm-2 control-label">*Goods Quantity</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" placeholder="Goods Quantity" formControlName="quantity" name="quantity">
+              <small class="label label-danger" 
+                *ngIf="invalidg('quantity') && fg.quantity.hasError('required')">
+                Goods Quantity is required</small>
+              <small class="label label-danger" *ngIf="invalidg('quantity') && fg.quantity.hasError('pattern')">Goods Quantity is
+                invalid</small>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="col-sm-2 control-label">*Goods Value</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" placeholder="Goods Value" formControlName="value" name="value">
+              <small class="label label-danger" 
+                *ngIf="invalidg('value') && fg.value.hasError('required')">
+                Goods Value is required</small>
+              <small class="label label-danger" *ngIf="invalidg('value') && fg.value.hasError('pattern')">Goods Value is
+                invalid</small>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="col-sm-2 control-label">*Goods Currency</label>
+            <div class="col-sm-4">
+              <ng-select 
+                [items]="countryList" 
+                bindLabel="currency" 
+                bindValue="currency" 
+                placeholder="Please select"
+                formControlName="currency" 
+                name="currency"></ng-select>
+            </div>
+            <div class="col-sm-6 text-right">
+              <button type="button" class="btn btn-default" (click)="onRemoveGoods()" [disabled]="isEmpty(listGood)">Remove Goods</button>&nbsp;&nbsp;
+              <button type="button" class="btn btn-default" (click)="onAddGoods()" [disabled]="gform.invalid">Add to Goods</button>
+            </div>
+          </div>
+        </form>
+
+        <div class="table-responsive">
+          <table class="table table-bordered table-condensed table-striped table-hover">
+            <thead>
+              <tr>
+                <th>Goods Descriptions</th>
+                <th class="text-right">Goods Quantity</th>
+                <th class="text-right">Goods Value</th>
+                <th class="text-center">Goods Currency</th>
+                <th class="text-right">Total</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let o of listGood">
+                <td>{{ o.description }}</td>
+                <td class="text-right">{{ o.quantity }}</td>
+                <td class="text-right">{{ o.value }}</td>
+                <td class="text-center">{{ o.currency }}</td>
+                <td class="text-right">{{ o.quantity * o.value }}</td>
+                <td>
+                  <input type="checkbox" [checked]="o.selected" (change)="onChangeSelect(o)" />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout-info">
+          <h4>Address Information</h4>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Shipper Name</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" placeholder="Shipper Name" formControlName="origin_shipper_name"
+              name="origin_shipper_name">
+            <small class="label label-danger"
+              *ngIf="invalid('origin_shipper_name') && f.origin_shipper_name.hasError('required')">Shipper Name is required</small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Address</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="Address 1" formControlName="origin_shipper_address1"
+              name="origin_shipper_address1">
+            <small class="label label-danger"
+              *ngIf="invalid('origin_shipper_address1') && f.origin_shipper_address1.hasError('required')">Address 1 is required</small>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-2 text-right">
+            <a class="btn btn-app" (click)="onGetAddressShipper()">
+              <i class="fa fa-address-card"></i> Address Book
+            </a>
+          </div>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="Address 2" formControlName="origin_shipper_address2"
+              name="origin_shipper_address2">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-4">
+            <input type="text" class="form-control" placeholder="Postcode" formControlName="origin_shipper_postcode"
+              name="origin_shipper_postcode">
+            <small class="label label-danger"
+              *ngIf="invalid('origin_shipper_postcode') && f.origin_shipper_postcode.hasError('required')">Postcode is
+              required</small>
+            <small class="label label-danger" *ngIf="invalid('origin_shipper_postcode') && f.origin_shipper_postcode.hasError('pattern')">Postcode is
+              invalid</small>
+          </div>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" placeholder="City" formControlName="origin_shipper_city"
+              name="origin_shipper_city">
+            <small class="label label-danger"
+              *ngIf="invalid('origin_shipper_city') && f.origin_shipper_city.hasError('required')">City is
+              required</small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-4">
+            <input type="text" class="form-control" placeholder="State" formControlName="origin_shipper_state_province"
+              name="origin_shipper_state_province">
+            <small class="label label-danger"
+              *ngIf="invalid('origin_shipper_state_province') && f.origin_shipper_state_province.hasError('required')">State is
+              required</small>
+          </div>
+          <div class="col-sm-4">
+            <ng-select
+              [items]="countryList" 
+              bindLabel="country_name" 
+              bindValue="country_name" 
+              placeholder="Please select"
+              (change)="onCountryChangeShipper()"
+              formControlName="origin_shipper_country"
+              name="origin_shipper_country"></ng-select>
+            <small class="label label-danger"
+              *ngIf="invalid('origin_shipper_country') && f.origin_shipper_country.hasError('required')">Country is
+              required</small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Shipper Contact Name</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" placeholder="Shipper Name" formControlName="origin_shipper_contact_name"
+              name="origin_shipper_contact_name">
+            <small class="label label-danger"
+              *ngIf="invalid('origin_shipper_contact_name') && f.origin_shipper_contact_name.hasError('required')">Shipper Contact Name is
+              required</small>
+          </div>
+          <label class="col-sm-2 control-label">Shipper Contact</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" placeholder="Shipper Contact" formControlName="origin_shipper_phone_no"
+              name="origin_shipper_phone_no">
+            <small class="label label-danger"
+              *ngIf="invalid('origin_shipper_phone_no') && f.origin_shipper_phone_no.hasError('required')">Shipper Contact 
+              is required</small>
+          </div>
+        </div>
+
+        <hr />
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Receiver Name</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" placeholder="Receiver Name" formControlName="dest_receiver_name"
+              name="dest_receiver_name">
+            <small class="label label-danger"
+              *ngIf="invalid('dest_receiver_name') && f.dest_receiver_name.hasError('required')">Receiver Name is required</small>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Address</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="Address 1" formControlName="dest_receiver_address1"
+              name="dest_receiver_address1">
+            <small class="label label-danger"
+              *ngIf="invalid('dest_receiver_address1') && f.dest_receiver_address1.hasError('required')">Address 1 is required</small>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-2 text-right">
+            <a class="btn btn-app" (click)="onGetAddressReceiver()">
+              <i class="fa fa-address-card"></i> Address Book
+            </a>
+          </div>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="Address 2" formControlName="dest_receiver_address2"
+              name="dest_receiver_address2">
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-4">
+            <input type="text" class="form-control" placeholder="Postcode" formControlName="dest_receiver_postcode"
+              name="dest_receiver_postcode">
+            <small class="label label-danger"
+              *ngIf="invalid('dest_receiver_postcode') && f.dest_receiver_postcode.hasError('required')">Postcode is
+              required</small>
+            <small class="label label-danger" *ngIf="invalid('dest_receiver_postcode') && f.dest_receiver_postcode.hasError('pattern')">Postcode is
+              invalid</small>
+          </div>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" placeholder="City" formControlName="dest_receiver_city"
+              name="dest_receiver_city">
+            <small class="label label-danger"
+              *ngIf="invalid('dest_receiver_city') && f.dest_receiver_city.hasError('required')">City is
+              required</small>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-4">
+            <input type="text" class="form-control" placeholder="State" formControlName="dest_receiver_state_province"
+              name="dest_receiver_state_province">
+            <small class="label label-danger"
+              *ngIf="invalid('dest_receiver_state_province') && f.dest_receiver_state_province.hasError('required')">State is
+              required</small>
+          </div>
+          <div class="col-sm-4">
+            <ng-select 
+              [items]="countryList" 
+              bindLabel="country_name" 
+              bindValue="country_name" 
+              placeholder="Please select"
+              (change)="onCountryChangeReceiver()" 
+              formControlName="dest_receiver_country" 
+              name="dest_receiver_country"></ng-select>
+            <small class="label label-danger"
+              *ngIf="invalid('dest_receiver_country') && f.dest_receiver_country.hasError('required')">Country is
+              required</small>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Receiver Contact Name</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" placeholder="Shipper Name" formControlName="dest_receiver_contact_name"
+              name="dest_receiver_contact_name">
+            <small class="label label-danger"
+              *ngIf="invalid('dest_receiver_contact_name') && f.dest_receiver_contact_name.hasError('required')">Receiver Contact
+              Name is required</small>
+          </div>
+          <label class="col-sm-2 control-label">Receiver Contact</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" placeholder="Shipper Contact" formControlName="dest_receiver_phone_no"
+              name="dest_receiver_phone_no">
+            <small class="label label-danger"
+              *ngIf="invalid('dest_receiver_phone_no') && f.dest_receiver_phone_no.hasError('required')">Receiver Contact
+              is required</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="box-footer">
+        <div class="row">
+          <div class="col-sm-2">
+            <button type="submit" class="btn btn-primary" [disabled]="mform.invalid">Confirm Shipment</button>
+          </div>
+          <div class="col-sm-2">
+            <button type="submit" class="btn btn-primary">Print Shipment</button>
+          </div>
+        </div>
       </div>
     </form>
   </div>
 </section>
-

@@ -28,6 +28,12 @@ Authorization: Token {{token}}
 
 ###
 
+GET {{base}}/api/shipment/list
+  ?start=10&length=10&order=id&dir=&value=
+Authorization: Token {{token}}
+
+###
+
 GET {{base}}/api/lookup/generic_master?master_type=service
 
 ###
@@ -129,6 +135,16 @@ Authorization: Token {{token}}
 ###
 
 GET {{base}}/api/address/list
+    ?start=0
+    &length=50
+    &order=address1
+    &dir=
+    &value=
+Authorization: Token {{token}}
+
+###
+
+GET {{base}}/api/address/list?address_id=fb1af50e-582b-4784-bf95-9a2644ceff60
 Authorization: Token {{token}}
 
 ###

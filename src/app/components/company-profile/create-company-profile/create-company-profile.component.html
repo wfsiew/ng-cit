@@ -1,0 +1,190 @@
+<p>create-company-profile works!</p>
+<section class="content-header">
+  <h1>Company Profile</h1>
+</section>
+<section class="content">
+  <div class="box">
+    <div class="box-header with-border">
+      <h3 class="box-title">Company Profile</h3>
+    </div>
+    <form [formGroup]="mform" class="form-horizontal">
+      <div class="box-body">
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Company Account</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" placeholder="Company Account" formControlName="company_account_code"
+              name="company_account_code">
+          </div>
+          <label class="col-sm-2 control-label">PIC Name</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" placeholder="PIC Name" formControlName="company_pic_full_name"
+              name="company_pic_full_name">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Company Name</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" placeholder="Company Name" formControlName="company_name"
+              name="company_name">
+          </div>
+          <label class="col-sm-2 control-label">PIC Email</label>
+          <div class="col-sm-4">
+            <input type="email" class="form-control" placeholder="PIC Email" formControlName="company_pic_email"
+              name="company_pic_email">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Company Code</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" placeholder="Company Code" formControlName="company_code"
+              name="company_code">
+          </div>
+          <label class="col-sm-2 control-label">PIC Number</label>
+          <div class="col-sm-4">
+            <input type="email" class="form-control" placeholder="PIC Email" formControlName="company_pic_phone_number"
+              name="company_pic_phone_number">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Company Address</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="Address 1" formControlName="company_address1"
+              name="company_address1">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-2 text-right">
+            <a class="btn btn-app" (click)="onGetAddress()">
+              <i class="fa fa-address-card"></i> Address Book
+            </a>
+          </div>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="Address 2" formControlName="company_address2"
+              name="company_address2">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-4">
+            <input type="text" class="form-control" placeholder="Postcode" formControlName="company_postcode"
+              name="company_postcode">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-4">
+            <input type="text" class="form-control" placeholder="City" formControlName="company_city"
+              name="company_city">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-4">
+            <input type="text" class="form-control" placeholder="State" formControlName="company_state_province"
+              name="company_state_province">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-4">
+            <ng-select 
+              [items]="countryList" 
+              bindLabel="country_name" 
+              bindValue="country_code" 
+              placeholder="Please select"
+              (change)="onCountryChange()" 
+              formControlName="company_country" 
+              name="company_country"></ng-select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Services</label>
+          <div class="col-sm-8 table-responsive">
+            <table class="table table-bordered table-striped table-hover">
+              <thead>
+                <tr>
+                  <th>Service Code</th>
+                  <th>Service Description</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let o of data.company_service_list">
+                  <td>{{ o.service_code }}</td>
+                  <td></td>
+                  <td>
+                    <input type="checkbox" [checked]="o.selected" (change)="onChangeSelect(o)" />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-3">
+            <ng-select 
+              [items]="serviceList" 
+              bindLabel="description" 
+              placeholder="Please select"
+              [(ngModel)]="service" 
+              [ngModelOptions]="{standalone: true}"></ng-select>
+          </div>
+          <div class="col-sm-5">
+            <button type="button" class="btn btn-default" (click)="addService()" [disabled]="isEmpty(service)">Add to Service</button>&nbsp;&nbsp;
+            <button type="button" class="btn btn-danger" (click)="removeService()" [disabled]="isEmpty(data.company_service_list)">Remove Service</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-2">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" formControlName="is_do" name="is_do"> DO Required
+              </label>
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" formControlName="is_cod" name="is_cod"> COD Enabled
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Parent Company</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" placeholder="Parent Company"
+              formControlName="parent_company_account_code" name="parent_company_account_code">
+            <span>Freight Mark Group of Company</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Consignment Print Default</label>
+          <div class="col-sm-1">
+            <div class="radio">
+              <label>
+                <input type="radio" formControlName="cdefault" name="cdefault" value="0"> A4
+              </label>
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <div class="radio">
+              <label>
+                <input type="radio" formControlName="cdefault" name="cdefault" value="1"> Shipping Label
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="box-footer">
+        <div class="pull-right">
+          <button type="submit" class="btn btn-primary" [disabled]="mform.invalid">Save Changes</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>

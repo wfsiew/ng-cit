@@ -6,77 +6,77 @@
     <div class="box-header with-border">
       <h3 class="box-title"></h3>
     </div>
-    <form [formGroup]="mform" class="form-horizontal">
+    <form [formGroup]="mform" (ngSubmit)="onSubmit()" class="form-horizontal">
       <div class="box-body">
         <div class="form-group">
-          <label class="col-sm-2 control-label">Company Account</label>
-          <div class="col-sm-10">
+          <label class="col-sm-3 control-label">Company Account</label>
+          <div class="col-sm-9">
             <input type="text" class="form-control" placeholder="Company Account" formControlName="company_code"
               name="company_code">
           </div>
         </div>
         <div class="form-group">
-          <label class="col-sm-2 control-label">Company Name</label>
-          <div class="col-sm-10">
+          <label class="col-sm-3 control-label">Company Name</label>
+          <div class="col-sm-9">
             <input type="text" class="form-control" placeholder="Company Name" formControlName="company_name"
               name="company_name">
           </div>
         </div>
         <div class="form-group">
-          <label class="col-sm-2 control-label">User ID</label>
-          <div class="col-sm-10">
+          <label class="col-sm-3 control-label">User ID</label>
+          <div class="col-sm-9">
             <input type="text" class="form-control" placeholder="User ID" formControlName="userid" name="userid">
           </div>
         </div>
         <div class="form-group">
-          <label class="col-sm-2 control-label">Email</label>
-          <div class="col-sm-10">
+          <label class="col-sm-3 control-label">Email</label>
+          <div class="col-sm-9">
             <input type="email" class="form-control" placeholder="Email" formControlName="email" name="email">
           </div>
         </div>
         <div class="form-group">
-          <label class="col-sm-2 control-label">Name</label>
-          <div class="col-sm-10">
+          <label class="col-sm-3 control-label">Name</label>
+          <div class="col-sm-9">
             <input type="text" class="form-control" placeholder="Name" formControlName="name" name="name">
           </div>
         </div>
         <div class="form-group">
-          <label class="col-sm-2 control-label">Phone number</label>
-          <div class="col-sm-10">
+          <label class="col-sm-3 control-label">Phone number</label>
+          <div class="col-sm-9">
             <input type="tel" class="form-control" placeholder="Phone number" formControlName="phone" name="phone">
           </div>
         </div>
         <div class="form-group">
-          <label class="col-sm-2 control-label">Default Shipper Address</label>
-          <div class="col-xs-10">
+          <label class="col-sm-3 control-label">Default Shipper Address</label>
+          <div class="col-sm-9">
             <input type="text" class="form-control" placeholder="Address 1" formControlName="addr1" name="addr1">
           </div>
         </div>
         <div class="form-group">
-          <div class="col-xs-2">
+          <div class="col-sm-3 text-right">
             <button type="button" class="btn btn-info" (click)="onGetAddress()"><i class="fa fa-address-card"></i> Address Book</button>
           </div>
-          <div class="col-xs-10">
+          <div class="col-sm-9">
             <input type="text" class="form-control" placeholder="Address 2" formControlName="addr2" name="addr2">
           </div>
         </div>
         <div class="form-group">
-          <div class="col-sm-offset-2 col-xs-10">
+          <div class="col-sm-offset-3 col-sm-9">
             <input type="text" class="form-control" placeholder="Postcode" formControlName="postcode" name="postcode">
           </div>
         </div>
         <div class="form-group">
-          <div class="col-sm-offset-2 col-xs-10">
+          <div class="col-sm-offset-3 col-sm-9">
             <input type="text" class="form-control" placeholder="City" formControlName="city" name="city">
           </div>
         </div>
         <div class="form-group">
-          <div class="col-sm-offset-2 col-xs-10">
+          <div class="col-sm-offset-3 col-sm-9">
             <input type="text" class="form-control" placeholder="State" formControlName="state" name="state">
           </div>
         </div>
         <div class="form-group">
-          <div class="col-sm-offset-2 col-xs-10">
+          <div class="col-sm-offset-3 col-sm-9">
             <ng-select 
               [items]="countryList" 
               bindLabel="country_name" 
@@ -86,6 +86,12 @@
               formControlName="country" 
               name="country"></ng-select>
           </div>
+        </div>
+      </div>
+
+      <div class="box-footer">
+        <div class="pull-right">
+          <button type="submit" class="btn btn-primary" [disabled]="mform.invalid">Save Changes</button>
         </div>
       </div>
     </form>

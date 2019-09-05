@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { AddressBookService } from '../../../services/address-book.service';
 import { MessageService } from '../../../services/message.service';
+import { AppConstant } from '../../../shared/constants/app.constant';
 import _ from 'lodash';
 import { ToastrService } from 'ngx-toastr';
 import { Helper } from '../../../shared/utils/helper';
@@ -11,33 +13,56 @@ import { Helper } from '../../../shared/utils/helper';
   templateUrl: './list-address-book.component.html',
   styleUrls: ['./list-address-book.component.css']
 })
-export class ListAddressBookComponent implements OnInit {
+export class ListAddressBookComponent implements OnInit, OnDestroy {
 
+  isloading = false;
   list = [];
-  itemsCount: number;
+  itemsCount = 0;
   selectAll = false;
   listSelected = [];
   page = 1;
+  search = '';
+  sort = 'full_name';
+  sort_dir = '';
+  subs: Subscription;
 
   readonly isEmpty = Helper.isEmpty;
+  readonly PAGE_SIZE = AppConstant.PAGE_SIZE;
 
   constructor(
     private router: Router,
     private addressBookService: AddressBookService,
     private msService: MessageService,
     private toastr: ToastrService
-  ) { }
+  ) { 
+    this.subs = this.msService.get().subscribe(res => {
+      if (res.name === 'list-address-book') {
+        const o = res.data;
+        this.page = o.page;
+        this.sort = o.sort;
+        this.sort_dir = o.dir;
+        this.search = o.search;
+      }
+    });
+  }
 
   ngOnInit() {
     this.load();
   }
 
+  ngOnDestroy() {
+    this.subs.unsubscribe();
+  }
+
   load() {
-    this.addressBookService.listAddressBook().subscribe((res: any) => {
+    this.isloading = true;
+    this.addressBookService.listAddressBook(this.page, AppConstant.PAGE_SIZE, this.sort, this.sort_dir, this.search).subscribe((res: any) => {
       this.list = res.status ? res.data : [];
       this.itemsCount = res.status ? res.recordsTotal : 0;
+      this.isloading = false;
     },
     (error) => {
+      this.isloading = false;
       if (error.status === 400) {
         this.list = [];
         this.itemsCount = 0;
@@ -88,10 +113,43 @@ export class ListAddressBookComponent implements OnInit {
 
   onEdit(o) {
     this.msService.send('edit-address-book', o);
-    this.router.navigate(['/cit/address-book/create'], { queryParams: { edit: 1 }});
+    this.msService.send('list-address-book', {
+      page: this.page,
+      sort: this.sort,
+      dir: this.sort_dir,
+      search: this.search
+    });
+    this.router.navigate(['/cit/address-book/edit', o.id]);
   }
 
   pageChanged(event: any) {
     this.page = event.page;
+    this.load();
+  }
+
+  sortBy(s) {
+    if (s !== this.sort) {
+      this.sort_dir = '';
+      this.sort = s;
+    }
+
+    else {
+      this.sort_dir = this.sort_dir === '' ? 'desc' : '';
+    }
+    this.load();
+
+    return false;
+  }
+
+  isSortBy(s, dir) {
+    return this.sort === s && this.sort_dir === dir;
+  }
+
+  onSearch() {
+    this.load();
+  }
+
+  onSearchKeypress(event) {
+    this.load();
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
@@ -6,7 +6,6 @@ import { Subscription } from 'rxjs';
 import { LookupService } from '../../../services/lookup.service';
 import { AddressBookService } from '../../../services/address-book.service';
 import { MessageService } from '../../../services/message.service';
-import { AuthService } from '../../../services/auth.service';
 import { AppConstant } from '../../../shared/constants/app.constant';
 import { Helper } from '../../../shared/utils/helper';
 import _ from 'lodash';
@@ -17,11 +16,13 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './create-address-book.component.html',
   styleUrls: ['./create-address-book.component.css']
 })
-export class CreateAddressBookComponent implements OnInit, OnDestroy {
+export class CreateAddressBookComponent implements OnInit {
 
+  isloading = false;
   countryList = [];
   mform: FormGroup;
   data: any;
+  id: string;
   isEdit = false;
   title = 'Create';
   subs: Subscription;
@@ -31,38 +32,37 @@ export class CreateAddressBookComponent implements OnInit, OnDestroy {
     private lookupService: LookupService,
     private addressBookService: AddressBookService,
     private msService: MessageService,
-    private authService: AuthService,
     private toastr: ToastrService,
     private route: ActivatedRoute,
     private loc: Location
   ) {
     this.createForm();
-    this.subs = this.msService.get().subscribe(res => {
-      if (res.name === 'edit-address-book') {
-        this.data = res.data;
-        localStorage.setItem(`edit-address-book`, JSON.stringify(this.data));
-      }
-    });
   }
 
   ngOnInit() {
-    this.route.queryParamMap.subscribe(params => {
-      this.isEdit = params.get('edit') === '1' ? true : false;
-      if (this.isEdit) {
+    this.route.paramMap.subscribe(params => {
+      this.id = params.get('id');
+      if (!_.isNull(this.id)) {
+        this.isEdit = true;
         this.title = 'Edit';
-        let o = localStorage.getItem('edit-address-book');
-        if (!_.isNull(o)) {
-          let s = JSON.parse(o);
-          this.data = s;
-        }
       }
 
       this.load();
     });
-  }
 
-  ngOnDestroy() {
-    this.subs.unsubscribe();
+    // this.route.queryParamMap.subscribe(params => {
+    //   this.isEdit = params.get('edit') === '1' ? true : false;
+    //   if (this.isEdit) {
+    //     this.title = 'Edit';
+    //     let o = localStorage.getItem('edit-address-book');
+    //     if (!_.isNull(o)) {
+    //       let s = JSON.parse(o);
+    //       this.data = s;
+    //     }
+    //   }
+
+    //   this.load();
+    // });
   }
 
   createForm() {
@@ -75,7 +75,7 @@ export class CreateAddressBookComponent implements OnInit, OnDestroy {
       city: ['', [Validators.required]],
       state: ['', [Validators.required]],
       postcode: ['', [Validators.required, Validators.pattern(Helper.getPostcodePattern('MY'))]],
-      country: ['Malaysia', Validators.required],
+      country: ['MY', Validators.required],
       isdefault: [false]
     });
   }
@@ -100,8 +100,18 @@ export class CreateAddressBookComponent implements OnInit, OnDestroy {
     this.lookupService.listCountryInfo().subscribe((res: any) => {
       this.countryList = res.response;
       if (this.isEdit) {
-        this.setForm();
+        this.loadAddressBook();
       }
+    });
+  }
+
+  loadAddressBook() {
+    this.addressBookService.getAddressBook(this.id).subscribe((res: any) => {
+      this.data = !_.isEmpty(res.data) ? res.data[0] : {};
+      this.setForm();
+    },
+    (error) => {
+      this.toastr.error('Load Address Book Failed', 'Edit Address Book');
     });
   }
 
@@ -128,8 +138,10 @@ export class CreateAddressBookComponent implements OnInit, OnDestroy {
       phone_number: this.f.phone.value,
       is_default: this.f.isdefault.value
     };
+    this.isloading = true;
     if (!this.isEdit) {
       this.addressBookService.createAddressBook(o).subscribe(res => {
+        this.isloading = false;
         this.toastr.success('New Address Book successfully created', 'Create Address Book');
         this.mform.patchValue({
           type: 'Sender',
@@ -144,6 +156,7 @@ export class CreateAddressBookComponent implements OnInit, OnDestroy {
         });
       },
       (error) => {
+        this.isloading = false;
         this.toastr.error('Create Address Book Failed', 'Create Address Book');
       });
     }
@@ -151,9 +164,11 @@ export class CreateAddressBookComponent implements OnInit, OnDestroy {
     else {
       o.id = this.data.id;
       this.addressBookService.updateAddressBook(o).subscribe(res => {
+        this.isloading = false;
         this.toastr.success('Address Book successfully updated', 'Update Address Book');
       },
       (error) => {
+        this.isloading = false;
         this.toastr.error('Update Address Book Failed', 'Update Address Book');
       });
     }

@@ -74,23 +74,14 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   onSuccess(res) {
-    this.authService.getUserDetails().subscribe(
-      (o) => {
-        if (o != null) {
-          if (this.nextUrl) {
-            this.router.navigateByUrl(this.nextUrl)
-              .catch(() => this.router.navigate(['/cit']));
-          }
-          else {
-            this.router.navigate(['/cit']);
-          }
-        }
+    if (this.nextUrl) {
+      this.router.navigateByUrl(this.nextUrl)
+        .catch(() => this.router.navigate(['/cit']));
+    }
 
-        else {
-          this.onErrorGetUserDetails();
-        }
-      }
-    );
+    else {
+      this.router.navigate(['/cit']);
+    }
   }
 
   onError(error) {
@@ -99,9 +90,5 @@ export class LoginComponent implements OnInit, OnDestroy {
         positionClass: 'toast-top-center'
       });
     }
-  }
-
-  onErrorGetUserDetails() {
-    this.onError('invalid_grant');
   }
 }

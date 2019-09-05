@@ -1,1 +1,91 @@
-<p>list-shipment works!</p>
+<section class="content-header">
+  <h1>Shipment</h1>
+</section>
+<section class="content">
+  <div class="box">
+    <div class="box-header"></div>
+    <div class="box-body">
+      <a class="btn btn-app bg-black">
+        <i class="fa fa-list"></i> Shipment Listing
+      </a>
+      <a class="btn btn-app" href="#" (click)="goto('/cit/shipment/create')">
+        <i class="fa fa-cube"></i> Create Single Shipment
+      </a>
+      <a class="btn btn-app">
+        <i class="fa fa-cubes"></i> Create Multiple Shipment
+      </a>
+    </div>
+  </div>
+
+  <div class="box">
+    <div class="box-header">
+      <div class="row">
+        <div class="col-xs-5 col-xs-offset-7">
+          <div class="input-group">
+            <input type="text" [(ngModel)]="search" (keydown.enter)="onSearchKeypress($event)" name="q" class="form-control"
+              placeholder="Search...">
+            <span class="input-group-btn">
+              <button type="button" name="search" class="btn btn-flat" (click)="onSearch()"><i class="fa fa-search"></i>
+              </button>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="box-body">
+      <div class="text-center" *ngIf="isEmpty(list)">
+        <h4 class="box-title">No records found</h4>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-bordered table-condensed table-striped table-hover">
+          <thead>
+            <tr>
+              <th>
+                Created Date
+              </th>
+              <th>
+                <a href="#" (click)="sortBy('consignment_no')">Consignment Number</a> <i *ngIf="sort === 'consignment_no'" class="fa"
+                  [ngClass]="{'fa-chevron-up': isSortBy('consignment_no', ''), 'fa-chevron-down': isSortBy('consignment_no', 'desc')}"></i>
+              </th>
+              <th>
+                <a href="#" (click)="sortBy('customer_reference')">Order Ref</a> <i *ngIf="sort === 'customer_reference'" class="fa"
+                  [ngClass]="{'fa-chevron-up': isSortBy('customer_reference', ''), 'fa-chevron-down': isSortBy('customer_reference', 'desc')}"></i>
+              </th>
+              <th>
+                <a href="#" (click)="sortBy('service_type')">Delivery Service</a> <i *ngIf="sort === 'service_type'" class="fa"
+                  [ngClass]="{'fa-chevron-up': isSortBy('service_type', ''), 'fa-chevron-down': isSortBy('service_type', 'desc')}"></i>
+              </th>
+              <th>
+                <a href="#" (click)="sortBy('dest_receiver_name')">Receiver Name</a> <i *ngIf="sort === 'dest_receiver_name'" class="fa"
+                  [ngClass]="{'fa-chevron-up': isSortBy('dest_receiver_name', ''), 'fa-chevron-down': isSortBy('dest_receiver_name', 'desc')}"></i>
+              </th>
+              <th>
+                Status
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let o of list">
+              <td>{{ o.id }}</td>
+              <td>{{ o.consignment_no }}</td>
+              <td>{{ o.customer_reference }}</td>
+              <td>{{ o.service_type }}</td>
+              <td>{{ o.dest_receiver_name }}</td>
+              <td>{{ o.id }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="overlay" *ngIf="isloading">
+      <i class="fa fa-refresh fa-spin"></i>
+    </div>
+
+    <div class="box-footer">
+      <div class="pull-right">
+        <pagination [totalItems]="itemsCount" [itemsPerPage]="PAGE_SIZE" [(ngModel)]="page" (pageChanged)="pageChanged($event)"></pagination>
+      </div>
+    </div>
+  </div>
+</section>

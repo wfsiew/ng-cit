@@ -1,7 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { MessageService } from '../../services/message.service';
-import { Subscription }from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -11,12 +9,9 @@ import { Subscription }from 'rxjs';
 export class HomeComponent implements OnInit, OnDestroy {
 
   menu: string;
-  subs: Subscription;
-  shipment: boolean;
   address_book: boolean;
 
   constructor(
-    private messageService: MessageService,
     private router: Router
   ) { }
 
@@ -30,13 +25,12 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.menu = 'user-profile';
     }
 
-    else if (x === '/cit/company-profile') {
+    else if (x.indexOf('/cit/company-profile') >= 0) {
       this.menu = 'company-profile';
     }
 
-    else if (x === '/cit/shipment/create') {
-      this.menu = 'shipment-create';
-      this.shipment = true;
+    else if (x.indexOf('/cit/shipment') >= 0){
+      this.menu = 'shipment';
     }
 
     else if (x == '/cit/address-book/create') {
@@ -44,14 +38,14 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.address_book = true;
     }
 
-    else if (x === '/cit/address-book/list') {
+    else if (x === '/cit/address-book/list' || x.indexOf('/cit/address-book/edit') >= 0) {
       this.menu = 'address-book-list';
       this.address_book = true;
     }
   }
 
   ngOnDestroy() {
-    this.subs.unsubscribe();
+    
   }
 
   goto(s, link) {

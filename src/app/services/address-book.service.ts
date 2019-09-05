@@ -3,6 +3,7 @@ import { HttpClient, HttpParams, HttpResponse, HttpHeaders } from '@angular/comm
 import { map, catchError } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import _ from 'lodash';
+import { Helper } from '../shared/utils/helper';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +18,21 @@ export class AddressBookService {
     return this.http.post(`${this.baseUrl}/api/address/create`, o);
   }
 
-  listAddressBook() {
-    return this.http.get(`${this.baseUrl}/api/address/list`);
+  listAddressBook(page, limit, sort, dir, value) {
+    let i = Helper.getStart(page, limit);
+    let prm: HttpParams = new HttpParams()
+      .set('start', `${i}`)
+      .set('length', limit)
+      .set('order', sort)
+      .set('dir', dir)
+      .set('value', value);
+    return this.http.get(`${this.baseUrl}/api/address/list`, { params: prm });
+  }
+
+  getAddressBook(id) {
+    let prm: HttpParams = new HttpParams()
+      .set('address_id', id);
+    return this.http.get(`${this.baseUrl}/api/address/list`, { params: prm });
   }
 
   deleteAddressBook(lx: string[]) {

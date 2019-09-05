@@ -1,12 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { PaginationModule, ModalModule  } from 'ngx-bootstrap';
+import { PaginationModule, ModalModule, BsDatepickerModule } from 'ngx-bootstrap';
 import {
   NgxUiLoaderModule, NgxUiLoaderConfig, SPINNER, POSITION,
   PB_DIRECTION, NgxUiLoaderRouterModule, NgxUiLoaderHttpModule
@@ -30,8 +30,8 @@ import { CreateShipmentComponent } from './components/shipment/create-shipment/c
 import { ListShipmentComponent } from './components/shipment/list-shipment/list-shipment.component';
 import { CreateAddressBookComponent } from './components/address-book/create-address-book/create-address-book.component';
 import { ListAddressBookComponent } from './components/address-book/list-address-book/list-address-book.component';
-import { CompanyProfileComponent } from './components/company-profile/company-profile.component';
 import { AddressBookModalComponent } from './shared/components/address-book-modal/address-book-modal.component';
+import { CreateCompanyProfileComponent } from './components/company-profile/create-company-profile/create-company-profile.component';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   bgsColor: 'blue',
@@ -64,8 +64,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     ListShipmentComponent,
     CreateAddressBookComponent,
     ListAddressBookComponent,
-    CompanyProfileComponent,
-    AddressBookModalComponent
+    AddressBookModalComponent,
+    CreateCompanyProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -77,6 +77,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     NgSelectModule,
     PaginationModule.forRoot(),
     ModalModule .forRoot(),
+    BsDatepickerModule.forRoot(),
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
     NgxUiLoaderRouterModule,
     NgxUiLoaderHttpModule.forRoot({ showForeground: true }),

@@ -5,11 +5,11 @@ import { LoginComponent } from '../components/login/login.component';
 import { HomeComponent } from '../components/home/home.component';
 import { DashboardComponent } from '../components/dashboard/dashboard.component';
 import { UserProfileComponent } from '../components/user-profile/user-profile.component';
-import { CompanyProfileComponent } from '../components/company-profile/company-profile.component';
 import { CreateShipmentComponent } from '../components/shipment/create-shipment/create-shipment.component';
 import { ListShipmentComponent } from '../components/shipment/list-shipment/list-shipment.component';
 import { CreateAddressBookComponent } from '../components/address-book/create-address-book/create-address-book.component';
 import { ListAddressBookComponent } from '../components/address-book/list-address-book/list-address-book.component';
+import { CreateCompanyProfileComponent } from '../components/company-profile/create-company-profile/create-company-profile.component';
 import { AuthGuardService } from '../services/auth-guard.service';
 
 const routes: Routes = [
@@ -20,16 +20,22 @@ const routes: Routes = [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuardService] },
       { path: 'user-profile', component: UserProfileComponent, canActivate: [AuthGuardService] },
-      { path: 'company-profile', component: CompanyProfileComponent, canActivate: [AuthGuardService] },
+      { path: 'company-profile',
+        children: [
+          { path: 'create', component: CreateCompanyProfileComponent, canActivate: [AuthGuardService] }
+        ]
+      },
       { path: 'shipment',
         children: [
-          { path: 'create', component: CreateShipmentComponent, canActivate: [AuthGuardService] }
+          { path: 'create', component: CreateShipmentComponent, canActivate: [AuthGuardService] },
+          { path: 'list', component: ListShipmentComponent, canActivate: [AuthGuardService] }
         ]
       },
       { path: 'address-book',
         children: [
           { path: 'create', component: CreateAddressBookComponent, canActivate: [AuthGuardService] },
           { path: 'list', component: ListAddressBookComponent, canActivate: [AuthGuardService] },
+          { path: 'edit/:id', component: CreateAddressBookComponent, canActivate: [AuthGuardService] }
         ]
       }
     ]
@@ -41,7 +47,7 @@ const routes: Routes = [
   declarations: [],
   imports: [
     CommonModule,
-    RouterModule.forRoot(routes, { useHash: true })
+    RouterModule.forRoot(routes)
   ],
   exports: [RouterModule]
 })

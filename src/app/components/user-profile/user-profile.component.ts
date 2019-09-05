@@ -41,27 +41,39 @@ export class UserProfileComponent implements OnInit {
       company_name: new FormControl({ value: '', disabled: true }),
       userid: new FormControl({ value: '', disabled: true }),
       email: new FormControl({ value: '', disabled: true }),
-      name: [''],
-      phone: [''],
-      addr1: [''],
+      name: ['', [Validators.required]],
+      phone: ['', [Validators.required]],
+      addr1: ['', [Validators.required]],
       addr2: [''],
-      postcode: [''],
-      city: [''],
-      state: [''],
-      country: ['MY']
+      postcode: ['', [Validators.required]],
+      city: ['', [Validators.required]],
+      state: ['', [Validators.required]],
+      country: ['MY', [Validators.required]]
     });
   }
 
   setForm() {
     const o = this.data;
-    const c = !Helper.isEmpty(o.company) ? o.company[0] : {};
+    let s = o.company_country;
+    let k = _.find(this.countryList, (x) => {
+      return x.country_code === s;
+    });
+    if (_.isUndefined(k)) {
+      s = 'MY';
+    }
     this.mform.patchValue({
-      company_code: c.company_code,
-      company_name: c.company_name,
+      company_code: o.company_code,
+      company_name: o.company_name,
       userid: o.username,
       email: o.email,
       name: `${o.first_name} ${o.last_name}`,
-      phone: o.phone_number
+      phone: o.phone_number,
+      addr1: o.company_address1,
+      addr2: o.company_address2,
+      postcode: o.company_postcode,
+      city: o.company_city,
+      state: o.company_state_province,
+      country: s
     });
   }
 
@@ -126,7 +138,18 @@ export class UserProfileComponent implements OnInit {
     this.mform.updateValueAndValidity();
   }
 
+  onSubmit() {
+    const o = {
+
+    };
+  }
+
   get f() {
     return this.mform.controls;
+  }
+
+  invalid(s: string) {
+    const m = this.mform.controls[s];
+    return m.invalid && (m.dirty || m.touched);
   }
 }

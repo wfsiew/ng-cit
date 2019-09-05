@@ -9,118 +9,101 @@
         <i class="fa fa-chevron-left"></i> Back
       </button>
     </div>
-    <form [formGroup]="mform" (ngSubmit)="onSubmit()">
+    <form [formGroup]="mform" (ngSubmit)="onSubmit()" class="form-horizontal">
       <div class="box-body">
         <div class="form-group">
-          <div class="row">
-            <div class="col-xs-2">
-              <label>Type</label>
-            </div>
-            <div class="col-xs-8">
-              <label>* Name</label>
-            </div>
-            <div class="col-xs-2">
-              <label>* Phone number</label>
+          <label class="col-sm-2 control-label">Type</label>
+          <div class="col-sm-4">
+            <select class="form-control" formControlName="type" name="type">
+              <option value="Sender">Sender</option>
+              <option value="Receiver">Receiver</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">* Name</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="Name" formControlName="name" name="name">
+            <small class="label label-danger" *ngIf="invalid('name') && f.name.hasError('required')">Name is required</small>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">* Phone number</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="Phone number" formControlName="phone" name="phone">
+            <small class="label label-danger" *ngIf="invalid('phone') && f.phone.hasError('required')">Phone number is
+              required</small>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">* Address 1</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="Address 1" formControlName="addr1" name="addr1">
+            <small class="label label-danger" *ngIf="invalid('addr1') && f.addr1.hasError('required')">Address 1 is required</small>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Address 2</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="Address 2" formControlName="addr2" name="addr2">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">* Postcode</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="Postcode" formControlName="postcode" name="postcode">
+            <small class="label label-danger" *ngIf="invalid('postcode') && f.postcode.hasError('required')">Postcode is
+              required</small>
+            <small class="label label-danger" *ngIf="invalid('postcode') && f.postcode.hasError('pattern')">Postcode is
+              invalid</small>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">* City</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="City" formControlName="city" name="city">
+            <small class="label label-danger" *ngIf="invalid('city') && f.city.hasError('required')">City is required</small>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">* State</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="State" formControlName="state" name="state">
+            <small class="label label-danger" *ngIf="invalid('state') && f.state.hasError('required')">State is required</small>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">* Country</label>
+          <div class="col-sm-10">
+            <ng-select
+              [items]="countryList" 
+              bindLabel="country_name" 
+              bindValue="country_name" 
+              placeholder="Please select"
+              (change)="onCountryChange()"
+              formControlName="country"
+              name="country"></ng-select>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" formControlName="isdefault" name="isdefault"> Default
+              </label>
             </div>
           </div>
+        </div>
+      </div>
 
-          <div class="row">
-            <div class="col-xs-2">
-              <select class="form-control" formControlName="type" name="type">
-                <option value="Sender">Sender</option>
-                <option value="Receiver">Receiver</option>
-              </select>
-            </div>
-            <div class="col-xs-8">
-              <input type="text" class="form-control" placeholder="Name" formControlName="name" name="name">
-              <small class="label label-danger" *ngIf="invalid('name') && f.name.hasError('required')">Name is required</small>
-            </div>
-            <div class="col-xs-2">
-              <input type="text" class="form-control" placeholder="Phone number" formControlName="phone" name="phone">
-              <small class="label label-danger" *ngIf="invalid('phone') && f.phone.hasError('required')">Phone number is required</small>
-            </div>
-          </div>
-          
-          <div class="row">
-            <div class="col-xs-12">
-              <label>* Address 1</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-xs-12">
-              <input type="text" class="form-control" placeholder="Address 1" formControlName="addr1" name="addr1">
-              <small class="label label-danger" *ngIf="invalid('addr1') && f.addr1.hasError('required')">Address 1 is required</small>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-xs-12">
-              <label>Address 2</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-xs-12">
-              <input type="text" class="form-control" placeholder="Address 2" formControlName="addr2" name="addr2">
-            </div>
-          </div>
-     
-          <div class="row">
-            <div class="col-xs-3">
-              <label>* Postcode</label>
-            </div>
-            <div class="col-xs-3">
-              <label>* City</label>
-            </div>
-            <div class="col-xs-3">
-              <label>* State</label>
-            </div>
-            <div class="col-xs-3">
-              <label>* Country</label>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-xs-3">
-              <input type="text" class="form-control" placeholder="Postcode" formControlName="postcode" name="postcode">
-              <small class="label label-danger" *ngIf="invalid('postcode') && f.postcode.hasError('required')">Postcode is
-                required</small>
-              <small class="label label-danger" *ngIf="invalid('postcode') && f.postcode.hasError('pattern')">Postcode is
-                invalid</small>
-            </div>
-            <div class="col-xs-3">
-              <input type="text" class="form-control" placeholder="City" formControlName="city" name="city">
-              <small class="label label-danger" *ngIf="invalid('city') && f.city.hasError('required')">City is required</small>
-            </div>
-            <div class="col-xs-3">
-              <input type="text" class="form-control" placeholder="State" formControlName="state" name="state">
-              <small class="label label-danger" *ngIf="invalid('state') && f.state.hasError('required')">State is required</small>
-            </div>
-            <div class="col-xs-3">
-              <ng-select
-                [items]="countryList" 
-                bindLabel="country_name" 
-                bindValue="country_name" 
-                placeholder="Please select"
-                (change)="onCountryChange()"
-                formControlName="country"
-                name="country"></ng-select>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-xs-10">
-              <div class="checkbox">
-                <label>
-                  <input type="checkbox" formControlName="isdefault" name="isdefault"> Default
-                </label>
-              </div>
-            </div>
-          </div>
-        </div>                       
+      <div class="overlay" *ngIf="isloading">
+        <i class="fa fa-refresh fa-spin"></i>
       </div>
 
       <div class="box-footer">
-        <button type="submit" class="btn btn-primary" [disabled]="mform.invalid">Submit</button>
+        <div class="pull-right">
+          <button type="submit" class="btn btn-primary" [disabled]="mform.invalid">Save Changes</button>
+        </div>
       </div>
     </form>
   </div>
