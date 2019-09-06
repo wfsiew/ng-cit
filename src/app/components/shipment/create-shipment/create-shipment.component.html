@@ -29,7 +29,7 @@
         </div>
 
         <div class="form-group">
-          <label class="col-sm-2 control-label">* Delivery Service</label>
+          <label class="col-sm-2 control-label">*Delivery Service</label>
           <div class="col-sm-4">
             <ng-select 
               [items]="serviceList" 
@@ -58,7 +58,7 @@
         </div>
 
         <div class="form-group">
-          <label class="col-sm-2 control-label">* Order Reference</label>
+          <label class="col-sm-2 control-label">*Order Reference</label>
           <div class="col-sm-4">
             <input type="text" class="form-control" placeholder="Order Reference" formControlName="customer_reference" 
               name="customer_reference">
@@ -405,6 +405,10 @@
               is required</small>
           </div>
         </div>
+      </div>
+
+      <div class="overlay" *ngIf="isloading">
+        <i class="fa fa-refresh fa-spin"></i>
       </div>
 
       <div class="box-footer">

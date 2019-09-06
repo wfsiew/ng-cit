@@ -27,6 +27,7 @@ import { LookupService } from './services/lookup.service';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { CreateShipmentComponent } from './components/shipment/create-shipment/create-shipment.component';
+import { CreateMultipleShipmentComponent } from './components/shipment/create-multiple-shipment/create-multiple-shipment.component';
 import { ListShipmentComponent } from './components/shipment/list-shipment/list-shipment.component';
 import { CreateAddressBookComponent } from './components/address-book/create-address-book/create-address-book.component';
 import { ListAddressBookComponent } from './components/address-book/list-address-book/list-address-book.component';
@@ -61,6 +62,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     DashboardComponent,
     UserProfileComponent,
     CreateShipmentComponent,
+    CreateMultipleShipmentComponent,
     ListShipmentComponent,
     CreateAddressBookComponent,
     ListAddressBookComponent,

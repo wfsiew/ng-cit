@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { LookupService } from '../../../services/lookup.service';
 import { ShipmentService } from '../../../services/shipment.service';
-import { MessageService } from '../../../services/message.service';
 import { CompanyService } from '../../../services/company.service';
 import { AppConstant } from '../../../shared/constants/app.constant';
 import _ from 'lodash';
@@ -20,6 +18,7 @@ import { AddressBookModalComponent } from '../../../shared/components/address-bo
 })
 export class CreateShipmentComponent implements OnInit {
 
+  isloading = false;
   serviceList = [];
   countryList = [];
   mform: FormGroup;
@@ -36,11 +35,9 @@ export class CreateShipmentComponent implements OnInit {
     private fb: FormBuilder,
     private lookupService: LookupService,
     private shipmentService: ShipmentService,
-    private msService: MessageService,
     private companyService: CompanyService,
     private toastr: ToastrService,
     private modalService: BsModalService,
-    private route: ActivatedRoute,
     private loc: Location
   ) {
     this.createForm();
@@ -125,7 +122,7 @@ export class CreateShipmentComponent implements OnInit {
     });
     this.lookupService.listService().subscribe((res: any) => {
       this.serviceList = res.data;
-    })
+    });
   }
 
   loadCompanyProfile() {
@@ -269,10 +266,11 @@ export class CreateShipmentComponent implements OnInit {
 	    "origin_shipper_state_province": "Selangor",
 	    "origin_shipper_district": "",
 	    "origin_shipper_country": "MY",
-	    "origin_shipper_name": "Kong Mun Hoe",
+      "origin_shipper_name": "Kong Mun Hoe",
 	    "origin_shipper_phone_no": "0165324876",
 	    "origin_shipper_mobile_no": "0165324876",
-	    "origin_shipper_email": "haseo2408@gmail.com",
+      "origin_shipper_email": "haseo2408@gmail.com",
+      
 	    "dest_address_id": "ADC02",
 	    "dest_receiver_address1": "No 16, Jalan Bahagia, Taman ABC",
 	    "dest_receiver_address2": "",
@@ -286,7 +284,8 @@ export class CreateShipmentComponent implements OnInit {
 	    "dest_receiver_phone_no": "0125529182",
 	    "dest_receiver_mobile_no": "0125529182",
 	    "dest_receiver_email": "haseo2409@gmail.com",
-	    "dest_receiver_name": "Kong Zai",
+      "dest_receiver_name": "Kong Zai",
+      
 	    "cod": true,
 	    "cod_value": 9.30,
 	    "carton_box_code": "XL",
@@ -319,6 +318,21 @@ export class CreateShipmentComponent implements OnInit {
 	    }]
 }
     */
+   let lp = _.map(this.listGood, (x) => {
+     return {
+       description: x.description,
+       weight: 0.00,
+       volume: 0.00,
+       height: 0.00,
+       length: 0.00,
+       width: 0.00,
+       value: x.value,
+       currency: x.currency,
+       quantity: x.quantity,
+       uom: 'PAS',
+       product_list: []
+     }
+   });
    const f = this.f;
     const o = {
       customer_reference: f.customer_reference.value,
@@ -329,9 +343,36 @@ export class CreateShipmentComponent implements OnInit {
       origin_shipper_city: f.origin_shipper_city.value,
       origin_shipper_state_province: f.origin_shipper_state_province.value,
       origin_shipper_country: f.origin_shipper_country.value,
-      
+      origin_shipper_name: f.origin_shipper_name.value,
+      origin_shipper_phone_no: f.origin_shipper_phone_no.value,
+
+      dest_address_id: '',
+      dest_receiver_address1: f.dest_receiver_address1.value,
+      dest_receiver_address2: f.dest_receiver_address2.value,
+      dest_receiver_postcode: f.dest_receiver_postcode.value,
+      dest_receiver_city: f.dest_receiver_city.value,
+      dest_receiver_state_province: f.dest_receiver_state_province.value,
+      dest_receiver_country: f.dest_receiver_country.value,
+      dest_receiver_phone_no: f.dest_receiver_phone_no.value,
+      dest_receiver_name: f.dest_receiver_name.value,
+
+      cod: f.is_cod.value,
+      cod_value: f.cod_value.value,
+      total_package_no: f.total_package_no.value,
+      service_type: f.service_type.value,
+      chargeable_weight: f.total_weight.value,
+      chargeable_weight_uom: 'KG',
+      shipment_package_list: lp
     };
-    alert(Helper.getDateStr(this.f.pickup_date.value));
+    this.isloading = true;
+    this.shipmentService.createShipment(o).subscribe(res => {
+      this.isloading = false;
+      this.toastr.success('New Shipment successfully created', 'Create Shipment');
+    },
+    (error) => {
+      this.isloading = false;
+      this.toastr.error('Create Shipment Failed', 'Create Shipment');
+    })
   }
 
   onBack() {

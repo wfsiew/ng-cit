@@ -1,0 +1,85 @@
+<section class="content-header">
+  <h1>Create Multiple Shipment</h1>
+</section>
+<section class="content">
+  <div class="box">
+    <div class="box-header with-border">
+      <h3 class="box-title"></h3>
+      <button type="button" class="btn btn-default" (click)="onBack()">
+        <i class="fa fa-chevron-left"></i> Back
+      </button>
+    </div>
+    <form [formGroup]="mform" (ngSubmit)="onSubmit()" class="form-horizontal">
+      <div class="box-body">
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Company Account</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" placeholder="Company Account" formControlName="company_account_code"
+              name="company_account_code">
+          </div>
+          <label class="col-sm-2 control-label">Company Name</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" placeholder="Company Name" formControlName="company_name"
+              name="company_name">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label">*Delivery Service</label>
+          <div class="col-sm-4">
+            <ng-select 
+              [items]="serviceList" 
+              bindLabel="description" 
+              bindValue="code"
+              placeholder="Please select"
+              formControlName="service_type"
+              name="service_type"></ng-select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label">*Goods Currency</label>
+          <div class="col-sm-4">
+            <ng-select 
+              [items]="countryList" 
+              bindLabel="currency" 
+              bindValue="currency" 
+              placeholder="Please select"
+              formControlName="currency" 
+              name="currency"></ng-select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label">*Upload Document</label>
+          <div class="col-sm-4">
+            <input type="file" class="form-control" placeholder="Upload Shipment" formControlName="file"
+              name="file" (change)="onFileChange($event)">
+          </div>
+          <div class="col-sm-1">
+            <button type="submit" class="btn btn-primary" [disabled]="mform.invalid">Upload</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-5">
+            <div class="progress" *ngIf="uploadResponse.status === 'progress'">
+              <div class="progress-bar progress-bar-aqua" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"
+                [ngStyle]="{ 'width': uploadResponse.message + '%' }">
+                <span class="sr-only">{{ uploadResponse.message }}% Complete</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <div *ngIf="uploadResponse.gotError === true" class="callout callout-danger">
+      <ng-container *ngFor="let o of uploadResponse.data; let k = index">
+        <div *ngFor="let i of o.error" class="alert alert-danger">
+          <div *ngFor="let e of i">{{ e }}</div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</section>
