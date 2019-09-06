@@ -74,6 +74,11 @@
             <i class="fa fa-user-circle-o"></i> <span>User Profile</span>
           </a>
         </li>
+        <li [ngClass]="{'active': menu === 'manifest'}">
+          <a href="#" (click)="goto('manifest', 'manifest/list')">
+            <i class="fa fa-file-text"></i> <span>Manifest</span>
+          </a>
+        </li>
         <li [ngClass]="{'active': menu === 'shipment'}">
           <a href="#" (click)="goto('shipment', 'shipment/list')">
             <i class="fa fa-user-circle-o"></i> <span>Shipment</span>

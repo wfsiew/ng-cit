@@ -29,6 +29,10 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.menu = 'company-profile';
     }
 
+    else if (x.indexOf('/cit/manifest') >= 0){
+      this.menu = 'manifest';
+    }
+
     else if (x.indexOf('/cit/shipment') >= 0){
       this.menu = 'shipment';
     }

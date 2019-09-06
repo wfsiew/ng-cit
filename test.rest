@@ -83,6 +83,11 @@ Content-Type: text/csv
 
 ###
 
+GET {{base}}/api/shipment/list/?shipment_id=2566
+Authorization: Token {{token}}
+
+###
+
 POST {{base}}/api/shipment/create
 Content-Type: application/json
 Authorization: Token {{token}}
@@ -184,3 +189,16 @@ Content-Type: application/json
 }
 
 ###
+
+GET {{base}}/api/manifest/03068911-4055-416c-87f1-c439967f8bc4/list/
+  ?manifestno=FMFM20190904001
+  &details=1
+Authorization: Token {{token}}
+
+###
+
+GET {{base}}/api/manifest/03068911-4055-416c-87f1-c439967f8bc4/list/
+  ?start_date=20190901
+  &details=1
+  &end_date=20190904
+Authorization: Token {{token}}

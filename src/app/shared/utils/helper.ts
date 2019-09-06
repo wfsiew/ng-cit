@@ -23,6 +23,11 @@ export class Helper {
     return s;
   }
 
+  public static getDateStr1(dt: Date) {
+    let s = `${dt.getFullYear()}${this.paddZero(dt.getMonth() + 1)}${Helper.paddZero(dt.getDate())}`;
+    return s;
+  }
+
   public static paddZero(i: number) {
     let s = `${i}`;
     if (i < 10) {

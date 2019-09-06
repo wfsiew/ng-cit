@@ -8,6 +8,7 @@ import { UserProfileComponent } from '../components/user-profile/user-profile.co
 import { CreateShipmentComponent } from '../components/shipment/create-shipment/create-shipment.component';
 import { CreateMultipleShipmentComponent } from '../components/shipment/create-multiple-shipment/create-multiple-shipment.component';
 import { ListShipmentComponent } from '../components/shipment/list-shipment/list-shipment.component';
+import { ListManifestComponent } from '../components/manifest/list-manifest/list-manifest.component';
 import { CreateAddressBookComponent } from '../components/address-book/create-address-book/create-address-book.component';
 import { ListAddressBookComponent } from '../components/address-book/list-address-book/list-address-book.component';
 import { CreateCompanyProfileComponent } from '../components/company-profile/create-company-profile/create-company-profile.component';
@@ -24,6 +25,11 @@ const routes: Routes = [
       { path: 'company-profile',
         children: [
           { path: 'create', component: CreateCompanyProfileComponent, canActivate: [AuthGuardService] }
+        ]
+      },
+      { path: 'manifest',
+        children: [
+          { path: 'list', component: ListManifestComponent, canActivate: [AuthGuardService] }
         ]
       },
       { path: 'shipment',

@@ -1,0 +1,85 @@
+<section class="content-header">
+  <h1>Manifest</h1>
+</section>
+<section class="content">
+  <div class="box">
+    <div class="box-header"></div>
+    <form class="form-horizontal">
+      <div class="box-body">
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Manifest No</label>
+          <div class="col-sm-4">
+            <input type="text" [(ngModel)]="manifest_no" class="form-control" placeholder="Manifest No" name="manifest_no">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Start Date</label>
+          <div class="col-sm-3">
+            <div class="input-group">
+              <input type="text" [(ngModel)]="s_date" class="form-control" name="s_date" bsDatepicker #dp1="bsDatepicker"
+                [bsConfig]="{ containerClass: 'theme-blue', dateInputFormat: 'YYYY-MM-DD' }">
+              <div class="input-group-btn">
+                <button class="btn btn-default" (click)="dp1.show()" [attr.aria-expanded]="dp1.isOpen">
+                  <i class="fa fa-calendar"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">End Date</label>
+          <div class="col-sm-3">
+            <div class="input-group">
+              <input type="text" [(ngModel)]="e_date" class="form-control" name="e_date" bsDatepicker #dp2="bsDatepicker"
+                [bsConfig]="{ containerClass: 'theme-blue', dateInputFormat: 'YYYY-MM-DD' }">
+              <div class="input-group-btn">
+                <button class="btn btn-default" (click)="dp2.show()" [attr.aria-expanded]="dp2.isOpen">
+                  <i class="fa fa-calendar"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-4">
+            <button type="button" class="btn btn-default" (click)="onSubmit()">Search</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="box">
+    <div class="box-body">
+      <div class="text-center" *ngIf="isEmpty(list)">
+        <h4 class="box-title">No records found</h4>
+      </div>
+      <div class="table-responsive" *ngFor="let o of list">
+        <div>
+          <label class="col-sm-2 control-label">Closed ?</label>
+          <div class="col-sm-4">{{ o.is_close ? 'YES': 'NO' }}</div>
+        </div>
+        <table class="table table-bordered table-condensed table-striped table-hover">
+          <thead>
+            <tr>
+              <th>Consignment No</th>
+              <th class="text-center">Confirmed</th>
+              <th>PCS</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let o of o['list-consignment']">
+              <td>{{ o.consignment }}</td>
+              <td class="text-center"><i class="fa" [ngClass]="{'fa-check': o.is_confirm, 'fa-close': !o.is_confirm}"></i></td>
+              <td>{{ o.pcs }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="overlay" *ngIf="isloading">
+      <i class="fa fa-refresh fa-spin"></i>
+    </div>
+  </div>
+</section>

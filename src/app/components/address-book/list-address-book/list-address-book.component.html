@@ -28,8 +28,8 @@
           <div class="text-center" *ngIf="isEmpty(list)">
             <h4 class="box-title">No records found</h4>
           </div>
-          <div class="table-responsive">
-            <table class="table table-bordered table-condensed table-striped table-hover" *ngIf="!isEmpty(list)">
+          <div class="table-responsive" *ngIf="!isEmpty(list)">
+            <table class="table table-bordered table-condensed table-striped table-hover">
               <thead>
                 <tr>
                   <th>

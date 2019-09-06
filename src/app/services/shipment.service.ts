@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpResponse, HttpHeaders, HttpEventType } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
-import _ from 'lodash';
 import { Helper } from '../shared/utils/helper';
 
 @Injectable({

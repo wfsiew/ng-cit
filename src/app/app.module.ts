@@ -29,6 +29,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { CreateShipmentComponent } from './components/shipment/create-shipment/create-shipment.component';
 import { CreateMultipleShipmentComponent } from './components/shipment/create-multiple-shipment/create-multiple-shipment.component';
 import { ListShipmentComponent } from './components/shipment/list-shipment/list-shipment.component';
+import { ListManifestComponent } from './components/manifest/list-manifest/list-manifest.component';
 import { CreateAddressBookComponent } from './components/address-book/create-address-book/create-address-book.component';
 import { ListAddressBookComponent } from './components/address-book/list-address-book/list-address-book.component';
 import { AddressBookModalComponent } from './shared/components/address-book-modal/address-book-modal.component';
@@ -64,6 +65,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     CreateShipmentComponent,
     CreateMultipleShipmentComponent,
     ListShipmentComponent,
+    ListManifestComponent,
     CreateAddressBookComponent,
     ListAddressBookComponent,
     AddressBookModalComponent,
