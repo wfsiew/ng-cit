@@ -111,7 +111,7 @@
               <tbody>
                 <tr *ngFor="let o of data.company_service_list">
                   <td>{{ o.service_code }}</td>
-                  <td></td>
+                  <td>{{ o.service_description }}</td>
                   <td>
                     <input type="checkbox" [checked]="o.selected" (change)="onChangeSelect(o)" />
                   </td>
