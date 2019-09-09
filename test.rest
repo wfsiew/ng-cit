@@ -13,8 +13,8 @@ POST {{base}}/api/user/login
 Content-Type: application/json
 
 {
-    "username": "admin",
-    "password": "admin123"
+    "username": "jason",
+    "password": "jason"
 }
 
 ###
@@ -175,7 +175,7 @@ Authorization: Token {{token}}
 Content-Type: application/json
 
 {
-    "type": "",
+  "type": "",
 	"country" : "MYX",
 	"address1" : "No 27, Jalan Something, Taman Something",
 	"address2": "Hulu Hala, Plus Mutli Typo",
@@ -190,15 +190,31 @@ Content-Type: application/json
 
 ###
 
-GET {{base}}/api/manifest/03068911-4055-416c-87f1-c439967f8bc4/list/
-  ?manifestno=FMFM20190904001,df68c082-5f8c-46de-b358-5a3a3e57073d&details=1
+POST {{base}}/api/checkin/consignment
+Authorization: Token {{token}}
+Content-Type: application/json
+
+{
+  "branch_id": 2,
+  "company_id":  "11b91530-b4e8-4b47-b3d3-e6d4e31077a9",
+  "list-cons": [
+      {
+          "consignment": "MYC0100044642"
+      }
+  ]
+}
+
+###
+
+GET {{base}}/api/manifest/11b91530-b4e8-4b47-b3d3-e6d4e31077a9/list/
+  ?manifestno=Ord00015
   &details=1
 Authorization: Token {{token}}
 
 ###
 
-GET {{base}}/api/manifest/03068911-4055-416c-87f1-c439967f8bc4/list/
+GET {{base}}/api/manifest/11b91530-b4e8-4b47-b3d3-e6d4e31077a9/list/
   ?start_date=20190901
-  &details=0
+  &details=1
   &end_date=20190904
 Authorization: Token {{token}}
