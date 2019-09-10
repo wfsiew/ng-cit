@@ -55,7 +55,7 @@ const routes: Routes = [
   declarations: [],
   imports: [
     CommonModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes, { useHash: false })
   ],
   exports: [RouterModule]
 })

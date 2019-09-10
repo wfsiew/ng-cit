@@ -1,5 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+import _ from 'lodash';
 
 @Component({
   selector: 'app-home',
@@ -10,12 +12,15 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   menu: string;
   address_book: boolean;
+  data: any = {};
 
   constructor(
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
+    this.load();
     const x = this.router.url;
     if (x === '/cit/dashboard') {
       this.menu = 'dashboard';
@@ -50,6 +55,23 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     
+  }
+
+  load() {
+    this.authService.getUserDetails().subscribe((res: any) => {
+      this.data = !_.isEmpty(res.data) ? res.data[0] : {};
+    });
+  }
+
+  logout() {
+    this.authService.clear();
+    this.router.navigate(['/login']);
+    return false;
+  }
+
+  onAddressBookClick(event) {
+    this.address_book = !this.address_book;
+    return false;
   }
 
   goto(s, link) {

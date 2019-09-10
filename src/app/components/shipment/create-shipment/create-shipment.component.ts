@@ -335,6 +335,7 @@ export class CreateShipmentComponent implements OnInit {
    });
    const f = this.f;
     const o = {
+      company_id: this.data.company_id,
       customer_reference: f.customer_reference.value,
       origin_address_id: '',
       origin_shipper_address1: f.origin_shipper_address1.value,
