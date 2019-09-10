@@ -44,7 +44,7 @@ export class CreateMultipleShipmentComponent implements OnInit {
       company_name: new FormControl({ value: '', disabled: true }),
       service_type: ['', [Validators.required]],
       currency: ['MYR', [Validators.required]],
-      file: ['', [Validators.required]]
+      file: [null]
     });
   }
 
@@ -77,13 +77,19 @@ export class CreateMultipleShipmentComponent implements OnInit {
   }
 
   onFileChange(event) {
-    if (event.target.files.length > 0) {
+    if (event.target.files && event.target.files.length) {
       const file = event.target.files[0];
-      this.mform.get('file').setValue(file);
+      this.mform.patchValue({
+        file: file
+      });
     }
   }
 
   onSubmit() {
+    if (_.isNull(this.f.file.value) || _.isUndefined(this.f.file.value)) {
+      this.toastr.error('Import File is required');
+      return;
+    }
     const f = this.f;
     const formData = new FormData();
     formData.append('file', this.mform.get('file').value);

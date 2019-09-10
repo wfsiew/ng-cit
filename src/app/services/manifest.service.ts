@@ -15,9 +15,9 @@ export class ManifestService {
 
   listManifestByNo(company_id: string, manifest_no: string) {
     let prm: HttpParams = new HttpParams()
-      .set('manifestno', 'FMFM20190904001')
+      .set('manifestno', manifest_no)
       .set('details', '1');
-    return this.http.get(`${this.baseUrl}/api/manifest/03068911-4055-416c-87f1-c439967f8bc4/list/`, { params: prm });
+    return this.http.get(`${this.baseUrl}/api/manifest/${company_id}/list/`, { params: prm });
   }
 
   listManifestByDateRange(company_id: string, start: Date, end: Date) {
@@ -26,5 +26,9 @@ export class ManifestService {
       .set('end_date', Helper.getDateStr1(end))
       .set('details', '1');
     return this.http.get(`${this.baseUrl}/api/manifest/${company_id}/list/`, { params: prm });
+  }
+
+  updateManifest(o, company_id: string) {
+    return this.http.post(`${this.baseUrl}/api/manifest/${company_id}/update/`, o);
   }
 }

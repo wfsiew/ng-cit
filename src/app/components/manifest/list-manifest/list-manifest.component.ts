@@ -51,7 +51,7 @@ export class ListManifestComponent implements OnInit {
   load() {
     let q: Observable<Object>;
     if (!Helper.isEmpty(this.manifest_no)) {
-      q = this.manifestService.listManifestByNo(this.company.company_id, this.manifest_no);
+      q = this.manifestService.listManifestByNo('03068911-4055-416c-87f1-c439967f8bc4', this.manifest_no);
     }
 
     else if (!_.isNull(this.s_date) && !_.isUndefined(this.s_date) 
@@ -76,5 +76,23 @@ export class ListManifestComponent implements OnInit {
 
   onSubmit() {
     this.load();
+  }
+
+  onConfirmManifest(consignment, manifest) {
+    const o = {
+      manifest_id: manifest.manifest_id,
+      'list-cons': [
+        {
+          consignment: consignment.consignment,
+          is_conifrm: true
+        }
+      ]
+    };
+    this.manifestService.updateManifest(o, this.company.company_id).subscribe((res: any) => {
+      this.load();
+    },
+    (error) => {
+      this.toastr.error('Update Manifest Failed', 'Confirm Manifest');
+    });
   }
 }
