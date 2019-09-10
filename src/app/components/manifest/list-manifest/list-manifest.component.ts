@@ -51,7 +51,7 @@ export class ListManifestComponent implements OnInit {
   load() {
     let q: Observable<Object>;
     if (!Helper.isEmpty(this.manifest_no)) {
-      q = this.manifestService.listManifestByNo('03068911-4055-416c-87f1-c439967f8bc4', this.manifest_no);
+      q = this.manifestService.listManifestByNo(this.company.company_id, this.manifest_no);
     }
 
     else if (!_.isNull(this.s_date) && !_.isUndefined(this.s_date) 
@@ -70,6 +70,10 @@ export class ListManifestComponent implements OnInit {
     },
     (error) => {
       this.isloading = false;
+      if (error.status === 400) {
+        this.list = [];
+      }
+      
       this.toastr.error('Load Manifest Failed');
     });
   }
