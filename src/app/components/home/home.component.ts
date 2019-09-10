@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import _ from 'lodash';
@@ -8,7 +8,7 @@ import _ from 'lodash';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnInit {
 
   menu: string;
   address_book: boolean;
@@ -51,10 +51,6 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.menu = 'address-book-list';
       this.address_book = true;
     }
-  }
-
-  ngOnDestroy() {
-    
   }
 
   load() {
