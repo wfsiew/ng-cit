@@ -34,6 +34,7 @@ import { CreateAddressBookComponent } from './components/address-book/create-add
 import { ListAddressBookComponent } from './components/address-book/list-address-book/list-address-book.component';
 import { AddressBookModalComponent } from './shared/components/address-book-modal/address-book-modal.component';
 import { CreateCompanyProfileComponent } from './components/company-profile/create-company-profile/create-company-profile.component';
+import { RegisterComponent } from './components/register/register.component';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   bgsColor: 'blue',
@@ -69,7 +70,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     CreateAddressBookComponent,
     ListAddressBookComponent,
     AddressBookModalComponent,
-    CreateCompanyProfileComponent
+    CreateCompanyProfileComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
