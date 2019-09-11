@@ -1,3 +1,7 @@
+body, html {
+  height: 100%;
+}
+
 .login-form {
   width: 340px;
   margin: 90px auto;
@@ -26,7 +30,9 @@
 }
 
 .bg {
-  background-image: url('/assets/img/fire-truck.jpg');
-  background-position: left center;
-  background-repeat: no-repeat, repeat;
+  background-image: url('/assets/img/a5.jpg');
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }

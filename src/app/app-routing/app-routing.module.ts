@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from '../components/login/login.component';
+import { RegisterComponent } from '../components/register/register.component';
 import { HomeComponent } from '../components/home/home.component';
 import { DashboardComponent } from '../components/dashboard/dashboard.component';
 import { UserProfileComponent } from '../components/user-profile/user-profile.component';
@@ -16,6 +17,7 @@ import { AuthGuardService } from '../services/auth-guard.service';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: 'register/:serial_id', component: RegisterComponent },
   {
     path: 'cit', component: HomeComponent, canActivate: [AuthGuardService],
     children: [

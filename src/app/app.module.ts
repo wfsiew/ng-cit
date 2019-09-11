@@ -15,6 +15,7 @@ import {
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';
 
@@ -34,7 +35,6 @@ import { CreateAddressBookComponent } from './components/address-book/create-add
 import { ListAddressBookComponent } from './components/address-book/list-address-book/list-address-book.component';
 import { AddressBookModalComponent } from './shared/components/address-book-modal/address-book-modal.component';
 import { CreateCompanyProfileComponent } from './components/company-profile/create-company-profile/create-company-profile.component';
-import { RegisterComponent } from './components/register/register.component';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   bgsColor: 'blue',
@@ -59,6 +59,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   declarations: [
     AppComponent,
     LoginComponent,
+    RegisterComponent,
     FooterComponent,
     HomeComponent,
     DashboardComponent,
@@ -70,8 +71,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     CreateAddressBookComponent,
     ListAddressBookComponent,
     AddressBookModalComponent,
-    CreateCompanyProfileComponent,
-    RegisterComponent
+    CreateCompanyProfileComponent
   ],
   imports: [
     BrowserModule,
