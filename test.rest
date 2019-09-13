@@ -19,6 +19,11 @@ Content-Type: application/json
 
 ###
 
+POST {{base}}/api/user/logout
+Authorization: Token {{token}}
+
+###
+
 @token = {{login.response.body.token}}
 
 ###
@@ -253,3 +258,15 @@ Authorization: Token {{token}}
 
 GET {{base}}/api/company/user/list
 Authorization: Token {{token}}
+
+###
+
+POST {{base}}/api/company/user/new
+Authorization: Token {{token}}
+Content-Type: application/json
+
+{
+  "company_id": "11b91530-b4e8-4b47-b3d3-e6d4e31077a9",
+  "email": "jason@huat.com",
+  "user_role": "USER"
+}

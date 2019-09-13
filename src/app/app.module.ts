@@ -45,6 +45,8 @@ import { AddressBookModalComponent } from './shared/components/address-book-moda
 import { CreateCompanyComponent } from './components/company/create-company/create-company.component';
 import { ListCompanyComponent } from './components/company/list-company/list-company.component';
 import { CreateCompanyProfileComponent } from './components/company-profile/create-company-profile/create-company-profile.component';
+import { ListUserComponent } from './components/user/list-user/list-user.component';
+import { CreateUserModalComponent } from './components/user/create-user-modal/create-user-modal.component';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   bgsColor: 'blue',
@@ -87,7 +89,9 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     ListCompanyComponent,
     CreateCompanyProfileComponent,
     MainDashboardComponent,
-    ListDashboardComponent
+    ListDashboardComponent,
+    ListUserComponent,
+    CreateUserModalComponent
   ],
   imports: [
     BrowserModule,
@@ -127,7 +131,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     }
   ],
   entryComponents: [
-    AddressBookModalComponent
+    AddressBookModalComponent,
+    CreateUserModalComponent
   ],
   bootstrap: [AppComponent]
 })

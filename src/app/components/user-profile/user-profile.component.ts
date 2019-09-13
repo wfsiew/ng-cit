@@ -110,6 +110,7 @@ export class UserProfileComponent implements OnInit {
         this.selectedAddress = {};
       }
     });
+    return false;
   }
 
   setAddress(o) {

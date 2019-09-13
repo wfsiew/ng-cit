@@ -6,23 +6,28 @@ import { MessageService } from '../../../services/message.service';
 import { AppConstant } from '../../../shared/constants/app.constant';
 import _ from 'lodash';
 import { ToastrService } from 'ngx-toastr';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Helper } from '../../../shared/utils/helper';
+import { CreateUserModalComponent } from '../create-user-modal/create-user-modal.component';
 
 @Component({
-  selector: 'app-list-company',
-  templateUrl: './list-company.component.html',
-  styleUrls: ['./list-company.component.css']
+  selector: 'app-list-user',
+  templateUrl: './list-user.component.html',
+  styleUrls: ['./list-user.component.css']
 })
-export class ListCompanyComponent implements OnInit, OnDestroy {
+export class ListUserComponent implements OnInit, OnDestroy {
 
   isloading = false;
   list = [];
   itemsCount = 0;
+  pending = false;
+  tab = 0;
   page = 1;
   search = '';
   sort = '';
   sort_dir = '';
   subs: Subscription;
+  bsModalRef: BsModalRef;
 
   readonly isEmpty = Helper.isEmpty;
   readonly PAGE_SIZE = AppConstant.PAGE_SIZE;
@@ -31,10 +36,11 @@ export class ListCompanyComponent implements OnInit, OnDestroy {
     private router: Router,
     private companyService: CompanyService,
     private msService: MessageService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private modalService: BsModalService
   ) {
     this.subs = this.msService.get().subscribe(res => {
-      if (res.name === 'list-company') {
+      if (res.name === 'list-user') {
         const o = res.data;
         this.page = o.page;
         // this.sort = o.sort;
@@ -54,7 +60,7 @@ export class ListCompanyComponent implements OnInit, OnDestroy {
 
   load() {
     this.isloading = true;
-    this.companyService.listCompany().subscribe((res: any) => {
+    this.companyService.listUser(this.pending).subscribe((res: any) => {
       this.list = res.status ? res.data : [];
       //this.itemsCount = res.status ? res.recordsTotal : 0;
       this.isloading = false;
@@ -67,22 +73,37 @@ export class ListCompanyComponent implements OnInit, OnDestroy {
       }
 
       else {
-        this.toastr.error('Load Company Failed');
+        this.toastr.error('Load User Failed');
       }
     });
   }
 
   onCreateNew() {
-    this.router.navigate(['/cit/company/create']);
+    const state = {
+      title: 'Add User'
+    };
+    this.bsModalRef = this.modalService.show(CreateUserModalComponent, { initialState: state });
+    this.bsModalRef.content.onClose.subscribe(res => {
+      if (res.result === true) {
+        if (this.tab === 1) {
+          this.load();
+        }
+      }
+
+      else {
+        
+      }
+    });
   }
-  
-  onViewDetails(o) {
-    this.router.navigate(['/cit/company/edit', o.company_id]);
+
+  onTab(i) {
+    this.tab = i;
+    this.pending = i === 0 ? false : true;
+    this.load();
     return false;
   }
 
-  onViewUser(o) {
-    this.router.navigate(['/cit/company/user/list']);
+  onView(o) {
     return false;
   }
 

@@ -63,8 +63,11 @@ export class HomeComponent implements OnInit {
   }
 
   logout() {
-    this.authService.clear();
-    this.router.navigate(['/login']);
+    this.authService.logout().subscribe(res => {
+      this.authService.clear();
+      this.router.navigate(['/login']);
+    });
+    
     return false;
   }
 

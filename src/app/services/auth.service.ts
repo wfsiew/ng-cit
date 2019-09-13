@@ -13,6 +13,7 @@ export class AuthService {
 
   private baseUrl = environment.baseUrl;
   private tokenUrl = `${this.baseUrl}/api/user/login`;
+  private logoutUrl = `${this.baseUrl}/api/user/logout`;
   private token: string;
 
   constructor(private http: HttpClient) { }
@@ -31,8 +32,8 @@ export class AuthService {
     );
   }
 
-  logoff() {
-
+  logout() {
+    return this.http.post(this.logoutUrl, {});
   }
 
   handleError(e): string {
@@ -47,8 +48,7 @@ export class AuthService {
     return !!this.getToken();
   }
 
-  clear(): void {
-    this.logoff();
+  clear() {
     localStorage.clear();
   }
 

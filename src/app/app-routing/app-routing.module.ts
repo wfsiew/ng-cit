@@ -16,6 +16,7 @@ import { CreateAddressBookComponent } from '../components/address-book/create-ad
 import { ListAddressBookComponent } from '../components/address-book/list-address-book/list-address-book.component';
 import { CreateCompanyComponent } from '../components/company/create-company/create-company.component';
 import { ListCompanyComponent } from '../components/company/list-company/list-company.component';
+import { ListUserComponent } from '../components/user/list-user/list-user.component';
 import { CreateCompanyProfileComponent } from '../components/company-profile/create-company-profile/create-company-profile.component';
 import { AuthGuardService } from '../services/auth-guard.service';
 
@@ -38,7 +39,12 @@ const routes: Routes = [
         children: [
           { path: 'create', component: CreateCompanyComponent, canActivate: [AuthGuardService] },
           { path: 'list', component: ListCompanyComponent, canActivate: [AuthGuardService] },
-          { path: 'edit/:id', component: CreateCompanyComponent, canActivate: [AuthGuardService] }
+          { path: 'edit/:id', component: CreateCompanyComponent, canActivate: [AuthGuardService] },
+          { path: 'user',
+            children: [
+              { path: 'list', component: ListUserComponent, canActivate: [AuthGuardService] }
+            ]
+          }
         ]
       },
       { path: 'company-profile',

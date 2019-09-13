@@ -54,7 +54,9 @@
         </div>
         <div class="form-group">
           <div class="col-sm-3 text-right">
-            <button type="button" class="btn btn-info" (click)="onGetAddress()"><i class="fa fa-address-card"></i> Address Book</button>
+            <a class="btn btn-app" (click)="onGetAddress()">
+              <i class="fa fa-address-card"></i> Address Book
+            </a>
           </div>
           <div class="col-sm-9">
             <input type="text" class="form-control" placeholder="Address 2" formControlName="addr2" name="addr2">

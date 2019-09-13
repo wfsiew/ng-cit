@@ -110,7 +110,9 @@ export class CreateCompanyComponent implements OnInit {
     });
     this.lookupService.listCountryInfo().subscribe((res: any) => {
       this.countryList = res.response;
-      this.loadCompanyProfile();
+      if (this.isEdit) {
+        this.loadCompanyProfile();
+      }
     });
   }
 
