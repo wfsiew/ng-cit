@@ -259,7 +259,7 @@ Authorization: Token {{token}}
 
 ###
 
-GET {{base}}/api/company/details?id=1e070ce3-9188-4b99-a6cf-aaf0e9036388
+GET {{base}}/api/company/details?id=11b91530-b4e8-4b47-b3d3-e6d4e31077a9
 Authorization: Token {{token}}
 
 ###
