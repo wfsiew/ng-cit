@@ -16,6 +16,9 @@ import { Helper } from '../../../shared/utils/helper';
 export class CreateUserModalComponent implements OnInit {
 
   title: string;
+  email: string = '';
+  roles: string = 'USER';
+  edit = false;
   mform: FormGroup;
 
   public onClose: Subject<any>;
@@ -32,14 +35,23 @@ export class CreateUserModalComponent implements OnInit {
   }
 
   createForm() {
+    this.edit = this.email === '' ? false : true;
     this.mform = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      user_type: ['USER', [Validators.required]]
+      email: [this.email, [Validators.required, Validators.email]],
+      user_type: [this.roles, [Validators.required]]
     });
   }
 
   onAssign() {
     this.onClose.next({ result: true });
+    this.bsModalRef.hide();
+  }
+
+  onConfirm() {
+    this.bsModalRef.hide();
+  }
+
+  onDelete() {
     this.bsModalRef.hide();
   }
 

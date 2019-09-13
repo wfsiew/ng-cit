@@ -89,10 +89,6 @@ export class ListUserComponent implements OnInit, OnDestroy {
           this.load();
         }
       }
-
-      else {
-        
-      }
     });
   }
 
@@ -104,6 +100,20 @@ export class ListUserComponent implements OnInit, OnDestroy {
   }
 
   onView(o) {
+    const x = o['list-user'];
+    const state = {
+      title: 'Edit User',
+      email: x.Email,
+      roles: x.Roles
+    };
+    this.bsModalRef = this.modalService.show(CreateUserModalComponent, { initialState: state });
+    this.bsModalRef.content.onClose.subscribe(res => {
+      if (res.result === true) {
+        if (this.tab === 1) {
+          this.load();
+        }
+      }
+    });
     return false;
   }
 

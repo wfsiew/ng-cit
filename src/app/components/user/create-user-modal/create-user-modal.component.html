@@ -8,15 +8,15 @@
   <form [formGroup]="mform" class="form-horizontal">
     <div class="form-group">
       <label class="col-sm-3 control-label">Email Address</label>
-      <div class="col-sm-8">
-        <input type="email" class="form-control" placeholder="Email Address" formControlName="email" name="email">
+      <div class="col-sm-9">
+        <input type="email" class="form-control" placeholder="Email Address" formControlName="email" name="email" [readonly]="edit">
         <small class="label label-danger" *ngIf="invalid('email') && f.email.hasError('required')">Email Address is required</small>
         <small class="label label-danger" *ngIf="invalid('email') && f.email.hasError('email')">Email Address is invalid</small>
       </div>
     </div>
     <div class="form-group">
       <label class="col-sm-3 control-label">User Type</label>
-      <div class="col-sm-8">
+      <div class="col-sm-9">
         <select class="form-control" formControlName="user_type" name="user_type">
           <option value="USER">USER</option>
           <option value="SUPERADMIN">SUPERADMIN</option>
@@ -27,5 +27,7 @@
   </form>
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-primary" (click)="onAssign()" [disabled]="mform.invalid">Assign</button>
+  <button *ngIf="edit" type="button" class="btn btn-primary" (click)="onConfirm()">Confirm</button>
+  <button *ngIf="edit" type="button" class="btn btn-danger" (click)="onDelete()">Delete</button>
+  <button *ngIf="!edit" type="button" class="btn btn-primary" (click)="onAssign()" [disabled]="mform.invalid">Assign</button>
 </div>
