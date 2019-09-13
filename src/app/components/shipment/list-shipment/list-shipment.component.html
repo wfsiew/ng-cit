@@ -40,8 +40,9 @@
         <table class="table table-bordered table-condensed table-striped table-hover">
           <thead>
             <tr>
-              <th>
-                Created Date
+              <th class="text-center">
+                <a href="#" (click)="sortBy('create_date')">Created Date</a> <i *ngIf="sort === 'create_date'" class="fa"
+                  [ngClass]="{'fa-chevron-up': isSortBy('create_date', ''), 'fa-chevron-down': isSortBy('create_date', 'desc')}"></i>
               </th>
               <th>
                 <a href="#" (click)="sortBy('consignment_no')">Consignment Number</a> <i *ngIf="sort === 'consignment_no'" class="fa"
@@ -66,7 +67,7 @@
           </thead>
           <tbody>
             <tr *ngFor="let o of list">
-              <td>{{ o.id }}</td>
+              <td class="text-center">{{ o.created_date | date:'yyyy-MM-dd' }}</td>
               <td>{{ o.consignment_no }}</td>
               <td>{{ o.customer_reference }}</td>
               <td>{{ o.service_type }}</td>

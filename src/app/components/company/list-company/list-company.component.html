@@ -20,31 +20,36 @@
       </div>
     </div>
 
-    <div class="box-body table-responsive">
-      <table class="table table-bordered table-condensed table-striped table-hover">
-        <thead>
-          <tr>
-            <th>No</th>
-            <th>Code</th>
-            <th>Company Name</th>
-            <th>Details</th>
-            <th>User</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let o of list; let i = index">
-            <td>{{ i + 1 }}</td>
-            <td>{{ o.account_code }}</td>
-            <td>{{ o.company_name }}</td>
-            <td>
-              <a href="#" (click)="onViewDetails(o)">View</a>
-            </td>
-            <td>
-              <a href="#" (click)="onViewUser(o)">View</a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="box-body">
+      <div class="text-center" *ngIf="isEmpty(list)">
+        <h4 class="box-title">No records found</h4>
+      </div>
+      <div class="table-responsive" *ngIf="!isEmpty(list)">
+        <table class="table table-bordered table-condensed table-striped table-hover">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Code</th>
+              <th>Company Name</th>
+              <th>Details</th>
+              <th>User</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let o of list; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ o.account_code }}</td>
+              <td>{{ o.company_name }}</td>
+              <td>
+                <a href="#" (click)="onViewDetails(o)">View</a>
+              </td>
+              <td>
+                <a href="#" (click)="onViewUser(o)">View</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
     <div class="overlay" *ngIf="isloading">

@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { DashboardService } from '../../../services/dashboard.service';
+import { CompanyService } from '../../../services/company.service';
+import { AuthService } from '../../../services/auth.service';
 import { MessageService } from '../../../services/message.service';
 import { AppConstant } from '../../../shared/constants/app.constant';
 import _ from 'lodash';
@@ -12,7 +15,7 @@ import { Helper } from '../../../shared/utils/helper';
   templateUrl: './main-dashboard.component.html',
   styleUrls: ['./main-dashboard.component.css']
 })
-export class MainDashboardComponent implements OnInit {
+export class MainDashboardComponent implements OnInit, OnDestroy {
 
   isloading = false;
   list = [];
@@ -22,35 +25,78 @@ export class MainDashboardComponent implements OnInit {
     delivered: 0,
     cancel: 0
   }
+  user = {
+    company_id: '',
+    company_name: ''
+  }
+  company_id: string;
+  role: string;
+  daterx = [new Date(), new Date()];
+  subs: Subscription;
 
   readonly isEmpty = Helper.isEmpty;
 
   constructor(
     private router: Router,
     private dashboardService: DashboardService,
+    private companyService: CompanyService,
+    private authService: AuthService,
+    private msService: MessageService,
     private toastr: ToastrService
-  ) { }
+  ) {
+    this.subs = this.msService.get().subscribe(res => {
+      if (res.name === 'main-dashboard') {
+        const o = res.data;
+        this.company_id = o.company_id;
+        this.daterx = o.daterx;
+      }
+    });
+  }
 
   ngOnInit() {
-    this.list = [
-      {
-        code: 'A100177',
-        company_name: 'Alibaba'
-      }
-    ]
+    let user = this.authService.loadUser();
+    this.role = user.role;
     this.load();
   }
 
+  ngOnDestroy() {
+    this.subs.unsubscribe();
+  }
+
   load() {
+    this.authService.getUserDetails().subscribe((res: any) => {
+      this.user = !_.isEmpty(res.data) ? res.data[0] : {};
+      this.company_id = this.user.company_id;
+      this.loadDashboard();
+      this.loadCompany();
+    });
+  }
+
+  loadCompany() {
+    let isAdmin = this.role === AppConstant.ROLE.ADMIN;
+    this.companyService.listCompany(isAdmin).subscribe((res: any) => {
+      this.list = res.status ? res.data : [];
+    },
+    (error) => {
+      this.toastr.error('Load Company Failed');
+    });
+  }
+
+  loadDashboard() {
     this.isloading = true;
-    this.dashboardService.getKPI('11b91530-b4e8-4b47-b3d3-e6d4e31077a9').subscribe((res: any) => {
+    const o = {
+      company_id: this.company_id,
+      start_date: Helper.getDateStr(this.daterx[0]),
+      end_date: Helper.getDateStr(this.daterx[1])
+    };
+    this.dashboardService.getKPI(o).subscribe((res: any) => {
       const o = res.status ? res.data.overview : [];
       let m = {
         'new': 0,
         'pending': 0,
         'delivered': 0,
         'cancel': 0
-      }
+      };
 
       _.each(['new', 'pending', 'delivered', 'cancel'], (k) => {
         let x = _.find(o, (j) => {
@@ -72,15 +118,22 @@ export class MainDashboardComponent implements OnInit {
   }
 
   onKPI(i) {
-    this.router.navigate(['/cit/dashboard/list', i]);
+    this.msService.send('main-dashboard', {
+      company_id: this.company_id,
+      daterx: this.daterx
+    });
+    this.router.navigate(['/cit/dashboard/list', i, this.company_id]);
     return false;
   }
 
   onViewDetails(o) {
+    this.router.navigate(['/cit/company/edit', o.company_id]);
     return false;
   }
 
   onViewDashboard(o) {
+    this.company_id = o.company_id;
+    this.loadDashboard();
     return false;
   }
 }

@@ -5,6 +5,10 @@ export class AppConstant {
   public static PAGE_SIZE = 20;
   public static NETWORK_TIMEOUT = 16000;
 
+  public static ROLE = {
+    ADMIN: 'ADMIN'
+  }
+
   public static VALIDATE = {
     NUMBER: /^(0|[1-9][0-9]*)$/,
     AMOUNT: /^\d+(\.\d{1,2})?$/,

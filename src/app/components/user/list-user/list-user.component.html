@@ -43,8 +43,12 @@
         <li [ngClass]="{ 'active': tab === 0 }"><a href="#" (click)="onTab(0)">Active</a></li>
         <li [ngClass]="{ 'active': tab === 1 }"><a href="#" (click)="onTab(1)">Pending Invitation</a></li>
       </ul>
+
+      <div class="text-center" *ngIf="isEmpty(list)">
+        <h4 class="box-title">No records found</h4>
+      </div>
   
-      <div class="table-responsive">
+      <div class="table-responsive" *ngIf="!isEmpty(list)">
         <table class="table table-condensed table-bordered table-striped table-hover">
           <thead>
             <tr>

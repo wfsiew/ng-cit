@@ -30,7 +30,7 @@ const routes: Routes = [
       { path: 'dashboard',
         children: [
           { path: '', component: MainDashboardComponent, canActivate: [AuthGuardService] },
-          { path: 'list/:id', component: ListDashboardComponent, canActivate: [AuthGuardService] },
+          { path: 'list/:id/:company_id', component: ListDashboardComponent, canActivate: [AuthGuardService] },
           { path: 'detail', component: DetailDashboardComponent, canActivate: [AuthGuardService] }
         ]
       },
