@@ -4,7 +4,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from '../components/login/login.component';
 import { RegisterComponent } from '../components/register/register.component';
 import { HomeComponent } from '../components/home/home.component';
-import { DashboardComponent } from '../components/dashboard/dashboard.component';
+import { MainDashboardComponent } from '../components/dashboard/main-dashboard/main-dashboard.component';
+import { ListDashboardComponent } from '../components/dashboard/list-dashboard/list-dashboard.component';
+import { DetailDashboardComponent } from '../components/dashboard/detail-dashboard/detail-dashboard.component';
 import { UserProfileComponent } from '../components/user-profile/user-profile.component';
 import { CreateShipmentComponent } from '../components/shipment/create-shipment/create-shipment.component';
 import { CreateMultipleShipmentComponent } from '../components/shipment/create-multiple-shipment/create-multiple-shipment.component';
@@ -12,6 +14,8 @@ import { ListShipmentComponent } from '../components/shipment/list-shipment/list
 import { ListManifestComponent } from '../components/manifest/list-manifest/list-manifest.component';
 import { CreateAddressBookComponent } from '../components/address-book/create-address-book/create-address-book.component';
 import { ListAddressBookComponent } from '../components/address-book/list-address-book/list-address-book.component';
+import { CreateCompanyComponent } from '../components/company/create-company/create-company.component';
+import { ListCompanyComponent } from '../components/company/list-company/list-company.component';
 import { CreateCompanyProfileComponent } from '../components/company-profile/create-company-profile/create-company-profile.component';
 import { AuthGuardService } from '../services/auth-guard.service';
 
@@ -22,8 +26,21 @@ const routes: Routes = [
     path: 'cit', component: HomeComponent, canActivate: [AuthGuardService],
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-      { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuardService] },
+      { path: 'dashboard',
+        children: [
+          { path: '', component: MainDashboardComponent, canActivate: [AuthGuardService] },
+          { path: 'list/:id', component: ListDashboardComponent, canActivate: [AuthGuardService] },
+          { path: 'detail', component: DetailDashboardComponent, canActivate: [AuthGuardService] }
+        ]
+      },
       { path: 'user-profile', component: UserProfileComponent, canActivate: [AuthGuardService] },
+      { path: 'company',
+        children: [
+          { path: 'create', component: CreateCompanyComponent, canActivate: [AuthGuardService] },
+          { path: 'list', component: ListCompanyComponent, canActivate: [AuthGuardService] },
+          { path: 'edit/:id', component: CreateCompanyComponent, canActivate: [AuthGuardService] }
+        ]
+      },
       { path: 'company-profile',
         children: [
           { path: 'create', component: CreateCompanyProfileComponent, canActivate: [AuthGuardService] }

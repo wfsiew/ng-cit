@@ -25,7 +25,15 @@ import { MessageService } from './services/message.service';
 import { AuthService } from './services/auth.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { LookupService } from './services/lookup.service';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { CompanyService } from './services/company.service';
+import { AddressBookService } from './services/address-book.service';
+import { ShipmentService } from './services/shipment.service';
+import { ManifestService } from './services/manifest.service';
+import { UserService } from './services/user.service';
+
+import { MainDashboardComponent } from './components/dashboard/main-dashboard/main-dashboard.component';
+import { ListDashboardComponent } from './components/dashboard/list-dashboard/list-dashboard.component';
+import { DetailDashboardComponent } from './components/dashboard/detail-dashboard/detail-dashboard.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { CreateShipmentComponent } from './components/shipment/create-shipment/create-shipment.component';
 import { CreateMultipleShipmentComponent } from './components/shipment/create-multiple-shipment/create-multiple-shipment.component';
@@ -34,6 +42,8 @@ import { ListManifestComponent } from './components/manifest/list-manifest/list-
 import { CreateAddressBookComponent } from './components/address-book/create-address-book/create-address-book.component';
 import { ListAddressBookComponent } from './components/address-book/list-address-book/list-address-book.component';
 import { AddressBookModalComponent } from './shared/components/address-book-modal/address-book-modal.component';
+import { CreateCompanyComponent } from './components/company/create-company/create-company.component';
+import { ListCompanyComponent } from './components/company/list-company/list-company.component';
 import { CreateCompanyProfileComponent } from './components/company-profile/create-company-profile/create-company-profile.component';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
@@ -62,7 +72,9 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     RegisterComponent,
     FooterComponent,
     HomeComponent,
-    DashboardComponent,
+    MainDashboardComponent,
+    ListDashboardComponent,
+    DetailDashboardComponent,
     UserProfileComponent,
     CreateShipmentComponent,
     CreateMultipleShipmentComponent,
@@ -71,7 +83,11 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     CreateAddressBookComponent,
     ListAddressBookComponent,
     AddressBookModalComponent,
-    CreateCompanyProfileComponent
+    CreateCompanyComponent,
+    ListCompanyComponent,
+    CreateCompanyProfileComponent,
+    MainDashboardComponent,
+    ListDashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -94,6 +110,11 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     AuthService,
     AuthGuardService,
     LookupService,
+    CompanyService,
+    AddressBookService,
+    ShipmentService,
+    ManifestService,
+    UserService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

@@ -223,3 +223,33 @@ GET {{base}}/api/manifest/11b91530-b4e8-4b47-b3d3-e6d4e31077a9/list/
   &details=1
   &end_date=20190910
 Authorization: Token {{token}}
+
+###
+
+GET {{base}}/api/manifest/load/LDFX17000134
+Authorization: Token {{token}}
+
+###
+
+POST  {{base}}/api/dashboard/company/kpi/
+Authorization: Token {{token}}
+Content-Type: application/json
+
+{
+  "company_id": "11b91530-b4e8-4b47-b3d3-e6d4e31077a9"
+}
+
+###
+
+GET {{base}}/api/company/list
+Authorization: Token {{token}}
+
+###
+
+GET {{base}}/api/company/details?id=9bfefba7-fefa-4130-a2d9-afd356e202d5
+Authorization: Token {{token}}
+
+###
+
+GET {{base}}/api/company/user/list
+Authorization: Token {{token}}

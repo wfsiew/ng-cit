@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import _ from 'lodash';
+import { User } from '../../shared/models/user';
 
 @Component({
   selector: 'app-home',
@@ -13,6 +14,7 @@ export class HomeComponent implements OnInit {
   menu: string;
   address_book: boolean;
   data: any = {};
+  user: User
 
   constructor(
     private router: Router,
@@ -30,8 +32,8 @@ export class HomeComponent implements OnInit {
       this.menu = 'user-profile';
     }
 
-    else if (x.indexOf('/cit/company-profile') >= 0) {
-      this.menu = 'company-profile';
+    else if (x.indexOf('/cit/company') >= 0) {
+      this.menu = 'company';
     }
 
     else if (x.indexOf('/cit/manifest') >= 0){
@@ -54,6 +56,7 @@ export class HomeComponent implements OnInit {
   }
 
   load() {
+    this.user = this.authService.loadUser();
     this.authService.getUserDetails().subscribe((res: any) => {
       this.data = !_.isEmpty(res.data) ? res.data[0] : {};
     });

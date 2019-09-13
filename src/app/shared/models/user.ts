@@ -5,6 +5,7 @@ export class User {
     public lastName?: string,
     public email?: string,
     public role?: string,
+    public base_company?: string,
     public token?: string,
     public status?: boolean,
     public user_id?: string

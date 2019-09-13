@@ -56,6 +56,7 @@ export class RegisterComponent implements OnInit {
       email: f.email.value,
       username: f.username.value,
       phone_number: f.phone_number.value,
+      date_of_birth: null,
       serial_id: this.serial_id
     };
     this.isloading = true;

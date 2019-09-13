@@ -1,0 +1,83 @@
+<section class="content-header">
+  <div class="row">
+    <div class="col-xs-3">
+      <button type="button" class="btn btn-default" (click)="onBack()">
+        <i class="fa fa-arrow-left"></i> Back
+      </button>
+    </div>
+  </div>
+</section>
+<section class="content">
+  <div class="box">
+    <div class="box-header with-border">
+      <h1 class="box-title">{{ title }}</h1>
+      <span class="company-name">Company Name</span>
+      <div class="pull-right">
+        <div class="input-group">
+          <input type="text" class="form-control" [(ngModel)]="daterx" name="daterx" bsDaterangepicker #dp="bsDaterangepicker"
+            placement="left"
+            [bsConfig]="{ containerClass: 'theme-blue', rangeInputFormat: 'YYYY-MM-DD' }">
+          <div class="input-group-btn">
+            <button class="btn btn-default" (click)="dp.show()" [attr.aria-expanded]="dp.isOpen">
+              <i class="fa fa-calendar"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="box-body">
+      <div class="row">
+        <div class="col-xs-6">
+          <button type="button" class="btn btn-primary btn-space">Copy</button>
+          <button type="button" class="btn btn-primary btn-space">CSV</button>
+          <button type="button" class="btn btn-primary btn-space">Excel</button>
+          <button type="button" class="btn btn-primary btn-space">Print</button>
+        </div>
+        <div class="col-xs-5 pull-right">
+          <div class="input-group">
+            <input type="text" [(ngModel)]="search" (keydown.enter)="onSearchKeypress($event)" name="q" class="form-control"
+              placeholder="Search...">
+            <span class="input-group-btn">
+              <button type="button" name="search" class="btn btn-flat" (click)="onSearch()"><i class="fa fa-search"></i>
+              </button>
+            </span>
+          </div>
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-xs-12 table-responsive">
+          <table class="table table-bordered table-condensed table-striped table-hover">
+            <thead>
+              <tr>
+                <th>Consignment</th>
+                <th>Customer Ref</th>
+                <th>Shipper Name</th>
+                <th>Receiver Name</th>
+                <th>Receiver HP</th>
+                <th>Weight</th>
+                <th>Status</th>
+                <th>Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>MX112233</td>
+                <td>776668</td>
+                <td>Benny</td>
+                <td>Bean</td>
+                <td>0128866690</td>
+                <td>0.8 KG</td>
+                <td>IN TRANSIT</td>
+                <td>
+                  <a href="#" (click)="onView()">View</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

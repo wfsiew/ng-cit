@@ -6,7 +6,6 @@ import { Subscription } from 'rxjs';
 import { LookupService } from '../../../services/lookup.service';
 import { AddressBookService } from '../../../services/address-book.service';
 import { MessageService } from '../../../services/message.service';
-import { AppConstant } from '../../../shared/constants/app.constant';
 import { Helper } from '../../../shared/utils/helper';
 import _ from 'lodash';
 import { ToastrService } from 'ngx-toastr';

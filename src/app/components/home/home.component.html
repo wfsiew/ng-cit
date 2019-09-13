@@ -27,7 +27,9 @@
               <li class="user-header">
                 <p>
                   {{ data.first_name }}&nbsp;{{ data.last_name }} - {{ data.display_name }}
+                  <small>{{ data.email }}</small>
                   <small>{{ data.company_phone_number }}</small>
+                  <small><b>{{ user.role }}</b></small>
                 </p>
               </li>
               <!-- Menu Body -->
@@ -101,9 +103,9 @@
           </ul>
         </li>
 
-        <li [ngClass]="{'active': menu === 'company-profile'}">
-          <a href="#" (click)="goto('company-profile', 'company-profile/create')">
-            <i class="fa fa-user-circle-o"></i> <span>Company Setup</span>
+        <li [ngClass]="{'active': menu === 'company'}">
+          <a href="#" (click)="goto('company-list', 'company/list')">
+            <i class="fa fa-user-circle-o"></i> <span>Company</span>
           </a>
         </li>
       </ul>
