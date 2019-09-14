@@ -1,5 +1,8 @@
 .footer {
   line-height: 20px;
+  position: fixed;
+  left: 0;
+  bottom: 0;
 }
 
 .footer-opacity {

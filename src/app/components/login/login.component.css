@@ -30,9 +30,15 @@ body, html {
 }
 
 .bg {
-  background-image: url('/assets/img/a5.jpg');
-  height: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
+  background: url('/assets/img/a5.jpg') no-repeat center center fixed;
+  width: 100%;
+  height: auto;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
   background-size: cover;
+  min-height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
