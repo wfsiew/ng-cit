@@ -59,7 +59,8 @@
           <label class="col-sm-2 control-label">Manifest No:</label>
           <div class="col-sm-4"><b>{{ o.manifest_no }}</b></div>
           <div class="pull-right">
-            <button type="button" class="btn btn-default">Manifest CLOSE</button>
+            <button *ngIf="!o.is_close" type="button" class="btn btn-success" (click)="onConfirmClose(confirm_close, o)">Manifest CLOSE</button>
+            <button type="button" class="btn btn-info">Print</button>
           </div>
         </div>
         <table class="table table-bordered table-condensed table-striped table-hover" *ngIf="!isEmpty(o['list-consignment'])">
@@ -75,9 +76,9 @@
             <tr *ngFor="let x of o['list-consignment']">
               <td>{{ x.consignment }}</td>
               <td>{{ x.pcs }}</td>
-              <td class="text-center">{{ x.is_confirm ? 'Confirm': 'Not Confirm' }}</td>
+              <td class="text-center">{{ x.is_confirm ? 'CONFIRM': 'NOT CONFIRM' }}</td>
               <td>
-                <button type="button" class="btn" (click)="onConfirmManifest(x, o)" [ngClass]="{ 'btn-success': !x.is_confirm, 'btn-danger': x.is_confirm }">{{ x.is_confirm ? 'Unconfirm': 'Confirm' }}</button>
+                <button type="button" class="btn" (click)="onConfirmCloseManifest(x, o)" [ngClass]="{ 'btn-success': !x.is_confirm, 'btn-danger': x.is_confirm }">{{ x.is_confirm ? 'Unconfirm': 'Confirm' }}</button>
               </td>
             </tr>
           </tbody>
@@ -89,4 +90,18 @@
       <i class="fa fa-refresh fa-spin"></i>
     </div>
   </div>
+
+  <ng-template #confirm_close>
+    <div class="modal-header">
+      <h4 class="modal-title text-center">Close Manifest</h4>
+    </div>
+    <div class="modal-body text-center">
+      <p>{{ selectedManifest.manifest_no }}</p>
+      <p>Are you sure?</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-success" (click)="_onConfirmClose()">Yes</button>
+      <button type="button" class="btn btn-danger" (click)="onCancel()">No</button>
+    </div>
+  </ng-template>
 </section>

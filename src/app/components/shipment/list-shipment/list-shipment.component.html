@@ -67,12 +67,12 @@
           </thead>
           <tbody>
             <tr *ngFor="let o of list">
-              <td class="text-center">{{ o.created_date | date:'yyyy-MM-dd' }}</td>
+              <td class="text-center">{{ o.created_date }}</td>
               <td>{{ o.consignment_no }}</td>
               <td>{{ o.customer_reference }}</td>
               <td>{{ o.service_type }}</td>
               <td>{{ o.dest_receiver_name }}</td>
-              <td>{{ o.id }}</td>
+              <td class="text-uppercase">{{ o.status }}</td>
             </tr>
           </tbody>
         </table>

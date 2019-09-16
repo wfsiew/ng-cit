@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription, Observable } from 'rxjs';
 import { ManifestService } from '../../../services/manifest.service';
@@ -8,6 +8,7 @@ import { AppConstant } from '../../../shared/constants/app.constant';
 import _ from 'lodash';
 import { ToastrService } from 'ngx-toastr';
 import { Helper } from '../../../shared/utils/helper';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-list-manifest',
@@ -24,6 +25,8 @@ export class ListManifestComponent implements OnInit {
   company = {
     company_id: ''
   };
+  modalRef: BsModalRef;
+  selectedManifest: any;
 
   readonly isEmpty = Helper.isEmpty;
 
@@ -32,7 +35,8 @@ export class ListManifestComponent implements OnInit {
     private manifestService: ManifestService,
     private companyService: CompanyService,
     private msService: MessageService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private modalService: BsModalService
   ) { }
 
   ngOnInit() {
@@ -82,13 +86,13 @@ export class ListManifestComponent implements OnInit {
     this.load();
   }
 
-  onConfirmManifest(consignment, manifest) {
+  onConfirmCloseManifest(consignment, manifest) {
     const o = {
       manifest_id: manifest.manifest_id,
       'list-cons': [
         {
           consignment: consignment.consignment,
-          is_conifrm: true
+          is_conifrm: !consignment.is_confirm
         }
       ]
     };
@@ -98,5 +102,31 @@ export class ListManifestComponent implements OnInit {
     (error) => {
       this.toastr.error('Update Manifest Failed', 'Confirm Manifest');
     });
+  }
+
+  onConfirmClose(tp: TemplateRef<any>, o) {
+    this.selectedManifest = o;
+    this.modalRef = this.modalService.show(tp, {class: 'modal-sm'});
+  }
+
+  _onConfirmClose() {
+    this.closeManifest(this.selectedManifest);
+  }
+
+  closeManifest(manifest) {
+    const o = {
+      manifest_id: manifest.manifest_id
+    };
+    this.manifestService.closeManifest(o, this.company.company_id).subscribe((res: any) => {
+      this.onCancel();
+      this.load();
+    },
+    (error) => {
+      this.toastr.error('Close Manifest Failed');
+    });
+  }
+
+  onCancel() {
+    this.modalRef.hide();
   }
 }
