@@ -16,6 +16,7 @@
         <div class="input-group">
           <input type="text" class="form-control" [(ngModel)]="daterx" name="daterx" bsDaterangepicker #dp="bsDaterangepicker"
             placement="left"
+            (bsValueChange)="onDateChange()"
             [bsConfig]="{ containerClass: 'theme-blue', rangeInputFormat: 'YYYY-MM-DD' }">
           <div class="input-group-btn">
             <button class="btn btn-default" (click)="dp.show()" [attr.aria-expanded]="dp.isOpen">

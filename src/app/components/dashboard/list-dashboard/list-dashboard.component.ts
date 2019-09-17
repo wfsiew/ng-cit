@@ -82,6 +82,10 @@ export class ListDashboardComponent implements OnInit, OnDestroy {
     });
   }
 
+  onDateChange() {
+    this.loadList();
+  }
+
   onSearch() {
     this.loadList();
   }

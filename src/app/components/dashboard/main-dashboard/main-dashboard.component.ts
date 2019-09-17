@@ -117,6 +117,12 @@ export class MainDashboardComponent implements OnInit, OnDestroy {
     });
   }
 
+  onDateChange() {
+    if (!Helper.isEmpty(this.company_id)) {
+      this.loadDashboard();
+    }
+  }
+
   onKPI(i) {
     this.msService.send('main-dashboard', {
       company_id: this.company_id,
