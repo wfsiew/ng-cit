@@ -20,4 +20,8 @@ export class DashboardService {
   listShipment(o) {
     return this.http.post(`${this.baseUrl}/api/dashboard/shipment/list`, o);
   }
+
+  getShipmentDetailByConsignment(consignment_no) {
+    return this.http.get(`${this.baseUrl}/api/dashboard/shipment/list/${consignment_no}`);
+  }
 }

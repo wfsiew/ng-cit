@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { CompanyService } from '../../../services/company.service';
 import { UserService } from '../../../services/user.service';
 import { Subject } from 'rxjs';
 import { BsModalRef } from 'ngx-bootstrap/modal';
@@ -19,6 +20,7 @@ export class CreateUserModalComponent implements OnInit {
   title: string;
   email: string = '';
   roles: string = 'USER';
+  company_id: string;
   edit = false;
   mform: FormGroup;
 
@@ -26,6 +28,7 @@ export class CreateUserModalComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private companyService: CompanyService,
     private userService: UserService,
     public bsModalRef: BsModalRef,
     private toastr: ToastrService
@@ -47,8 +50,9 @@ export class CreateUserModalComponent implements OnInit {
   onAssign() {
     const f = this.f;
     const o = {
+      company_id: '',
       email: f.email.value,
-      user_type: f.user_type.value
+      user_role: f.user_type.value
     };
     this.userService.createUser(o).subscribe((res: any) => {
       this.onClose.next({ result: true });

@@ -90,8 +90,8 @@ export class ListDashboardComponent implements OnInit, OnDestroy {
     this.loadList();
   }
 
-  onView() {
-    this.router.navigate(['/cit/dashboard/detail']);
+  onView(o) {
+    this.router.navigate(['/cit/dashboard/detail', o.ConsignmentNo]);
     return false;
   }
 

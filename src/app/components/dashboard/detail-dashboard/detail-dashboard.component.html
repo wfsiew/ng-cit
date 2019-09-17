@@ -24,12 +24,12 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>MXS44555</td>
-            <td>449987654</td>
-            <td>1.10</td>
-            <td>Ahmad</td>
-            <td>Office</td>
+          <tr *ngFor="let o of list">
+            <td>{{ o.consignment_note }}</td>
+            <td>{{ o.cRef1 }}</td>
+            <td>{{ o.weight }}</td>
+            <td>{{ o.rc_name }}</td>
+            <td>{{ o.rc_location }}</td>
           </tr>
         </tbody>
       </table>
@@ -47,27 +47,27 @@
             <tbody>
               <tr>
                 <td>Name</td>
-                <td></td>
+                <td>{{ data.cn_name }}</td>
               </tr>
               <tr>
                 <td>Mobile</td>
-                <td></td>
+                <td>{{ data.cn_MobileNo }}</td>
               </tr>
               <tr>
                 <td>Address</td>
-                <td></td>
+                <td class="text-center">{{ data.cn_Address1 }}&nbsp;{{ data.cn_Address2 }}</td>
               </tr>
               <tr>
                 <td>Email</td>
-                <td></td>
+                <td>{{ data.cn_Email }}</td>
               </tr>
               <tr>
                 <td>Postcode</td>
-                <td></td>
+                <td>{{ data.cn_ZipCode }}</td>
               </tr>
               <tr>
                 <td>Country</td>
-                <td></td>
+                <td>{{ cn_CountryCode }}</td>
               </tr>
             </tbody>
           </table>
@@ -85,27 +85,27 @@
             <tbody>
               <tr>
                 <td>Name</td>
-                <td></td>
+                <td>{{ data.sh_name }}</td>
               </tr>
               <tr>
                 <td>Mobile</td>
-                <td></td>
+                <td>{{ data.sh_MobileNo }}</td>
               </tr>
               <tr>
                 <td>Address</td>
-                <td></td>
+                <td>{{ data.sh_Address1 }}&nbsp;{{ data.sh_Address2 }}</td>
               </tr>
               <tr>
                 <td>Email</td>
-                <td></td>
+                <td>{{ data.sh_Email }}</td>
               </tr>
               <tr>
                 <td>Postcode</td>
-                <td></td>
+                <td>{{ data.sh_ZipCode }}</td>
               </tr>
               <tr>
                 <td>Country</td>
-                <td></td>
+                <td>{{ data.sh_CountryCode }}</td>
               </tr>
             </tbody>
           </table>
@@ -128,10 +128,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>MXS44555</td>
-            <td>449987654</td>
-            <td>1.10</td>
+          <tr *ngFor="let o of list_tracking">
+            <td>{{ o.dateTime }}</td>
+            <td>{{ o.Location }}</td>
+            <td>{{ o.Description }}</td>
           </tr>
         </tbody>
       </table>
@@ -145,7 +145,7 @@
           <h3 class="box-title">Proof Of Delivery (POD)</h3>
         </div>
         <div class="box-body">
-          <img class="img-responsive pad" src="assets/img/photo1.png">
+          <img class="img-responsive pad" src="http://citflask.fmx.asia//dashboard/image/MYX1028081880">
         </div>
       </div>
     </div>
@@ -156,7 +156,7 @@
           <h3 class="box-title">Delivery Order (DO)</h3>
         </div>
         <div class="box-body">
-          <img class="img-responsive pad" src="assets/img/photo1.png">
+          <img class="img-responsive pad" src="http://citflask.fmx.asia//dashboard/image/do/MYX1028081880">
         </div>
       </div>
     </div>

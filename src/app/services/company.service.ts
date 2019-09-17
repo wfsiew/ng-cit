@@ -47,4 +47,8 @@ export class CompanyService {
     
     return this.http.get(`${this.baseUrl}/api/company/user/list`);
   }
+
+  assignUser(o) {
+    return this.http.post(`${this.baseUrl}/api/company/user/new`, o);
+  }
 }

@@ -48,7 +48,7 @@ export class ListManifestComponent implements OnInit {
       this.company = !_.isEmpty(res.data) ? res.data[0] : {};
     },
     (error) => {
-      this.toastr.error('Load Company Detail Failed', 'Company Detail');
+      this.toastr.error('Load Company Detail Failed');
     });
   }
 

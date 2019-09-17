@@ -28,6 +28,11 @@ Authorization: Token {{token}}
 
 ###
 
+GET {{base}}/api/dashboard/shipment/list/MYX1022354737
+Authorization: Token {{token}}
+
+###
+
 GET {{base}}/api/user/details
 Authorization: Token {{token}}
 
