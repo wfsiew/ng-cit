@@ -63,6 +63,18 @@
               <th>
                 Status
               </th>
+              <th>
+                <a href="#" (click)="sortBy('dest_receiver_city')">Receiver City <i *ngIf="sort === 'dest_receiver_city'" class="fa"
+                  [ngClass]="{'fa-chevron-up': isSortBy('dest_receiver_city', ''), 'fa-chevron-down': isSortBy('dest_receiver_city', 'desc')}"></i></a>
+              </th>
+              <th>
+                <a href="#" (click)="sortBy('account_code')">Account Code <i *ngIf="sort === 'account_code'" class="fa"
+                  [ngClass]="{'fa-chevron-up': isSortBy('account_code', ''), 'fa-chevron-down': isSortBy('account_code', 'desc')}"></i></a>
+              </th>
+              <th>
+                <a href="#" (click)="sortBy('packaging_type')">Packaging Type <i *ngIf="sort === 'packaging_type'" class="fa"
+                  [ngClass]="{'fa-chevron-up': isSortBy('packaging_type', ''), 'fa-chevron-down': isSortBy('packaging_type', 'desc')}"></i></a>
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -73,6 +85,9 @@
               <td>{{ o.service_type }}</td>
               <td>{{ o.dest_receiver_name }}</td>
               <td class="text-uppercase">{{ o.status }}</td>
+              <td>{{ o.dest_receiver_city }}</td>
+              <td>{{ o.account_code }}</td>
+              <td>{{ o.packaging_type }}</td>
             </tr>
           </tbody>
         </table>
@@ -84,7 +99,7 @@
     </div>
 
     <div class="box-footer">
-      <div class="pull-right">
+      <div class="pull-right" *ngIf="itemsCount">
         <pagination [totalItems]="itemsCount" [itemsPerPage]="PAGE_SIZE" [(ngModel)]="page" (pageChanged)="pageChanged($event)"></pagination>
       </div>
     </div>

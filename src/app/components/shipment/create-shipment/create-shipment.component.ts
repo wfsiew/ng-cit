@@ -54,7 +54,7 @@ export class CreateShipmentComponent implements OnInit {
       service_type: ['', [Validators.required]],
       pickup_date: ['', [Validators.required]],
       customer_reference: ['', [Validators.required]],
-      is_insurance_req: [true],
+      is_insurance_req: [false],
       is_do: [false],
       is_cod: [false],
       cod_value: ['0.00', [Validators.required, Validators.pattern(AppConstant.VALIDATE.AMOUNT)]],

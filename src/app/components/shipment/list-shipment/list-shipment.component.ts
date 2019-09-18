@@ -97,8 +97,8 @@ export class ListShipmentComponent implements OnInit, OnDestroy {
     else {
       this.sort_dir = this.sort_dir === '' ? 'desc' : '';
     }
-    this.load();
 
+    this.load();
     return false;
   }
 
