@@ -48,11 +48,11 @@ export class CreateUserModalComponent implements OnInit {
   }
 
   onAssign() {
-    const f = this.f;
+    const f = this.mform.value;
     const o = {
       company_id: '',
-      email: f.email.value,
-      user_role: f.user_type.value
+      email: f.email,
+      user_role: f.user_type
     };
     this.userService.createUser(o).subscribe((res: any) => {
       this.onClose.next({ result: true });
