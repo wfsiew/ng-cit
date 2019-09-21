@@ -75,7 +75,8 @@ export class CreateAddressBookComponent implements OnInit {
       state: ['', [Validators.required]],
       postcode: ['', [Validators.required, Validators.pattern(Helper.getPostcodePattern('MY'))]],
       country: ['MY', Validators.required],
-      isdefault: [false]
+      isdefault: [false],
+      isprivate: [false]
     });
   }
 
@@ -91,7 +92,8 @@ export class CreateAddressBookComponent implements OnInit {
       state: o.state_province,
       postcode: o.postcode,
       country: o.country,
-      isdefault: o.is_default
+      isdefault: o.is_default,
+      isprivate: o.is_private
     });
   }
 
@@ -123,19 +125,21 @@ export class CreateAddressBookComponent implements OnInit {
   }
 
   onSubmit() {
+    const f = this.mform.value;
     const o = {
       id: 0,
-      type: this.f.type.value,
-      country: this.f.country.value,
-      address1: this.f.addr1.value,
-      address2: this.f.addr2.value,
-      postcode: this.f.postcode.value,
-      state_province: this.f.state.value,
-      city: this.f.city.value,
+      type: f.type,
+      country: f.country,
+      address1: f.addr1,
+      address2: f.addr2,
+      postcode: f.postcode,
+      state_province: f.state,
+      city: f.city,
       district: '',
-      full_name: this.f.name.value,
-      phone_number: this.f.phone.value,
-      is_default: this.f.isdefault.value
+      full_name: f.name,
+      phone_number: f.phone,
+      is_default: f.isdefault,
+      is_private: f.isprivate
     };
     this.isloading = true;
     if (!this.isEdit) {
@@ -151,7 +155,8 @@ export class CreateAddressBookComponent implements OnInit {
           city: '',
           state: '',
           postcode: '',
-          isdefault: false
+          isdefault: false,
+          isprivate: false
         });
       },
       (error) => {

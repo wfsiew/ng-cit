@@ -18,14 +18,15 @@ export class AddressBookService {
     return this.http.post(`${this.baseUrl}/api/address/create`, o);
   }
 
-  listAddressBook(page, limit, sort, dir, value) {
+  listAddressBook(page, limit, sort, dir, value, is_private: boolean = false) {
     let i = Helper.getStart(page, limit);
     let prm: HttpParams = new HttpParams()
       .set('start', `${i}`)
       .set('length', limit)
       .set('order', sort)
       .set('dir', dir)
-      .set('value', value);
+      .set('value', value)
+      .set('private', is_private === true ? '1' : '0');
     return this.http.get(`${this.baseUrl}/api/address/list`, { params: prm });
   }
 
