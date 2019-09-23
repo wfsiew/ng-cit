@@ -49,6 +49,11 @@ Authorization: Token {{token}}
 
 ###
 
+GET {{base}}/api/shipment/list/?shipment_id=2708
+Authorization: Token {{token}}
+
+###
+
 GET {{base}}/api/lookup/generic_master?master_type=service
 
 ###
@@ -227,8 +232,13 @@ Authorization: Token {{token}}
 GET {{base}}/api/manifest/11b91530-b4e8-4b47-b3d3-e6d4e31077a9/list/
   ?start_date=20190901
   &details=1
-  &end_date=20190910
+  &end_date=20190930
   &details_status=all
+  &start=0
+  &length=20
+  &order=id
+  &dir=
+  &value=
 Authorization: Token {{token}}
 
 ###

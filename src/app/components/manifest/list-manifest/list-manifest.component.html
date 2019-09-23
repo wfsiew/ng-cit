@@ -55,14 +55,33 @@
         <h4 class="box-title">No records found</h4>
       </div>
       <div class="table-responsive" *ngFor="let o of list">
-        <div>
-          <label class="col-sm-2 control-label">Manifest No:</label>
-          <div class="col-sm-4"><b>{{ o.manifest_no }}</b></div>
-          <div class="pull-right">
-            <button *ngIf="!o.is_close" type="button" class="btn btn-success" (click)="onConfirmClose(confirm_close, o)">Manifest CLOSE</button>
-            <button type="button" class="btn btn-info">Print</button>
-          </div>
-        </div>
+        <table class="table table-bordered table-condensed table-striped table-hover">
+          <thead>
+            <tr>
+              <th>Manifest No</th>
+              <th>Status</th>
+              <th>Date Create</th>
+              <th>Total Of Consignment</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let o of list">
+              <td>{{ o.manifest_no }}</td>
+              <td class="text-center">{{ o.is_close ? 'CLOSED' : 'OPEN' }}</td>
+              <td>{{ o.created_date }}</td>
+              <td>{{ o['list-consignment'].length }}</td>
+              <td>
+                <button *ngIf="!o.is_close" type="button" class="btn btn-success" (click)="onConfirmClose(confirm_close, o)">Manifest CLOSE</button>
+              </td>
+              <td>
+                <button type="button" class="btn btn-info">Print</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
         <table class="table table-bordered table-condensed table-striped table-hover" *ngIf="!isEmpty(o['list-consignment'])">
           <thead>
             <tr>
@@ -88,6 +107,12 @@
 
     <div class="overlay" *ngIf="isloading">
       <i class="fa fa-refresh fa-spin"></i>
+    </div>
+
+    <div class="box-footer">
+      <div class="pull-right" *ngIf="itemsCount">
+        <pagination [totalItems]="itemsCount" [itemsPerPage]="PAGE_SIZE" [(ngModel)]="page" (pageChanged)="pageChanged($event)"></pagination>
+      </div>
     </div>
   </div>
 

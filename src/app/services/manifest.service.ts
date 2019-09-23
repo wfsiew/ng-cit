@@ -13,20 +13,32 @@ export class ManifestService {
 
   constructor(private http: HttpClient) { }
 
-  listManifestByNo(company_id: string, manifest_no: string) {
+  listManifestByNo(company_id: string, manifest_no: string, page, limit, sort, dir, value) {
+    let i = Helper.getStart(page, limit);
     let prm: HttpParams = new HttpParams()
       .set('manifestno', manifest_no)
       .set('details', '1')
-      .set('details_status', '0');
+      .set('details_status', 'all')
+      .set('start', `${i}`)
+      .set('length', limit)
+      .set('order', sort)
+      .set('dir', dir)
+      .set('value', value);
     return this.http.get(`${this.baseUrl}/api/manifest/${company_id}/list/`, { params: prm });
   }
 
-  listManifestByDateRange(company_id: string, start: Date, end: Date) {
+  listManifestByDateRange(company_id: string, start: Date, end: Date, page, limit, sort, dir, value) {
+    let i = Helper.getStart(page, limit);
     let prm: HttpParams = new HttpParams()
       .set('start_date', Helper.getDateStr1(start))
       .set('end_date', Helper.getDateStr1(end))
       .set('details', '1')
-      .set('details_status', 'all');
+      .set('details_status', 'all')
+      .set('start', `${i}`)
+      .set('length', limit)
+      .set('order', sort)
+      .set('dir', dir)
+      .set('value', value);
     return this.http.get(`${this.baseUrl}/api/manifest/${company_id}/list/`, { params: prm });
   }
 

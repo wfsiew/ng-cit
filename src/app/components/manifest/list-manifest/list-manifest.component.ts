@@ -27,8 +27,14 @@ export class ListManifestComponent implements OnInit {
   };
   modalRef: BsModalRef;
   selectedManifest: any;
+  itemsCount = 0;
+  page = 1;
+  search = '';
+  sort = 'id';
+  sort_dir = '';
 
   readonly isEmpty = Helper.isEmpty;
+  readonly PAGE_SIZE = AppConstant.PAGE_SIZE;
 
   constructor(
     private router: Router,
@@ -55,12 +61,12 @@ export class ListManifestComponent implements OnInit {
   load() {
     let q: Observable<Object>;
     if (!Helper.isEmpty(this.manifest_no)) {
-      q = this.manifestService.listManifestByNo(this.company.company_id, this.manifest_no);
+      q = this.manifestService.listManifestByNo(this.company.company_id, this.manifest_no, this.page, AppConstant.PAGE_SIZE, this.sort, this.sort_dir, this.search);
     }
 
     else if (!_.isNull(this.s_date) && !_.isUndefined(this.s_date) 
       && !_.isNull(this.e_date) && !_.isUndefined(this.e_date)) {
-      q = this.manifestService.listManifestByDateRange(this.company.company_id, this.s_date, this.e_date);
+      q = this.manifestService.listManifestByDateRange(this.company.company_id, this.s_date, this.e_date, this.page, AppConstant.PAGE_SIZE, this.sort, this.sort_dir, this.search);
     }
 
     if (_.isUndefined(q) || _.isNull(q)) {
@@ -70,6 +76,7 @@ export class ListManifestComponent implements OnInit {
     this.isloading = true;
     q.subscribe((res: any) => {
       this.list = res.status ? res.data : [];
+      this.itemsCount = this.list.length;
       this.isloading = false;
     },
     (error) => {
@@ -77,9 +84,16 @@ export class ListManifestComponent implements OnInit {
       if (error.status === 400) {
         this.list = [];
       }
-      
-      this.toastr.error('Load Manifest Failed');
+
+      else {
+        this.toastr.error('Load Manifest Failed');
+      }
     });
+  }
+
+  pageChanged(event: any) {
+    this.page = event.page;
+    this.load();
   }
 
   onSubmit() {
