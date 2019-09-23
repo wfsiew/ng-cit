@@ -97,7 +97,7 @@
               <td>{{ x.pcs }}</td>
               <td class="text-center">{{ x.is_confirm ? 'CONFIRM': 'NOT CONFIRM' }}</td>
               <td>
-                <button type="button" class="btn" (click)="onConfirmCloseManifest(x, o)" [ngClass]="{ 'btn-success': !x.is_confirm, 'btn-danger': x.is_confirm }">{{ x.is_confirm ? 'Unconfirm': 'Confirm' }}</button>
+                <button type="button" class="btn" (click)="onConfirmConsignment(x, o)" [ngClass]="{ 'btn-success': !x.is_confirm, 'btn-danger': x.is_confirm }">{{ x.is_confirm ? 'Unconfirm': 'Confirm' }}</button>
               </td>
             </tr>
           </tbody>

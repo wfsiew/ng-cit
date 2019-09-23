@@ -100,7 +100,7 @@ export class ListManifestComponent implements OnInit {
     this.load();
   }
 
-  onConfirmCloseManifest(consignment, manifest) {
+  onConfirmConsignment(consignment, manifest) {
     const o = {
       manifest_id: manifest.manifest_id,
       'list-cons': [
