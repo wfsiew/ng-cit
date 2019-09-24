@@ -49,4 +49,8 @@ export class ManifestService {
   updateManifest(o, company_id: string) {
     return this.http.post(`${this.baseUrl}/api/manifest/${company_id}/update/`, o);
   }
+
+  checkinConsignment(o) {
+    return this.http.post(`${this.baseUrl}/api/checkin/consignment`, o);
+  }
 }

@@ -24,6 +24,7 @@ export class ListDashboardComponent implements OnInit, OnDestroy {
   company_name = '';
   title = '';
   daterx = [new Date(), new Date()];
+  datex = this.daterx;
 
   TITLE = ['NEW', 'PENDING', 'DELIVERED', 'CANCEL'];
   STATUS = ['new', 'pending', 'delivered', 'cancel'];
@@ -68,8 +69,8 @@ export class ListDashboardComponent implements OnInit, OnDestroy {
     this.isloading = true;
     const o = {
       company_id: this.company_id,
-      start_date: Helper.getDateStr(this.daterx[0]),
-      end_date: Helper.getDateStr(this.daterx[1]),
+      start_date: Helper.getDateStr(this.datex[0]),
+      end_date: Helper.getDateStr(this.datex[1]),
       status: this.STATUS[Number(this.id)]
     }
     this.dashboardService.listShipment(o).subscribe((res: any) => {
@@ -82,7 +83,8 @@ export class ListDashboardComponent implements OnInit, OnDestroy {
     });
   }
 
-  onDateChange() {
+  onDateChange(val) {
+    this.datex = val;
     this.loadList();
   }
 

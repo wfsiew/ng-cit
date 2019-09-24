@@ -20,8 +20,8 @@ export class ListManifestComponent implements OnInit, OnDestroy {
   isloading = false;
   list = [];
   manifest_no = '';
-  s_date: Date;
-  e_date: Date;
+  daterx = [new Date(), new Date()];
+  datex = this.daterx;
   company = {
     company_id: ''
   };
@@ -53,8 +53,8 @@ export class ListManifestComponent implements OnInit, OnDestroy {
         this.sort_dir = o.dir;
         this.search = o.search;
         this.manifest_no = o.manifest_no;
-        this.s_date = o.s_date;
-        this.e_date = o.e_date;
+        this.daterx = [o.s_date, o.e_date];
+        this.datex = this.daterx;
       }
     });
   }
@@ -78,14 +78,18 @@ export class ListManifestComponent implements OnInit, OnDestroy {
   }
 
   load() {
+    if (Helper.isEmpty(this.company.company_id)) {
+      return;
+    }
+
     let q: Observable<Object>;
     if (!Helper.isEmpty(this.manifest_no)) {
       q = this.manifestService.listManifestByNo(this.company.company_id, this.manifest_no, this.page, AppConstant.PAGE_SIZE, this.sort, this.sort_dir, this.search);
     }
 
-    else if (!_.isNull(this.s_date) && !_.isUndefined(this.s_date) 
-      && !_.isNull(this.e_date) && !_.isUndefined(this.e_date)) {
-      q = this.manifestService.listManifestByDateRange(this.company.company_id, this.s_date, this.e_date, this.page, AppConstant.PAGE_SIZE, this.sort, this.sort_dir, this.search);
+    else if (!_.isNull(this.datex[0]) && !_.isUndefined(this.datex[0]) 
+      && !_.isNull(this.datex[1]) && !_.isUndefined(this.datex[1])) {
+      q = this.manifestService.listManifestByDateRange(this.company.company_id, this.datex[0], this.datex[1], this.page, AppConstant.PAGE_SIZE, this.sort, this.sort_dir, this.search);
     }
 
     if (_.isUndefined(q) || _.isNull(q)) {
@@ -110,6 +114,11 @@ export class ListManifestComponent implements OnInit, OnDestroy {
     });
   }
 
+  onDateChange(val) {
+    this.datex = val;
+    this.load();
+  }
+
   pageChanged(event: any) {
     this.page = event.page;
     this.load();
@@ -122,8 +131,8 @@ export class ListManifestComponent implements OnInit, OnDestroy {
       dir: this.sort_dir,
       search: this.search,
       manifest_no: this.manifest_no,
-      s_date: this.s_date,
-      e_date: this.e_date
+      s_date: this.daterx[0],
+      e_date: this.daterx[1]
     });
     this.router.navigate(['/cit/manifest/detail', o.manifest_no, this.company.company_id]);
     return false;

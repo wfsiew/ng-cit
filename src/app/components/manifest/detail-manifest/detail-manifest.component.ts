@@ -98,6 +98,24 @@ export class DetailManifestComponent implements OnInit {
     });
   }
 
+  onCheckIn(consignment) {
+    const o = {
+      branch_id: null,
+      company_id: this.company_id,
+      'list-cons': [
+        {
+          consignment: consignment.consignment
+        }
+      ]
+    };
+    this.manifestService.checkinConsignment(o).subscribe((res: any) => {
+
+    },
+    (error) => {
+      this.toastr.error('Check In Consignment Failed');
+    });
+  }
+
   onBack() {
     this.loc.back();
   }

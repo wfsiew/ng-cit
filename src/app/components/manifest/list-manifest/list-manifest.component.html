@@ -11,38 +11,21 @@
           <div class="col-sm-4">
             <input type="text" [(ngModel)]="manifest_no" class="form-control" placeholder="Manifest No" name="manifest_no">
           </div>
-        </div>
-        <div class="form-group">
-          <label class="col-sm-2 control-label">Start Date</label>
           <div class="col-sm-3">
-            <div class="input-group">
-              <input type="text" [(ngModel)]="s_date" class="form-control" name="s_date" bsDatepicker #dp1="bsDatepicker"
-                [bsConfig]="{ containerClass: 'theme-blue', dateInputFormat: 'YYYY-MM-DD' }">
-              <div class="input-group-btn">
-                <button class="btn btn-default" (click)="dp1.show()" [attr.aria-expanded]="dp1.isOpen">
-                  <i class="fa fa-calendar"></i>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-sm-2 control-label">End Date</label>
-          <div class="col-sm-3">
-            <div class="input-group">
-              <input type="text" [(ngModel)]="e_date" class="form-control" name="e_date" bsDatepicker #dp2="bsDatepicker"
-                [bsConfig]="{ containerClass: 'theme-blue', dateInputFormat: 'YYYY-MM-DD' }">
-              <div class="input-group-btn">
-                <button class="btn btn-default" (click)="dp2.show()" [attr.aria-expanded]="dp2.isOpen">
-                  <i class="fa fa-calendar"></i>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="col-sm-offset-2 col-sm-4">
             <button type="button" class="btn btn-primary" (click)="onSubmit()"><i class="fa fa-search"></i> Search</button>
+          </div>
+          <div class="col-sm-3 pull-right">
+            <div class="input-group">
+              <input type="text" class="form-control" [(ngModel)]="daterx" name="daterx" bsDaterangepicker #dp="bsDaterangepicker"
+                placement="left"
+                (bsValueChange)="onDateChange($event)"
+                [bsConfig]="{ containerClass: 'theme-blue', rangeInputFormat: 'YYYY-MM-DD' }">
+              <div class="input-group-btn">
+                <button class="btn btn-default" (click)="dp.show()" [attr.aria-expanded]="dp.isOpen">
+                  <i class="fa fa-calendar"></i>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
