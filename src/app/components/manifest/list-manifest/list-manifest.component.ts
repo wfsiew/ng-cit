@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription, Observable } from 'rxjs';
 import { ManifestService } from '../../../services/manifest.service';
@@ -15,7 +15,7 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
   templateUrl: './list-manifest.component.html',
   styleUrls: ['./list-manifest.component.css']
 })
-export class ListManifestComponent implements OnInit {
+export class ListManifestComponent implements OnInit, OnDestroy {
 
   isloading = false;
   list = [];
@@ -32,6 +32,7 @@ export class ListManifestComponent implements OnInit {
   search = '';
   sort = 'id';
   sort_dir = '';
+  subs: Subscription;
 
   readonly isEmpty = Helper.isEmpty;
   readonly PAGE_SIZE = AppConstant.PAGE_SIZE;
@@ -43,15 +44,33 @@ export class ListManifestComponent implements OnInit {
     private msService: MessageService,
     private toastr: ToastrService,
     private modalService: BsModalService
-  ) { }
+  ) {
+    this.subs = this.msService.get().subscribe(res => {
+      if (res.name === 'list-manifest') {
+        const o = res.data;
+        this.page = o.page;
+        this.sort = o.sort;
+        this.sort_dir = o.dir;
+        this.search = o.search;
+        this.manifest_no = o.manifest_no;
+        this.s_date = o.s_date;
+        this.e_date = o.e_date;
+      }
+    });
+  }
 
   ngOnInit() {
     this.loadCompanyProfile();
   }
 
+  ngOnDestroy() {
+    this.subs.unsubscribe();
+  }
+
   loadCompanyProfile() {
     this.companyService.getCompanyDetails().subscribe((res: any) => {
       this.company = !_.isEmpty(res.data) ? res.data[0] : {};
+      this.load();
     },
     (error) => {
       this.toastr.error('Load Company Detail Failed');
@@ -94,6 +113,20 @@ export class ListManifestComponent implements OnInit {
   pageChanged(event: any) {
     this.page = event.page;
     this.load();
+  }
+
+  onView(o) {
+    this.msService.send('list-manifest', {
+      page: this.page,
+      sort: this.sort,
+      dir: this.sort_dir,
+      search: this.search,
+      manifest_no: this.manifest_no,
+      s_date: this.s_date,
+      e_date: this.e_date
+    });
+    this.router.navigate(['/cit/manifest/detail', o.manifest_no, this.company.company_id]);
+    return false;
   }
 
   onSubmit() {

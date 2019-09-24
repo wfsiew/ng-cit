@@ -33,7 +33,7 @@ export class DetailDashboardComponent implements OnInit {
   }
 
   load() {
-    alert(this.consignment_no)
+    this.isloading = true;
     this.dashboardService.getShipmentDetailByConsignment(this.consignment_no).subscribe((res: any) => {
       this.list = res.status ? res.details : [];
       this.list_tracking = res.status ? res.history: [];

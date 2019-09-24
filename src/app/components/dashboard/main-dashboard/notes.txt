@@ -1,0 +1,20 @@
+== hosting ==
+    Install NPM and NodeJS 8
+    Install Firebase Tools (npm install -g firebase-tools)
+    Go to the source folder
+    Install the dependencies for functions/hosting (npm install)
+    Login to Firebase (firebase login)
+    Switch to desired project (firebase use <project_id>). To view the list of project (firebase list)
+    ng build --configuration=dev` (or test or production)
+    Deploy (firebase deploy --only hosting)
+
+== functions ==
+    Install NPM and NodeJS 8
+    Install Firebase Tools (npm install -g firebase-tools)
+    Go to the function folder
+    Install the dependencies for functions/hosting (npm install)
+    Login to Firebase (firebase login)
+    Switch to desired project (firebase use <project_id>). To view the list of project (firebase list)
+    7a: Deploy all functions: (firebase deploy --only functions)
+    7b: Deploy specific function(s): (firebase deploy --only functions:func1,functions:func2)
+

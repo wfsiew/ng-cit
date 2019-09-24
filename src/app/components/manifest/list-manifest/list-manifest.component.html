@@ -54,7 +54,7 @@
       <div class="text-center" *ngIf="isEmpty(list)">
         <h4 class="box-title">No records found</h4>
       </div>
-      <div class="table-responsive" *ngFor="let o of list">
+      <div class="table-responsive" *ngIf="!isEmpty(list)">
         <table class="table table-bordered table-condensed table-striped table-hover">
           <thead>
             <tr>
@@ -63,7 +63,6 @@
               <th>Date Create</th>
               <th>Total Of Consignment</th>
               <th></th>
-              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -71,33 +70,9 @@
               <td>{{ o.manifest_no }}</td>
               <td class="text-center">{{ o.is_close ? 'CLOSED' : 'OPEN' }}</td>
               <td>{{ o.created_date }}</td>
-              <td>{{ o['list-consignment'].length }}</td>
+              <td>{{ o.count }}</td>
               <td>
-                <button *ngIf="!o.is_close" type="button" class="btn btn-success" (click)="onConfirmClose(confirm_close, o)">Manifest CLOSE</button>
-              </td>
-              <td>
-                <button type="button" class="btn btn-info">Print</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-
-        <table class="table table-bordered table-condensed table-striped table-hover" *ngIf="!isEmpty(o['list-consignment'])">
-          <thead>
-            <tr>
-              <th>Consignment No</th>
-              <th>PCS</th>
-              <th class="text-center">Status</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let x of o['list-consignment']">
-              <td>{{ x.consignment }}</td>
-              <td>{{ x.pcs }}</td>
-              <td class="text-center">{{ x.is_confirm ? 'CONFIRM': 'NOT CONFIRM' }}</td>
-              <td>
-                <button type="button" class="btn" (click)="onConfirmConsignment(x, o)" [ngClass]="{ 'btn-success': !x.is_confirm, 'btn-danger': x.is_confirm }">{{ x.is_confirm ? 'Unconfirm': 'Confirm' }}</button>
+                <a href="#" (click)="onView(o)">View</a>
               </td>
             </tr>
           </tbody>
@@ -115,18 +90,4 @@
       </div>
     </div>
   </div>
-
-  <ng-template #confirm_close>
-    <div class="modal-header">
-      <h4 class="modal-title text-center">Close Manifest</h4>
-    </div>
-    <div class="modal-body text-center">
-      <p>{{ selectedManifest.manifest_no }}</p>
-      <p>Are you sure?</p>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-success" (click)="_onConfirmClose()">Yes</button>
-      <button type="button" class="btn btn-danger" (click)="onCancel()">No</button>
-    </div>
-  </ng-template>
 </section>
