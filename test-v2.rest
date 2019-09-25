@@ -1,0 +1,305 @@
+@base = http://139.59.221.42:8001
+#@base = http://127.0.0.1:8000
+###
+
+# fmxit / fmx12345
+
+###
+
+# @name login
+POST {{base}}/api/user/login
+Content-Type: application/json
+
+{
+    "username": "jason",
+    "password": "jason"
+}
+
+###
+
+@token = {{login.response.body.token}}
+# @token = ebb9a2d1b28e93427518ea3182d9cdf0d79db3d1
+# @token = 69b0ea7f72a2da10ffaf36df282f1382d0a646ad
+
+###
+
+GET {{base}}/api/dashboard/shipment/list/MYX1022354737
+Authorization: Token {{token}}
+
+###
+
+GET {{base}}/api/user/details
+Authorization: Token {{token}}
+
+###
+
+# GET {{base}}/api/company/listing
+# Authorization: Token {{token}}
+
+###
+
+GET {{base}}/api/shipment/list
+  ?start=10&length=10&order=id&dir=&value=
+Authorization: Token {{token}}
+
+###
+
+GET {{base}}/api/lookup/generic_master?master_type=service
+
+###
+
+GET {{base}}/api/lookup/generic_master?master_type=uom
+
+###
+
+GET {{base}}/api/lookup/country-info
+
+###
+## @paramter
+## coutry: by default is MY if country is empty
+## postcode : Is wildcard search
+# @name = postcode
+GET {{base}}/api/lookup/postcode?postcode=47500
+&country=my
+
+###
+
+POST {{base}}/file/confirm_upload/
+Authorization: Token {{token}}
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="company_account_code"
+
+F000086
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="delivery_service"
+
+EXP
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="currency"
+
+MYR
+# ------WebKitFormBoundary7MA4YWxkTrZu0gW
+# Content-Disposition: form-data; name="is_do"
+
+# False
+# ------WebKitFormBoundary7MA4YWxkTrZu0gW
+# Content-Disposition: form-data; name="shipper_address_id"
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="UploadOrderMalaysia.csv"
+Content-Type: text/csv
+
+< C:\Users\Glenvio\Downloads\UploadOrderMalaysia.csv
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+###
+
+GET {{base}}/api/shipment/list/?shipment_id=2566
+Authorization: Token {{token}}
+
+###
+
+POST {{base}}/api/shipment/create
+Content-Type: application/json
+Authorization: Token {{token}}
+
+{
+    "customer_reference": "MH01",
+    "origin_address_id": "ADC01",
+    "origin_shipper_address1": "No 136, Hala Lapangan Peradana, Hala Lapangan Panorama",
+    "origin_shipper_address2": "",
+    "origin_shipper_address3": "",
+    "origin_shipper_address4": "",
+    "origin_shipper_postcode": "47500",
+    "origin_shipper_city": "Puchong",
+    "origin_shipper_state_province": "Selangor",
+    "origin_shipper_district": "",
+    "origin_shipper_country": "MY",
+    "origin_shipper_name": "Kong Mun Hoe",
+    "origin_shipper_phone_no": "0165324876",
+    "dest_address_id": "ADC02",
+    "dest_receiver_address1": "No 16, Jalan Bahagia, Taman ABC",
+    "dest_receiver_address2": "",
+    "dest_receiver_address3": "",
+    "dest_receiver_address4": "",
+    "dest_receiver_postcode": "",
+    "dest_receiver_city": "Petaling Jaya",
+    "dest_receiver_state_province": "Selangor",
+    "dest_receiver_district": "",
+    "dest_receiver_country": "MY",
+    "dest_receiver_phone_no": "0125529182",
+    "dest_receiver_mobile_no": "",
+    "dest_receiver_email": "",
+    "dest_receiver_name": "Kong Zai",
+    "cod": true,
+    "cod_value": 9.30,
+    "total_package_no": 1,
+    "service_type": "EXP",
+    "order_amount" : 25.00,
+    "order_amount_currency": "MYR",
+    "shipment_package_list" : 
+    [{
+        "description" : "This is a good book to read",
+        "weight": 4.2,
+        "volume": 5.2,
+        "height": 6.32,
+        "length": 7.9,
+        "width": 10.0,
+        "value": 10.45,
+        "currency": "MYR",
+        "quantity": 6,
+        "uom":"PAS",
+        "product_list": [{
+            "product_name": "Magazine",
+            "product_code": "Pieces",
+            "value":"2",
+            "currency":"MYR",
+            "quantity" : "2"
+        }]
+    }]
+}
+
+###
+
+GET {{base}}/api/company/details
+# ?id=f567d1ab-c9f1-4b0b-aa3e-b883cd8d0cde
+Authorization: Token {{token}}
+
+
+###
+
+GET {{base}}/api/company/test/details?id=f567d1ab-c9f1-4b0b-aa3e-b883cd8d0cde
+Authorization: Token {{token}}
+
+###
+
+GET {{base}}/api/address/list
+    ?start=0
+    &length=50
+    &order=address1
+    &dir=
+    &value=
+Authorization: Token {{token}}
+
+###
+
+GET {{base}}/api/address/list?address_id=fb1af50e-582b-4784-bf95-9a2644ceff60
+Authorization: Token {{token}}
+
+###
+
+POST {{base}}/api/address/create
+Authorization: Token {{token}}
+Content-Type: application/json
+
+{
+  "type": "",
+	"country" : "MYX",
+	"address1" : "No 27, Jalan Something, Taman Something",
+	"address2": "Hulu Hala, Plus Mutli Typo",
+	"postcode" : "45000",
+	"state_province": "Selangor",
+	"city": "Shah Alam",
+	"district": "",
+	"full_name": "Mun Hoe Kong",
+	"phone_number": "017-5958776",
+	"is_default": false
+}
+
+###
+
+POST {{base}}/api/checkin/consignment
+Authorization: Token {{token}}
+Content-Type: application/json
+
+{
+  "branch_id": 2,
+  "company_id":  "11b91530-b4e8-4b47-b3d3-e6d4e31077a9",
+  "list-cons": [
+      {
+          "consignment": "MYC0100044642"
+      }
+  ]
+}
+
+###
+
+# @description = List Details of Manifest & wildcard search on Manifest details
+GET {{base}}/api/manifest/f567d1ab-c9f1-4b0b-aa3e-b883cd8d0cde/list/
+  ?manifestno=FMM00021320190917001
+  &start=80
+  &length=20
+  &order=
+  &dir=desc
+  &value=
+Authorization: Token {{token}}
+
+### Search Manifest test
+
+# @name = Search Manifest in list
+GET {{base}}/api/manifest/f567d1ab-c9f1-4b0b-aa3e-b883cd8d0cde/list/
+  ?start_date=
+  &end_date=
+  &start=0
+  &length=20
+  &order=id
+  &dir=
+  &value=FMM00021320190917
+Authorization: Token {{token}}
+
+###
+
+GET {{base}}/api/manifest/load/LDFX17000134
+Authorization: Token {{token}}
+
+###
+
+POST {{base}}/api/dashboard/company/kpi/
+Authorization: Token {{token}}
+Content-Type: application/json
+
+{
+  "company_id": "11b91530-b4e8-4b47-b3d3-e6d4e31077a9"
+}
+
+###
+
+POST {{base}}/api/dashboard/shipment/list
+Authorization: Token {{token}}
+Content-Type: application/json
+
+{
+  "company_id": "11b91530-b4e8-4b47-b3d3-e6d4e31077a9",
+	"start_date":"2019-09-01",
+	"end_date":"2019-09-10",
+	"status":"new"
+}
+
+###
+
+GET {{base}}/api/company/list?admin=1
+Authorization: Token {{token}}
+
+###
+
+GET {{base}}/api/company/details?id=f7e9f478-706e-4643-a734-049f545924bd
+Authorization: Token {{token}}
+
+###
+
+GET {{base}}/api/company/user/list
+Authorization: Token {{token}}
+
+###
+
+POST {{base}}/api/company/user/new
+Authorization: Token {{token}}
+Content-Type: application/json
+
+{
+  "company_id": "11b91530-b4e8-4b47-b3d3-e6d4e31077a9",
+  "email": "jason@huat.com",
+  "user_role": "USER"
+}
