@@ -36,7 +36,7 @@
           </thead>
           <tbody>
             <tr *ngFor="let o of list">
-              <td>{{ o.consignment }}</td>
+              <td>{{ o.consignment_no }}</td>
               <td>{{ o.pcs }}</td>
               <td class="text-center">{{ o.is_confirm ? 'CONFIRM': 'NOT CONFIRM' }}</td>
               <td>
@@ -51,6 +51,12 @@
 
     <div class="overlay" *ngIf="isloading">
       <i class="fa fa-refresh fa-spin"></i>
+    </div>
+
+    <div class="box-footer">
+      <div class="pull-right" *ngIf="itemsCount">
+        <pagination [totalItems]="itemsCount" [itemsPerPage]="PAGE_SIZE" [(ngModel)]="page" (pageChanged)="pageChanged($event)"></pagination>
+      </div>
     </div>
   </div>
 

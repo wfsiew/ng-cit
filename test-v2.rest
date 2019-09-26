@@ -229,8 +229,8 @@ Content-Type: application/json
 # @description = List Details of Manifest & wildcard search on Manifest details
 GET {{base}}/api/manifest/f567d1ab-c9f1-4b0b-aa3e-b883cd8d0cde/list/
   ?manifestno=FMM00021320190917001
-  &start=80
-  &length=20
+  &start=0
+  &length=2
   &order=
   &dir=desc
   &value=

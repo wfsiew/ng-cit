@@ -2,6 +2,7 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ManifestService } from '../../../services/manifest.service';
 import { Location } from '@angular/common';
+import { AppConstant } from '../../../shared/constants/app.constant';
 import _ from 'lodash';
 import { ToastrService } from 'ngx-toastr';
 import { Helper } from '../../../shared/utils/helper';
@@ -20,8 +21,14 @@ export class DetailManifestComponent implements OnInit {
   company_id: string;
   data: any = {};
   modalRef: BsModalRef;
+  itemsCount = 0;
+  page = 1;
+  search = '';
+  sort = 'id';
+  sort_dir = '';
 
   readonly isEmpty = Helper.isEmpty;
+  readonly PAGE_SIZE = AppConstant.PAGE_SIZE;
   
   constructor(
     private route: ActivatedRoute,
@@ -41,9 +48,10 @@ export class DetailManifestComponent implements OnInit {
 
   load() {
     this.isloading = true;
-    this.manifestService.listManifestByNo(this.company_id, this.manifest_no, 1, 50, 'id', '', '', '1').subscribe((res: any) => {
-      let x = res.status ? res.data[0] : {};
+    this.manifestService.getManifestDetail(this.company_id, this.manifest_no, this.page, AppConstant.PAGE_SIZE, this.sort, this.sort_dir, this.search).subscribe((res: any) => {
+      let x = res.status ? res.data : {};
       this.data = x;
+      this.itemsCount = x.total_record;
       this.list = x['list-consignment'];
       this.isloading = false;
     },
@@ -51,6 +59,11 @@ export class DetailManifestComponent implements OnInit {
       this.isloading = false;
       this.toastr.error('Load Manifest Detail Failed');
     });
+  }
+
+  pageChanged(event: any) {
+    this.page = event.page;
+    this.load();
   }
 
   onConfirmCloseManifest(tp: TemplateRef<any>) {

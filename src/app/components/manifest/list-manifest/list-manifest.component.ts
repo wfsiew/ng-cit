@@ -82,19 +82,19 @@ export class ListManifestComponent implements OnInit, OnDestroy {
       return;
     }
 
-    let q: Observable<Object>;
-    if (!Helper.isEmpty(this.manifest_no)) {
-      q = this.manifestService.listManifestByNo(this.company.company_id, this.manifest_no, this.page, AppConstant.PAGE_SIZE, this.sort, this.sort_dir, this.search);
-    }
+    let q = this.manifestService.listManifest(this.company.company_id, this.datex[0], this.datex[1], this.page, AppConstant.PAGE_SIZE, this.sort, this.sort_dir, this.search);
+    // if (!Helper.isEmpty(this.manifest_no)) {
+    //   q = this.manifestService.listManifestByNo(this.company.company_id, this.manifest_no, this.page, AppConstant.PAGE_SIZE, this.sort, this.sort_dir, this.search);
+    // }
 
-    else if (!_.isNull(this.datex[0]) && !_.isUndefined(this.datex[0]) 
-      && !_.isNull(this.datex[1]) && !_.isUndefined(this.datex[1])) {
-      q = this.manifestService.listManifestByDateRange(this.company.company_id, this.datex[0], this.datex[1], this.page, AppConstant.PAGE_SIZE, this.sort, this.sort_dir, this.search);
-    }
+    // else if (!_.isNull(this.datex[0]) && !_.isUndefined(this.datex[0]) 
+    //   && !_.isNull(this.datex[1]) && !_.isUndefined(this.datex[1])) {
+    //   q = this.manifestService.listManifestByDateRange(this.company.company_id, this.datex[0], this.datex[1], this.page, AppConstant.PAGE_SIZE, this.sort, this.sort_dir, this.search);
+    // }
 
-    if (_.isUndefined(q) || _.isNull(q)) {
-      return;
-    }
+    // if (_.isUndefined(q) || _.isNull(q)) {
+    //   return;
+    // }
 
     this.isloading = true;
     q.subscribe((res: any) => {
@@ -184,5 +184,13 @@ export class ListManifestComponent implements OnInit, OnDestroy {
 
   onCancel() {
     this.modalRef.hide();
+  }
+
+  onSearch() {
+    this.load();
+  }
+
+  onSearchKeypress(event) {
+    this.load();
   }
 }
