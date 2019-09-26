@@ -129,6 +129,14 @@ export class DetailManifestComponent implements OnInit {
     });
   }
 
+  onSearch() {
+    this.load();
+  }
+
+  onSearchKeypress(event) {
+    this.load();
+  }
+
   onBack() {
     this.loc.back();
   }
