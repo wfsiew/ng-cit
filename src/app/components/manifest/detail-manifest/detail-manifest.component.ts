@@ -52,7 +52,7 @@ export class DetailManifestComponent implements OnInit {
       let x = res.status ? res.data : {};
       this.data = x;
       this.itemsCount = x.total_record;
-      this.list = x['list-consignment'];
+      this.list = x['list-consignment'][0];
       this.isloading = false;
     },
     (error) => {
