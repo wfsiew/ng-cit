@@ -49,9 +49,11 @@ export class ListDashboardComponent implements OnInit, OnDestroy {
       }
 
       this.company_id = params.get('company_id');
-
       this.load();
     });
+    this.route.queryParams.subscribe(params => {
+      this.daterx = [new Date(params['s_date']), new Date(params['e_date'])];
+  });
   }
 
   ngOnDestroy() {
@@ -62,7 +64,6 @@ export class ListDashboardComponent implements OnInit, OnDestroy {
     this.companyService.getCompany(this.company_id).subscribe((res: any) => {
       this.company_name = res.status ? res.data[0].display_name : '';
     });
-    this.loadList();
   }
 
   loadList() {
@@ -84,6 +85,10 @@ export class ListDashboardComponent implements OnInit, OnDestroy {
   }
 
   onDateChange(val) {
+    if (_.isNull(val)) {
+      return;
+    }
+
     this.datex = val;
     this.loadList();
   }

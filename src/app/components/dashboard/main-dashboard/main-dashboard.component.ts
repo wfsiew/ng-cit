@@ -32,6 +32,7 @@ export class MainDashboardComponent implements OnInit, OnDestroy {
   company_id: string;
   role: string;
   daterx = [new Date(), new Date()];
+  datex = this.daterx;
   subs: Subscription;
 
   readonly isEmpty = Helper.isEmpty;
@@ -86,8 +87,8 @@ export class MainDashboardComponent implements OnInit, OnDestroy {
     this.isloading = true;
     const o = {
       company_id: this.company_id,
-      start_date: Helper.getDateStr(this.daterx[0]),
-      end_date: Helper.getDateStr(this.daterx[1])
+      start_date: Helper.getDateStr(this.datex[0]),
+      end_date: Helper.getDateStr(this.datex[1])
     };
     this.dashboardService.getKPI(o).subscribe((res: any) => {
       const o = res.status ? res.data.overview : [];
@@ -117,7 +118,12 @@ export class MainDashboardComponent implements OnInit, OnDestroy {
     });
   }
 
-  onDateChange() {
+  onDateChange(val) {
+    if (_.isNull(val)) {
+      return;
+    }
+
+    this.datex = val;
     if (!Helper.isEmpty(this.company_id)) {
       this.loadDashboard();
     }
@@ -128,7 +134,7 @@ export class MainDashboardComponent implements OnInit, OnDestroy {
       company_id: this.company_id,
       daterx: this.daterx
     });
-    this.router.navigate(['/cit/dashboard/list', i, this.company_id]);
+    this.router.navigate(['/cit/dashboard/list', i, this.company_id], { queryParams: { s_date: Helper.getDateStr(this.daterx[0]), e_date: Helper.getDateStr(this.daterx[1]) } });
     return false;
   }
 
