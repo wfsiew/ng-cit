@@ -52,7 +52,7 @@ export class CreateShipmentComponent implements OnInit {
       company_account_code: new FormControl({ value: '', disabled: true }),
       company_name: new FormControl({ value: '', disabled: true }),
       service_type: ['', [Validators.required]],
-      pickup_date: ['', [Validators.required]],
+      pickup_date: [new Date(), [Validators.required]],
       customer_reference: ['', [Validators.required]],
       is_insurance_req: [false],
       is_do: [false],
@@ -337,6 +337,7 @@ export class CreateShipmentComponent implements OnInit {
     const o = {
       company_id: this.data.company_id,
       customer_reference: f.customer_reference.value,
+      pickup_date: Helper.getDateStr1(f.pickup_date.value),
       origin_address_id: '',
       origin_shipper_address1: f.origin_shipper_address1.value,
       origin_shipper_address2: f.origin_shipper_address2.value,

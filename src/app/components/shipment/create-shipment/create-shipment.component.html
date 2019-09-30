@@ -49,7 +49,7 @@
               <input type="text" class="form-control" formControlName="pickup_date" name="pickup_date" bsDatepicker #dp="bsDatepicker"
                 [bsConfig]="{ containerClass: 'theme-blue', dateInputFormat: 'YYYY-MM-DD' }">
               <div class="input-group-btn">
-                <button class="btn btn-default" (click)="dp.show()" [attr.aria-expanded]="dp.isOpen">
+                <button type="button" class="btn btn-default" (click)="dp.show()" [attr.aria-expanded]="dp.isOpen">
                   <i class="fa fa-calendar"></i>
                 </button>
               </div>
@@ -414,7 +414,7 @@
       <div class="box-footer">
         <div class="row">
           <div class="col-sm-2">
-            <button type="submit" class="btn btn-primary" >Confirm Shipment</button>
+            <button type="submit" class="btn btn-primary" [disabled]="invalid">Confirm Shipment</button>
           </div>
           <div class="col-sm-2">
             <button type="submit" class="btn btn-primary">Print Shipment</button>
