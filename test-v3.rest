@@ -107,7 +107,7 @@ Authorization: Token {{token}}
 {
     "customer_reference": "JASONREF003",
     "pickup_date" : "20190930",  
-    "origin_address_id": "ADC01",
+    "origin_address_id": "",
     "origin_shipper_address1": "No 136, Hala Lapangan Peradana, Hala Lapangan Panorama",
     "origin_shipper_address2": "",
     "origin_shipper_address3": "",
@@ -119,7 +119,7 @@ Authorization: Token {{token}}
     "origin_shipper_country": "MY",
     "origin_shipper_name": "Kong Mun Hoe",
     "origin_shipper_phone_no": "0165324876",
-    "dest_address_id": "ADC02",
+    "dest_address_id": "",
     "dest_receiver_address1": "No 16, Jalan Bahagia, Taman ABC",
     "dest_receiver_address2": "",
     "dest_receiver_address3": "",

@@ -56,8 +56,8 @@ export class CreateShipmentComponent implements OnInit {
       customer_reference: ['', [Validators.required]],
       is_insurance_req: [false],
       is_do: [false],
-      is_cod: [false],
-      cod_value: ['0.00', [Validators.required, Validators.pattern(AppConstant.VALIDATE.AMOUNT)]],
+      is_cod: [true],
+      cod_value: ['10.00', [Validators.required, Validators.pattern(AppConstant.VALIDATE.AMOUNT)]],
       total_package_no: ['', [Validators.required, Validators.pattern(AppConstant.VALIDATE.NUMBER)]],
       total_weight: ['', [Validators.required, Validators.pattern(AppConstant.VALIDATE.AMOUNT)]],
 
@@ -333,6 +333,10 @@ export class CreateShipmentComponent implements OnInit {
        product_list: []
      }
    });
+   let orderamt = 0;
+   _.each(this.listGood, (x) => {
+     orderamt += x.value * x.quantity
+   });
    const f = this.f;
     const o = {
       company_id: this.data.company_id,
@@ -362,6 +366,8 @@ export class CreateShipmentComponent implements OnInit {
       cod_value: f.cod_value.value,
       total_package_no: f.total_package_no.value,
       service_type: f.service_type.value,
+      order_amount : orderamt,
+      order_amount_currency: 'MYR',
       chargeable_weight: f.total_weight.value,
       chargeable_weight_uom: 'KG',
       shipment_package_list: lp
