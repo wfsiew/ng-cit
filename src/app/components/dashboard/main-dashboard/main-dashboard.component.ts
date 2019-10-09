@@ -132,9 +132,9 @@ export class MainDashboardComponent implements OnInit, OnDestroy {
   onKPI(i) {
     this.msService.send('main-dashboard', {
       company_id: this.company_id,
-      daterx: this.daterx
+      daterx: this.datex
     });
-    this.router.navigate(['/cit/dashboard/list', i, this.company_id], { queryParams: { s_date: Helper.getDateStr(this.daterx[0]), e_date: Helper.getDateStr(this.daterx[1]) } });
+    this.router.navigate(['/cit/dashboard/list', i, this.company_id], { queryParams: { s_date: Helper.getDateStr(this.datex[0]), e_date: Helper.getDateStr(this.datex[1]) } });
     return false;
   }
 

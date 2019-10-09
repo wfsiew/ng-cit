@@ -44,6 +44,7 @@ export class CreateMultipleShipmentComponent implements OnInit {
       company_name: new FormControl({ value: '', disabled: true }),
       service_type: ['', [Validators.required]],
       currency: ['MYR', [Validators.required]],
+      pickup_date: [new Date(), [Validators.required]],
       file: [null]
     });
   }
@@ -98,6 +99,7 @@ export class CreateMultipleShipmentComponent implements OnInit {
     formData.append('currency', f.currency.value);
     formData.append('is_do', 'True');
     formData.append('shipper_address_id', '');
+    formData.append('pickup_date', Helper.getDateStr(f.pickup_date.value));
 
     //this.isloading = true;
     this.shipmentService.uploadShipment(formData).subscribe((res: any) => {
