@@ -282,7 +282,7 @@
             <ng-select
               [items]="countryList" 
               bindLabel="country_name" 
-              bindValue="country_name" 
+              bindValue="country_code" 
               placeholder="Please select"
               (change)="onCountryChangeShipper()"
               formControlName="origin_shipper_country"
@@ -376,7 +376,7 @@
             <ng-select 
               [items]="countryList" 
               bindLabel="country_name" 
-              bindValue="country_name" 
+              bindValue="country_code" 
               placeholder="Please select"
               (change)="onCountryChangeReceiver()" 
               formControlName="dest_receiver_country" 

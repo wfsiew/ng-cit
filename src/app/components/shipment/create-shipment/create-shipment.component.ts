@@ -341,13 +341,14 @@ export class CreateShipmentComponent implements OnInit {
     const o = {
       company_id: this.data.company_id,
       customer_reference: f.customer_reference.value,
-      pickup_date: Helper.getDateStr(f.pickup_date.value),
+      pickup_date: Helper.getDateStr1(f.pickup_date.value),
       origin_address_id: '',
       origin_shipper_address1: f.origin_shipper_address1.value,
       origin_shipper_address2: f.origin_shipper_address2.value,
       origin_shipper_postcode: f.origin_shipper_postcode.value,
       origin_shipper_city: f.origin_shipper_city.value,
       origin_shipper_state_province: f.origin_shipper_state_province.value,
+      origin_shipper_district: '',
       origin_shipper_country: f.origin_shipper_country.value,
       origin_shipper_name: f.origin_shipper_name.value,
       origin_shipper_phone_no: f.origin_shipper_phone_no.value,
@@ -358,6 +359,7 @@ export class CreateShipmentComponent implements OnInit {
       dest_receiver_postcode: f.dest_receiver_postcode.value,
       dest_receiver_city: f.dest_receiver_city.value,
       dest_receiver_state_province: f.dest_receiver_state_province.value,
+      dest_receiver_district: '',
       dest_receiver_country: f.dest_receiver_country.value,
       dest_receiver_phone_no: f.dest_receiver_phone_no.value,
       dest_receiver_name: f.dest_receiver_name.value,
@@ -368,8 +370,8 @@ export class CreateShipmentComponent implements OnInit {
       service_type: f.service_type.value,
       order_amount : orderamt,
       order_amount_currency: 'MYR',
-      chargeable_weight: f.total_weight.value,
-      chargeable_weight_uom: 'KG',
+      // chargeable_weight: f.total_weight.value,
+      // chargeable_weight_uom: 'KG',
       shipment_package_list: lp
     };
     this.isloading = true;

@@ -99,7 +99,7 @@ export class CreateMultipleShipmentComponent implements OnInit {
     formData.append('currency', f.currency.value);
     formData.append('is_do', 'True');
     formData.append('shipper_address_id', '');
-    formData.append('pickup_date', Helper.getDateStr(f.pickup_date.value));
+    formData.append('pickup_date', Helper.getDateStr1(f.pickup_date.value));
 
     //this.isloading = true;
     this.shipmentService.uploadShipment(formData).subscribe((res: any) => {
