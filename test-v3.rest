@@ -137,7 +137,7 @@ Authorization: Token {{token}}
     "cod_value": 9.30,
     "total_package_no": 1,
     "service_type": "EXP",
-    "order_amount" : 25.00,
+    "order_amount" : 25,
     "order_amount_currency": "MYR",
     "shipment_package_list" : 
     [{
