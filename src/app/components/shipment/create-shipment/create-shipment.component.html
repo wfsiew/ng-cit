@@ -100,11 +100,18 @@
         </div> -->
 
         <div class="form-group">
-          <label class="col-sm-2 control-label">* Packaging Type</label>
+          <label class="col-sm-2 control-label">*Packaging Type</label>
           <div class="col-sm-4">
-            <select class="form-control">
-              <option>Parcel</option>
-            </select>
+            <ng-select
+              [items]="uomList" 
+              bindLabel="description" 
+              bindValue="code" 
+              placeholder="Please select"
+              formControlName="uom"
+              name="uom"></ng-select>
+            <small class="label label-danger"
+              *ngIf="invalid('uom') && f.uom.hasError('required')">Packaging Type is
+              required</small>
           </div>
         </div>
 

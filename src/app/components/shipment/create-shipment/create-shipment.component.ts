@@ -21,6 +21,7 @@ export class CreateShipmentComponent implements OnInit {
   isloading = false;
   serviceList = [];
   countryList = [];
+  uomList = [];
   mform: FormGroup;
   gform: FormGroup;
   data: any;
@@ -52,6 +53,7 @@ export class CreateShipmentComponent implements OnInit {
       company_account_code: new FormControl({ value: '', disabled: true }),
       company_name: new FormControl({ value: '', disabled: true }),
       service_type: ['', [Validators.required]],
+      uom: ['', [Validators.required]],
       pickup_date: [new Date(), [Validators.required]],
       customer_reference: ['', [Validators.required]],
       is_insurance_req: [false],
@@ -122,6 +124,9 @@ export class CreateShipmentComponent implements OnInit {
     });
     this.lookupService.listService().subscribe((res: any) => {
       this.serviceList = res.data;
+    });
+    this.lookupService.listUOM().subscribe((res: any) => {
+      this.uomList = res.data;
     });
   }
 
