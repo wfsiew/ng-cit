@@ -71,7 +71,7 @@ export class HomeComponent implements OnInit {
     return false;
   }
 
-  onAddressBookClick(event) {
+  onAddressBookClick() {
     this.address_book = !this.address_book;
     return false;
   }

@@ -16,7 +16,7 @@ export class DetailDashboardComponent implements OnInit {
   list = [];
   list_tracking = [];
   consignment_no: string;
-  data = {};
+  data: any = {};
 
   constructor(
     private route: ActivatedRoute,

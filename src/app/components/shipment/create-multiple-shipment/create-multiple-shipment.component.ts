@@ -21,7 +21,7 @@ export class CreateMultipleShipmentComponent implements OnInit {
   countryList = [];
   mform: FormGroup;
   data: any;
-  uploadResponse = { status: '', message: '', filePath: '' };
+  uploadResponse: any = { status: '', message: '', filePath: '' };
 
   constructor(
     private fb: FormBuilder,

@@ -97,6 +97,10 @@ export class ListDashboardComponent implements OnInit, OnDestroy {
     this.loadList();
   }
 
+  onSearchKeypress(event) {
+    this.loadList();
+  }
+
   onView(o) {
     this.router.navigate(['/cit/dashboard/detail', o.ConsignmentNo]);
     return false;

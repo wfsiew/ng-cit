@@ -150,7 +150,7 @@ Authorization: Token {{token}}
         "value": 10.45,
         "currency": "MYR",
         "quantity": 6,
-        "uom":"PAS",
+        "uom":"PAR",
         "product_list": [{
             "product_name": "Magazine",
             "product_code": "Pieces",
