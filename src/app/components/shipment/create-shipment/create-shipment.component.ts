@@ -323,33 +323,34 @@ export class CreateShipmentComponent implements OnInit {
 	    }]
 }
     */
-   let lp = _.map(this.listGood, (x) => {
-     return {
-       description: x.description,
-       weight: 0.00,
-       volume: 0.00,
-       height: 0.00,
-       length: 0.00,
-       width: 0.00,
-       value: x.value,
-       currency: x.currency,
-       quantity: x.quantity,
-       uom: 'PAS',
-       product_list: []
-     }
+    const f = this.f;
+    let lp = _.map(this.listGood, (x) => {
+      return {
+        description: x.description,
+        weight: 0.00,
+        volume: 0.00,
+        height: 0.00,
+        length: 0.00,
+        width: 0.00,
+        value: x.value,
+        currency: x.currency,
+        quantity: x.quantity,
+        uom: f.uom.value,
+        product_list: []
+      }
    });
    let orderamt = 0;
    _.each(this.listGood, (x) => {
      orderamt += x.value * x.quantity
    });
-   const f = this.f;
+   
     const o = {
-      company_id: this.data.company_id,
       customer_reference: f.customer_reference.value,
-      pickup_date: Helper.getDateStr1(f.pickup_date.value),
       origin_address_id: '',
       origin_shipper_address1: f.origin_shipper_address1.value,
       origin_shipper_address2: f.origin_shipper_address2.value,
+      origin_shipper_address3: '',
+      origin_shipper_address4: '',
       origin_shipper_postcode: f.origin_shipper_postcode.value,
       origin_shipper_city: f.origin_shipper_city.value,
       origin_shipper_state_province: f.origin_shipper_state_province.value,
@@ -357,24 +358,37 @@ export class CreateShipmentComponent implements OnInit {
       origin_shipper_country: f.origin_shipper_country.value,
       origin_shipper_name: f.origin_shipper_name.value,
       origin_shipper_phone_no: f.origin_shipper_phone_no.value,
+      origin_shipper_mobile_no: '-',
+      origin_shipper_email: '',
 
       dest_address_id: '',
       dest_receiver_address1: f.dest_receiver_address1.value,
       dest_receiver_address2: f.dest_receiver_address2.value,
+      dest_receiver_address3: '',
+      dest_receiver_address4: '',
       dest_receiver_postcode: f.dest_receiver_postcode.value,
       dest_receiver_city: f.dest_receiver_city.value,
       dest_receiver_state_province: f.dest_receiver_state_province.value,
       dest_receiver_district: '',
       dest_receiver_country: f.dest_receiver_country.value,
-      dest_receiver_phone_no: f.dest_receiver_phone_no.value,
       dest_receiver_name: f.dest_receiver_name.value,
+      dest_receiver_phone_no: f.dest_receiver_phone_no.value,
+      dest_receiver_mobile_no: '-',
+      dest_receiver_email: '',
 
       cod: f.is_cod.value,
       cod_value: f.cod_value.value,
+      carton_box_code: 'XL',
       total_package_no: f.total_package_no.value,
       service_type: f.service_type.value,
       order_amount : orderamt,
+      insurance_amount: 30.00,
+      chargeable_weight: f.total_weight.value,
+      chargeable_weight_uom: 'KG',
       order_amount_currency: 'MYR',
+      company_id: this.data.company_id,
+      pickup_date: Helper.getDateStr(f.pickup_date.value),
+
       // chargeable_weight: f.total_weight.value,
       // chargeable_weight_uom: 'KG',
       shipment_package_list: lp
