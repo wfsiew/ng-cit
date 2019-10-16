@@ -400,8 +400,14 @@ export class CreateShipmentComponent implements OnInit {
     },
     (error) => {
       this.isloading = false;
-      this.toastr.error('Create Shipment Failed', 'Create Shipment');
-    })
+      if (error.status === 400 && error.error && error.error.message) {
+        this.toastr.error(`Create Shipment Failed: ${error.error.message}`, 'Create Shipment');
+      }
+
+      else {
+        this.toastr.error('Create Shipment Failed', 'Create Shipment');
+      }
+    });
   }
 
   onBack() {
