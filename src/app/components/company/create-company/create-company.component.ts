@@ -156,6 +156,8 @@ export class CreateCompanyComponent implements OnInit {
     }
     this.mform.patchValue({
       company_pic_full_name: o.full_name,
+      company_pic_email: o.email,
+      company_pic_phone_number: o.phone_number,
       company_address1: o.address1,
       company_address2: o.address2,
       company_postcode: o.postcode,
