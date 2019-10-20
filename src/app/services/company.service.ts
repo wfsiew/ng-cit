@@ -12,6 +12,10 @@ export class CompanyService {
 
   constructor(private http: HttpClient) { }
 
+  createCompany(o) {
+    return this.http.post(`${this.baseUrl}/api/company/create`, o);
+  }
+
   listCompany(admin: boolean = false) {
     if (admin === true) {
       let prm = new HttpParams().set('admin', '1');

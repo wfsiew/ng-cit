@@ -102,6 +102,15 @@ export class ListShipmentComponent implements OnInit, OnDestroy {
     return false;
   }
 
+  onPrintLabel(o) {
+    this.shipmentService.printLabel(o.consignment_no, 'Shipping_Label').subscribe(res => {
+      
+    },
+    (error) => {
+      console.log(error);
+    });
+  }
+
   isSortBy(s, dir) {
     return this.sort === s && this.sort_dir === dir;
   }

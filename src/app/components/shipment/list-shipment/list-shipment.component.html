@@ -75,6 +75,7 @@
                 <a href="#" (click)="sortBy('packaging_type')">Packaging Type <i *ngIf="sort === 'packaging_type'" class="fa"
                   [ngClass]="{'fa-chevron-up': isSortBy('packaging_type', ''), 'fa-chevron-down': isSortBy('packaging_type', 'desc')}"></i></a>
               </th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -88,6 +89,9 @@
               <td>{{ o.dest_receiver_city }}</td>
               <td>{{ o.account_code }}</td>
               <td>{{ o.packaging_type }}</td>
+              <td>
+                <button type="button" class="btn btn-primary" (click)="onPrintLabel(o)">Print</button>
+              </td>
             </tr>
           </tbody>
         </table>

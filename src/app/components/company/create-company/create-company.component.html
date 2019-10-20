@@ -9,7 +9,7 @@
         <i class="fa fa-chevron-left"></i> Back
       </button>
     </div>
-    <form [formGroup]="mform" class="form-horizontal">
+    <form [formGroup]="mform" (ngSubmit)="onSubmit()" class="form-horizontal">
       <div class="box-body">
         <div class="form-group">
           <label class="col-sm-2 control-label">Company Account</label>
@@ -45,7 +45,7 @@
           </div>
           <label class="col-sm-2 control-label">PIC Number</label>
           <div class="col-sm-4">
-            <input type="email" class="form-control" placeholder="PIC Email" formControlName="company_pic_phone_number"
+            <input type="email" class="form-control" placeholder="PIC Number" formControlName="company_pic_phone_number"
               name="company_pic_phone_number">
           </div>
         </div>
@@ -54,7 +54,7 @@
           <label class="col-sm-2 control-label">Company Address</label>
           <div class="col-sm-10">
             <input type="text" class="form-control" placeholder="Address 1" formControlName="company_address1"
-              name="company_address1">
+              name="company_address1" readonly>
           </div>
         </div>
         <div class="form-group">
@@ -65,25 +65,25 @@
           </div>
           <div class="col-sm-10">
             <input type="text" class="form-control" placeholder="Address 2" formControlName="company_address2"
-              name="company_address2">
+              name="company_address2" readonly>
           </div>
         </div>
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-4">
             <input type="text" class="form-control" placeholder="Postcode" formControlName="company_postcode"
-              name="company_postcode">
+              name="company_postcode" readonly>
           </div>
         </div>
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-4">
             <input type="text" class="form-control" placeholder="City" formControlName="company_city"
-              name="company_city">
+              name="company_city" readonly>
           </div>
         </div>
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-4">
             <input type="text" class="form-control" placeholder="State" formControlName="company_state_province"
-              name="company_state_province">
+              name="company_state_province" readonly>
           </div>
         </div>
         <div class="form-group">
@@ -95,7 +95,8 @@
               placeholder="Please select"
               (change)="onCountryChange()" 
               formControlName="company_country" 
-              name="company_country"></ng-select>
+              name="company_country"
+              [disabled]="true"></ng-select>
           </div>
         </div>
 
@@ -180,6 +181,10 @@
             </div>
           </div>
         </div>
+      </div>
+
+      <div class="overlay" *ngIf="isloading">
+        <i class="fa fa-refresh fa-spin"></i>
       </div>
 
       <div class="box-footer">

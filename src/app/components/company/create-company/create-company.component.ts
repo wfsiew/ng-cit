@@ -17,6 +17,7 @@ import { AddressBookModalComponent } from '../../../shared/components/address-bo
 })
 export class CreateCompanyComponent implements OnInit {
 
+  isloading = false;
   countryList = [];
   serviceList = [];
   mform: FormGroup;
@@ -214,7 +215,35 @@ export class CreateCompanyComponent implements OnInit {
   }
 
   onSubmit() {
-    
+    const f = this.mform.value;
+    let lx = _.map(this.data.company_service_list, (k) => {
+      return {
+        service_id: k.service_id,
+        service_code: k.service_code
+      };
+    });
+    const o = {
+      company_account_code: f.company_account_code,
+      company_code: f.company_code,
+      company_name: f.company_name,
+      display_name: f.company_name,
+      parent_company_account_code: null,
+      parent_company_id : null,
+      is_do: f.is_do,
+      is_cod: f.is_cod,
+      is_active: true,
+      address_id: this.selectedAddress.id,
+      company_service_list: lx
+    };
+    this.isloading = true;
+    this.companyService.createCompany(o).subscribe(res => {
+      this.isloading = false;
+      this.toastr.success('New Company successfully created', 'Create Company');
+    },
+    (error) => {
+      this.isloading = false;
+      this.toastr.error('Create Company Failed', 'Create Company');
+    });
   }
 
   onBack() {
@@ -226,6 +255,10 @@ export class CreateCompanyComponent implements OnInit {
   }
 
   invalid(s: string) {
+    if (!this.selectedAddress.id) {
+      return true;
+    }
+    
     const m = this.mform.controls[s];
     return m.invalid && (m.dirty || m.touched);
   }

@@ -50,4 +50,11 @@ export class ShipmentService {
       }
     }));
   }
+
+  printLabel(consignment_no: string, type: string) {
+    let prm: HttpParams = new HttpParams()
+      .set('consignment_no', consignment_no)
+      .set('type', type);
+    return this.http.get(`${this.baseUrl}/api/reports/labels/`, { params: prm });
+  }
 }
