@@ -95,7 +95,7 @@ Content-Type: text/csv
 
 ###
 
-GET {{base}}/api/shipment/list/?shipment_id=2566
+GET {{base}}/api/shipment/list/?shipment_id=4748
 Authorization: Token {{token}}
 
 ###
@@ -106,7 +106,7 @@ Authorization: Token {{token}}
 
 {
     "customer_reference": "JASONREF003",
-    "pickup_date" : "20190930",  
+    "pickup_date" : "2019-10-30",  
     "origin_address_id": "",
     "origin_shipper_address1": "No 136, Hala Lapangan Peradana, Hala Lapangan Panorama",
     "origin_shipper_address2": "",
