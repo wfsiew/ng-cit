@@ -1,0 +1,10 @@
+HTTP/1.1 200 OK
+Date: Mon, 21 Oct 2019 23:40:19 GMT
+Server: WSGIServer/0.2 CPython/3.7.3
+Content-Type: application/json
+Vary: Accept, Origin
+Allow: GET, HEAD, OPTIONS
+X-Frame-Options: SAMEORIGIN
+Content-Length: 1657
+
+{"status":true,"recordsTotal":1,"data":[{"id":4747,"origin_address_id":"ADC01","customer_reference":"MH01","consignment_no":"MYC0100068558","origin_shipper_address1":"No 136, Hala Lapangan Peradana, Hala Lapangan Panorama","origin_shipper_address2":"","origin_shipper_address3":"","origin_shipper_address4":"","origin_shipper_postcode":"47500","origin_shipper_city":"Puchong","origin_shipper_state_province":null,"origin_shipper_district":null,"origin_shipper_country":null,"origin_shipper_name":"Kong Mun Hoe","origin_shipper_phone_no":"0165324876","origin_shipper_mobile_no":null,"origin_shipper_email":null,"dest_address_id":"ADC02","dest_receiver_address1":"No 16, Jalan Bahagia, Taman ABC","dest_receiver_address2":"","dest_receiver_address3":"","dest_receiver_address4":"","dest_receiver_postcode":"","dest_receiver_city":"Petaling Jaya","dest_receiver_state_province":"Selangor","dest_receiver_district":"","dest_receiver_country":"MY","dest_receiver_phone_no":"0125529182","dest_receiver_mobile_no":"","dest_receiver_email":"","dest_receiver_name":"Kong Zai","cod":true,"cod_value":9.3,"insurance_amount":null,"total_package_no":1,"service_type":"EXP","order_amount":25.0,"order_amount_currency":"MYR","chargeable_weigth":null,"chargeable_weight_uom":null,"is_draft":false,"shipment_package_list":[{"id":4139,"cargo_id":null,"consignment_no":"MYC0100068558","description":"This is a good book to read","weight":4.2,"volume":5.2,"height":6.32,"wdith":10.0,"length":7.9,"value":10.45,"currency":"MYR","quantity":6,"uom":"PAS","product_list":[{"id":4158,"product_name":"Magazine","product_code":"Pieces","value":2.0,"quantity":2,"currency":"MYR"}]}]}]}

@@ -1,0 +1,1361 @@
+{
+	"info": {
+		"_postman_id": "be6c46e1-9255-4966-bf48-b75fcfd311f0",
+		"name": "fmx/CIT copy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "company",
+			"item": [
+				{
+					"name": "User",
+					"item": [
+						{
+							"name": "Assign New User",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Token {{local-dev-token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t \"company_id\": \"11b91530-b4e8-4b47-b3d3-e6d4e31077a9\",\n    \"email\": \"jason.tai@paperose.com.my\",\n    \"user_role\": \"USER\"\n}"
+								},
+								"url": {
+									"raw": "{{local-dev-url}}/api/company/user/new",
+									"host": [
+										"{{local-dev-url}}"
+									],
+									"path": [
+										"api",
+										"company",
+										"user",
+										"new"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Company Details",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{local-dev-token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{local-dev-url}}/api/company/details",
+							"host": [
+								"{{local-dev-url}}"
+							],
+							"path": [
+								"api",
+								"company",
+								"details"
+							],
+							"query": [
+								{
+									"key": "Authorization",
+									"value": "Token de999251d732dea930600659c15151af930ed3a4",
+									"disabled": true
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Company Details via company id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Token {{local-dev-token}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{local-dev-url}}/api/company/details?id=1e070ce3-9188-4b99-a6cf-aaf0e9036388",
+							"host": [
+								"{{local-dev-url}}"
+							],
+							"path": [
+								"api",
+								"company",
+								"details"
+							],
+							"query": [
+								{
+									"key": "Authorization",
+									"value": "Token de999251d732dea930600659c15151af930ed3a4",
+									"disabled": true
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"disabled": true
+								},
+								{
+									"key": "id",
+									"value": "1e070ce3-9188-4b99-a6cf-aaf0e9036388"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Company List",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{local-dev-token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{local-dev-url}}/api/company/list",
+							"host": [
+								"{{local-dev-url}}"
+							],
+							"path": [
+								"api",
+								"company",
+								"list"
+							],
+							"query": [
+								{
+									"key": "Authorization",
+									"value": "Token de999251d732dea930600659c15151af930ed3a4",
+									"disabled": true
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Company Details Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token 820861332b3977516587e7d8e1370e112acdc139",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"company_id\": \"11b91530-b4e8-4b47-b3d3-e6d4e31077a9\",\n    \"company_account_code\": \"F000086\",\n    \"company_name\": \"FMX (M) SDN BHD\",\n    \"display_name\": \"FMX (M) SDN BHD\",\n    \"parent_company_id\": null,\n    \"parent_company_account_code\" :null,\n    \"is_cod\": true,\n    \"is_do\": true,\n    \"is_active\": true,\n    \"address\": \"7a1c214f-b273-4161-8e44-46b28fbe0051\",\n    \"company_service_list\": [\n        {\n            \"service_id\": \"e2eecbfc-9837-495f-8606-c4a836fed6a2\",\n            \"service_code\": \"PREMIUM\"        \t\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/company/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"company",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Company Details Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{local-dev-token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"company_account_code\": \"F000088\",\n    \"company_code\": \"FXFX\",\n    \"company_name\": \"FMX (M) SDN BHD\",\n    \"display_name\": \"FMX (M) SDN BHD\",\n    \"parent_company_account_code\": null,\n    \"parent_company_id\" : null,\n    \"is_cod\": true,\n    \"is_do\": true,\n    \"is_active\" : true,\n    \"address_id\": \"7a1c214f-b273-4161-8e44-46b28fbe0051\",\n    \"company_service_list\": [\n        {\n            \"service_id\": \"e2eecbfc-9837-495f-8606-c4a836fed6a2\",\n            \"service_code\": \"PREMIUM\"        \t\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{local-dev-url}}/api/company/create",
+							"host": [
+								"{{local-dev-url}}"
+							],
+							"path": [
+								"api",
+								"company",
+								"create"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "shipment",
+			"item": [
+				{
+					"name": "Upload",
+					"item": [
+						{
+							"name": "confirm_upload",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "{{access_token}}"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"filename\":\"/media/CITOrder_MalaysiaModified_MphTY64.csv\"\n}"
+								},
+								"url": {
+									"raw": "{{dev_url}}/file/confirm_upload/",
+									"host": [
+										"{{dev_url}}"
+									],
+									"path": [
+										"file",
+										"confirm_upload",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "List Shipment By Pagination",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token d7daa1cc2bbc850712a15629f614fb583588db1f",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/shipment/list/?start=0&length=20&order=origin_address_id&dir=desc&history=True",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"shipment",
+								"list",
+								""
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "0"
+								},
+								{
+									"key": "length",
+									"value": "20"
+								},
+								{
+									"key": "order",
+									"value": "origin_address_id"
+								},
+								{
+									"key": "dir",
+									"value": "desc"
+								},
+								{
+									"key": "history",
+									"value": "True"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Shipment Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Token {{local-dev-token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t    \"company_id\": \"11b91530-b4e8-4b47-b3d3-e6d4e31077a9\",\r\n\t    \"customer_reference\": \"TEST001\",\r\n\t    \"origin_address_id\": null,\r\n\t    \"origin_shipper_address1\": \"NO 123 Jalan Test 1234\",\r\n\t    \"origin_shipper_address2\": \"\",\r\n\t    \"origin_shipper_address3\": \"\",\r\n\t    \"origin_shipper_address4\": \"\",\r\n\t    \"origin_shipper_postcode\": \"31650\",\r\n\t    \"origin_shipper_city\": \"Puchong\",\r\n\t    \"origin_shipper_state_province\": \"Selangor\",\r\n\t    \"origin_shipper_district\": \"\",\r\n\t    \"origin_shipper_country\": \"MY\",\r\n\t    \"origin_shipper_name\": \"Kong Mun Hoe\",\r\n\t    \"origin_shipper_phone_no\": \"0165324876\",\r\n\t    \"origin_shipper_mobile_no\": \"0165324876\",\r\n\t    \"origin_shipper_email\": \"haseo2408@gmail.com\",\r\n\t    \"dest_address_id\": null,\r\n\t    \"dest_receiver_address1\": \"No 16, Jalan Bahagia, Taman ABC\",\r\n\t    \"dest_receiver_address2\": \"\",\r\n\t    \"dest_receiver_address3\": \"\",\r\n\t    \"dest_receiver_address4\": \"\",\r\n\t    \"dest_receiver_postcode\": \"47500\",\r\n\t    \"dest_receiver_city\": \"Petaling Jaya\",\r\n\t    \"dest_receiver_state_province\": \"Selangor\",\r\n\t    \"dest_receiver_district\": \"\",\r\n\t    \"dest_receiver_country\": \"MY\",\r\n\t    \"dest_receiver_phone_no\": \"0125529182\",\r\n\t    \"dest_receiver_mobile_no\": \"0125529182\",\r\n\t    \"dest_receiver_email\": \"haseo2409@gmail.com\",\r\n\t    \"dest_receiver_name\": \"Kong Zai\",\r\n\t    \"cod\": true,\r\n\t    \"cod_value\": 9.30,\r\n\t    \"carton_box_code\": \"XL\",\r\n\t    \"total_package_no\": 1,\r\n\t    \"service_type\": \"EXP\",\r\n\t    \"order_amount\" : 25.00,\r\n\t    \"insurance_amount\": 30.00,\r\n\t    \"chargeable_weight\": 5.00,\r\n\t    \"chargeable_weight_uom\": \"KG\",\r\n\t    \"order_amount_currency\": \"MY\",\r\n\t    \"shipment_package_list\": \r\n\t    [{\r\n\t    \t\"description\" : \"This is a good book to read\",\r\n\t    \t\"weight\": 4.2,\r\n\t    \t\"volume\": 5.2,\r\n\t    \t\"height\": 6.32,\r\n\t    \t\"length\": 7.9,\r\n\t    \t\"width\": 10.0,\r\n\t    \t\"value\": 10.45,\r\n\t    \t\"currency\": \"MY\",\r\n\t    \t\"quantity\": 6,\r\n\t    \t\"uom\":\"PAS\",\r\n\t    \t\"product_list\": [{\r\n\t    \t\t\"product_name\": \"Magazine\",\r\n\t    \t\t\"product_code\": \"Pieces\",\r\n\t    \t\t\"value\":\"2\",\r\n\t    \t\t\"currency\":\"MY\",\r\n\t    \t\t\"quantity\" : \"2\"\r\n\t    \t}]\r\n\t    }]\r\n}"
+						},
+						"url": {
+							"raw": "{{local-dev-url}}/api/shipment/create",
+							"host": [
+								"{{local-dev-url}}"
+							],
+							"path": [
+								"api",
+								"shipment",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Shipment Delete",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"shipment_id\": 61,\n        \"product_list_id\": 41\n    }\n]"
+						},
+						"url": {
+							"raw": "http://178.128.126.178/api/shipment/delete",
+							"protocol": "http",
+							"host": [
+								"178",
+								"128",
+								"126",
+								"178"
+							],
+							"path": [
+								"api",
+								"shipment",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Shipment Details By Shipment Id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Token d7daa1cc2bbc850712a15629f614fb583588db1f",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/shipment/list/?shipment_id=82",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"shipment",
+								"list",
+								""
+							],
+							"query": [
+								{
+									"key": "shipment_id",
+									"value": "82"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Shipment Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Token 9b583a8fe5fca33b15bc48a96f3b5466fe8c85fd",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"82\",\n    \"origin_address_id\": \"BDC100\",\n    \"customer_reference\" : \"MH007\",\n    \"origin_shipper_name\": \"Kong Mun Hoe 12\",\n    \"origin_shipper_address1\": \"No 136, Hala Lapangan Peradana, Hala Lapangan Panorama\",\n    \"origin_shipper_address2\": \"\",\n    \"origin_shipper_address3\": \"\",\n    \"origin_shipper_address4\": \"\",\n    \"origin_shipper_postcode\": \"47500\",\n    \"origin_shipper_city\": \"Puchong\",\n    \"origin_shipper_state_province\": \"Selangor\",\n    \"origin_shipper_shipper_district\": \"\",\n    \"origin_shipper_phone_no\": \"0165324876\",\n    \"origin_shipper_mobile_no\": \"0165324876\",\n    \"origin_shipper_email\": \"haseo2408@gmail.com\",\n    \"dest_address_id\": \"BDC02\",\n    \"dest_receiver_address1\": \"No 16, Jalan Bahagia, Taman ABC\",\n    \"dest_receiver_address2\": \"\",\n    \"dest_receiver_address3\": \"\",\n    \"dest_receiver_address4\": \"\",\n    \"dest_receiver_postcode\": \"\",\n    \"dest_receiver_city\": \"Petaling Jaya\",\n    \"dest_receiver_state_province\": \"Selangor\",\n    \"dest_receiver_shipper_district\": \"\",\n    \"dest_receiver_phone_no\": \"0125529182\",\n    \"dest_receiver_mobile_no\": \"0125529182\",\n    \"dest_receiver_email\": \"haseo2490@gmail.com\",\n    \"dest_receiver_name\": \"Kong Zai 2\",\n    \"cod\": true,\n    \"cod_value\": 9.7,\n    \"carton_box_code\": \"L\",\n    \"total_package_no\": 2,\n    \"service_type\": \"EXPRESS\",\n    \"order_amount\": 29,\n    \"order_amount_currency\": \"MY\",\n    \"shipment_package_list\": [\n        {\n            \"id\": 60,\n            \"description\": \"This is a good book to read 2\",\n            \"weight\": 10,\n            \"volume\": 60,\n            \"height\": 45,\n            \"length\": 21,\n            \"value\": 10.45,\n            \"currency\": \"MYR\",\n            \"quantity\": 6,\n            \"uom\": \"PAR\",\n            \"product_list\": [\n                {\n                \t\"id\": 42,\n                    \"product_name\": \"Magazine & Novel\",\n                    \"product_code\": \"Book\",\n                    \"value\": \"3\",\n                    \"currency\": \"MYR\",\n                    \"quantity\": \"2\"\n                }\n            ]\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/shipment/update",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"shipment",
+								"update"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "address book",
+			"item": [
+				{
+					"name": "Create Address",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token d7daa1cc2bbc850712a15629f614fb583588db1f",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"type\": \"Receiver\",\n\t\"country\" : \"MY\",\n\t\"address1\" : \"No 27, Jalan Something, Taman Something\",\n\t\"address2\": \"Hulu Hala, Plus Mutli Typo\",\n\t\"postcode\" : \"45000\",\n\t\"state_province\": \"Selangor\",\n\t\"city\": \"Shah Alam\",\n\t\"district\": \"\",\n\t\"full_name\": \"Mun Hoe Kong\",\n\t\"phone_number\": \"017-5958776\",\n\t\"email\" : \"MunHoeKong@cs.com.my\",\n\t\"is_default\": false\n}"
+						},
+						"url": {
+							"raw": "{{dev_url}}/api/address/create",
+							"host": [
+								"{{dev_url}}"
+							],
+							"path": [
+								"api",
+								"address",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List All Address",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{local-dev-token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{local-dev-url}}/api/address/list",
+							"host": [
+								"{{local-dev-url}}"
+							],
+							"path": [
+								"api",
+								"address",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Address",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token d7daa1cc2bbc850712a15629f614fb583588db1f",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t{\"id\": \"d3f9bc5e-141a-484a-9ac8-33fd3ec27836\"},\n\t{\"id\": \"4ae4c38a-d153-4636-a679-dbc08653a39a\"}\n]"
+						},
+						"url": {
+							"raw": "{{dev_url}}/api/address/delete",
+							"host": [
+								"{{dev_url}}"
+							],
+							"path": [
+								"api",
+								"address",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Address Information",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token d7daa1cc2bbc850712a15629f614fb583588db1f",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\n        {\n            \"id\": \"d264c2e8-5340-4df7-9e0f-e57a4df6d8b6\",\n            \"type\": \"Sender\",\n            \"postcode\": \"45700\",\n            \"address1\": \"NO 96, Jalan Alligment, Taman Another\",\n            \"address2\": \"Hulu Hilla, Plus Many Bug\",\n            \"address3\": \"\",\n            \"address4\": \"\",\n            \"city\": \"Shah Alam\",\n            \"country\": \"MY\",\n            \"full_name\": \"Mun Hoe Kong\",\n            \"phone_number\": \"+60165324876\",\n            \"email\":\"MunHoeKong@cs.com.my\",\n            \"state_province\": \"Selangor\",\n            \"district\": \"\",\n            \"is_default\": true\n        }"
+						},
+						"url": {
+							"raw": "{{dev_url}}/api/address/update",
+							"host": [
+								"{{dev_url}}"
+							],
+							"path": [
+								"api",
+								"address",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Address Details By ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token 94bd322557f40f18198492d8c4acbc90c5afccae",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/address/list/?address_id=fb1af50e-582b-4784-bf95-9a2644ceff60",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"address",
+								"list",
+								""
+							],
+							"query": [
+								{
+									"key": "address_id",
+									"value": "fb1af50e-582b-4784-bf95-9a2644ceff60"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "lookup",
+			"item": [
+				{
+					"name": "lookup for product master",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/lookup/product_master",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"lookup",
+								"product_master"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UOM(PACKAGE) Listing",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/lookup/generic_master?master_type=uom",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"lookup",
+								"generic_master"
+							],
+							"query": [
+								{
+									"key": "master_type",
+									"value": "uom"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SERVICE Listing",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/lookup/generic_master?master_type=service",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"lookup",
+								"generic_master"
+							],
+							"query": [
+								{
+									"key": "master_type",
+									"value": "service"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Country Currency Listing",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token 7cc3b778ab309658428f52943f1fa438873bc932",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/lookup/country-info",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"lookup",
+								"country-info"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "get all the lookup value for drop down or select value"
+		},
+		{
+			"name": "Manifest",
+			"item": [
+				{
+					"name": "Consignment Check IN",
+					"item": [
+						{
+							"name": "Check In via Consignment",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Token {{local-dev-token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"branch_id\": null,\n    \"company_id\":  \"11b91530-b4e8-4b47-b3d3-e6d4e31077a9\",\n    \"list-cons\": [\n        {\n            \"consignment\": \"MYC0100031905\"\n        }\n    ]\n}"
+								},
+								"url": {
+									"raw": "{{local-dev-url}}/api/checkin/consignment",
+									"host": [
+										"{{local-dev-url}}"
+									],
+									"path": [
+										"api",
+										"checkin",
+										"consignment"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Manifest List via date range",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{local-dev-token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{stateging-url}}/api/manifest/11b91530-b4e8-4b47-b3d3-e6d4e31077a9/list/?start_date=20190908&details=1&details_status=all",
+							"host": [
+								"{{stateging-url}}"
+							],
+							"path": [
+								"api",
+								"manifest",
+								"11b91530-b4e8-4b47-b3d3-e6d4e31077a9",
+								"list",
+								""
+							],
+							"query": [
+								{
+									"key": "start_date",
+									"value": "20190908"
+								},
+								{
+									"key": "details",
+									"value": "1"
+								},
+								{
+									"key": "details_status",
+									"value": "all"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Manifest - Search/List via Manifest No",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Token {{local-dev-token}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{stateging-url}}/api/manifest/03068911-4055-416c-87f1-c439967f8bc4/list/?manifestno=df68c082-5f8c-46de-b358-5a3a3e57073d&details=1&details_status=0",
+							"host": [
+								"{{stateging-url}}"
+							],
+							"path": [
+								"api",
+								"manifest",
+								"03068911-4055-416c-87f1-c439967f8bc4",
+								"list",
+								""
+							],
+							"query": [
+								{
+									"key": "manifestno",
+									"value": "df68c082-5f8c-46de-b358-5a3a3e57073d"
+								},
+								{
+									"key": "details",
+									"value": "1"
+								},
+								{
+									"key": "details_status",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Manifest",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{local-dev-token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"manifest_id\": \"df68c082-5f8c-46de-b358-5a3a3e57073d\",\n    \"list-cons\": [\n        {\n            \"consignment\": \"MYC0100028352\",\n            \"is_confirm\": false\n        },\n        {\n            \"consignment\": \"MYC0100028361\",\n            \"is_confirm\": false\n        },\n        {\n            \"consignment\": \"MYC0100028363\",\n            \"is_confirm\": false\n        }\n        \n    ]\n}"
+						},
+						"url": {
+							"raw": "{{locel-dev-url}}/api/manifest/03068911-4055-416c-87f1-c439967f8bc4/update/",
+							"host": [
+								"{{locel-dev-url}}"
+							],
+							"path": [
+								"api",
+								"manifest",
+								"03068911-4055-416c-87f1-c439967f8bc4",
+								"update",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Close Manifest",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Token {{local-dev-token}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"manifest_id\": \"df68c082-5f8c-46de-b358-5a3a3e57073d\"\n}"
+						},
+						"url": {
+							"raw": "{{stateging-url}}/api/manifest/03068911-4055-416c-87f1-c439967f8bc4/update/close",
+							"host": [
+								"{{stateging-url}}"
+							],
+							"path": [
+								"api",
+								"manifest",
+								"03068911-4055-416c-87f1-c439967f8bc4",
+								"update",
+								"close"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "b46aad0a-99db-4abe-9128-d7a2a087d4d3",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "3bad3737-371a-4069-aa0d-8915f241fdce",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "User Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\" : \"taishjason\",\n\t\"password\" : \"jason123\"\n}"
+						},
+						"url": {
+							"raw": "{{local-dev-url}}/api/user/login",
+							"host": [
+								"{{local-dev-url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Password Reset",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\" : \"taishjason@gmail.com\",\n\t\"password\" : \"jason123\"\n}"
+						},
+						"url": {
+							"raw": "{{local-dev-url}}/api/user/password-reset/",
+							"host": [
+								"{{local-dev-url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"password-reset",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create New User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\": \"jason123\",\r\n    \"first_name\": \"Jason\",\r\n    \"last_name\": \"Paperose\",\r\n    \"email\": \"jason.tai@paperose.com.my\",\r\n    \"username\": \"jason.tai@paperose.com.my\",\r\n    \"phone_number\": null,\r\n    \"date_of_birth\": null,\r\n    \"serial_id\" : \"414b7ec4-d924-452b-b44a-a4c2ad5a0503\"\r\n}"
+						},
+						"url": {
+							"raw": "{{local-dev-url}}/api/user/create",
+							"host": [
+								"{{local-dev-url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Token 074df5455760be1fbf7797b92c10e1d6554f8720",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://178.128.126.178:8000/api/user/logout",
+							"protocol": "http",
+							"host": [
+								"178",
+								"128",
+								"126",
+								"178"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Detail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Token {{local-dev-token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{local-dev-url}}/api/user/details",
+							"host": [
+								"{{local-dev-url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"details"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Loadgen",
+			"item": [
+				{
+					"name": "Loadgen",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{local-dev-token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{local-dev-url}}/api/manifest/load/LDFX17000134",
+							"host": [
+								"{{local-dev-url}}"
+							],
+							"path": [
+								"api",
+								"manifest",
+								"load",
+								"LDFX17000134"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "loadgen",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Token {{local-dev-token}}",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{local-dev-url}}/api/manifest/load/LDFX17000134",
+							"host": [
+								"{{local-dev-url}}"
+							],
+							"path": [
+								"api",
+								"manifest",
+								"load",
+								"LDFX17000134"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "This is applicable to certain user only"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "e3f73324-1f40-4ea0-8660-7b89846d9156",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "7acdae52-a4a3-4e6d-96bf-a2687c112a68",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "8e93ab54-dfa4-4af7-a5af-4c1c36514ae0",
+			"key": "local-dev-url",
+			"value": "http://127.0.0.1:8000",
+			"type": "string"
+		},
+		{
+			"id": "ac82dd74-b5dc-4245-9f81-1334a66f0112",
+			"key": "local-dev-token",
+			"value": "8c90a8bfe536f05000c528fa9eb6307e885bdf99",
+			"type": "string"
+		},
+		{
+			"id": "3fb92de3-91ed-48ea-8ac6-48e55d8f82d9",
+			"key": "stateging-url",
+			"value": "caapi.fmx.asia:8001",
+			"type": "string"
+		},
+		{
+			"id": "9c2a3b97-5002-47cc-91b6-d975ebaa3820",
+			"key": "steteging-token",
+			"value": "",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"id": "58ad4c91-0680-4ed9-9e86-499791a5cb71",
+			"key": "live-url",
+			"value": "caapi.fmx.asia:8000",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"id": "cec9cf10-daf3-4d05-b9fe-38ddf6f2583f",
+			"key": "live-token",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

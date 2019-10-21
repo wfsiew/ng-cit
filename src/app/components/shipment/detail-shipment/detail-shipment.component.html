@@ -13,13 +13,11 @@
         <div class="form-group">
           <label class="col-sm-2 control-label">Company Account</label>
           <div class="col-sm-4">
-            <input type="text" class="form-control" placeholder="Company Account" formControlName="company_account_code"
-              name="company_account_code" readonly>
+            <div class="form-control-static">company_account_code</div>
           </div>
           <label class="col-sm-2 control-label">Company Name</label>
           <div class="col-sm-4">
-            <input type="text" class="form-control" placeholder="Company Name" formControlName="company_name"
-              name="company_name" readonly>
+            <div class="form-control-static">company_name</div>
           </div>
         </div>
 
@@ -30,8 +28,7 @@
         <div class="form-group">
           <label class="col-sm-2 control-label">*Delivery Service</label>
           <div class="col-sm-4">
-            <input type="text" class="form-control" formControlName="service_type"
-              name="service_type" readonly>
+            <div class="form-control-static">service_type</div>
           </div>
           <div class="col-sm-3">
             <label class="control-label">Requested Pickup Date</label><br />
@@ -39,47 +36,42 @@
           </div>
           
           <div class="col-sm-3">
-            <input type="text" class="form-control" formControlName="pickup_date" 
-              name="pickup_date" readonly>
+            <div class="form-control-static">pickup_date</div>
           </div>
         </div>
 
         <div class="form-group">
           <label class="col-sm-2 control-label">*Order Reference</label>
           <div class="col-sm-4">
-            <input type="text" class="form-control" placeholder="Order Reference" formControlName="customer_reference" 
-              name="customer_reference" readonly>
+            <div class="form-control-static">customer_reference</div>
           </div>
           <div class="col-sm-6">
             <div class="checkbox">
               <label>
-                <input type="checkbox" formControlName="is_insurance_req" name="is_insurance_req" disabled> Additional Insurance Required
+                <i class="fa fa-check"></i> Additional Insurance Required
               </label>
             </div>
-            <i>*Please contact our Customer Service</i>
           </div>
         </div>
 
         <div class="form-group">
           <label class="col-sm-2 control-label">*Packaging Type</label>
           <div class="col-sm-4">
-            <input type="text" class="form-control" formControlName="uom" name="uom" readonly>
+            <div class="form-control-static">uom</div>
           </div>
         </div>
 
         <div class="form-group">
           <label class="col-sm-2 control-label">*Total Package Quantity</label>
           <div class="col-sm-4">
-            <input type="text" class="form-control" placeholder="Total Package Quantity" formControlName="total_package_no"
-              name="total_package_no" readonly>
+            <div class="form-control-static">total_package_no</div>
           </div>
         </div>
 
         <div class="form-group">
           <label class="col-sm-2 control-label">*Total Weight (KG)</label>
           <div class="col-sm-4">
-            <input type="text" class="form-control" placeholder="Total Weight (KG)" formControlName="total_weight"
-              name="total_weight" readonly>
+            <div class="form-control-static">total_weight</div>
           </div>
         </div>
 
@@ -96,7 +88,6 @@
                 <th class="text-right">Goods Value</th>
                 <th class="text-center">Goods Currency</th>
                 <th class="text-right">Total</th>
-                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -106,9 +97,6 @@
                 <td class="text-right">{{ o.value }}</td>
                 <td class="text-center">{{ o.currency }}</td>
                 <td class="text-right">{{ o.quantity * o.value }}</td>
-                <td>
-                  <input type="checkbox" [checked]="o.selected" (change)="onChangeSelect(o)" />
-                </td>
               </tr>
             </tbody>
           </table>
@@ -121,57 +109,48 @@
         <div class="form-group">
           <label class="col-sm-2 control-label">Shipper Name</label>
           <div class="col-sm-4">
-            <input type="text" class="form-control" placeholder="Shipper Name" formControlName="origin_shipper_name"
-              name="origin_shipper_name" readonly>
+            <div class="form-control-static">origin_shipper_name</div>
           </div>
         </div>
 
         <div class="form-group">
           <label class="col-sm-2 control-label">Address</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" placeholder="Address 1" formControlName="origin_shipper_address1"
-              name="origin_shipper_address1" readonly>
+            <div class="form-control-static">origin_shipper_address1</div>
           </div>
         </div>
         <div class="form-group">
           <div class="col-sm-10 col-sm-offset-2">
-            <input type="text" class="form-control" placeholder="Address 2" formControlName="origin_shipper_address2"
-              name="origin_shipper_address2" readonly>
+            <div class="form-control-static">origin_shipper_address2</div>
           </div>
         </div>
 
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-4">
-            <input type="text" class="form-control" placeholder="Postcode" formControlName="origin_shipper_postcode"
-              name="origin_shipper_postcode" readonly>
+            <div class="form-control-static">origin_shipper_postcode</div>
           </div>
           <div class="col-sm-4">
-            <input type="text" class="form-control" placeholder="City" formControlName="origin_shipper_city"
-              name="origin_shipper_city" readonly>
+            <div class="form-control-static">origin_shipper_city</div>
           </div>
         </div>
 
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-4">
-            <input type="text" class="form-control" placeholder="State" formControlName="origin_shipper_state_province"
-              name="origin_shipper_state_province" readonly>
+            <div class="form-control-static">origin_shipper_state_province</div>
           </div>
           <div class="col-sm-4">
-            <input type="text" class="form-control" formControlName="origin_shipper_country"
-              name="origin_shipper_country" readonly>
+            <div class="form-control-static">origin_shipper_country</div>
           </div>
         </div>
 
         <div class="form-group">
           <label class="col-sm-2 control-label">Shipper Contact Name</label>
           <div class="col-sm-4">
-            <input type="text" class="form-control" placeholder="Shipper Name" formControlName="origin_shipper_contact_name"
-              name="origin_shipper_contact_name" readonly>
+            <div class="form-control-static">origin_shipper_contact_name</div>
           </div>
           <label class="col-sm-2 control-label">Shipper Contact</label>
           <div class="col-sm-4">
-            <input type="text" class="form-control" placeholder="Shipper Contact" formControlName="origin_shipper_phone_no"
-              name="origin_shipper_phone_no" readonly>
+            <div class="form-control-static">origin_shipper_phone_no</div>
           </div>
         </div>
 
@@ -180,47 +159,50 @@
         <div class="form-group">
           <label class="col-sm-2 control-label">Receiver Name</label>
           <div class="col-sm-4">
-            <input type="text" class="form-control" placeholder="Receiver Name" formControlName="dest_receiver_name"
-              name="dest_receiver_name" readonly>
+            <div class="form-control-static">dest_receiver_name</div>
           </div>
         </div>
         
         <div class="form-group">
           <label class="col-sm-2 control-label">Address</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" placeholder="Address 1" formControlName="dest_receiver_address1"
-              name="dest_receiver_address1" readonly>
+            <div class="form-control-static">dest_receiver_address1</div>
           </div>
         </div>
         <div class="form-group">
           <div class="col-sm-10 col-sm-offset-2">
-            <input type="text" class="form-control" placeholder="Address 2" formControlName="dest_receiver_address2"
-              name="dest_receiver_address2" readonly>
+            <div class="form-control-static">dest_receiver_address2</div>
           </div>
         </div>
 
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-4">
-            <input type="text" class="form-control" placeholder="Postcode" formControlName="dest_receiver_postcode"
-              name="dest_receiver_postcode" readonly>
+            <div class="form-control-static">dest_receiver_postcode</div>
           </div>
           <div class="col-sm-4">
-            <input type="text" class="form-control" placeholder="City" formControlName="dest_receiver_city"
-              name="dest_receiver_city" readonly>
+            <div class="form-control-static">dest_receiver_city</div>
           </div>
         </div>
 
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-4">
-            <input type="text" class="form-control" placeholder="State" formControlName="dest_receiver_state_province"
-              name="dest_receiver_state_province" readonly>
+            <div class="form-control-static">dest_receiver_state_province</div>
           </div>
           <div class="col-sm-4">
-            <input type="text" class="form-control" formControlName="dest_receiver_country"
-              name="dest_receiver_country" readonly>
+            <div class="form-control-static">dest_receiver_country</div>
           </div>
         </div>
 
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Receiver Contact Name</label>
+          <div class="col-sm-4">
+            <div class="form-control-static">dest_receiver_contact_name</div>
+          </div>
+          <label class="col-sm-2 control-label">Receiver Contact</label>
+          <div class="col-sm-4">
+            <div class="form-control-static">dest_receiver_phone_no</div>
+          </div>
+        </div>
       </form>
   
       <div class="overlay" *ngIf="isloading">
