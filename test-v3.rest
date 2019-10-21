@@ -95,7 +95,7 @@ Content-Type: text/csv
 
 ###
 
-GET {{base}}/api/shipment/list/?shipment_id=4748
+GET {{base}}/api/shipment/list/?shipment_id=4747
 Authorization: Token {{token}}
 
 ###

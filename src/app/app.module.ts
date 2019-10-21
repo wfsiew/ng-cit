@@ -37,6 +37,7 @@ import { DetailDashboardComponent } from './components/dashboard/detail-dashboar
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { CreateShipmentComponent } from './components/shipment/create-shipment/create-shipment.component';
 import { CreateMultipleShipmentComponent } from './components/shipment/create-multiple-shipment/create-multiple-shipment.component';
+import { DetailShipmentComponent } from './components/shipment/detail-shipment/detail-shipment.component';
 import { ListShipmentComponent } from './components/shipment/list-shipment/list-shipment.component';
 import { ListManifestComponent } from './components/manifest/list-manifest/list-manifest.component';
 import { DetailManifestComponent } from './components/manifest/detail-manifest/detail-manifest.component';
@@ -81,6 +82,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     UserProfileComponent,
     CreateShipmentComponent,
     CreateMultipleShipmentComponent,
+    DetailShipmentComponent,
     ListShipmentComponent,
     ListManifestComponent,
     DetailManifestComponent,
