@@ -29,7 +29,9 @@ export class ShipmentService {
   }
 
   getShipment(id) {
-    return this.http.get(`${this.baseUrl}/api/shipmentOrder/${id}`);
+    let prm: HttpParams = new HttpParams()
+      .set('shipment_id', `${id}`);
+    return this.http.get(`${this.baseUrl}/api/shipment/list/`, { params: prm });
   }
 
   uploadShipment(o: FormData) {
