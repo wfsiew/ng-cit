@@ -4,11 +4,14 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { LookupService } from '../../../services/lookup.service';
 import { CompanyService } from '../../../services/company.service';
+import { AuthService } from 'src/app/services/auth.service';
 import _ from 'lodash';
 import { ToastrService } from 'ngx-toastr';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Helper } from '../../../shared/utils/helper';
+import { User } from 'src/app/shared/models/user';
 import { AddressBookModalComponent } from '../../../shared/components/address-book-modal/address-book-modal.component';
+import { AppConstant } from 'src/app/shared/constants/app.constant';
 
 @Component({
   selector: 'app-create-company',
@@ -29,6 +32,8 @@ export class CreateCompanyComponent implements OnInit {
   selectedAddress: any;
   id: string;
   isEdit = false;
+  canEdit = false;
+  user: User;
 
   readonly isEmpty = Helper.isEmpty;
 
@@ -36,6 +41,7 @@ export class CreateCompanyComponent implements OnInit {
     private fb: FormBuilder,
     private lookupService: LookupService,
     private companyService: CompanyService,
+    private authService: AuthService,
     private toastr: ToastrService,
     private modalService: BsModalService,
     private route: ActivatedRoute,
@@ -49,9 +55,8 @@ export class CreateCompanyComponent implements OnInit {
       this.id = params.get('id');
       if (!_.isNull(this.id)) {
         this.isEdit = true;
+        this.loadUser();
       }
-
-      this.load();
     });
   }
 
@@ -89,6 +94,7 @@ export class CreateCompanyComponent implements OnInit {
       company_account_code: o.company_account_code,
       company_pic_full_name: o.company_pic_full_name,
       company_name: o.company_name,
+      display_name: o.display_name,
       company_pic_email: o.company_pic_email,
       company_code: o.company_code,
       company_pic_phone_number: o.company_pic_phone_number,
@@ -105,16 +111,24 @@ export class CreateCompanyComponent implements OnInit {
     });
   }
 
+  loadUser() {
+    this.user = this.authService.loadUser();
+    this.canEdit = this.user.role === AppConstant.ROLE.ADMIN;
+    this.load();
+  }
+
   load() {
-    this.lookupService.listService().subscribe((res: any) => {
-      this.serviceList = res.data;
-    });
-    this.lookupService.listCountryInfo().subscribe((res: any) => {
-      this.countryList = res.response;
-      if (this.isEdit) {
-        this.loadCompanyProfile();
-      }
-    });
+    if (this.canEdit) {
+      this.lookupService.listService().subscribe((res: any) => {
+        this.serviceList = res.data;
+      });
+      this.lookupService.listCountryInfo().subscribe((res: any) => {
+        this.countryList = res.response;
+        if (this.isEdit) {
+          this.loadCompanyProfile();
+        }
+      });
+    }
   }
 
   loadCompanyProfile() {
@@ -228,7 +242,7 @@ export class CreateCompanyComponent implements OnInit {
       company_account_code: f.company_account_code,
       company_code: f.company_code,
       company_name: f.company_name,
-      display_name: f.company_name,
+      display_name: f.display_name,
       parent_company_account_code: null,
       parent_company_id : null,
       is_do: f.is_do,

@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { CompanyService } from '../../../services/company.service';
-import { MessageService } from '../../../services/message.service';
-import { AppConstant } from '../../../shared/constants/app.constant';
+import { CompanyService } from 'src/app/services/company.service';
+import { MessageService } from 'src/app//services/message.service';
+import { AppConstant } from 'src/app/shared/constants/app.constant';
 import _ from 'lodash';
 import { ToastrService } from 'ngx-toastr';
-import { Helper } from '../../../shared/utils/helper';
+import { Helper } from 'src/app/shared/utils/helper';
 
 @Component({
   selector: 'app-list-company',
