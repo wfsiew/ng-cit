@@ -141,14 +141,14 @@
           <div class="col-sm-offset-2 col-sm-2">
             <div class="checkbox">
               <label>
-                <input type="checkbox" formControlName="is_do" name="is_do" [disabled]="!canEdit"> DO Required
+                <input type="checkbox" formControlName="is_do" name="is_do"  [attr.disabled]="canEdit ? null : 1"> DO Required
               </label>
             </div>
           </div>
           <div class="col-sm-2">
             <div class="checkbox">
               <label>
-                <input type="checkbox" formControlName="is_cod" name="is_cod" [disabled]="!canEdit"> COD Enabled
+                <input type="checkbox" formControlName="is_cod" name="is_cod"  [attr.disabled]="canEdit ? null : 1"> COD Enabled
               </label>
             </div>
           </div>
@@ -168,14 +168,14 @@
           <div class="col-sm-1">
             <div class="radio">
               <label>
-                <input type="radio" formControlName="cdefault" name="cdefault" value="0" [disabled]="!canEdit"> A4
+                <input type="radio" formControlName="cdefault" name="cdefault" value="0"  [attr.disabled]="canEdit ? null : 1"> A4
               </label>
             </div>
           </div>
           <div class="col-sm-2">
             <div class="radio">
               <label>
-                <input type="radio" formControlName="cdefault" name="cdefault" value="1" [disabled]="!canEdit"> Shipping Label
+                <input type="radio" formControlName="cdefault" name="cdefault" value="1" [attr.disabled]="canEdit ? null : 1"> Shipping Label
               </label>
             </div>
           </div>

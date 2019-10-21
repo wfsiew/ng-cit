@@ -118,17 +118,15 @@ export class CreateCompanyComponent implements OnInit {
   }
 
   load() {
-    if (this.canEdit) {
-      this.lookupService.listService().subscribe((res: any) => {
-        this.serviceList = res.data;
-      });
-      this.lookupService.listCountryInfo().subscribe((res: any) => {
-        this.countryList = res.response;
-        if (this.isEdit) {
-          this.loadCompanyProfile();
-        }
-      });
-    }
+    this.lookupService.listService().subscribe((res: any) => {
+      this.serviceList = res.data;
+    });
+    this.lookupService.listCountryInfo().subscribe((res: any) => {
+      this.countryList = res.response;
+      if (this.isEdit) {
+        this.loadCompanyProfile();
+      }
+    });
   }
 
   loadCompanyProfile() {

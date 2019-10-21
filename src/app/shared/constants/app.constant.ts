@@ -6,7 +6,9 @@ export class AppConstant {
   public static NETWORK_TIMEOUT = 16000;
 
   public static ROLE = {
-    ADMIN: 'ADMIN'
+    ADMIN: 'ADMIN',
+    SUPERADMIN: 'SUPERADMIN',
+    USER: 'USER'
   }
 
   public static VALIDATE = {
