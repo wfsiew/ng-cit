@@ -45,6 +45,7 @@ export class CreateMultipleShipmentComponent implements OnInit {
       service_type: ['', [Validators.required]],
       currency: ['MYR', [Validators.required]],
       pickup_date: [new Date(), [Validators.required]],
+      shipper_address_id: ['', [Validators.required]],
       file: [null]
     });
   }
@@ -53,7 +54,8 @@ export class CreateMultipleShipmentComponent implements OnInit {
     const o = this.data;
     this.mform.patchValue({
       company_account_code: o.company_account_code,
-      company_name: o.company_name
+      company_name: o.company_name,
+      shipper_address_id: o.address
     });
   }
 
@@ -98,7 +100,7 @@ export class CreateMultipleShipmentComponent implements OnInit {
     formData.append('delivery_service', f.service_type.value);
     formData.append('currency', f.currency.value);
     formData.append('is_do', 'True');
-    formData.append('shipper_address_id', '');
+    formData.append('shipper_address_id', f.address_id.value);
     formData.append('pickup_date', Helper.getDateStr1(f.pickup_date.value));
 
     //this.isloading = true;
