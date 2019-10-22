@@ -72,6 +72,16 @@ export class ListShipmentComponent implements OnInit, OnDestroy {
     });
   }
 
+  onEdit(o) {
+    this.msService.send('list-shipment', {
+      page: this.page,
+      sort: this.sort,
+      dir: this.sort_dir,
+      search: this.search
+    });
+    this.router.navigate(['/cit/shipment/edit', o.id]);
+  }
+
   pageChanged(event: any) {
     this.page = event.page;
     this.load();

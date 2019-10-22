@@ -34,6 +34,10 @@ export class ShipmentService {
     return this.http.get(`${this.baseUrl}/api/shipment/list/`, { params: prm });
   }
 
+  updateShipment(o) {
+    return this.http.put(`${this.baseUrl}/api/shipment/update`, o);
+  }
+
   uploadShipment(o: FormData) {
     return this.http.post(`${this.baseUrl}/file/confirm_upload/`, o, {
       reportProgress: true,

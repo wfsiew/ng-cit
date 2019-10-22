@@ -1,5 +1,5 @@
 <section class="content-header">
-  <h1>Create Shipment</h1>
+  <h1>{{ title }} Shipment</h1>
 </section>
 <section class="content">
   <div class="box">
@@ -422,6 +422,9 @@
         <div class="row">
           <div class="col-sm-2">
             <button type="submit" class="btn btn-primary" [disabled]="mform.invalid">Confirm Shipment</button>
+          </div>
+          <div class="col-sm-2" *ngIf="isEdit">
+            <button type="button" class="btn btn-primary" (click)="onPrintShipment()" [disabled]="isPrintDisabled">Print Shipment</button>
           </div>
         </div>
       </div>

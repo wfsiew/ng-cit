@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { LookupService } from 'src/app/services/lookup.service';
 import { ShipmentService } from 'src/app/services/shipment.service';
@@ -25,29 +25,43 @@ export class CreateShipmentComponent implements OnInit {
   uomList = [];
   mform: FormGroup;
   gform: FormGroup;
-  data: any;
+  data: any = {};
+  datax: any = {};
+  id: string;
   listGood = [];
+  shipmentPackage: any = {};
   bsModalRef: BsModalRef;
   selectedAddressShipper: any;
   selectedAddressReceiver: any;
+  isEdit = false;
+  title = 'Create';
 
   readonly isEmpty = Helper.isEmpty;
 
   constructor(
-    private router: Router,
     private fb: FormBuilder,
     private lookupService: LookupService,
     private shipmentService: ShipmentService,
     private companyService: CompanyService,
     private toastr: ToastrService,
     private modalService: BsModalService,
+    private route: ActivatedRoute,
+    private router: Router,
     private loc: Location
   ) {
     this.createForm();
   }
 
   ngOnInit() {
-    this.load();
+    this.route.paramMap.subscribe(params => {
+      this.id = params.get('id');
+      if (!_.isNull(this.id)) {
+        this.isEdit = true;
+        this.title = 'Edit';
+      }
+
+      this.load();
+    });
   }
 
   createForm() {
@@ -135,10 +149,40 @@ export class CreateShipmentComponent implements OnInit {
   loadCompanyProfile() {
     this.companyService.getCompanyDetails().subscribe((res: any) => {
       this.data = !_.isEmpty(res.data) ? res.data[0] : {};
-      this.setForm();
+      this.loadShipment();
     },
     (error) => {
       this.toastr.error('Load Company Detail Failed', 'Create Shipment');
+    });
+  }
+
+  loadShipment() {
+    this.shipmentService.getShipment(this.id).subscribe((res: any) => {
+      this.datax = !_.isEmpty(res.data) ? res.data[0] : {};
+      if (!Helper.isEmpty(this.datax)) {
+        this.shipmentPackage = this.datax.shipment_package_list[0];
+        this.setForm();
+        this.loadProductList();
+      }
+    },
+    (error) => {
+      this.toastr.error('Load Shipment Detail Failed', 'Create Shipment');
+    });
+  }
+
+  loadProductList() {
+    const ls = this.shipmentPackage.product_list;
+    if (Helper.isEmpty(ls)) {
+      return;
+    }
+
+    _.each(ls, (x) => {
+      this.listGood.push({
+        description: `${x.product_name} (${x.product_code})`,
+        quantity: x.quantity,
+        value: x.value,
+        currency: x.currency
+      });
     });
   }
 
@@ -349,6 +393,7 @@ export class CreateShipmentComponent implements OnInit {
    });
    
     const o = {
+      id: 0,
       customer_reference: f.customer_reference.value,
       origin_address_id: '',
       origin_shipper_address1: f.origin_shipper_address1.value,
@@ -398,20 +443,41 @@ export class CreateShipmentComponent implements OnInit {
       shipment_package_list: lp
     };
     this.isloading = true;
-    this.shipmentService.createShipment(o).subscribe(res => {
-      this.isloading = false;
-      this.toastr.success('New Shipment successfully created', 'Create Shipment');
-    },
-    (error) => {
-      this.isloading = false;
-      if (error.status === 400 && error.error && error.error.message) {
-        this.toastr.error(`Create Shipment Failed: ${error.error.message}`, 'Create Shipment');
-      }
+    if (!this.isEdit) {
+      this.shipmentService.createShipment(o).subscribe(res => {
+        this.isloading = false;
+        this.toastr.success('New Shipment successfully created', 'Create Shipment');
+      },
+      (error) => {
+        this.isloading = false;
+        if (error.status === 400 && error.error && error.error.message) {
+          this.toastr.error(`Create Shipment Failed: ${error.error.message}`, 'Create Shipment');
+        }
+  
+        else {
+          this.toastr.error('Create Shipment Failed', 'Create Shipment');
+        }
+      });
+    }
+    
+    else {
+      o.id = this.data.id;
+      this.shipmentService.updateShipment(o).subscribe(res => {
 
-      else {
-        this.toastr.error('Create Shipment Failed', 'Create Shipment');
-      }
-    });
+      },
+      (error) => {
+        this.isloading = false;
+        this.toastr.error('Update Shipment Failed', 'Update Shipment');
+      });
+    }
+  }
+
+  onPrintShipment() {
+    if (_.isEmpty(this.datax)) {
+      return;
+    }
+
+    this.shipmentService.printLabel(this.datax.consignment_no, AppConstant.PRINT_TYPE.SHIPPING_LABEL);
   }
 
   onBack() {

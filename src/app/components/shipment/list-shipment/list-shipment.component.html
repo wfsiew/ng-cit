@@ -90,7 +90,9 @@
               <td>{{ o.account_code }}</td>
               <td>{{ o.packaging_type }}</td>
               <td>
-                <button type="button" class="btn btn-primary" (click)="onPrintLabel(o)">Print</button>
+                <button type="button" class="btn btn-primary" (click)="onEdit(o)">
+                  <i class="fa fa-edit"></i> Edit
+                </button>
               </td>
             </tr>
           </tbody>
