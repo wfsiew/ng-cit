@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { ShipmentService } from '../../../services/shipment.service';
-import { MessageService } from '../../../services/message.service';
-import { AppConstant } from '../../../shared/constants/app.constant';
+import { ShipmentService } from 'src/app/services/shipment.service';
+import { MessageService } from 'src/app/services/message.service';
+import { AppConstant } from 'src/app/shared/constants/app.constant';
 import _ from 'lodash';
 import { ToastrService } from 'ngx-toastr';
-import { Helper } from '../../../shared/utils/helper';
+import { Helper } from 'src/app/shared/utils/helper';
 
 @Component({
   selector: 'app-list-shipment',
@@ -103,7 +103,7 @@ export class ListShipmentComponent implements OnInit, OnDestroy {
   }
 
   onPrintLabel(o) {
-    this.shipmentService.printLabel(o.consignment_no, 'Shipping_Label').subscribe(res => {
+    this.shipmentService.printLabel(o.consignment_no, AppConstant.PRINT_TYPE.SHIPPING_LABEL).subscribe(res => {
       
     },
     (error) => {

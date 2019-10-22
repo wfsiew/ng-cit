@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { BsModalRef } from 'ngx-bootstrap/modal';
-import { AddressBookService } from '../../../services/address-book.service';
-import { AppConstant } from '../../../shared/constants/app.constant';
+import { AddressBookService } from 'src/app/services/address-book.service';
+import { AppConstant } from 'src/app/shared/constants/app.constant';
 import _ from 'lodash';
 import { ToastrService } from 'ngx-toastr';
-import { Helper } from '../../../shared/utils/helper';
+import { Helper } from 'src/app/shared/utils/helper';
 
 @Component({
   selector: 'app-address-book-modal',

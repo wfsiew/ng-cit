@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpResponse, HttpHeaders } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
-import { environment } from '../../environments/environment';
-import { Helper } from '../shared/utils/helper';
+import { environment } from 'src/environments/environment';
+import { Helper } from 'src/app/shared/utils/helper';
 
 @Injectable({
   providedIn: 'root'

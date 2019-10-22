@@ -11,6 +11,11 @@ export class AppConstant {
     USER: 'USER'
   }
 
+  public static PRINT_TYPE = {
+    NEWCONSIGNMENTNOTE: 'NewConsignmentNote',
+    SHIPPING_LABEL: 'Shipping_Label'
+  }
+
   public static VALIDATE = {
     NUMBER: /^(0|[1-9][0-9]*)$/,
     AMOUNT: /^\d+(\.\d{1,2})?$/,

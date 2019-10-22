@@ -7,7 +7,7 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { timeout } from 'rxjs/operators';
-import { AppConstant } from '../constants/app.constant';
+import { AppConstant } from 'src/app/shared/constants/app.constant';
 
 @Injectable({
   providedIn: 'root'

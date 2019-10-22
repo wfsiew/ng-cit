@@ -5,8 +5,8 @@ import { take, filter, catchError, finalize, timeout, tap } from 'rxjs/operators
 import { Injectable, InjectionToken, Inject } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
-import { AppConstant } from '../constants/app.constant';
+import { AuthService } from 'src/app/services/auth.service';
+import { AppConstant } from 'src/app/shared/constants/app.constant';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {

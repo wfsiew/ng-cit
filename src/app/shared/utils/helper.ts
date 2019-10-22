@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { AppConstant } from '../constants/app.constant';
+import { AppConstant } from 'src/app/shared/constants/app.constant';
 
 export class Helper {
 

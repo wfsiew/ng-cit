@@ -1,12 +1,12 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { LookupService } from '../../services/lookup.service';
-import { AuthService } from '../../services/auth.service';
+import { LookupService } from 'src/app/services/lookup.service';
+import { AuthService } from 'src/app/services/auth.service';
 import _ from 'lodash';
 import { ToastrService } from 'ngx-toastr';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { Helper } from '../../shared/utils/helper';
-import { AddressBookModalComponent } from '../../shared/components/address-book-modal/address-book-modal.component';
+import { Helper } from 'src/app/shared/utils/helper';
+import { AddressBookModalComponent } from 'src/app/shared/components/address-book-modal/address-book-modal.component';
 
 @Component({
   selector: 'app-user-profile',

@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { CompanyService } from '../../../services/company.service';
-import { UserService } from '../../../services/user.service';
+import { CompanyService } from 'src/app/services/company.service';
+import { UserService } from 'src/app/services/user.service';
 import { Subject } from 'rxjs';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 
-import { AppConstant } from '../../../shared/constants/app.constant';
+import { AppConstant } from 'src/app/shared/constants/app.constant';
 import _ from 'lodash';
 import { ToastrService } from 'ngx-toastr';
-import { Helper } from '../../../shared/utils/helper';
+import { Helper } from 'src/app/shared/utils/helper';
 
 @Component({
   selector: 'app-create-user-modal',

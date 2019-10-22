@@ -1,7 +1,7 @@
 import { HttpHeaders } from '@angular/common/http';
 import { HttpResponse } from '@angular/common/http';
-import { AppConstant } from '../constants/app.constant';
-import { ResponseWrapper } from '../models/response-wrapper';
+import { AppConstant } from 'src/app/shared/constants/app.constant';
+import { ResponseWrapper } from 'src/app/shared/models/response-wrapper';
 
 export class ResUtil {
 

@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Location } from '@angular/common';
-import { LookupService } from '../../../services/lookup.service';
-import { ShipmentService } from '../../../services/shipment.service';
-import { CompanyService } from '../../../services/company.service';
-import { AppConstant } from '../../../shared/constants/app.constant';
+import { LookupService } from 'src/app/services/lookup.service';
+import { ShipmentService } from 'src/app/services/shipment.service';
+import { CompanyService } from 'src/app/services/company.service';
+import { AppConstant } from 'src/app/shared/constants/app.constant';
 import _ from 'lodash';
 import { ToastrService } from 'ngx-toastr';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { Helper } from '../../../shared/utils/helper';
-import { AddressBookModalComponent } from '../../../shared/components/address-book-modal/address-book-modal.component';
+import { Helper } from 'src/app/shared/utils/helper';
+import { AddressBookModalComponent } from 'src/app/shared/components/address-book-modal/address-book-modal.component';
 
 @Component({
   selector: 'app-create-shipment',
@@ -33,6 +34,7 @@ export class CreateShipmentComponent implements OnInit {
   readonly isEmpty = Helper.isEmpty;
 
   constructor(
+    private router: Router,
     private fb: FormBuilder,
     private lookupService: LookupService,
     private shipmentService: ShipmentService,
@@ -136,7 +138,7 @@ export class CreateShipmentComponent implements OnInit {
       this.setForm();
     },
     (error) => {
-      this.toastr.error('Load Company Detail Failed', 'Company Detail');
+      this.toastr.error('Load Company Detail Failed', 'Create Shipment');
     });
   }
 
@@ -258,6 +260,8 @@ export class CreateShipmentComponent implements OnInit {
   }
 
   onSubmit() {
+    // this.router.navigate(['/cit/shipment/detail', 4747]);
+    // return;
     /*
 {
 	    "customer_reference": "MH01",

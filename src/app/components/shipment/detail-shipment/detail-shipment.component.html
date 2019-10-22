@@ -13,11 +13,11 @@
         <div class="form-group">
           <label class="col-sm-2 control-label">Company Account</label>
           <div class="col-sm-4">
-            <div class="form-control-static">company_account_code</div>
+            <div class="form-control-static">{{ data.company_account_code }}</div>
           </div>
           <label class="col-sm-2 control-label">Company Name</label>
           <div class="col-sm-4">
-            <div class="form-control-static">company_name</div>
+            <div class="form-control-static">{{ data.company_name }}</div>
           </div>
         </div>
 
@@ -28,28 +28,25 @@
         <div class="form-group">
           <label class="col-sm-2 control-label">*Delivery Service</label>
           <div class="col-sm-4">
-            <div class="form-control-static">service_type</div>
+            <div class="form-control-static">{{ datax.service_type }}</div>
           </div>
           <div class="col-sm-3">
             <label class="control-label">Requested Pickup Date</label><br />
-            <i>*This will be the pickup date</i>
           </div>
           
           <div class="col-sm-3">
-            <div class="form-control-static">pickup_date</div>
+            <div class="form-control-static">{{ datax.pickup_date }}</div>
           </div>
         </div>
 
         <div class="form-group">
           <label class="col-sm-2 control-label">*Order Reference</label>
           <div class="col-sm-4">
-            <div class="form-control-static">customer_reference</div>
+            <div class="form-control-static">{{ datax.customer_reference }}</div>
           </div>
           <div class="col-sm-6">
-            <div class="checkbox">
-              <label>
-                <i class="fa fa-check"></i> Additional Insurance Required
-              </label>
+            <div>
+              <i class="fa fa-check"></i> Additional Insurance Required
             </div>
           </div>
         </div>
@@ -57,21 +54,21 @@
         <div class="form-group">
           <label class="col-sm-2 control-label">*Packaging Type</label>
           <div class="col-sm-4">
-            <div class="form-control-static">uom</div>
+            <div class="form-control-static">{{ shipmentPackage.uom }}</div>
           </div>
         </div>
 
         <div class="form-group">
           <label class="col-sm-2 control-label">*Total Package Quantity</label>
           <div class="col-sm-4">
-            <div class="form-control-static">total_package_no</div>
+            <div class="form-control-static">{{ datax.total_package_no }}</div>
           </div>
         </div>
 
         <div class="form-group">
           <label class="col-sm-2 control-label">*Total Weight (KG)</label>
           <div class="col-sm-4">
-            <div class="form-control-static">total_weight</div>
+            <div class="form-control-static">{{ datax.chargeable_weight }}</div>
           </div>
         </div>
 
@@ -109,48 +106,48 @@
         <div class="form-group">
           <label class="col-sm-2 control-label">Shipper Name</label>
           <div class="col-sm-4">
-            <div class="form-control-static">origin_shipper_name</div>
+            <div class="form-control-static">{{ datax.origin_shipper_name }}</div>
           </div>
         </div>
 
         <div class="form-group">
           <label class="col-sm-2 control-label">Address</label>
           <div class="col-sm-10">
-            <div class="form-control-static">origin_shipper_address1</div>
+            <div class="form-control-static">{{ datax.origin_shipper_address1 }}</div>
           </div>
         </div>
         <div class="form-group">
           <div class="col-sm-10 col-sm-offset-2">
-            <div class="form-control-static">origin_shipper_address2</div>
+            <div class="form-control-static">{{ datax.origin_shipper_address2 }}</div>
           </div>
         </div>
 
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-4">
-            <div class="form-control-static">origin_shipper_postcode</div>
+            <div class="form-control-static">{{ datax.origin_shipper_postcode }}</div>
           </div>
           <div class="col-sm-4">
-            <div class="form-control-static">origin_shipper_city</div>
+            <div class="form-control-static">{{ datax.origin_shipper_city }}</div>
           </div>
         </div>
 
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-4">
-            <div class="form-control-static">origin_shipper_state_province</div>
+            <div class="form-control-static">{{ datax.origin_shipper_state_province }}</div>
           </div>
           <div class="col-sm-4">
-            <div class="form-control-static">origin_shipper_country</div>
+            <div class="form-control-static">{{ datax.origin_shipper_country }}</div>
           </div>
         </div>
 
         <div class="form-group">
           <label class="col-sm-2 control-label">Shipper Contact Name</label>
           <div class="col-sm-4">
-            <div class="form-control-static">origin_shipper_contact_name</div>
+            <div class="form-control-static">{{ datax.origin_shipper_contact_name }}</div>
           </div>
           <label class="col-sm-2 control-label">Shipper Contact</label>
           <div class="col-sm-4">
-            <div class="form-control-static">origin_shipper_phone_no</div>
+            <div class="form-control-static">{{ datax.origin_shipper_phone_no }}</div>
           </div>
         </div>
 
@@ -159,48 +156,48 @@
         <div class="form-group">
           <label class="col-sm-2 control-label">Receiver Name</label>
           <div class="col-sm-4">
-            <div class="form-control-static">dest_receiver_name</div>
+            <div class="form-control-static">{{ datax.dest_receiver_name }}</div>
           </div>
         </div>
         
         <div class="form-group">
           <label class="col-sm-2 control-label">Address</label>
           <div class="col-sm-10">
-            <div class="form-control-static">dest_receiver_address1</div>
+            <div class="form-control-static">{{ datax.dest_receiver_address1 }}</div>
           </div>
         </div>
         <div class="form-group">
           <div class="col-sm-10 col-sm-offset-2">
-            <div class="form-control-static">dest_receiver_address2</div>
+            <div class="form-control-static">{{ datax.dest_receiver_address2 }}</div>
           </div>
         </div>
 
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-4">
-            <div class="form-control-static">dest_receiver_postcode</div>
+            <div class="form-control-static">{{ datax.dest_receiver_postcode }}</div>
           </div>
           <div class="col-sm-4">
-            <div class="form-control-static">dest_receiver_city</div>
+            <div class="form-control-static">{{ datax.dest_receiver_city }}</div>
           </div>
         </div>
 
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-4">
-            <div class="form-control-static">dest_receiver_state_province</div>
+            <div class="form-control-static">{{ datax.dest_receiver_state_province }}</div>
           </div>
           <div class="col-sm-4">
-            <div class="form-control-static">dest_receiver_country</div>
+            <div class="form-control-static">{{ datax.dest_receiver_country }}</div>
           </div>
         </div>
 
         <div class="form-group">
           <label class="col-sm-2 control-label">Receiver Contact Name</label>
           <div class="col-sm-4">
-            <div class="form-control-static">dest_receiver_contact_name</div>
+            <div class="form-control-static">{{ datax.dest_receiver_contact_name }}</div>
           </div>
           <label class="col-sm-2 control-label">Receiver Contact</label>
           <div class="col-sm-4">
-            <div class="form-control-static">dest_receiver_phone_no</div>
+            <div class="form-control-static">{{ datax.dest_receiver_phone_no }}</div>
           </div>
         </div>
       </form>
@@ -212,7 +209,7 @@
       <div class="box-footer">
         <div class="row">
           <div class="col-sm-2">
-            <button type="button" class="btn btn-primary">Print Shipment</button>
+            <button type="button" class="btn btn-primary" (click)="onPrintShipment()" [disabled]="isPrintDisabled">Print Shipment</button>
           </div>
         </div>
       </div>

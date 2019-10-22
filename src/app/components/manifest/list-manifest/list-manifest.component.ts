@@ -1,13 +1,13 @@
 import { Component, OnInit, OnDestroy, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription, Observable } from 'rxjs';
-import { ManifestService } from '../../../services/manifest.service';
-import { CompanyService } from '../../../services/company.service';
-import { MessageService } from '../../../services/message.service';
-import { AppConstant } from '../../../shared/constants/app.constant';
+import { ManifestService } from 'src/app/services/manifest.service';
+import { CompanyService } from 'src/app/services/company.service';
+import { MessageService } from 'src/app/services/message.service';
+import { AppConstant } from 'src/app/shared/constants/app.constant';
 import _ from 'lodash';
 import { ToastrService } from 'ngx-toastr';
-import { Helper } from '../../../shared/utils/helper';
+import { Helper } from 'src/app/shared/utils/helper';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({

@@ -1,4 +1,4 @@
-@base = http://139.59.221.42:8000
+@base = http://139.59.221.42:8001
 #@base = http://127.0.0.1:8000
 ###
 
@@ -92,6 +92,16 @@ Content-Type: text/csv
 
 < C:\Users\Glenvio\Downloads\UploadOrderMalaysia.csv
 ------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+###
+
+GET {{base}}/api/reports/labels/?consignment_no=MYC0100024858&type=NewConsignmentNote
+Authorization: Token {{token}}
+
+###
+
+GET {{base}}/api/reports/labels/?consignment_no=MYC0100024858&type=Shipping_Label
+Authorization: Token {{token}}
 
 ###
 
