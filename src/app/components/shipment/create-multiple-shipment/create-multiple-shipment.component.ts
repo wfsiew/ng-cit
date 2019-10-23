@@ -7,7 +7,9 @@ import { CompanyService } from 'src/app/services/company.service';
 import { AppConstant } from 'src/app/shared/constants/app.constant';
 import _ from 'lodash';
 import { ToastrService } from 'ngx-toastr';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Helper } from 'src/app/shared/utils/helper';
+import { AddressBookModalComponent } from 'src/app/shared/components/address-book-modal/address-book-modal.component';
 
 @Component({
   selector: 'app-create-multiple-shipment',
@@ -21,6 +23,8 @@ export class CreateMultipleShipmentComponent implements OnInit {
   countryList = [];
   mform: FormGroup;
   data: any;
+  bsModalRef: BsModalRef;
+  selectedAddressShipper: any;
   uploadResponse: any = { status: '', message: '', filePath: '' };
 
   constructor(
@@ -29,6 +33,7 @@ export class CreateMultipleShipmentComponent implements OnInit {
     private shipmentService: ShipmentService,
     private companyService: CompanyService,
     private toastr: ToastrService,
+    private modalService: BsModalService,
     private loc: Location
   ) {
     this.createForm();
@@ -46,6 +51,7 @@ export class CreateMultipleShipmentComponent implements OnInit {
       currency: ['MYR', [Validators.required]],
       pickup_date: [new Date(), [Validators.required]],
       shipper_address_id: ['', [Validators.required]],
+      origin_shipper_name: ['', [Validators.required]],
       file: [null]
     });
   }
@@ -54,8 +60,7 @@ export class CreateMultipleShipmentComponent implements OnInit {
     const o = this.data;
     this.mform.patchValue({
       company_account_code: o.company_account_code,
-      company_name: o.company_name,
-      shipper_address_id: o.address
+      company_name: o.company_name
     });
   }
 
@@ -76,6 +81,32 @@ export class CreateMultipleShipmentComponent implements OnInit {
     },
     (error) => {
       this.toastr.error('Load Company Detail Failed', 'Company Detail');
+    });
+  }
+
+  onGetAddressShipper() {
+    const state = {
+      title: 'Address Book'
+    };
+    this.bsModalRef = this.modalService.show(AddressBookModalComponent, { initialState: state });
+    this.bsModalRef.content.closeBtnName = 'Close';
+    this.bsModalRef.content.onClose.subscribe(res => {
+      if (res.result === true) {
+        this.selectedAddressShipper = res.data;
+        this.setAddressShipper(res.data);
+      }
+
+      else {
+        this.selectedAddressShipper = {};
+      }
+    });
+    return false;
+  }
+
+  setAddressShipper(o) {
+    this.mform.patchValue({
+      shipper_address_id: o.id,
+      origin_shipper_name: o.full_name
     });
   }
 
@@ -100,7 +131,7 @@ export class CreateMultipleShipmentComponent implements OnInit {
     formData.append('delivery_service', f.service_type.value);
     formData.append('currency', f.currency.value);
     formData.append('is_do', 'True');
-    formData.append('shipper_address_id', f.address_id.value);
+    formData.append('shipper_address_id', f.shipper_address_id.value);
     formData.append('pickup_date', Helper.getDateStr1(f.pickup_date.value));
 
     //this.isloading = true;

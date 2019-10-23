@@ -79,6 +79,7 @@ export class CreateShipmentComponent implements OnInit {
       total_package_no: ['', [Validators.required, Validators.pattern(AppConstant.VALIDATE.NUMBER)]],
       total_weight: ['', [Validators.required, Validators.pattern(AppConstant.VALIDATE.AMOUNT)]],
 
+      origin_address_id: ['', [Validators.required]],
       origin_shipper_name: ['', [Validators.required]],
       origin_shipper_address1: ['', [Validators.required]],
       origin_shipper_address2: [''],
@@ -89,6 +90,7 @@ export class CreateShipmentComponent implements OnInit {
       origin_shipper_contact_name: ['', [Validators.required]],
       origin_shipper_phone_no: ['', [Validators.required]],
 
+      dest_address_id: ['', [Validators.required]],
       dest_receiver_name: ['', [Validators.required]],
       dest_receiver_address1: ['', [Validators.required]],
       dest_receiver_address2: [''],
@@ -233,6 +235,7 @@ export class CreateShipmentComponent implements OnInit {
       s = 'MY';
     }
     this.mform.patchValue({
+      origin_address_id: o.id,
       origin_shipper_name: o.full_name,
       origin_shipper_address1: o.address1,
       origin_shipper_address2: o.address2,
@@ -252,6 +255,7 @@ export class CreateShipmentComponent implements OnInit {
       s = 'MY';
     }
     this.mform.patchValue({
+      dest_address_id: o.id,
       dest_receiver_name: o.full_name,
       dest_receiver_address1: o.address1,
       dest_receiver_address2: o.address2,
@@ -395,7 +399,7 @@ export class CreateShipmentComponent implements OnInit {
     const o = {
       id: 0,
       customer_reference: f.customer_reference.value,
-      origin_address_id: '',
+      origin_address_id: f.origin_address_id.value,
       origin_shipper_address1: f.origin_shipper_address1.value,
       origin_shipper_address2: f.origin_shipper_address2.value,
       origin_shipper_address3: '',
@@ -410,7 +414,7 @@ export class CreateShipmentComponent implements OnInit {
       origin_shipper_mobile_no: '-',
       origin_shipper_email: '',
 
-      dest_address_id: '',
+      dest_address_id: f.dest_address_id.value,
       dest_receiver_address1: f.dest_receiver_address1.value,
       dest_receiver_address2: f.dest_receiver_address2.value,
       dest_receiver_address3: '',
