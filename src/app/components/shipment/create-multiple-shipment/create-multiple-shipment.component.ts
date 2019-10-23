@@ -49,7 +49,7 @@ export class CreateMultipleShipmentComponent implements OnInit {
       company_name: new FormControl({ value: '', disabled: true }),
       service_type: ['', [Validators.required]],
       currency: ['MYR', [Validators.required]],
-      pickup_date: [new Date(), [Validators.required]],
+      pickup_date: [new Date()],
       shipper_address_id: ['', [Validators.required]],
       origin_shipper_name: ['', [Validators.required]],
       file: [null]
@@ -132,7 +132,10 @@ export class CreateMultipleShipmentComponent implements OnInit {
     formData.append('currency', f.currency.value);
     formData.append('is_do', 'True');
     formData.append('shipper_address_id', f.shipper_address_id.value);
-    formData.append('pickup_date', Helper.getDateStr1(f.pickup_date.value));
+
+    if (!Helper.isEmpty(f.pickup_date.value) && !_.isNull(f.pickup_date.value) && !_.isUndefined(f.pickup_date.value)) {
+      formData.append('pickup_date', Helper.getDateStr1(f.pickup_date.value));
+    }
 
     //this.isloading = true;
     this.shipmentService.uploadShipment(formData).subscribe((res: any) => {

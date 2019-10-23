@@ -70,7 +70,7 @@ export class CreateShipmentComponent implements OnInit {
       company_name: new FormControl({ value: '', disabled: true }),
       service_type: ['', [Validators.required]],
       uom: ['', [Validators.required]],
-      pickup_date: [new Date(), [Validators.required]],
+      pickup_date: [new Date()],
       customer_reference: ['', [Validators.required]],
       is_insurance_req: [false],
       is_do: [false],
@@ -442,12 +442,16 @@ export class CreateShipmentComponent implements OnInit {
       chargeable_weight_uom: 'KG',
       order_amount_currency: 'MYR',
       company_id: this.data.company_id,
-      pickup_date: Helper.getDateStr(f.pickup_date.value),
 
       // chargeable_weight: f.total_weight.value,
       // chargeable_weight_uom: 'KG',
       shipment_package_list: lp
     };
+
+    if (!Helper.isEmpty(f.pickup_date.value) && !_.isNull(f.pickup_date.value) && !_.isUndefined(f.pickup_date.value)) {
+      o['pickup_date'] = Helper.getDateStr(f.pickup_date.value);
+    }
+
     this.isloading = true;
     if (!this.isEdit) {
       this.shipmentService.createShipment(o).subscribe(res => {
