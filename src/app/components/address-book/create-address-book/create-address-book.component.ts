@@ -66,7 +66,6 @@ export class CreateAddressBookComponent implements OnInit {
 
   createForm() {
     this.mform = this.fb.group({
-      type: ['Sender', [Validators.required]],
       name: ['', [Validators.required]],
       phone: ['', [Validators.required]],
       addr1: ['', [Validators.required]],
@@ -83,7 +82,6 @@ export class CreateAddressBookComponent implements OnInit {
   setForm() {
     const o = this.data;
     this.mform.patchValue({
-      type: o.type,
       name: o.full_name,
       phone: o.phone_number,
       addr1: o.address1,
@@ -128,7 +126,7 @@ export class CreateAddressBookComponent implements OnInit {
     const f = this.mform.value;
     const o = {
       id: 0,
-      type: f.type,
+      type: '',
       country: f.country,
       address1: f.addr1,
       address2: f.addr2,
@@ -147,7 +145,6 @@ export class CreateAddressBookComponent implements OnInit {
         this.isloading = false;
         this.toastr.success('New Address Book successfully created', 'Create Address Book');
         this.mform.patchValue({
-          type: 'Sender',
           name: '',
           phone: '',
           addr1: '',
