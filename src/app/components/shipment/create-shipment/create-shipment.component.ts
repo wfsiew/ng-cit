@@ -70,7 +70,7 @@ export class CreateShipmentComponent implements OnInit {
       company_name: new FormControl({ value: '', disabled: true }),
       service_type: ['', [Validators.required]],
       uom: ['', [Validators.required]],
-      pickup_date: [new Date()],
+      pickup_date: [null],
       customer_reference: ['', [Validators.required]],
       is_insurance_req: [false],
       is_do: [false],
@@ -151,6 +151,7 @@ export class CreateShipmentComponent implements OnInit {
   loadCompanyProfile() {
     this.companyService.getCompanyDetails().subscribe((res: any) => {
       this.data = !_.isEmpty(res.data) ? res.data[0] : {};
+      this.setForm();
       this.loadShipment();
     },
     (error) => {
@@ -159,11 +160,14 @@ export class CreateShipmentComponent implements OnInit {
   }
 
   loadShipment() {
+    if (_.isNull(this.id) || _.isUndefined(this.id)) {
+      return;
+    }
+
     this.shipmentService.getShipment(this.id).subscribe((res: any) => {
       this.datax = !_.isEmpty(res.data) ? res.data[0] : {};
       if (!Helper.isEmpty(this.datax)) {
         this.shipmentPackage = this.datax.shipment_package_list[0];
-        this.setForm();
         this.loadProductList();
       }
     },
