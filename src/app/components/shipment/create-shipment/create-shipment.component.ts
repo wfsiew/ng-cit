@@ -87,7 +87,7 @@ export class CreateShipmentComponent implements OnInit {
       origin_shipper_city: ['', [Validators.required]],
       origin_shipper_state_province: ['', [Validators.required]],
       origin_shipper_country: ['MY', [Validators.required]],
-      origin_shipper_contact_name: ['', [Validators.required]],
+      origin_shipper_contact_name: [''],
       origin_shipper_phone_no: ['', [Validators.required]],
 
       dest_address_id: ['', [Validators.required]],
@@ -98,7 +98,7 @@ export class CreateShipmentComponent implements OnInit {
       dest_receiver_city: ['', [Validators.required]],
       dest_receiver_state_province: ['', [Validators.required]],
       dest_receiver_country: ['MY', [Validators.required]],
-      dest_receiver_contact_name: ['', [Validators.required]],
+      dest_receiver_contact_name: [''],
       dest_receiver_phone_no: ['', [Validators.required]]
     });
 
@@ -242,7 +242,8 @@ export class CreateShipmentComponent implements OnInit {
       origin_shipper_postcode: o.postcode,
       origin_shipper_city: o.city,
       origin_shipper_state_province: o.state_province,
-      origin_shipper_country: s
+      origin_shipper_country: s,
+      origin_shipper_phone_no: o.phone_number
     });
   }
 
@@ -262,7 +263,8 @@ export class CreateShipmentComponent implements OnInit {
       dest_receiver_postcode: o.postcode,
       dest_receiver_city: o.city,
       dest_receiver_state_province: o.state_province,
-      dest_receiver_country: s
+      dest_receiver_country: s,
+      dest_receiver_phone_no: o.phone_number
     });
   }
 
