@@ -431,7 +431,7 @@ export class CreateShipmentComponent implements OnInit {
 
       cod: f.is_cod.value,
       cod_value: f.cod_value.value,
-      carton_box_code: 'XL',
+      carton_box_code: f.uom.value,
       total_package_no: f.total_package_no.value,
       service_type: f.service_type.value,
       order_amount : orderamt,
