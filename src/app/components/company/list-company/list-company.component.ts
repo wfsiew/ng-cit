@@ -20,8 +20,8 @@ export class ListCompanyComponent implements OnInit, OnDestroy {
   itemsCount = 0;
   page = 1;
   search = '';
-  sort = '';
-  sort_dir = '';
+  sort = 'company_account_code';
+  sort_dir = 'desc';
   subs: Subscription;
 
   readonly isEmpty = Helper.isEmpty;
@@ -54,9 +54,9 @@ export class ListCompanyComponent implements OnInit, OnDestroy {
 
   load() {
     this.isloading = true;
-    this.companyService.listCompany().subscribe((res: any) => {
+    this.companyService.listCompany(this.page, AppConstant.PAGE_SIZE, this.sort, this.sort_dir).subscribe((res: any) => {
       this.list = res.status ? res.data : [];
-      //this.itemsCount = res.status ? res.recordsTotal : 0;
+      this.itemsCount = res.status ? res.recordsTotal : 0;
       this.isloading = false;
     },
     (error) => {

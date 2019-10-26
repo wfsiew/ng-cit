@@ -19,6 +19,10 @@ export class MainDashboardComponent implements OnInit, OnDestroy {
 
   isloading = false;
   list = [];
+  itemsCount = 0;
+  page = 1;
+  sort = 'company_account_code';
+  sort_dir = 'desc';
   data = {
     new: 0,
     pending: 0,
@@ -74,8 +78,7 @@ export class MainDashboardComponent implements OnInit, OnDestroy {
   }
 
   loadCompany() {
-    let isAdmin = this.role === AppConstant.ROLE.ADMIN;
-    this.companyService.listCompany(isAdmin).subscribe((res: any) => {
+    this.companyService.listCompany(this.page, AppConstant.PAGE_SIZE, this.sort, this.sort_dir).subscribe((res: any) => {
       this.list = res.status ? res.data : [];
     },
     (error) => {

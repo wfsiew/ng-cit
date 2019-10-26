@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpResponse, HttpHeaders } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { Helper } from 'src/app/shared/utils/helper';
 
 @Injectable({
   providedIn: 'root'
@@ -16,13 +17,23 @@ export class CompanyService {
     return this.http.post(`${this.baseUrl}/api/company/create`, o);
   }
 
-  listCompany(admin: boolean = false) {
+  listCompany__(admin: boolean = false) {
     if (admin === true) {
       let prm = new HttpParams().set('admin', '1');
       return this.http.get(`${this.baseUrl}/api/company/list`, { params: prm });
     }
     
     return this.http.get(`${this.baseUrl}/api/company/list`);
+  }
+
+  listCompany(page, limit, sort, dir) {
+    let i = Helper.getStart(page, limit);
+    let prm: HttpParams = new HttpParams()
+      .set('start', `${i}`)
+      .set('length', limit)
+      .set('order', sort)
+      .set('dir', dir);
+    return this.http.get(`${this.baseUrl}/api/company/list`, { params: prm });
   }
 
   getCompany(id) {
