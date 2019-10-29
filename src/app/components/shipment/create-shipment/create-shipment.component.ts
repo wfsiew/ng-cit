@@ -5,6 +5,7 @@ import { Location } from '@angular/common';
 import { LookupService } from 'src/app/services/lookup.service';
 import { ShipmentService } from 'src/app/services/shipment.service';
 import { CompanyService } from 'src/app/services/company.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { AppConstant } from 'src/app/shared/constants/app.constant';
 import _ from 'lodash';
 import { ToastrService } from 'ngx-toastr';
@@ -43,6 +44,7 @@ export class CreateShipmentComponent implements OnInit {
     private lookupService: LookupService,
     private shipmentService: ShipmentService,
     private companyService: CompanyService,
+    private authService: AuthService,
     private toastr: ToastrService,
     private modalService: BsModalService,
     private route: ActivatedRoute,
@@ -138,7 +140,7 @@ export class CreateShipmentComponent implements OnInit {
   load() {
     this.lookupService.listCountryInfo().subscribe((res: any) => {
       this.countryList = res.response;
-      this.loadCompanyProfile();
+      this.loadUserDetails();
     });
     this.lookupService.listService().subscribe((res: any) => {
       this.serviceList = res.data;
@@ -148,8 +150,19 @@ export class CreateShipmentComponent implements OnInit {
     });
   }
 
-  loadCompanyProfile() {
-    this.companyService.getCompanyDetails().subscribe((res: any) => {
+  loadUserDetails() {
+    this.authService.getUserDetails().subscribe((res: any) => {
+      let user = !_.isEmpty(res.data) ? res.data[0] : {};
+      let company_id = user.company_id;
+      this.loadCompanyProfile(company_id);
+    },
+    (error) => {
+      this.toastr.error('Load User Details Failed', 'Create Shipment');
+    });
+  }
+
+  loadCompanyProfile(id) {
+    this.companyService.getCompany(id).subscribe((res: any) => {
       this.data = !_.isEmpty(res.data) ? res.data[0] : {};
       this.setForm();
       this.loadShipment();

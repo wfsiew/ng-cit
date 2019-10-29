@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { DashboardService } from '../../../services/dashboard.service';
-import { CompanyService } from '../../../services/company.service';
-import { AuthService } from '../../../services/auth.service';
-import { MessageService } from '../../../services/message.service';
-import { AppConstant } from '../../../shared/constants/app.constant';
+import { DashboardService } from 'src/app/services/dashboard.service';
+import { CompanyService } from 'src/app/services/company.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { MessageService } from 'src/app/services/message.service';
+import { AppConstant } from 'src/app/shared/constants/app.constant';
 import _ from 'lodash';
 import { ToastrService } from 'ngx-toastr';
 import { Helper } from '../../../shared/utils/helper';
@@ -74,6 +74,9 @@ export class MainDashboardComponent implements OnInit, OnDestroy {
       this.company_id = this.user.company_id;
       this.loadDashboard();
       this.loadCompany();
+    },
+    (error) => {
+      this.toastr.error('Load User Details Failed');
     });
   }
 

@@ -55,8 +55,9 @@ export class CreateCompanyComponent implements OnInit {
       this.id = params.get('id');
       if (!_.isNull(this.id)) {
         this.isEdit = true;
-        this.loadUser();
       }
+
+      this.loadUser();
     });
   }
 
