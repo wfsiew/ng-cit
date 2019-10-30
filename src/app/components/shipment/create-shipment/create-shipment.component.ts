@@ -81,7 +81,7 @@ export class CreateShipmentComponent implements OnInit {
       total_package_no: ['', [Validators.required, Validators.pattern(AppConstant.VALIDATE.NUMBER)]],
       total_weight: ['', [Validators.required, Validators.pattern(AppConstant.VALIDATE.AMOUNT)]],
 
-      origin_address_id: ['', [Validators.required]],
+      origin_address_id: [''],
       origin_shipper_name: ['', [Validators.required]],
       origin_shipper_address1: ['', [Validators.required]],
       origin_shipper_address2: [''],
@@ -92,7 +92,7 @@ export class CreateShipmentComponent implements OnInit {
       origin_shipper_contact_name: [''],
       origin_shipper_phone_no: ['', [Validators.required]],
 
-      dest_address_id: ['', [Validators.required]],
+      dest_address_id: [''],
       dest_receiver_name: ['', [Validators.required]],
       dest_receiver_address1: ['', [Validators.required]],
       dest_receiver_address2: [''],
