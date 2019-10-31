@@ -157,9 +157,14 @@
         <div class="form-group">
           <label class="col-sm-2 control-label">Parent Company</label>
           <div class="col-sm-4">
-            <input type="text" class="form-control" placeholder="Parent Company"
-              formControlName="parent_company_account_code" name="parent_company_account_code" [readonly]="!canEdit">
-            <span>Freight Mark Group of Company</span>
+            <ng-select 
+              [items]="companyList" 
+              bindLabel="company_name" 
+              bindValue="account_code"
+              placeholder="Please select"
+              (change)="onParentCompanyChange()" 
+              formControlName="parent_company_account_code"
+              name="parent_company_account_code"></ng-select>
           </div>
         </div>
 

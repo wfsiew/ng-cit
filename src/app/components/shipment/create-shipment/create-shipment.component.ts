@@ -112,6 +112,40 @@ export class CreateShipmentComponent implements OnInit {
     });
   }
 
+  setFormEdit() {
+    const o = this.datax;
+    this.mform.patchValue({
+      service_type: o.service_type,
+      uom: o.packaging_type,
+      customer_reference: o.customer_reference,
+      is_insurance_req: o.is_insurance,
+      is_cod: o.cod,
+      cod_value: o.cod_value,
+      total_package_no: o.total_package_no,
+      total_weight: o.chargeable_weigth,
+
+      origin_address_id: o.origin_address_id,
+      origin_shipper_name: o.origin_shipper_name,
+      origin_shipper_address1: o.origin_shipper_address1,
+      origin_shipper_address2: o.origin_shipper_address2,
+      origin_shipper_postcode: o.origin_shipper_postcode,
+      origin_shipper_city: o.origin_shipper_city,
+      origin_shipper_state_province: o.origin_shipper_state_province,
+      origin_shipper_country: o.origin_shipper_country,
+      origin_shipper_phone_no: o.origin_shipper_phone_no,
+
+      dest_address_id: o.dest_address_id,
+      dest_receiver_name: o.dest_receiver_name,
+      dest_receiver_address1: o.dest_receiver_address1,
+      dest_receiver_address2: o.dest_receiver_address2,
+      dest_receiver_postcode: o.dest_receiver_postcode,
+      dest_receiver_city: o.dest_receiver_city,
+      dest_receiver_state_province: o.dest_receiver_state_province,
+      dest_receiver_country: o.dest_receiver_country,
+      dest_receiver_phone_no: o.dest_receiver_phone_no
+    });
+  }
+
   setForm() {
     const o = this.data;
     let s = o.company_country;
@@ -179,8 +213,9 @@ export class CreateShipmentComponent implements OnInit {
 
     this.shipmentService.getShipment(this.id).subscribe((res: any) => {
       this.datax = !_.isEmpty(res.data) ? res.data[0] : {};
+      this.setFormEdit();
       if (!Helper.isEmpty(this.datax)) {
-        this.shipmentPackage = this.datax.shipment_package_list[0];
+        this.shipmentPackage = this.datax.shipment_package_list;
         this.loadProductList();
       }
     },
@@ -190,14 +225,14 @@ export class CreateShipmentComponent implements OnInit {
   }
 
   loadProductList() {
-    const ls = this.shipmentPackage.product_list;
+    const ls = this.shipmentPackage;
     if (Helper.isEmpty(ls)) {
       return;
     }
 
     _.each(ls, (x) => {
       this.listGood.push({
-        description: `${x.product_name} (${x.product_code})`,
+        description: `${x.description}`,
         quantity: x.quantity,
         value: x.value,
         currency: x.currency
@@ -490,7 +525,8 @@ export class CreateShipmentComponent implements OnInit {
     else {
       o.id = this.data.id;
       this.shipmentService.updateShipment(o).subscribe(res => {
-
+        this.isloading = false;
+        this.toastr.success('Shipment successfully updated', 'Update Shipment');
       },
       (error) => {
         this.isloading = false;

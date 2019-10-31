@@ -21,6 +21,7 @@ import { AppConstant } from 'src/app/shared/constants/app.constant';
 export class CreateCompanyComponent implements OnInit {
 
   isloading = false;
+  companyList = [];
   countryList = [];
   serviceList = [];
   mform: FormGroup;
@@ -34,6 +35,7 @@ export class CreateCompanyComponent implements OnInit {
   isEdit = false;
   canEdit = false;
   user: User;
+  parent_company_id = null;
 
   readonly isEmpty = Helper.isEmpty;
 
@@ -114,11 +116,14 @@ export class CreateCompanyComponent implements OnInit {
 
   loadUser() {
     this.user = this.authService.loadUser();
-    this.canEdit = this.user.role === AppConstant.ROLE.ADMIN;
+    this.canEdit = this.user.role === AppConstant.ROLE.ADMIN || this.user.role === AppConstant.ROLE.SUPERUSER;
     this.load();
   }
 
   load() {
+    this.companyService.listCompany(1, 100000, 'company_account_code', '').subscribe((res: any) => {
+      this.companyList = res.data;
+    });
     this.lookupService.listService().subscribe((res: any) => {
       this.serviceList = res.data;
     });
@@ -178,6 +183,14 @@ export class CreateCompanyComponent implements OnInit {
       company_state_province: o.state_province,
       company_country: s
     });
+  }
+
+  onParentCompanyChange() {
+    const x = this.f.parent_company_account_code.value;
+    let o = _.find(this.companyList, (k) => {
+      return k.account_code === x;
+    });
+    this.parent_company_id = o.company_id;
   }
 
   onCountryChange() {
@@ -242,11 +255,12 @@ export class CreateCompanyComponent implements OnInit {
       company_code: f.company_code,
       company_name: f.company_name,
       display_name: f.display_name,
-      parent_company_account_code: null,
-      parent_company_id : null,
+      parent_company_account_code: f.parent_company_account_code,
+      parent_company_id : this.parent_company_id,
       is_do: f.is_do,
       is_cod: f.is_cod,
       is_active: true,
+      label_default: 'A4',
       address_id: this.selectedAddress.id,
       company_service_list: lx
     };

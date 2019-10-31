@@ -105,7 +105,7 @@ Authorization: Token {{token}}
 
 ###
 
-GET {{base}}/api/shipment/list/?shipment_id=4747
+GET {{base}}/api/shipment/list/?shipment_id=3022
 Authorization: Token {{token}}
 
 ###
@@ -287,7 +287,11 @@ Content-Type: application/json
 
 ###
 
-GET {{base}}/api/company/list?admin=1
+GET {{base}}/api/company/list
+  ?start=0
+  &length=100000
+  &order=company_account_code
+  &dir=
 Authorization: Token {{token}}
 
 ###

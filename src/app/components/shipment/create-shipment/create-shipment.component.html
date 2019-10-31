@@ -214,7 +214,7 @@
                 <td class="text-right">{{ o.quantity }}</td>
                 <td class="text-right">{{ o.value }}</td>
                 <td class="text-center">{{ o.currency }}</td>
-                <td class="text-right">{{ o.quantity * o.value }}</td>
+                <td class="text-right">{{ o.quantity * o.value | currency:' ' }}</td>
                 <td>
                   <input type="checkbox" [checked]="o.selected" (change)="onChangeSelect(o)" />
                 </td>

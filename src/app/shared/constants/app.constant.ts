@@ -7,7 +7,7 @@ export class AppConstant {
 
   public static ROLE = {
     ADMIN: 'ADMIN',
-    SUPERADMIN: 'SUPERADMIN',
+    SUPERUSER: 'SUPERUSER',
     USER: 'USER'
   }
 
