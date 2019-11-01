@@ -54,7 +54,7 @@ export class CreateUserModalComponent implements OnInit {
       email: f.email,
       user_role: f.user_type
     };
-    this.userService.createUser(o).subscribe((res: any) => {
+    this.companyService.assignUser(o).subscribe((res: any) => {
       this.onClose.next({ result: true });
       this.toastr.success('New User succesfully created');
       this.bsModalRef.hide();
