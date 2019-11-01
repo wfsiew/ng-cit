@@ -301,7 +301,7 @@ Authorization: Token {{token}}
 
 ###
 
-GET {{base}}/api/company/user/list
+GET {{base}}/api/company/user/list?company_id=f7e9f478-06e-4643-a734-049f545924bd
 Authorization: Token {{token}}
 
 ###
