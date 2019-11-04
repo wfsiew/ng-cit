@@ -86,6 +86,11 @@ export class ListCompanyComponent implements OnInit, OnDestroy {
     return false;
   }
 
+  pageChanged(event: any) {
+    this.page = event.page;
+    this.load();
+  }
+
   onSearch() {
     this.load();
   }

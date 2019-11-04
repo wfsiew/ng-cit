@@ -55,5 +55,11 @@
     <div class="overlay" *ngIf="isloading">
       <i class="fa fa-refresh fa-spin"></i>
     </div>
+
+    <div class="box-footer">
+      <div class="pull-right" *ngIf="itemsCount">
+        <pagination [totalItems]="itemsCount" [itemsPerPage]="PAGE_SIZE" [(ngModel)]="page" (pageChanged)="pageChanged($event)"></pagination>
+      </div>
+    </div>
   </div>
 </section>
