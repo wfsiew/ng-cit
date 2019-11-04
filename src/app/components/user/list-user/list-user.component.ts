@@ -41,10 +41,6 @@ export class ListUserComponent implements OnInit, OnDestroy {
     private toastr: ToastrService,
     private modalService: BsModalService
   ) {
-    this.route.queryParams.subscribe(params => {
-      this.company_id = params['company_id'];
-      this.load();
-    });
     this.subs = this.msService.get().subscribe(res => {
       if (res.name === 'list-user') {
         const o = res.data;
@@ -57,7 +53,10 @@ export class ListUserComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.load();
+    this.route.queryParams.subscribe(params => {
+      this.company_id = params['company_id'];
+      this.load();
+    });
   }
 
   ngOnDestroy() {
@@ -68,6 +67,7 @@ export class ListUserComponent implements OnInit, OnDestroy {
     this.isloading = true;
     this.companyService.listUser(this.pending).subscribe((res: any) => {
       this.list = res.status ? res.data : [];
+      console.log(this.list)
       //this.itemsCount = res.status ? res.recordsTotal : 0;
       this.isloading = false;
     },
@@ -81,6 +81,13 @@ export class ListUserComponent implements OnInit, OnDestroy {
       else {
         this.toastr.error('Load User Failed');
       }
+    });
+
+    this.companyService.getCompany(this.company_id).subscribe((res: any) => {
+      console.log(res);
+    },
+    (error) => {
+      this.toastr.error('Load Company Name Failed');
     });
   }
 

@@ -20,7 +20,7 @@ export class CreateUserModalComponent implements OnInit {
   title: string;
   email: string = '';
   roles: string = 'USER';
-  company_id: string;
+  company_id: string = '';
   edit = false;
   mform: FormGroup;
 
