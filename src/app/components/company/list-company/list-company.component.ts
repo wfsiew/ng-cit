@@ -82,7 +82,7 @@ export class ListCompanyComponent implements OnInit, OnDestroy {
   }
 
   onViewUser(o) {
-    this.router.navigate(['/cit/company/user/list']);
+    this.router.navigate(['/cit/company/user/list'], { queryParams: { company_id: o.company_id } });
     return false;
   }
 

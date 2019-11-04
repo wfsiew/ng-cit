@@ -50,7 +50,7 @@ export class CreateUserModalComponent implements OnInit {
   onAssign() {
     const f = this.mform.value;
     const o = {
-      company_id: '',
+      company_id: this.company_id,
       email: f.email,
       user_role: f.user_type
     };

@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CompanyService } from 'src/app/services/company.service';
 import { MessageService } from 'src/app/services/message.service';
@@ -28,17 +28,23 @@ export class ListUserComponent implements OnInit, OnDestroy {
   sort_dir = '';
   subs: Subscription;
   bsModalRef: BsModalRef;
+  company_id: string;
 
   readonly isEmpty = Helper.isEmpty;
   readonly PAGE_SIZE = AppConstant.PAGE_SIZE;
 
   constructor(
+    private route: ActivatedRoute,
     private router: Router,
     private companyService: CompanyService,
     private msService: MessageService,
     private toastr: ToastrService,
     private modalService: BsModalService
   ) {
+    this.route.queryParams.subscribe(params => {
+      this.company_id = params['company_id'];
+      this.load();
+    });
     this.subs = this.msService.get().subscribe(res => {
       if (res.name === 'list-user') {
         const o = res.data;
@@ -80,7 +86,8 @@ export class ListUserComponent implements OnInit, OnDestroy {
 
   onCreateNew() {
     const state = {
-      title: 'Add User'
+      title: 'Add User',
+      company_id: this.company_id
     };
     this.bsModalRef = this.modalService.show(CreateUserModalComponent, { initialState: state });
     this.bsModalRef.content.onClose.subscribe(res => {
