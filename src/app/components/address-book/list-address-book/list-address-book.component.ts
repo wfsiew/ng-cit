@@ -60,7 +60,7 @@ export class ListAddressBookComponent implements OnInit, OnDestroy {
 
   load() {
     this.isloading = true;
-    this.addressBookService.listAddressBook(this.page, AppConstant.PAGE_SIZE, this.sort, this.sort_dir, this.search, this.private).subscribe((res: any) => {
+    this.addressBookService.listAddressBook(this.page, AppConstant.PAGE_SIZE, this.sort, this.sort_dir, this.search, this.private ? '1' : '0').subscribe((res: any) => {
       this.list = res.status ? res.data : [];
       this.itemsCount = res.status ? res.recordsTotal : 0;
       this.isloading = false;
