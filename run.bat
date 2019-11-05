@@ -1,1 +1,1 @@
-ng serve --port=5100 --open
+ng serve --port=5100

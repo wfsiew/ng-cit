@@ -78,7 +78,7 @@ export class ListUserComponent implements OnInit, OnDestroy {
 
   load() {
     this.isloading = true;
-    this.companyService.listUser(this.pending).subscribe((res: any) => {
+    this.companyService.listUser(this.company_id, this.pending).subscribe((res: any) => {
       this.list = res.status ? res.data : [];
       //this.itemsCount = res.status ? res.recordsTotal : 0;
       this.isloading = false;
