@@ -62,7 +62,8 @@ export class CompanyService {
       return this.http.get(`${this.baseUrl}/api/company/user/list`, { params: prm });
     }
     
-    return this.http.get(`${this.baseUrl}/api/company/user/list`);
+    let prm = new HttpParams().set('company_id', company_id);
+    return this.http.get(`${this.baseUrl}/api/company/user/list`, { params: prm });
   }
 
   assignUser(o) {
