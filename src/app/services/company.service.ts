@@ -54,13 +54,16 @@ export class CompanyService {
     return this.http.post(`${this.baseUrl}/api/company/update`, o);
   }
 
-  listUser(pending: boolean = false) {
+  listUser(company_id, pending: boolean = false) {
     if (pending === true) {
-      let prm = new HttpParams().set('pending', '1');
+      let prm = new HttpParams()
+        .set('pending', '1')
+        .set('company_id', company_id);
       return this.http.get(`${this.baseUrl}/api/company/user/list`, { params: prm });
     }
     
-    return this.http.get(`${this.baseUrl}/api/company/user/list`);
+    let prm = new HttpParams().set('company_id', company_id);
+    return this.http.get(`${this.baseUrl}/api/company/user/list`, { params: prm });
   }
 
   assignUser(o) {
