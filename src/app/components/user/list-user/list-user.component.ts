@@ -59,7 +59,10 @@ export class ListUserComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.loadUser();
+    this.route.queryParams.subscribe(params => {
+      this.company_id = params['company_id'];
+      this.loadUser();
+    });
   }
 
   ngOnDestroy() {
@@ -76,7 +79,6 @@ export class ListUserComponent implements OnInit, OnDestroy {
     this.isloading = true;
     this.companyService.listUser(this.company_id, this.pending).subscribe((res: any) => {
       this.list = res.status ? res.data : [];
-      console.log(this.list)
       //this.itemsCount = res.status ? res.recordsTotal : 0;
       this.isloading = false;
     },
