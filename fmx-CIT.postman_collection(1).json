@@ -1,0 +1,1187 @@
+{
+	"info": {
+		"_postman_id": "06d83db6-e9ed-4a16-84fa-59637d36eae7",
+		"name": "fmx/CIT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "company",
+			"item": [
+				{
+					"name": "Company Details",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token 8275f92b743a3237320d965c6a2054645cd43ecc",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/company/details?id=4cb93dc4-3bfd-436a-8d34-c8fa3f874bc6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"company",
+								"details"
+							],
+							"query": [
+								{
+									"key": "Authorization",
+									"value": "Token de999251d732dea930600659c15151af930ed3a4",
+									"disabled": true
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"disabled": true
+								},
+								{
+									"key": "id",
+									"value": "4cb93dc4-3bfd-436a-8d34-c8fa3f874bc6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Company Details Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token 820861332b3977516587e7d8e1370e112acdc139",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"company_id\": \"11b91530-b4e8-4b47-b3d3-e6d4e31077a9\",\n    \"company_account_code\": \"F000086\",\n    \"company_name\": \"FMX (M) SDN BHD\",\n    \"display_name\": \"FMX (M) SDN BHD\",\n    \"parent_company_id\": null,\n    \"parent_company_account_code\" :null,\n    \"is_cod\": true,\n    \"is_do\": true,\n    \"is_active\": true,\n    \"address\": \"7a1c214f-b273-4161-8e44-46b28fbe0051\",\n    \"company_service_list\": [\n        {\n            \"service_id\": \"e2eecbfc-9837-495f-8606-c4a836fed6a2\",\n            \"service_code\": \"PREMIUM\"        \t\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/company/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"company",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Company Details Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token a6901b7fcb02e27e8bcd1b8f8f90c490365b817b",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"company_account_code\": \"F000088\",\n    \"company_code\": \"FXFX\",\n    \"company_name\": \"FMX (M) SDN BHD\",\n    \"display_name\": \"FMX (M) SDN BHD\",\n    \"parent_company_account_code\": null,\n    \"parent_company_id\" : null,\n    \"is_cod\": true,\n    \"is_do\": true,\n    \"is_active\" : true,\n    \"label_default\" : \"A4\",\n    \"address_id\": \"7a1c214f-b273-4161-8e44-46b28fbe0051\",\n    \"company_service_list\": [\n        {\n            \"service_id\": \"e2eecbfc-9837-495f-8606-c4a836fed6a2\",\n            \"service_code\": \"PREMIUM\"        \t\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/company/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"company",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Company Details List",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token 608ac08c548ad16060730420800f69d2098c8fdc",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/company/list?start=0&length=20&order=company_account_code&dir=desc",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"company",
+								"list"
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "0"
+								},
+								{
+									"key": "length",
+									"value": "20"
+								},
+								{
+									"key": "order",
+									"value": "company_account_code"
+								},
+								{
+									"key": "dir",
+									"value": "desc"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "shipment",
+			"item": [
+				{
+					"name": "List Shipment By Pagination",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token 0a35bd5b4cf704d91326fb615908641a90634245",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/shipment/list/?start=0&length=20&order=origin_address_id&dir=desc&history=false",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"shipment",
+								"list",
+								""
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "0"
+								},
+								{
+									"key": "length",
+									"value": "20"
+								},
+								{
+									"key": "order",
+									"value": "origin_address_id"
+								},
+								{
+									"key": "dir",
+									"value": "desc"
+								},
+								{
+									"key": "history",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Shipment Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Token f2f44016a3f9f687452fdd59a9d7101265428212",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t    \"customer_reference\": \"MHCS0011\",\r\n\t    \"origin_address_id\": \"ADC01\",\r\n\t    \"origin_shipper_address1\": \"No 136, Hala Lapangan Peradana, Hala Lapangan Panorama\",\r\n\t    \"origin_shipper_address2\": \"\",\r\n\t    \"origin_shipper_address3\": \"\",\r\n\t    \"origin_shipper_address4\": \"\",\r\n\t    \"origin_shipper_postcode\": \"31650\",\r\n\t    \"origin_shipper_city\": \"Puchong\",\r\n\t    \"origin_shipper_state_province\": \"Selangor\",\r\n\t    \"origin_shipper_district\": \"\",\r\n\t    \"origin_shipper_country\": \"MY\",\r\n\t    \"origin_shipper_name\": \"Kong Mun Hoe\",\r\n\t    \"origin_shipper_phone_no\": \"0165324876\",\r\n\t    \"origin_shipper_mobile_no\": \"0165324876\",\r\n\t    \"origin_shipper_email\": \"haseo2408@gmail.com\",\r\n\t    \"dest_address_id\": \"ADC02\",\r\n\t    \"dest_receiver_address1\": \"No 16, Jalan Bahagia, Taman ABC\",\r\n\t    \"dest_receiver_address2\": \"\",\r\n\t    \"dest_receiver_address3\": \"\",\r\n\t    \"dest_receiver_address4\": \"\",\r\n\t    \"dest_receiver_postcode\": \"47500\",\r\n\t    \"dest_receiver_city\": \"Petaling Jaya\",\r\n\t    \"dest_receiver_state_province\": \"Selangor\",\r\n\t    \"dest_receiver_district\": \"\",\r\n\t    \"dest_receiver_country\": \"MY\",\r\n\t    \"dest_receiver_phone_no\": \"0125529182\",\r\n\t    \"dest_receiver_mobile_no\": \"0125529182\",\r\n\t    \"dest_receiver_email\": \"haseo2409@gmail.com\",\r\n\t    \"dest_receiver_name\": \"Kong Zai\",\r\n\t    \"cod\": true,\r\n\t    \"cod_value\": 9.30,\r\n\t    \"carton_box_code\": \"PAR\",\r\n\t    \"total_package_no\": 1,\r\n\t    \"service_type\": \"EXP\",\r\n\t    \"order_amount\" : 25.00,\r\n\t    \"insurance_amount\": 30.00,\r\n\t    \"is_insurance\" : true,\r\n\t    \"chargeable_weight\": 5.00,\r\n\t    \"chargeable_weight_uom\": \"KG\",\r\n\t    \"order_amount_currency\": \"MY\",\r\n\t    \"pickup_date\" : \"2019-10-23\",\r\n\t    \"shipment_package_list\": \r\n\t    [{\r\n\t    \t\"description\" : \"This is a good book to read\",\r\n\t    \t\"weight\": 4.2,\r\n\t    \t\"volume\": 5.2,\r\n\t    \t\"height\": 6.32,\r\n\t    \t\"length\": 7.9,\r\n\t    \t\"width\": 10.0,\r\n\t    \t\"value\": 10.45,\r\n\t    \t\"currency\": \"MY\",\r\n\t    \t\"quantity\": 6,\r\n\t    \t\"uom\":\"PAS\",\r\n\t    \t\"product_list\": [{\r\n\t    \t\t\"product_name\": \"Magazine\",\r\n\t    \t\t\"product_code\": \"Pieces\",\r\n\t    \t\t\"value\":\"2\",\r\n\t    \t\t\"currency\":\"MY\",\r\n\t    \t\t\"quantity\" : \"2\"\r\n\t    \t}]\r\n\t    }]\r\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/shipment/create",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"shipment",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Shipment Delete",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"shipment_id\": 61,\n        \"product_list_id\": 41\n    }\n]"
+						},
+						"url": {
+							"raw": "http://178.128.126.178/api/shipment/delete",
+							"protocol": "http",
+							"host": [
+								"178",
+								"128",
+								"126",
+								"178"
+							],
+							"path": [
+								"api",
+								"shipment",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Shipment Details By Shipment Id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Token d7daa1cc2bbc850712a15629f614fb583588db1f",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/shipment/list/?shipment_id=82",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"shipment",
+								"list",
+								""
+							],
+							"query": [
+								{
+									"key": "shipment_id",
+									"value": "82"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Shipment Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Token 134c5f2d92e6cb8bd9c06094dbf6b5c61d31db64",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"4762\",\n    \"origin_address_id\": \"5164cf9f-bd9b-4f56-a692-2fd79ebd588d\",\n    \"customer_reference\" : \"MH0CS007\",\n    \"origin_shipper_name\": \"Kong Mun Hoe 12\",\n    \"origin_shipper_address1\": \"No 136, Hala Lapangan Peradana, Hala Lapangan Panorama\",\n    \"origin_shipper_address2\": \"\",\n    \"origin_shipper_address3\": \"\",\n    \"origin_shipper_address4\": \"\",\n    \"origin_shipper_postcode\": \"47500\",\n    \"origin_shipper_city\": \"Puchong\",\n    \"origin_shipper_state_province\": \"Selangor\",\n    \"origin_shipper_shipper_district\": \"\",\n    \"origin_shipper_phone_no\": \"0165324876\",\n    \"origin_shipper_mobile_no\": \"0165324876\",\n    \"origin_shipper_email\": \"haseo2408@gmail.com\",\n    \"dest_address_id\": \"672266bf-0e4c-4d0d-b536-c71618be4d97\",\n    \"dest_receiver_address1\": \"No 16, Jalan Bahagia, Taman ABC\",\n    \"dest_receiver_phone_no\": \"0125529182\",\n    \"dest_receiver_mobile_no\": \"0125529182\",\n    \"dest_receiver_email\": \"haseo2490@gmail.com\",\n    \"dest_receiver_name\": \"Kong Zai 2\",\n    \"cod\": true,\n    \"cod_value\": 9.7,\n    \"carton_box_code\": \"L\",\n    \"total_package_no\": 2,\n    \"service_type\": \"EXP\",\n    \"is_insurance\" : true,\n    \"insurance_amount\" : \"100.00\",\n    \"order_amount\": 29,\n    \"order_amount_currency\": \"MY\",\n    \"shipment_package_list\": [\n        {\n            \"id\": 4154,\n            \"description\": \"This is a good book to read 2\",\n            \"weight\": 10,\n            \"volume\": 60,\n            \"height\": 45,\n            \"length\": 21,\n            \"value\": 10.45,\n            \"currency\": \"MYR\",\n            \"quantity\": 6,\n            \"uom\": \"PAR\",\n            \"product_list\": [\n                {\n                \t\"id\": 4173,\n                    \"product_name\": \"Magazine & Novel\",\n                    \"product_code\": \"Book\",\n                    \"value\": \"3\",\n                    \"currency\": \"MYR\",\n                    \"quantity\": \"2\"\n                }\n            ]\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/shipment/update",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"shipment",
+								"update"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "upload",
+			"item": [
+				{
+					"name": "confirm_upload",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Token 608ac08c548ad16060730420800f69d2098c8fdc"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Kong/Downloads/UploadOrderMalaysiaNew.csv"
+								},
+								{
+									"key": "company_account_code",
+									"value": "F000086",
+									"type": "text"
+								},
+								{
+									"key": "delivery_service",
+									"value": "EXP",
+									"type": "text"
+								},
+								{
+									"key": "currency",
+									"value": "MYR",
+									"type": "text"
+								},
+								{
+									"key": "is_do",
+									"value": "True",
+									"type": "text"
+								},
+								{
+									"key": "shipper_address_id",
+									"value": "d7f50c2f-0f4b-4c39-b37c-849e380fb880",
+									"type": "text"
+								},
+								{
+									"key": "pickup_date",
+									"value": "2019-10-26",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/file/confirm_upload/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"file",
+								"confirm_upload",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "address book",
+			"item": [
+				{
+					"name": "Create Address",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token 26f845fdf9999405baebcb3bfa870bc45f16aab9",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"type\": \"Receiver\",\n\t\"country\" : \"MY\",\n\t\"address1\" : \"No 27, Jalan Jason, Taman Jaason\",\n\t\"address2\": \"Hulu Hala, Plus Mutli Typo\",\n\t\"postcode\" : \"45000\",\n\t\"state_province\": \"Selangor\",\n\t\"city\": \"Shah Alam\",\n\t\"district\": \"\",\n\t\"full_name\": \"Jason Hou Something\",\n\t\"phone_number\": \"017-5958776\",\n\t\"email\" : \"Jsaon@cs.com.my\",\n\t\"is_default\": false,\n\t\"is_private\" : true\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/address/create",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"address",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List All Address",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token 26f845fdf9999405baebcb3bfa870bc45f16aab9",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/address/list?start=0&length=20&dir=desc&order=id&private=2",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"address",
+								"list"
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "0"
+								},
+								{
+									"key": "length",
+									"value": "20"
+								},
+								{
+									"key": "dir",
+									"value": "desc"
+								},
+								{
+									"key": "order",
+									"value": "id"
+								},
+								{
+									"key": "private",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Address",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token 9d6dfe8fd854967b35a65c06cc68fe33a7b795a7",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t{\"id\": \"2179b763-c064-474a-856e-5cd66be9f467\"},\n\t{\"id\": \"672266bf-0e4c-4d0d-b536-c71618be4d97\"}\n]"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/address/delete",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"address",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Address Information",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token 9d6dfe8fd854967b35a65c06cc68fe33a7b795a7",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\n        {\n            \"id\": \"0ca20cad-761b-4e3c-b051-ee4a86682bf4\",\n            \"type\": \"Sender\",\n            \"postcode\": \"45700\",\n            \"address1\": \"NO 96, Jalan Alligment, Taman Another\",\n            \"address2\": \"Hulu Hilla, Plus Many Bug\",\n            \"address3\": \"\",\n            \"address4\": \"\",\n            \"city\": \"Ipoh\",\n            \"country\": \"MY\",\n            \"full_name\": \"Mun Hoe Kong\",\n            \"phone_number\": \"+60165324876\",\n            \"email\":\"MunHoeKong@cs.com.my\",\n            \"state_province\": \"Selangor\",\n            \"district\": \"\",\n            \"is_default\": true,\n            \"is_private\" : true\n        }"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/address/update",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"address",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Address Details By ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token 9d6dfe8fd854967b35a65c06cc68fe33a7b795a7",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/address/list/?address_id=3e230866-137c-4696-b985-06849e610cb1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"address",
+								"list",
+								""
+							],
+							"query": [
+								{
+									"key": "address_id",
+									"value": "3e230866-137c-4696-b985-06849e610cb1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "lookup",
+			"item": [
+				{
+					"name": "lookup for product master",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/lookup/product_master",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"lookup",
+								"product_master"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UOM(PACKAGE) Listing",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/lookup/generic_master?master_type=uom",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"lookup",
+								"generic_master"
+							],
+							"query": [
+								{
+									"key": "master_type",
+									"value": "uom"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SERVICE Listing",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/lookup/generic_master?master_type=service",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"lookup",
+								"generic_master"
+							],
+							"query": [
+								{
+									"key": "master_type",
+									"value": "service"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Country Currency Listing",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token 7cc3b778ab309658428f52943f1fa438873bc932",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/lookup/country-info",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"lookup",
+								"country-info"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "get all the lookup value for drop down or select value"
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "User Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\" : \"admin\",\n\t\"password\" : \"admin1234\"\n}"
+						},
+						"url": {
+							"raw": "http://178.128.126.178:8000/api/user/login",
+							"protocol": "http",
+							"host": [
+								"178",
+								"128",
+								"126",
+								"178"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create New User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\": \"admin5566\",\r\n    \"first_name\": \"admin5566\",\r\n    \"last_name\": \"123\",\r\n    \"email\": \"admin5566@fmx.com\",\r\n    \"username\": \"admin5566\",\r\n    \"phone_number\": \"+60165324888\",\r\n    \"date_of_birth\": null\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/user/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Token 074df5455760be1fbf7797b92c10e1d6554f8720",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://178.128.126.178:8000/api/user/logout",
+							"protocol": "http",
+							"host": [
+								"178",
+								"128",
+								"126",
+								"178"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Detail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Token 94bd322557f40f18198492d8c4acbc90c5afccae"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/user/details",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								"details"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Update",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Token 26f845fdf9999405baebcb3bfa870bc45f16aab9"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"status\": true,\r\n    \"data\": [\r\n        {\r\n            \"first_name\": \"Jason\",\r\n            \"phone_number\": \"+60192676802\",\r\n            \"date_of_birth\": \"1983-10-29\",\r\n            \"last_name\": \"How\",\r\n            \"email\": \"Jason.how.cs@freightmark.com.my\",\r\n            \"is_active\": true,\r\n            \"company_id\": \"11b91530-b4e8-4b47-b3d3-e6d4e31077a9\"\r\n        }\r\n    ]\r\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/user/update",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change Password",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Token 074df5455760be1fbf7797b92c10e1d6554f8720",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"old_password\" : \"admin1234\",\n\t\"new_password\" : \"admin1234f\",\n\t\"confirm_password\" : \"admin1234\"\n}"
+						},
+						"url": {
+							"raw": "http://178.128.126.178:8000/api/user/change-password",
+							"protocol": "http",
+							"host": [
+								"178",
+								"128",
+								"126",
+								"178"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								"change-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reset Password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "kong.mun.hoe@freightmark.com.my",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/user/password-reset/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								"password-reset",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "report",
+			"item": [
+				{
+					"name": "New consignment note download",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Token 8275f92b743a3237320d965c6a2054645cd43ecc"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"value": null,
+									"type": "file",
+									"disabled": true
+								},
+								{
+									"key": "company_account_code",
+									"value": "F000086",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "delivery_service",
+									"value": "EXP",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "currency",
+									"value": "MYR",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "is_do",
+									"value": "True",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "shipper_address_id",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "pickup_date",
+									"value": "2019-10-11",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/reports/labels/?consignment_no=MYC0100024858",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"reports",
+								"labels",
+								""
+							],
+							"query": [
+								{
+									"key": "consignment_no",
+									"value": "MYC0100024858"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	]
+}
