@@ -30,9 +30,12 @@ export class AddressBookService {
     return this.http.get(`${this.baseUrl}/api/address/list`, { params: prm });
   }
 
-  getAddressBook(id) {
+  getAddressBook(id, privateval) {
     let prm: HttpParams = new HttpParams()
       .set('address_id', id);
+    if (privateval === '1') {
+      prm = prm.append('private', privateval);
+    }
     return this.http.get(`${this.baseUrl}/api/address/list`, { params: prm });
   }
 

@@ -18,7 +18,7 @@ export class ListAddressBookComponent implements OnInit, OnDestroy {
   isloading = false;
   list = [];
   itemsCount = 0;
-  private = false;
+  is_private = false;
   tab = 0;
   selectAll = false;
   listSelected = [];
@@ -45,7 +45,7 @@ export class ListAddressBookComponent implements OnInit, OnDestroy {
         this.sort_dir = o.dir;
         this.search = o.search;
         this.tab = o.tab;
-        this.private = this.tab === 0 ? false : true;
+        this.is_private = this.tab === 0 ? false : true;
       }
     });
   }
@@ -60,7 +60,7 @@ export class ListAddressBookComponent implements OnInit, OnDestroy {
 
   load() {
     this.isloading = true;
-    this.addressBookService.listAddressBook(this.page, AppConstant.PAGE_SIZE, this.sort, this.sort_dir, this.search, this.private ? '1' : '0').subscribe((res: any) => {
+    this.addressBookService.listAddressBook(this.page, AppConstant.PAGE_SIZE, this.sort, this.sort_dir, this.search, this.is_private ? '1' : '0').subscribe((res: any) => {
       this.list = res.status ? res.data : [];
       this.itemsCount = res.status ? res.recordsTotal : 0;
       this.isloading = false;
@@ -124,7 +124,7 @@ export class ListAddressBookComponent implements OnInit, OnDestroy {
       search: this.search,
       tab: this.tab
     });
-    this.router.navigate(['/cit/address-book/edit', o.id]);
+    this.router.navigate(['/cit/address-book/edit', o.id], { queryParams: { private: this.is_private ? '1' : '0' } });
   }
 
   pageChanged(event: any) {
@@ -152,7 +152,7 @@ export class ListAddressBookComponent implements OnInit, OnDestroy {
 
   onTab(i) {
     this.tab = i;
-    this.private = i === 0 ? false : true;
+    this.is_private = i === 0 ? false : true;
     this.load();
     return false;
   }

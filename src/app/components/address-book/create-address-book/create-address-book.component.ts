@@ -24,6 +24,7 @@ export class CreateAddressBookComponent implements OnInit {
   id: string;
   isEdit = false;
   title = 'Create';
+  privateval = '0';
   subs: Subscription;
 
   constructor(
@@ -39,6 +40,9 @@ export class CreateAddressBookComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      this.privateval = params['private'];
+    });
     this.route.paramMap.subscribe(params => {
       this.id = params.get('id');
       if (!_.isNull(this.id)) {
@@ -105,7 +109,7 @@ export class CreateAddressBookComponent implements OnInit {
   }
 
   loadAddressBook() {
-    this.addressBookService.getAddressBook(this.id).subscribe((res: any) => {
+    this.addressBookService.getAddressBook(this.id, this.privateval).subscribe((res: any) => {
       this.data = !_.isEmpty(res.data) ? res.data[0] : {};
       this.setForm();
     },
