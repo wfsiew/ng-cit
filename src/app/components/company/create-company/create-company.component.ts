@@ -2,15 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { LookupService } from '../../../services/lookup.service';
-import { CompanyService } from '../../../services/company.service';
+import { LookupService } from 'src/app/services/lookup.service';
+import { CompanyService } from 'src/app/services/company.service';
 import { AuthService } from 'src/app/services/auth.service';
 import _ from 'lodash';
 import { ToastrService } from 'ngx-toastr';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { Helper } from '../../../shared/utils/helper';
+import { Helper } from 'src/app/shared/utils/helper';
 import { User } from 'src/app/shared/models/user';
-import { AddressBookModalComponent } from '../../../shared/components/address-book-modal/address-book-modal.component';
+import { AddressBookModalComponent } from 'src/app/shared/components/address-book-modal/address-book-modal.component';
 import { AppConstant } from 'src/app/shared/constants/app.constant';
 
 @Component({

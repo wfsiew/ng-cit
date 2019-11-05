@@ -2,12 +2,14 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CompanyService } from 'src/app/services/company.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { MessageService } from 'src/app/services/message.service';
 import { AppConstant } from 'src/app/shared/constants/app.constant';
 import _ from 'lodash';
 import { ToastrService } from 'ngx-toastr';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Helper } from 'src/app/shared/utils/helper';
+import { User } from 'src/app/shared/models/user';
 import { CreateUserModalComponent } from '../create-user-modal/create-user-modal.component';
 
 @Component({
@@ -29,6 +31,9 @@ export class ListUserComponent implements OnInit, OnDestroy {
   subs: Subscription;
   bsModalRef: BsModalRef;
   company_id: string;
+  company_name: string;
+  canEdit = false;
+  user: User;
 
   readonly isEmpty = Helper.isEmpty;
   readonly PAGE_SIZE = AppConstant.PAGE_SIZE;
@@ -37,6 +42,7 @@ export class ListUserComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private companyService: CompanyService,
+    private authService: AuthService,
     private msService: MessageService,
     private toastr: ToastrService,
     private modalService: BsModalService
@@ -57,11 +63,17 @@ export class ListUserComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.load();
+    this.loadUser();
   }
 
   ngOnDestroy() {
     this.subs.unsubscribe();
+  }
+
+  loadUser() {
+    this.user = this.authService.loadUser();
+    this.canEdit = this.user.role === AppConstant.ROLE.ADMIN || this.user.role === AppConstant.ROLE.SUPERUSER;
+    this.load();
   }
 
   load() {
@@ -82,12 +94,21 @@ export class ListUserComponent implements OnInit, OnDestroy {
         this.toastr.error('Load User Failed');
       }
     });
+
+    this.companyService.getCompany(this.company_id).subscribe((res: any) => {
+      const data = res.status ? res.data[0] : [];
+      this.company_name = data.company_name;
+    },
+    (errpr) => {
+      this.toastr.error('Load Company Name Failed');
+    });
   }
 
   onCreateNew() {
     const state = {
       title: 'Add User',
-      company_id: this.company_id
+      company_id: this.company_id,
+      canEdit: this.canEdit
     };
     this.bsModalRef = this.modalService.show(CreateUserModalComponent, { initialState: state });
     this.bsModalRef.content.onClose.subscribe(res => {
@@ -111,7 +132,8 @@ export class ListUserComponent implements OnInit, OnDestroy {
     const state = {
       title: 'Edit User',
       email: x.Email,
-      roles: x.Roles
+      roles: x.Roles,
+      canEdit: this.canEdit
     };
     this.bsModalRef = this.modalService.show(CreateUserModalComponent, { initialState: state });
     this.bsModalRef.content.onClose.subscribe(res => {

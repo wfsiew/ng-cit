@@ -22,6 +22,7 @@ export class CreateUserModalComponent implements OnInit {
   roles: string = 'USER';
   company_id: string;
   edit = false;
+  canEdit = false;
   mform: FormGroup;
 
   public onClose: Subject<any>;

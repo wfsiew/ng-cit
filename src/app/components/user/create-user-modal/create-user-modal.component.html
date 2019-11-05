@@ -27,7 +27,7 @@
   </form>
 </div>
 <div class="modal-footer">
-  <button *ngIf="edit" type="button" class="btn btn-primary" (click)="onConfirm()">Confirm</button>
-  <button *ngIf="edit" type="button" class="btn btn-danger" (click)="onDelete()">Delete</button>
+  <button *ngIf="edit && canEdit" type="button" class="btn btn-primary" (click)="onConfirm()">Confirm</button>
+  <button *ngIf="edit && canEdit" type="button" class="btn btn-danger" (click)="onDelete()">Delete</button>
   <button *ngIf="!edit" type="button" class="btn btn-primary" (click)="onAssign()" [disabled]="mform.invalid">Assign</button>
 </div>
