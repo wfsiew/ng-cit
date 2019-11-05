@@ -93,16 +93,10 @@ export class ListUserComponent implements OnInit, OnDestroy {
     });
 
     this.companyService.getCompany(this.company_id).subscribe((res: any) => {
-<<<<<<< HEAD
-      console.log(res);
-    },
-    (error) => {
-=======
       const data = res.status ? res.data[0] : [];
       this.company_name = data.company_name;
     },
     (errpr) => {
->>>>>>> 5b2523b2f62d3ae0e2a75c81c4cd35d74a709a36
       this.toastr.error('Load Company Name Failed');
     });
   }

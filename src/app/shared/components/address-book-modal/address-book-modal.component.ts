@@ -69,6 +69,7 @@ export class AddressBookModalComponent implements OnInit {
 
   pageChanged(event: any) {
     this.page = event.page;
+    this.load();
   }
 
   sortBy(s) {
