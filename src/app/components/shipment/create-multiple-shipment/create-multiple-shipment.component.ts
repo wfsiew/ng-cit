@@ -146,8 +146,12 @@ export class CreateMultipleShipmentComponent implements OnInit {
     formData.append('is_do', 'True');
     formData.append('shipper_address_id', f.shipper_address_id.value);
 
-    if (!Helper.isEmpty(f.pickup_date.value) && !_.isNull(f.pickup_date.value) && !_.isUndefined(f.pickup_date.value)) {
-      formData.append('pickup_date', Helper.getDateStr1(f.pickup_date.value));
+    if (_.isNull(f.pickup_date.value)) {
+      formData.append('pickup_date', '');
+    }
+
+    else {
+      formData.append('pickup_date', Helper.getDateStr(f.pickup_date.value));
     }
 
     //this.isloading = true;
