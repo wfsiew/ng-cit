@@ -54,7 +54,7 @@ export class ListCompanyComponent implements OnInit, OnDestroy {
 
   load() {
     this.isloading = true;
-    this.companyService.listCompany(this.page, AppConstant.PAGE_SIZE, this.sort, this.sort_dir).subscribe((res: any) => {
+    this.companyService.listCompany(this.page, AppConstant.PAGE_SIZE, this.sort, this.sort_dir, this.search).subscribe((res: any) => {
       this.list = res.status ? res.data : [];
       this.itemsCount = res.status ? res.recordsTotal : 0;
       this.isloading = false;

@@ -26,13 +26,14 @@ export class CompanyService {
     return this.http.get(`${this.baseUrl}/api/company/list`);
   }
 
-  listCompany(page, limit, sort, dir) {
+  listCompany(page, limit, sort, dir, value = '') {
     let i = Helper.getStart(page, limit);
     let prm: HttpParams = new HttpParams()
       .set('start', `${i}`)
       .set('length', limit)
       .set('order', sort)
-      .set('dir', dir);
+      .set('dir', dir)
+      .set('value', value)
     return this.http.get(`${this.baseUrl}/api/company/list`, { params: prm });
   }
 
