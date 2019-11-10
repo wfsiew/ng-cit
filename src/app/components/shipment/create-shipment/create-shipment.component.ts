@@ -536,11 +536,23 @@ export class CreateShipmentComponent implements OnInit {
   }
 
   onPrintShipment() {
-    if (_.isEmpty(this.datax)) {
-      return;
-    }
+    // if (_.isEmpty(this.datax)) {
+    //   return;
+    // }
 
-    this.shipmentService.printLabel(this.datax.consignment_no, AppConstant.PRINT_TYPE.SHIPPING_LABEL);
+    // this.shipmentService.printLabel(this.datax.consignment_no, AppConstant.PRINT_TYPE.NEWCONSIGNMENTNOTE).subscribe((res: any) => {
+    //   console.log(res);
+    // },
+    // (error) => {
+    //   this.toastr.error('Print Shipment Faled');
+    // });
+
+    this.shipmentService.printLabel('MYC0100049707', AppConstant.PRINT_TYPE.NEWCONSIGNMENTNOTE).subscribe((res: any) => {
+      console.log(res);
+    },
+    (error) => {
+      this.toastr.error('Print Shipment Faled');
+    });
   }
 
   onBack() {
@@ -563,5 +575,9 @@ export class CreateShipmentComponent implements OnInit {
   invalidg(s: string) {
     const m = this.gform.controls[s];
     return m.invalid && (m.dirty || m.touched);
+  }
+
+  get isPrintDisabled() {
+    return false;
   }
 }
