@@ -55,15 +55,18 @@ export class CompanyService {
     return this.http.post(`${this.baseUrl}/api/company/update`, o);
   }
 
-  listUser(company_id, pending: boolean = false) {
+  listUser(company_id, pending: boolean = false, value = '') {
     if (pending === true) {
       let prm = new HttpParams()
         .set('pending', '1')
-        .set('company_id', company_id);
+        .set('company_id', company_id)
+        .set('value', value);
       return this.http.get(`${this.baseUrl}/api/company/user/list`, { params: prm });
     }
     
-    let prm = new HttpParams().set('company_id', company_id);
+    let prm = new HttpParams()
+      .set('company_id', company_id)
+      .set('value', value);
     return this.http.get(`${this.baseUrl}/api/company/user/list`, { params: prm });
   }
 
