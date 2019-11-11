@@ -62,7 +62,9 @@ export class CreateMultipleShipmentComponent implements OnInit {
     const o = this.data;
     this.mform.patchValue({
       company_account_code: o.company_account_code,
-      company_name: o.company_name
+      company_name: o.company_name,
+      shipper_address_id: o.address,
+      origin_shipper_name: o.company_pic_full_name
     });
   }
 

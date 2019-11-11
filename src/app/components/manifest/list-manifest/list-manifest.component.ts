@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Subscription, Observable } from 'rxjs';
 import { ManifestService } from 'src/app/services/manifest.service';
 import { CompanyService } from 'src/app/services/company.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { MessageService } from 'src/app/services/message.service';
 import { AppConstant } from 'src/app/shared/constants/app.constant';
 import _ from 'lodash';
@@ -41,6 +42,7 @@ export class ListManifestComponent implements OnInit, OnDestroy {
     private router: Router,
     private manifestService: ManifestService,
     private companyService: CompanyService,
+    private authService: AuthService,
     private msService: MessageService,
     private toastr: ToastrService,
     private modalService: BsModalService
@@ -60,15 +62,26 @@ export class ListManifestComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.loadCompanyProfile();
+    this.loadUserDetails();
   }
 
   ngOnDestroy() {
     this.subs.unsubscribe();
   }
 
-  loadCompanyProfile() {
-    this.companyService.getCompanyDetails().subscribe((res: any) => {
+  loadUserDetails() {
+    this.authService.getUserDetails().subscribe((res: any) => {
+      let user = !_.isEmpty(res.data) ? res.data[0] : {};
+      let company_id = user.company_id;
+      this.loadCompanyProfile(company_id);
+    },
+    (error) => {
+      this.toastr.error('Load User Details Failed');
+    });
+  }
+
+  loadCompanyProfile(id) {
+    this.companyService.getCompany(id).subscribe((res: any) => {
       this.company = !_.isEmpty(res.data) ? res.data[0] : {};
       this.load();
     },
