@@ -43,14 +43,17 @@ Authorization: Token {{token}}
 ###
 
 GET {{base}}/api/lookup/generic_master?master_type=service
+Authorization: Token {{token}}
 
 ###
 
 GET {{base}}/api/lookup/generic_master?master_type=uom
+Authorization: Token {{token}}
 
 ###
 
 GET {{base}}/api/lookup/country-info
+Authorization: Token {{token}}
 
 ###
 ## @paramter
