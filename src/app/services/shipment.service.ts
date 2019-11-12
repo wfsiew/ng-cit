@@ -61,6 +61,10 @@ export class ShipmentService {
     let prm: HttpParams = new HttpParams()
       .set('consignment_no', consignment_no)
       .set('type', type);
-    return this.http.get(`${this.baseUrl}/api/reports/labels/`, { params: prm });
+    return this.http.get(`${this.baseUrl}/api/reports/labels/`, { params: prm, responseType: 'blob' }).pipe(
+      map(res => {
+        return new Blob([res], { type: 'application/pdf' });
+      })
+    );
   }
 }

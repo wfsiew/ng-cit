@@ -98,12 +98,12 @@ Content-Type: text/csv
 
 ###
 
-GET {{base}}/api/reports/labels/?consignment_no=MYC0100050604&type=NewConsignmentNote
+GET {{base}}/api/reports/labels/?consignment_no=MYC0100024858&type=NewConsignmentNote
 Authorization: Token {{token}}
 
 ###
 
-GET {{base}}/api/reports/labels/?consignment_no=MYC0100050604&type=Shipping_Label
+GET {{base}}/api/reports/labels/?consignment_no=MYC0100024858&type=Shipping_Label
 Authorization: Token {{token}}
 
 ###

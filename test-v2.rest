@@ -284,6 +284,11 @@ Authorization: Token {{token}}
 
 ###
 
+GET {{base}}/api/company/list?start=0&length=20&order=company_account_code&dir=desc&value=xxxx
+Authorization: Token {{token}}
+
+###
+
 GET {{base}}/api/company/details?id=f7e9f478-706e-4643-a734-049f545924bd
 Authorization: Token {{token}}
 

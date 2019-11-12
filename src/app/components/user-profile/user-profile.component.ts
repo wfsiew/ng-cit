@@ -1,4 +1,5 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { LookupService } from 'src/app/services/lookup.service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -23,6 +24,7 @@ export class UserProfileComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private router: Router,
     private lookupService: LookupService,
     private authService: AuthService,
     private toastr: ToastrService,
@@ -143,6 +145,10 @@ export class UserProfileComponent implements OnInit {
     const o = {
 
     };
+  }
+
+  onChangePwd() {
+    this.router.navigate(['/cit/change-pwd']);
   }
 
   get f() {

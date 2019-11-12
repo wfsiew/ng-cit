@@ -17,6 +17,6 @@ export class UserService {
   }
 
   changePwd(o) {
-    return this.http.post(`${this.baseUrl}/api/user/change-password`, o);
+    return this.http.put(`${this.baseUrl}/api/user/change-password`, o);
   }
 }

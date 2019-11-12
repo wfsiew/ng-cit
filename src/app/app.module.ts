@@ -35,6 +35,7 @@ import { MainDashboardComponent } from './components/dashboard/main-dashboard/ma
 import { ListDashboardComponent } from './components/dashboard/list-dashboard/list-dashboard.component';
 import { DetailDashboardComponent } from './components/dashboard/detail-dashboard/detail-dashboard.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { ChangePwdComponent } from './components/user-profile/change-pwd/change-pwd.component';
 import { CreateShipmentComponent } from './components/shipment/create-shipment/create-shipment.component';
 import { CreateMultipleShipmentComponent } from './components/shipment/create-multiple-shipment/create-multiple-shipment.component';
 import { DetailShipmentComponent } from './components/shipment/detail-shipment/detail-shipment.component';
@@ -95,7 +96,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     MainDashboardComponent,
     ListDashboardComponent,
     ListUserComponent,
-    CreateUserModalComponent
+    CreateUserModalComponent,
+    ChangePwdComponent
   ],
   imports: [
     BrowserModule,

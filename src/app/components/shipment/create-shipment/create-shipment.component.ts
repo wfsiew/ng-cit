@@ -566,8 +566,10 @@ export class CreateShipmentComponent implements OnInit {
     //   this.toastr.error('Print Shipment Faled');
     // });
 
+    let tab = window.open();
     this.shipmentService.printLabel('MYC0100049707', AppConstant.PRINT_TYPE.NEWCONSIGNMENTNOTE).subscribe((res: any) => {
-      console.log(res);
+      const s = URL.createObjectURL(res);
+      tab.location.href = s;
     },
     (error) => {
       this.toastr.error('Print Shipment Faled');

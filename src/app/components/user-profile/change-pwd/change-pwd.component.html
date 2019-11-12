@@ -1,0 +1,46 @@
+<section class="content-header">
+  <h1>Change Password</h1>
+</section>
+<section class="content">
+  <div class="box">
+    <div class="box-header with-border">
+      <h3 class="box-title"></h3>
+    </div>
+    <form [formGroup]="mform" (ngSubmit)="onSubmit()" class="form-horizontal">
+      <div class="box-body">
+        <div class="form-group">
+          <label class="col-sm-3 control-label">Current Password</label>
+          <div class="col-sm-9">
+            <input type="password" class="form-control" placeholder="Current Password" formControlName="opwd" name="opwd">
+            <small class="label label-danger" *ngIf="invalid('opwd') && f.opwd.hasError('required')">Current Password is required</small>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label">New Password</label>
+          <div class="col-sm-9">
+            <input type="password" class="form-control" placeholder="New Password" formControlName="pwd" name="pwd">
+            <small class="label label-danger" *ngIf="invalid('pwd') && f.pwd.hasError('required')">New Password is required</small>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label">Confirm Password</label>
+          <div class="col-sm-9">
+            <input type="password" class="form-control" placeholder="Confirm Password" formControlName="cpwd" name="cpwd">
+            <small class="label label-danger" *ngIf="invalid('cpwd') && f.cpwd.hasError('required')">Confirm Password is required</small>
+            <small class="label label-danger" *ngIf="invalid('cpwd') && f.cpwd.hasError('wrongpwd')">Password does not match</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="overlay" *ngIf="isloading">
+        <i class="fa fa-refresh fa-spin"></i>
+      </div>
+
+      <div class="box-footer">
+        <div class="pull-right">
+          <button type="submit" class="btn btn-primary" [disabled]="mform.invalid">Save Changes</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
