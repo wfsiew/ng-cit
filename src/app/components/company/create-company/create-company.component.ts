@@ -251,6 +251,7 @@ export class CreateCompanyComponent implements OnInit {
       };
     });
     const o = {
+      company_id: 0,
       company_account_code: f.company_account_code,
       company_code: f.company_code,
       company_name: f.company_name,
@@ -261,18 +262,32 @@ export class CreateCompanyComponent implements OnInit {
       is_cod: f.is_cod,
       is_active: true,
       label_default: 'A4',
-      address_id: this.selectedAddress.id,
+      address_id: this.isEdit ? this.data.address : this.selectedAddress.id,
       company_service_list: lx
     };
     this.isloading = true;
-    this.companyService.createCompany(o).subscribe(res => {
-      this.isloading = false;
-      this.toastr.success('New Company successfully created', 'Create Company');
-    },
-    (error) => {
-      this.isloading = false;
-      this.toastr.error('Create Company Failed', 'Create Company');
-    });
+    if (!this.isEdit) {
+      this.companyService.createCompany(o).subscribe(res => {
+        this.isloading = false;
+        this.toastr.success('New Company successfully created', 'Create Company');
+      },
+      (error) => {
+        this.isloading = false;
+        this.toastr.error('Create Company Failed', 'Create Company');
+      });
+    }
+    
+    else {
+      o.company_id = this.data.company_id;
+      this.companyService.updateCompany(o).subscribe(res => {
+        this.isloading = false;
+        this.toastr.success('Company successfully updated', 'Update Company');
+      },
+      (error) => {
+        this.isloading = false;
+        this.toastr.error('Update Company Failed', 'Update Company');
+      });
+    }
   }
 
   onBack() {

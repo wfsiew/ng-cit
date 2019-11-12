@@ -47,12 +47,12 @@ export class CompanyService {
     return this.http.get(`${this.baseUrl}/api/company/details`);
   }
 
-  addCompanyAndService(o) {
+  addCompanyService(o) {
     return this.http.post(`${this.baseUrl}/api/company/add_service`, o);
   }
 
-  updateCompanyAndService(o) {
-    return this.http.post(`${this.baseUrl}/api/company/update`, o);
+  updateCompany(o) {
+    return this.http.put(`${this.baseUrl}/api/company/update`, o);
   }
 
   listUser(company_id, pending: boolean = false, value = '') {

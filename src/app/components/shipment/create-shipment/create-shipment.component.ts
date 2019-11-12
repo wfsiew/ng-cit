@@ -178,9 +178,9 @@ export class CreateShipmentComponent implements OnInit {
       this.countryList = res.response;
       this.loadUserDetails();
     });
-    this.lookupService.listService().subscribe((res: any) => {
-      this.serviceList = res.data;
-    });
+    // this.lookupService.listService().subscribe((res: any) => {
+    //   this.serviceList = res.data;
+    // });
     this.lookupService.listUOM().subscribe((res: any) => {
       this.uomList = res.data;
     });
@@ -200,6 +200,7 @@ export class CreateShipmentComponent implements OnInit {
   loadCompanyProfile(id) {
     this.companyService.getCompany(id).subscribe((res: any) => {
       this.data = !_.isEmpty(res.data) ? res.data[0] : {};
+      this.serviceList = this.data.company_service_list;
       this.setForm();
       this.loadShipment();
     },
