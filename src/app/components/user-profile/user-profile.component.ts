@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { LookupService } from 'src/app/services/lookup.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { UserService } from 'src/app/services/user.service';
 import _ from 'lodash';
 import { ToastrService } from 'ngx-toastr';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
@@ -16,6 +17,7 @@ import { AddressBookModalComponent } from 'src/app/shared/components/address-boo
 })
 export class UserProfileComponent implements OnInit {
 
+  isloading = false;
   countryList = [];
   mform: FormGroup;
   data: any;
@@ -27,6 +29,7 @@ export class UserProfileComponent implements OnInit {
     private router: Router,
     private lookupService: LookupService,
     private authService: AuthService,
+    private userService: UserService,
     private toastr: ToastrService,
     private modalService: BsModalService
   ) {
@@ -42,15 +45,18 @@ export class UserProfileComponent implements OnInit {
       company_code: new FormControl({ value: '', disabled: true }),
       company_name: new FormControl({ value: '', disabled: true }),
       userid: new FormControl({ value: '', disabled: true }),
-      email: new FormControl({ value: '', disabled: true }),
-      name: ['', [Validators.required]],
+      username: new FormControl({ value: '', disabled: true }),
+      first_name: ['', [Validators.required]],
+      last_name: ['', [Validators.required]],
+      email: ['', [Validators.required]],
       phone: ['', [Validators.required]],
-      addr1: ['', [Validators.required]],
-      addr2: [''],
-      postcode: ['', [Validators.required]],
-      city: ['', [Validators.required]],
-      state: ['', [Validators.required]],
-      country: ['MY', [Validators.required]]
+      date_of_birth: [null, [Validators.required]],
+      addr1: new FormControl({ value: '', disabled: true }),
+      addr2: new FormControl({ value: '', disabled: true }),
+      postcode: new FormControl({ value: '', disabled: true }),
+      city: new FormControl({ value: '', disabled: true }),
+      state: new FormControl({ value: '', disabled: true }),
+      country: new FormControl({ value: '', disabled: true })
     });
   }
 
@@ -66,10 +72,13 @@ export class UserProfileComponent implements OnInit {
     this.mform.patchValue({
       company_code: o.company_code,
       company_name: o.company_name,
-      userid: o.username,
+      userid: o.id,
+      username: o.username,
+      first_name: o.first_name,
+      last_name: o.last_name,
       email: o.email,
-      name: `${o.first_name} ${o.last_name}`,
       phone: o.phone_number,
+      date_of_birth: new Date(o.date_of_birth),
       addr1: o.company_address1,
       addr2: o.company_address2,
       postcode: o.company_postcode,
@@ -142,9 +151,27 @@ export class UserProfileComponent implements OnInit {
   }
 
   onSubmit() {
+    const x = this.data;
+    const f = this.mform.value;
     const o = {
-
+      first_name: f.first_name,
+      last_name: f.last_name,
+      email: f.email,
+      date_of_birth: Helper.getDateStr(f.date_of_birth),
+      is_active: x.is_active,
+      company_id: x.company_id,
+      username: x.username,
+      user_id: x.id
     };
+    this.isloading = true;
+    this.userService.updateUser(o).subscribe((res: any) =>{
+      this.isloading = false;
+      this.toastr.success('Profile successfully updated');
+    },
+    (error) => {
+      this.isloading = false;
+      this.toastr.error('Update Profile Failed');
+    });
   }
 
   onChangePwd() {

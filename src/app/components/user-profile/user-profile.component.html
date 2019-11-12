@@ -29,23 +29,55 @@
           </div>
         </div>
         <div class="form-group">
-          <label class="col-sm-3 control-label">Email</label>
+          <label class="col-sm-3 control-label">Username</label>
           <div class="col-sm-9">
-            <input type="email" class="form-control" placeholder="Email" formControlName="email" name="email">
+            <input type="text" class="form-control" placeholder="Username" formControlName="username" name="username">
           </div>
         </div>
         <div class="form-group">
-          <label class="col-sm-3 control-label">Name</label>
+          <label class="col-sm-3 control-label">First Name</label>
           <div class="col-sm-9">
-            <input type="text" class="form-control" placeholder="Name" formControlName="name" name="name">
+            <input type="text" class="form-control" placeholder="First Name" formControlName="first_name" name="first_name">
+            <small class="label label-danger" *ngIf="invalid('first_name') && f.first_name.hasError('required')">First Name is required</small>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label">Last Name</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" placeholder="Last Name" formControlName="last_name" name="last_name">
+            <small class="label label-danger" *ngIf="invalid('last_name') && f.last_name.hasError('required')">Last Name is required</small>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label">Email</label>
+          <div class="col-sm-9">
+            <input type="email" class="form-control" placeholder="Email" formControlName="email" name="email">
+            <small class="label label-danger" *ngIf="invalid('email') && f.email.hasError('required')">Email is required</small>
           </div>
         </div>
         <div class="form-group">
           <label class="col-sm-3 control-label">Phone number</label>
           <div class="col-sm-9">
             <input type="tel" class="form-control" placeholder="Phone number" formControlName="phone" name="phone">
+            <small class="label label-danger" *ngIf="invalid('phone') && f.phone.hasError('required')">Phone number is required</small>
           </div>
         </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label">Date of Birth</label>
+          <div class="col-sm-3">
+            <div class="input-group">
+              <input type="text" class="form-control" formControlName="date_of_birth" name="date_of_birth" bsDatepicker #dp="bsDatepicker"
+                [bsConfig]="{ containerClass: 'theme-blue', dateInputFormat: 'YYYY-MM-DD' }">
+              <div class="input-group-btn">
+                <button type="button" class="btn btn-default" (click)="dp.show()" [attr.aria-expanded]="dp.isOpen">
+                  <i class="fa fa-calendar"></i>
+                </button>
+              </div>
+            </div>
+            <small class="label label-danger" *ngIf="invalid('date_of_birth') && f.date_of_birth.hasError('required')">Date of Birth is required</small>
+          </div>
+        </div>
+
         <div class="form-group">
           <label class="col-sm-3 control-label">Default Shipper Address</label>
           <div class="col-sm-9">
@@ -89,6 +121,10 @@
               name="country"></ng-select>
           </div>
         </div>
+      </div>
+
+      <div class="overlay" *ngIf="isloading">
+        <i class="fa fa-refresh fa-spin"></i>
       </div>
 
       <div class="box-footer">
