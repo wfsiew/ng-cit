@@ -15,4 +15,8 @@ export class UserService {
   createUser(o) {
     return this.http.post(`${this.baseUrl}/api/user/create`, o);
   }
+
+  changePwd(o) {
+    return this.http.post(`${this.baseUrl}/api/user/change-password`, o);
+  }
 }
