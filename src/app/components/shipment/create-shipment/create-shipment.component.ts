@@ -12,6 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Helper } from 'src/app/shared/utils/helper';
 import { AddressBookModalComponent } from 'src/app/shared/components/address-book-modal/address-book-modal.component';
+import * as FileSaver from 'file-saver'; 
 
 @Component({
   selector: 'app-create-shipment',
@@ -556,21 +557,12 @@ export class CreateShipmentComponent implements OnInit {
   }
 
   onPrintShipment() {
-    // if (_.isEmpty(this.datax)) {
-    //   return;
-    // }
+    if (_.isEmpty(this.datax)) {
+      return;
+    }
 
-    // this.shipmentService.printLabel(this.datax.consignment_no, AppConstant.PRINT_TYPE.NEWCONSIGNMENTNOTE).subscribe((res: any) => {
-    //   console.log(res);
-    // },
-    // (error) => {
-    //   this.toastr.error('Print Shipment Faled');
-    // });
-
-    let tab = window.open();
-    this.shipmentService.printLabel('MYC0100049707', AppConstant.PRINT_TYPE.NEWCONSIGNMENTNOTE).subscribe((res: any) => {
-      const s = URL.createObjectURL(res);
-      tab.location.href = s;
+    this.shipmentService.printLabel(this.datax.consignment_no, AppConstant.PRINT_TYPE.NEWCONSIGNMENTNOTE).subscribe((res: any) => {
+      FileSaver.saveAs(res, `${this.datax.consignment_no}.pdf`);
     },
     (error) => {
       this.toastr.error('Print Shipment Faled');

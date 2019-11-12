@@ -3,10 +3,12 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { ShipmentService } from 'src/app/services/shipment.service';
 import { CompanyService } from 'src/app/services/company.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { AppConstant } from 'src/app/shared/constants/app.constant';
 import _ from 'lodash';
 import { ToastrService } from 'ngx-toastr';
 import { Helper } from 'src/app/shared/utils/helper';
+import * as FileSaver from 'file-saver'; 
 
 @Component({
   selector: 'app-detail-shipment',
@@ -30,6 +32,7 @@ export class DetailShipmentComponent implements OnInit {
   constructor(
     private shipmentService: ShipmentService,
     private companyService: CompanyService,
+    private authService: AuthService,
     private toastr: ToastrService,
     private route: ActivatedRoute,
     private loc: Location
@@ -43,11 +46,22 @@ export class DetailShipmentComponent implements OnInit {
   }
 
   load() {
-    this.loadCompanyProfile();
+    this.loadUserDetails();
   }
 
-  loadCompanyProfile() {
-    this.companyService.getCompanyDetails().subscribe((res: any) => {
+  loadUserDetails() {
+    this.authService.getUserDetails().subscribe((res: any) => {
+      let user = !_.isEmpty(res.data) ? res.data[0] : {};
+      let company_id = user.company_id;
+      this.loadCompanyProfile(company_id);
+    },
+    (error) => {
+      this.toastr.error('Load User Details Failed', 'Create Shipment');
+    });
+  }
+
+  loadCompanyProfile(id) {
+    this.companyService.getCompany(id).subscribe((res: any) => {
       this.data = !_.isEmpty(res.data) ? res.data[0] : {};
       this.loadShipment();
     },
@@ -90,7 +104,12 @@ export class DetailShipmentComponent implements OnInit {
       return;
     }
 
-    this.shipmentService.printLabel(this.datax.consignment_no, AppConstant.PRINT_TYPE.SHIPPING_LABEL);
+    this.shipmentService.printLabel(this.datax.consignment_no, AppConstant.PRINT_TYPE.NEWCONSIGNMENTNOTE).subscribe((res: any) => {
+      FileSaver.saveAs(res, `${this.datax.consignment_no}.pdf`);
+    },
+    (error) => {
+      this.toastr.error('Print Shipment Faled');
+    });
   }
 
   onBack() {
