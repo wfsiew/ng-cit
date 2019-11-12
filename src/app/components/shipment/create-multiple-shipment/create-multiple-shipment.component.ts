@@ -85,7 +85,7 @@ export class CreateMultipleShipmentComponent implements OnInit {
       this.loadCompanyProfile(company_id);
     },
     (error) => {
-      this.toastr.error('Load User Details Failed', 'Create Shipment');
+      this.toastr.error('Load User Details Failed', 'Create Multiple Shipment');
     });
   }
 
@@ -96,7 +96,7 @@ export class CreateMultipleShipmentComponent implements OnInit {
       this.setForm();
     },
     (error) => {
-      this.toastr.error('Load Company Detail Failed', 'Company Detail');
+      this.toastr.error('Load Company Detail Failed');
     });
   }
 
@@ -157,20 +157,21 @@ export class CreateMultipleShipmentComponent implements OnInit {
       formData.append('pickup_date', Helper.getDateStr(f.pickup_date.value));
     }
 
-    //this.isloading = true;
+    this.isloading = true;
     this.shipmentService.uploadShipment(formData).subscribe((res: any) => {
       this.uploadResponse = res;
       if (res.gotError === true) {
+        this.isloading = false;
         this.toastr.error('Error Detected in Import File, please amend and re-upload', 'Upload Shipment');
       }
 
       else if (res.gotError === false) {
+        this.isloading = false;
         this.toastr.success('Upload Shipment successful', 'Upload Shipment');
       }
-      // this.isloading = false;
     },
     (error) => {
-      //this.isloading = false;
+      this.isloading = false;
       this.toastr.error('Upload Shipment Failed', 'Upload Shipment');
     })
   }

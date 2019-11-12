@@ -106,6 +106,10 @@
       </div>
     </form>
 
+    <div class="overlay" *ngIf="isloading">
+      <i class="fa fa-refresh fa-spin"></i>
+    </div>
+
     <div *ngIf="uploadResponse.gotError === true" class="callout callout-danger">
       <ng-container *ngFor="let o of uploadResponse.data; let k = index">
         <div *ngFor="let i of o.error" class="alert alert-danger">

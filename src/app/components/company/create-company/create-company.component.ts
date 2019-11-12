@@ -80,7 +80,7 @@ export class CreateCompanyComponent implements OnInit {
       is_do: [false],
       is_cod: [false],
       parent_company_account_code: [''],
-      cdefault: ['0']
+      cdefault: ['A4']
     });
   }
 
@@ -110,7 +110,7 @@ export class CreateCompanyComponent implements OnInit {
       is_do: o.is_do,
       is_cod: o.is_cod,
       parent_company_account_code: o.parent_company_account_code,
-      cdefault: '1'
+      cdefault: o.company_label_default
     });
   }
 
@@ -193,12 +193,33 @@ export class CreateCompanyComponent implements OnInit {
     this.parent_company_id = o.company_id;
   }
 
+  setPostcodeValidator(country_code, field) {
+    let o = _.find(this.countryList, { country_code: country_code });
+    if (_.isUndefined(o)) {
+      this.mform.get(field).setValidators([
+        Validators.required
+      ]);
+      this.mform.updateValueAndValidity();
+    }
+
+    else if (!o.regrex) {
+      this.mform.get(field).setValidators([
+        Validators.required
+      ]);
+      this.mform.updateValueAndValidity();
+    }
+
+    else if (o.regrex) {
+      this.mform.get(field).setValidators([
+        Validators.required,
+        Validators.pattern(o.regrex)
+      ]);
+      this.mform.updateValueAndValidity();
+    }
+  }
+
   onCountryChange() {
-    this.mform.get('company_postcode').setValidators([
-      Validators.required,
-      Validators.pattern(Helper.getPostcodePattern(this.f.company_country.value))
-    ]);
-    this.mform.updateValueAndValidity();
+    this.setPostcodeValidator(this.f.company_country.value, 'company_postcode');
   }
 
   addService() {

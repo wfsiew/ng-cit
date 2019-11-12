@@ -58,7 +58,7 @@ export class CreateCompanyProfileComponent implements OnInit {
       is_do: [false],
       is_cod: [false],
       parent_company_account_code: [''],
-      cdefault: ['0']
+      cdefault: ['A4']
     });
   }
 
@@ -87,8 +87,9 @@ export class CreateCompanyProfileComponent implements OnInit {
       is_do: o.is_do,
       is_cod: o.is_cod,
       parent_company_account_code: o.parent_company_account_code,
-      cdefault: '1'
+      cdefault: o.company_label_default
     });
+    alert(o.company_label_default)
   }
 
   load() {

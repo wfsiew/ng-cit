@@ -157,6 +157,7 @@ export class UserProfileComponent implements OnInit {
       first_name: f.first_name,
       last_name: f.last_name,
       email: f.email,
+      phone_number: f.phone,
       date_of_birth: Helper.getDateStr(f.date_of_birth),
       is_active: x.is_active,
       company_id: x.company_id,
