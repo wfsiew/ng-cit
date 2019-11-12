@@ -51,7 +51,7 @@ export class CreateMultipleShipmentComponent implements OnInit {
       company_name: new FormControl({ value: '', disabled: true }),
       service_type: ['', [Validators.required]],
       currency: ['MYR', [Validators.required]],
-      pickup_date: [new Date()],
+      pickup_date: [null],
       shipper_address_id: ['', [Validators.required]],
       origin_shipper_name: ['', [Validators.required]],
       file: [null]
