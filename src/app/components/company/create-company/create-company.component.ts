@@ -265,6 +265,11 @@ export class CreateCompanyComponent implements OnInit {
 
   onSubmit() {
     const f = this.mform.value;
+    let address_id = this.data.address;
+    if (this.selectedAddress) {
+      address_id = this.selectedAddress.id;
+    }
+
     let lx = _.map(this.data.company_service_list, (k) => {
       return {
         service_id: k.service_id,
@@ -283,8 +288,8 @@ export class CreateCompanyComponent implements OnInit {
       is_cod: f.is_cod,
       is_active: true,
       label_default: f.cdefault,
-      address_id: this.isEdit ? this.data.address : this.selectedAddress.id,
-      address: this.isEdit ? this.data.address : this.selectedAddress.id,
+      address_id: address_id,
+      address: address_id,
       company_service_list: lx
     };
     this.isloading = true;
