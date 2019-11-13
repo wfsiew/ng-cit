@@ -103,7 +103,7 @@ export class CreateCompanyComponent implements OnInit {
       company_pic_phone_number: o.company_pic_phone_number,
       company_address1: o.company_address1,
       company_address2: o.company_address2,
-      company_postcode: o.company_postcode,
+      company_postcode: o.company_post_code,
       company_city: o.company_city,
       company_state_province: o.company_state_province,
       company_country: s,
