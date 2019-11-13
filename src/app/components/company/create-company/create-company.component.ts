@@ -116,7 +116,7 @@ export class CreateCompanyComponent implements OnInit {
 
   loadUser() {
     this.user = this.authService.loadUser();
-    this.canEdit = this.user.role === AppConstant.ROLE.ADMIN || this.user.role === AppConstant.ROLE.SUPERUSER;
+    this.canEdit = this.user.role === AppConstant.ROLE.ADMIN;
     this.load();
   }
 
