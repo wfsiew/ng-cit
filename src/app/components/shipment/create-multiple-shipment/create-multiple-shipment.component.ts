@@ -168,6 +168,7 @@ export class CreateMultipleShipmentComponent implements OnInit {
       else if (res.gotError === false) {
         this.isloading = false;
         this.toastr.success('Upload Shipment successful', 'Upload Shipment');
+        this.onBack();
       }
     },
     (error) => {

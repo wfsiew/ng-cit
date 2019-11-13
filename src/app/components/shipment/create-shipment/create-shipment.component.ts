@@ -530,6 +530,7 @@ export class CreateShipmentComponent implements OnInit {
       this.shipmentService.createShipment(o).subscribe(res => {
         this.isloading = false;
         this.toastr.success('New Shipment successfully created', 'Create Shipment');
+        this.onBack();
       },
       (error) => {
         this.isloading = false;
@@ -548,6 +549,7 @@ export class CreateShipmentComponent implements OnInit {
       this.shipmentService.updateShipment(o).subscribe(res => {
         this.isloading = false;
         this.toastr.success('Shipment successfully updated', 'Update Shipment');
+        this.onBack();
       },
       (error) => {
         this.isloading = false;

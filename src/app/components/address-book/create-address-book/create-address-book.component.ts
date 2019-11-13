@@ -180,6 +180,7 @@ export class CreateAddressBookComponent implements OnInit {
           isdefault: false,
           isprivate: false
         });
+        this.onBack();
       },
       (error) => {
         this.isloading = false;
@@ -192,6 +193,7 @@ export class CreateAddressBookComponent implements OnInit {
       this.addressBookService.updateAddressBook(o).subscribe(res => {
         this.isloading = false;
         this.toastr.success('Address Book successfully updated', 'Update Address Book');
+        this.onBack();
       },
       (error) => {
         this.isloading = false;

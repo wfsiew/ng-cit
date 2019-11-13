@@ -291,6 +291,7 @@ export class CreateCompanyComponent implements OnInit {
       this.companyService.createCompany(o).subscribe(res => {
         this.isloading = false;
         this.toastr.success('New Company successfully created', 'Create Company');
+        this.onBack();
       },
       (error) => {
         this.isloading = false;
@@ -303,6 +304,7 @@ export class CreateCompanyComponent implements OnInit {
       this.companyService.updateCompany(o).subscribe(res => {
         this.isloading = false;
         this.toastr.success('Company successfully updated', 'Update Company');
+        this.onBack();
       },
       (error) => {
         this.isloading = false;
