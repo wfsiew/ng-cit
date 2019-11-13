@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from 'src/app/services/auth.service';
 import _ from 'lodash';
-import { User } from '../../shared/models/user';
+import { User } from 'src/app/shared/models/user';
+import { AppConstant } from 'src/app/shared/constants/app.constant';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,9 @@ export class HomeComponent implements OnInit {
   menu: string;
   address_book: boolean;
   data: any = {};
-  user: User
+  user: User;
+
+  readonly ROLE = AppConstant.ROLE;
 
   constructor(
     private router: Router,

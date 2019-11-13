@@ -103,7 +103,7 @@
           </ul>
         </li>
 
-        <li [ngClass]="{'active': menu === 'company'}">
+        <li [ngClass]="{'active': menu === 'company'}" *ngIf="user.role !== ROLE.USER">
           <a href="#" (click)="goto('company-list', 'company/list')">
             <i class="fa fa-user-circle-o"></i> <span>Company</span>
           </a>

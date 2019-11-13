@@ -2,10 +2,12 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CompanyService } from 'src/app/services/company.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { MessageService } from 'src/app//services/message.service';
 import { AppConstant } from 'src/app/shared/constants/app.constant';
 import _ from 'lodash';
 import { ToastrService } from 'ngx-toastr';
+import { User } from 'src/app/shared/models/user';
 import { Helper } from 'src/app/shared/utils/helper';
 
 @Component({
@@ -22,14 +24,17 @@ export class ListCompanyComponent implements OnInit, OnDestroy {
   search = '';
   sort = 'company_account_code';
   sort_dir = 'desc';
+  user: User;
   subs: Subscription;
 
   readonly isEmpty = Helper.isEmpty;
   readonly PAGE_SIZE = AppConstant.PAGE_SIZE;
+  readonly ROLE = AppConstant.ROLE;
 
   constructor(
     private router: Router,
     private companyService: CompanyService,
+    private authService: AuthService,
     private msService: MessageService,
     private toastr: ToastrService
   ) {
@@ -54,6 +59,7 @@ export class ListCompanyComponent implements OnInit, OnDestroy {
 
   load() {
     this.isloading = true;
+    this.user = this.authService.loadUser();
     this.companyService.listCompany(this.page, AppConstant.PAGE_SIZE, this.sort, this.sort_dir, this.search).subscribe((res: any) => {
       this.list = res.status ? res.data : [];
       this.itemsCount = res.status ? res.recordsTotal : 0;
