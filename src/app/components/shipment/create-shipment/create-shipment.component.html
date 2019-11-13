@@ -85,18 +85,20 @@
           <div class="col-sm-4">
             
           </div>
-          <div class="col-sm-2" *ngIf="data.is_cod">
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" formControlName="is_cod" name="is_cod"> COD Required
-              </label>
+          <ng-container *ngIf="data.is_cod">
+            <div class="col-sm-2">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" formControlName="is_cod" name="is_cod"> COD Required
+                </label>
+              </div>
             </div>
-          </div>
-          <label class="col-sm-2 control-label">COD Value</label>
-          <div class="col-sm-2">
-            <input type="text" class="form-control" placeholder="COD Value" formControlName="cod_value" name="cod_value">
-            <small class="label label-danger" *ngIf="invalid('cod_value') && f.cod_value.hasError('required')">COD Value is required</small>
-          </div>
+            <label class="col-sm-2 control-label">COD Value</label>
+            <div class="col-sm-2">
+              <input type="text" class="form-control" placeholder="COD Value" formControlName="cod_value" name="cod_value">
+              <small class="label label-danger" *ngIf="invalid('cod_value') && f.cod_value.hasError('required')">COD Value is required</small>
+            </div>
+          </ng-container>"
         </div>
 
         <div class="form-group">
