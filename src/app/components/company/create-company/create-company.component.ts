@@ -283,6 +283,7 @@ export class CreateCompanyComponent implements OnInit {
       is_cod: f.is_cod,
       is_active: true,
       label_default: 'A4',
+      address_id: this.isEdit ? this.data.address : this.selectedAddress.id,
       address: this.isEdit ? this.data.address : this.selectedAddress.id,
       company_service_list: lx
     };
