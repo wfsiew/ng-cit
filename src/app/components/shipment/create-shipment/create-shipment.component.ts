@@ -527,10 +527,10 @@ export class CreateShipmentComponent implements OnInit {
 
     this.isloading = true;
     if (!this.isEdit) {
-      this.shipmentService.createShipment(o).subscribe(res => {
+      this.shipmentService.createShipment(o).subscribe((res: any) => {
         this.isloading = false;
         this.toastr.success('New Shipment successfully created', 'Create Shipment');
-        this.onBack();
+        this.router.navigate(['/cit/shipment/detail', res.shipment_id]);
       },
       (error) => {
         this.isloading = false;

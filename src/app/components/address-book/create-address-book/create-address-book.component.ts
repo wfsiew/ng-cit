@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { LookupService } from '../../../services/lookup.service';
@@ -34,6 +34,7 @@ export class CreateAddressBookComponent implements OnInit {
     private msService: MessageService,
     private toastr: ToastrService,
     private route: ActivatedRoute,
+    private router: Router,
     private loc: Location
   ) {
     this.createForm();
@@ -180,7 +181,7 @@ export class CreateAddressBookComponent implements OnInit {
           isdefault: false,
           isprivate: false
         });
-        this.onBack();
+        this.router.navigate(['/cit/address-book/list']);
       },
       (error) => {
         this.isloading = false;
