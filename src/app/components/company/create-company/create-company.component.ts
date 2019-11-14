@@ -112,6 +112,7 @@ export class CreateCompanyComponent implements OnInit {
       parent_company_account_code: o.parent_company_account_code,
       cdefault: o.company_label_default
     });
+    this.onParentCompanyChange();
   }
 
   loadUser() {
@@ -123,6 +124,7 @@ export class CreateCompanyComponent implements OnInit {
   load() {
     this.companyService.listCompany(1, 100000, 'company_account_code', '').subscribe((res: any) => {
       this.companyList = res.data;
+      console.log(this.companyList)
     });
     this.lookupService.listService().subscribe((res: any) => {
       this.serviceList = res.data;
@@ -187,9 +189,7 @@ export class CreateCompanyComponent implements OnInit {
 
   onParentCompanyChange() {
     const x = this.f.parent_company_account_code.value;
-    let o = _.find(this.companyList, (k) => {
-      return k.account_code === x;
-    });
+    let o = _.find(this.companyList, { account_code: x });
     this.parent_company_id = o.company_id;
   }
 

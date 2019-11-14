@@ -36,6 +36,7 @@ export class CreateShipmentComponent implements OnInit {
   selectedAddressShipper: any;
   selectedAddressReceiver: any;
   isEdit = false;
+  isView = false;
   title = 'Create';
 
   readonly isEmpty = Helper.isEmpty;
@@ -58,6 +59,7 @@ export class CreateShipmentComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.id = params.get('id');
+      this.isView = params.get('view') === '0' ? true : false;
       if (!_.isNull(this.id)) {
         this.isEdit = true;
         this.title = 'Edit';
@@ -78,8 +80,8 @@ export class CreateShipmentComponent implements OnInit {
       customer_reference: ['', [Validators.required]],
       is_insurance_req: [false],
       is_do: [false],
-      is_cod: [true],
-      cod_value: ['10.00', [Validators.required, Validators.pattern(AppConstant.VALIDATE.AMOUNT)]],
+      is_cod: [false],
+      cod_value: ['0.00', [Validators.required, Validators.pattern(AppConstant.VALIDATE.AMOUNT)]],
       total_package_no: ['', [Validators.required, Validators.pattern(AppConstant.VALIDATE.NUMBER)]],
       total_weight: ['', [Validators.required, Validators.pattern(AppConstant.VALIDATE.AMOUNT)]],
 
@@ -247,6 +249,10 @@ export class CreateShipmentComponent implements OnInit {
   }
 
   onGetAddressShipper() {
+    if (this.isView) {
+      return false;
+    }
+
     const state = {
       title: 'Address Book'
     };
@@ -266,6 +272,10 @@ export class CreateShipmentComponent implements OnInit {
   }
 
   onGetAddressReceiver() {
+    if (this.isView) {
+      return false;
+    }
+
     const state = {
       title: 'Address Book'
     };
@@ -532,7 +542,7 @@ export class CreateShipmentComponent implements OnInit {
       this.shipmentService.createShipment(o).subscribe((res: any) => {
         this.isloading = false;
         this.toastr.success('New Shipment successfully created', 'Create Shipment');
-        this.router.navigate(['/cit/shipment/detail', res.shipment_id]);
+        this.router.navigate(['/cit/shipment/detail', res.shipment_id, 0]);
       },
       (error) => {
         this.isloading = false;
@@ -597,5 +607,65 @@ export class CreateShipmentComponent implements OnInit {
 
   get isPrintDisabled() {
     return false;
+  }
+
+  get service_type() {
+    let p = this.datax.service_type;
+    let s = p;
+    if (Helper.isEmpty(p)) {
+      return p;
+    }
+
+    let o = _.find(this.serviceList, { service_code: p });
+    if (!_.isUndefined(o)) {
+      s = o.service_description;
+    }
+
+    return s;
+  }
+
+  get packaging_type() {
+    let p = this.datax.packaging_type;
+    let s = p;
+    if (Helper.isEmpty(p)) {
+      return p;
+    }
+
+    let o = _.find(this.uomList, { code: p });
+    if (!_.isUndefined(o)) {
+      s = o.description;
+    }
+
+    return s;
+  }
+
+  get origin_shipper_country() {
+    let country = this.datax.origin_shipper_country;
+    let s = country;
+    if (Helper.isEmpty(country)) {
+      return country;
+    }
+
+    let o = _.find(this.countryList, { country_code: country });
+    if (!_.isUndefined(o)) {
+      s = o.country_name;
+    }
+
+    return s;
+  }
+
+  get dest_receiver_country() {
+    let country = this.datax.dest_receiver_country;
+    let s = country;
+    if (Helper.isEmpty(country)) {
+      return country;
+    }
+
+    let o = _.find(this.countryList, { country_code: country });
+    if (!_.isUndefined(o)) {
+      s = o.country_name;
+    }
+
+    return s;
   }
 }
