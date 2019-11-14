@@ -71,6 +71,7 @@ export class CreateShipmentComponent implements OnInit {
     this.mform = this.fb.group({
       company_account_code: new FormControl({ value: '', disabled: true }),
       company_name: new FormControl({ value: '', disabled: true }),
+      consignment_no: new FormControl({ value: '', disabled: true }),
       service_type: ['', [Validators.required]],
       uom: ['', [Validators.required]],
       pickup_date: [null],
@@ -116,6 +117,7 @@ export class CreateShipmentComponent implements OnInit {
   setFormEdit() {
     const o = this.datax;
     this.mform.patchValue({
+      consignment_no: o.consignment_no,
       service_type: o.service_type,
       uom: o.packaging_type,
       customer_reference: o.customer_reference,
