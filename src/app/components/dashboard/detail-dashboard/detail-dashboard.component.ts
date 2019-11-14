@@ -49,4 +49,12 @@ export class DetailDashboardComponent implements OnInit {
   onBack() {
     this.loc.back();
   }
+
+  get podimage() {
+    return `http://citflask.fmx.asia//dashboard/image/${this.consignment_no}`;
+  }
+
+  get doimage() {
+    return `http://citflask.fmx.asia//dashboard/image/do/${this.consignment_no}`;
+  }
 }
