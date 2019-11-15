@@ -23,6 +23,7 @@ export class CreateAddressBookComponent implements OnInit {
   data: any;
   id: string;
   isEdit = false;
+  isView = false;
   title = 'Create';
   privateval = '0';
   subs: Subscription;
@@ -46,6 +47,7 @@ export class CreateAddressBookComponent implements OnInit {
     });
     this.route.paramMap.subscribe(params => {
       this.id = params.get('id');
+      this.isView = params.get('view') === '0' ? true : false;
       if (!_.isNull(this.id)) {
         this.isEdit = true;
         this.title = 'Edit';
@@ -214,5 +216,20 @@ export class CreateAddressBookComponent implements OnInit {
   invalid(s: string) {
     const m = this.mform.controls[s];
     return m.invalid && (m.dirty || m.touched);
+  }
+
+  get country() {
+    let country = this.data.country;
+    let s = country;
+    if (Helper.isEmpty(country)) {
+      return country;
+    }
+
+    let o = _.find(this.countryList, { country_code: country });
+    if (!_.isUndefined(o)) {
+      s = o.country_name;
+    }
+
+    return s;
   }
 }

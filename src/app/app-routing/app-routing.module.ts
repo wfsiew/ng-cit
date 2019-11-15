@@ -44,6 +44,7 @@ const routes: Routes = [
           { path: 'create', component: CreateCompanyComponent, canActivate: [AuthGuardService] },
           { path: 'list', component: ListCompanyComponent, canActivate: [AuthGuardService] },
           { path: 'edit/:id', component: CreateCompanyComponent, canActivate: [AuthGuardService] },
+          { path: 'detail/:id/:view', component: CreateCompanyComponent, canActivate: [AuthGuardService] },
           { path: 'user',
             children: [
               { path: 'list', component: ListUserComponent, canActivate: [AuthGuardService] }
@@ -75,7 +76,8 @@ const routes: Routes = [
         children: [
           { path: 'create', component: CreateAddressBookComponent, canActivate: [AuthGuardService] },
           { path: 'list', component: ListAddressBookComponent, canActivate: [AuthGuardService] },
-          { path: 'edit/:id', component: CreateAddressBookComponent, canActivate: [AuthGuardService] }
+          { path: 'edit/:id', component: CreateAddressBookComponent, canActivate: [AuthGuardService] },
+          { path: 'detail/:id/:view', component: CreateAddressBookComponent, canActivate: [AuthGuardService] }
         ]
       }
     ]

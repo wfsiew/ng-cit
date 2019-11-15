@@ -23,14 +23,14 @@
         <div class="form-group">
           <label class="col-sm-2 control-label">* Name</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" placeholder="Name" formControlName="name" name="name">
+            <input type="text" class="form-control" placeholder="Name" formControlName="name" name="name" [attr.disabled]="isView ? 1 : null">
             <small class="label label-danger" *ngIf="invalid('name') && f.name.hasError('required')">Name is required</small>
           </div>
         </div>
         <div class="form-group">
           <label class="col-sm-2 control-label">* Phone number</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" placeholder="Phone number" formControlName="phone" name="phone">
+            <input type="text" class="form-control" placeholder="Phone number" formControlName="phone" name="phone" [attr.disabled]="isView ? 1 : null">
             <small class="label label-danger" *ngIf="invalid('phone') && f.phone.hasError('required')">Phone number is
               required</small>
           </div>
@@ -38,20 +38,20 @@
         <div class="form-group">
           <label class="col-sm-2 control-label">* Address 1</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" placeholder="Address 1" formControlName="addr1" name="addr1">
+            <input type="text" class="form-control" placeholder="Address 1" formControlName="addr1" name="addr1" [attr.disabled]="isView ? 1 : null">
             <small class="label label-danger" *ngIf="invalid('addr1') && f.addr1.hasError('required')">Address 1 is required</small>
           </div>
         </div>
         <div class="form-group">
           <label class="col-sm-2 control-label">Address 2</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" placeholder="Address 2" formControlName="addr2" name="addr2">
+            <input type="text" class="form-control" placeholder="Address 2" formControlName="addr2" name="addr2" [attr.disabled]="isView ? 1 : null">
           </div>
         </div>
         <div class="form-group">
           <label class="col-sm-2 control-label">* Postcode</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" placeholder="Postcode" formControlName="postcode" name="postcode">
+            <input type="text" class="form-control" placeholder="Postcode" formControlName="postcode" name="postcode" [attr.disabled]="isView ? 1 : null">
             <small class="label label-danger" *ngIf="invalid('postcode') && f.postcode.hasError('required')">Postcode is
               required</small>
             <small class="label label-danger" *ngIf="invalid('postcode') && f.postcode.hasError('pattern')">Postcode is
@@ -61,35 +61,40 @@
         <div class="form-group">
           <label class="col-sm-2 control-label">* City</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" placeholder="City" formControlName="city" name="city">
+            <input type="text" class="form-control" placeholder="City" formControlName="city" name="city" [attr.disabled]="isView ? 1 : null">
             <small class="label label-danger" *ngIf="invalid('city') && f.city.hasError('required')">City is required</small>
           </div>
         </div>
         <div class="form-group">
           <label class="col-sm-2 control-label">* State</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" placeholder="State" formControlName="state" name="state">
+            <input type="text" class="form-control" placeholder="State" formControlName="state" name="state" [attr.disabled]="isView ? 1 : null">
             <small class="label label-danger" *ngIf="invalid('state') && f.state.hasError('required')">State is required</small>
           </div>
         </div>
         <div class="form-group">
           <label class="col-sm-2 control-label">* Country</label>
           <div class="col-sm-10">
-            <ng-select
-              [items]="countryList" 
-              bindLabel="country_name" 
-              bindValue="country_code" 
-              placeholder="Please select"
-              (change)="onCountryChange()"
-              formControlName="country"
-              name="country"></ng-select>
+            <ng-container *ngIf="isView">
+              <input type="text" class="form-control" disabled [value]="country">
+            </ng-container>
+            <ng-container *ngIf="!isView">
+              <ng-select
+                [items]="countryList" 
+                bindLabel="country_name" 
+                bindValue="country_code" 
+                placeholder="Please select"
+                (change)="onCountryChange()"
+                formControlName="country"
+                name="country"></ng-select>
+            </ng-container>
           </div>
         </div>
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-10">
             <div class="checkbox">
               <label>
-                <input type="checkbox" formControlName="isdefault" name="isdefault"> Default
+                <input type="checkbox" formControlName="isdefault" name="isdefault" [attr.disabled]="isView ? 1 : null"> Default
               </label>
             </div>
           </div>
@@ -98,7 +103,7 @@
           <div class="col-sm-offset-2 col-sm-10">
             <div class="checkbox">
               <label>
-                <input type="checkbox" formControlName="isprivate" name="isprivate"> Private
+                <input type="checkbox" formControlName="isprivate" name="isprivate" [attr.disabled]="isView ? 1 : null"> Private
               </label>
             </div>
           </div>
@@ -111,6 +116,7 @@
 
       <div class="box-footer">
         <div class="pull-right">
+          <button type="button" class="btn btn-primary btn-edit" (click)="isView = false" *ngIf="isView">Edit</button>
           <button type="submit" class="btn btn-primary" [disabled]="mform.invalid">Save Changes</button>
         </div>
       </div>
