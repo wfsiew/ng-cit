@@ -34,6 +34,7 @@ export class CreateCompanyComponent implements OnInit {
   id: string;
   isEdit = false;
   canEdit = false;
+  isView = false;
   user: User;
   parent_company_id = null;
 
@@ -55,6 +56,7 @@ export class CreateCompanyComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.id = params.get('id');
+      this.isView = params.get('isView') === '0' ? true : false;
       if (!_.isNull(this.id)) {
         this.isEdit = true;
       }
@@ -124,7 +126,6 @@ export class CreateCompanyComponent implements OnInit {
   load() {
     this.companyService.listCompany(1, 100000, 'company_account_code', '').subscribe((res: any) => {
       this.companyList = res.data;
-      console.log(this.companyList)
     });
     this.lookupService.listService().subscribe((res: any) => {
       this.serviceList = res.data;
@@ -334,5 +335,35 @@ export class CreateCompanyComponent implements OnInit {
     
     const m = this.mform.controls[s];
     return m.invalid && (m.dirty || m.touched);
+  }
+
+  get country() {
+    let country = this.data.company_country;
+    let s = country;
+    if (Helper.isEmpty(country)) {
+      return country;
+    }
+
+    let o = _.find(this.countryList, { country_code: country });
+    if (!_.isUndefined(o)) {
+      s = o.country_name;
+    }
+
+    return s;
+  }
+
+  get parent_company() {
+    let x = this.data.company_id;
+    let s = x;
+    if (Helper.isEmpty(x)) {
+      return x;
+    }
+
+    let o = _.find(this.companyList, { company_id: x });
+    if (_.isUndefined(o)) {
+      s = o.company_name;
+    }
+
+    return s;
   }
 }

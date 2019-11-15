@@ -15,12 +15,12 @@
           <label class="col-sm-2 control-label">Company Account</label>
           <div class="col-sm-4">
             <input type="text" class="form-control" placeholder="Company Account" formControlName="company_account_code"
-              name="company_account_code" [readonly]="!canEdit">
+              name="company_account_code" [readonly]="!canEdit" [attr.disabled]="isView ? 1 : null">
           </div>
           <label class="col-sm-2 control-label">PIC Name</label>
           <div class="col-sm-4">
             <input type="text" class="form-control" placeholder="PIC Name" formControlName="company_pic_full_name"
-              name="company_pic_full_name" readonly>
+              name="company_pic_full_name" readonly [attr.disabled]="isView ? 1 : null">
           </div>
         </div>
 
@@ -28,12 +28,12 @@
           <label class="col-sm-2 control-label">Company Name</label>
           <div class="col-sm-4">
             <input type="text" class="form-control" placeholder="Company Name" formControlName="company_name"
-              name="company_name" [readonly]="!canEdit">
+              name="company_name" [readonly]="!canEdit" [attr.disabled]="isView ? 1 : null">
           </div>
           <label class="col-sm-2 control-label">PIC Email</label>
           <div class="col-sm-4">
             <input type="email" class="form-control" placeholder="PIC Email" formControlName="company_pic_email"
-              name="company_pic_email" readonly>
+              name="company_pic_email" readonly [attr.disabled]="isView ? 1 : null">
           </div>
         </div>
 
@@ -41,12 +41,12 @@
           <label class="col-sm-2 control-label">Company Code</label>
           <div class="col-sm-4">
             <input type="text" class="form-control" placeholder="Company Code" formControlName="company_code"
-              name="company_code" [readonly]="!canEdit">
+              name="company_code" [readonly]="!canEdit" [attr.disabled]="isView ? 1 : null">
           </div>
           <label class="col-sm-2 control-label">PIC Number</label>
           <div class="col-sm-4">
             <input type="email" class="form-control" placeholder="PIC Number" formControlName="company_pic_phone_number"
-              name="company_pic_phone_number" readonly>
+              name="company_pic_phone_number" readonly [attr.disabled]="isView ? 1 : null">
           </div>
         </div>
 
@@ -54,7 +54,7 @@
           <label class="col-sm-2 control-label">Company Address</label>
           <div class="col-sm-10">
             <input type="text" class="form-control" placeholder="Address 1" formControlName="company_address1"
-              name="company_address1" readonly>
+              name="company_address1" readonly [attr.disabled]="isView ? 1 : null">
           </div>
         </div>
         <div class="form-group">
@@ -65,37 +65,42 @@
           </div>
           <div class="col-sm-10">
             <input type="text" class="form-control" placeholder="Address 2" formControlName="company_address2"
-              name="company_address2" readonly>
+              name="company_address2" readonly [attr.disabled]="isView ? 1 : null">
           </div>
         </div>
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-4">
             <input type="text" class="form-control" placeholder="Postcode" formControlName="company_postcode"
-              name="company_postcode" readonly>
+              name="company_postcode" readonly [attr.disabled]="isView ? 1 : null">
           </div>
         </div>
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-4">
             <input type="text" class="form-control" placeholder="City" formControlName="company_city"
-              name="company_city" readonly>
+              name="company_city" readonly [attr.disabled]="isView ? 1 : null">
           </div>
         </div>
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-4">
             <input type="text" class="form-control" placeholder="State" formControlName="company_state_province"
-              name="company_state_province" readonly>
+              name="company_state_province" readonly [attr.disabled]="isView ? 1 : null">
           </div>
         </div>
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-4">
-            <ng-select 
-              [items]="countryList" 
-              bindLabel="country_name" 
-              bindValue="country_code" 
-              placeholder="Please select"
-              (change)="onCountryChange()" 
-              formControlName="company_country" 
-              name="company_country"></ng-select>
+            <ng-container *ngIf="">
+              <input type="text" class="form-control" disabled [value]="country" />
+            </ng-container>
+            <ng-container *ngIf="!isView">
+              <ng-select 
+                [items]="countryList" 
+                bindLabel="country_name" 
+                bindValue="country_code" 
+                placeholder="Please select"
+                (change)="onCountryChange()" 
+                formControlName="company_country" 
+                name="company_country"></ng-select>
+            </ng-container>
           </div>
         </div>
 
@@ -122,7 +127,7 @@
             </table>
           </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" *ngIf="!isView">
           <div class="col-sm-offset-2 col-sm-3">
             <ng-select 
               [items]="serviceList" 
@@ -141,14 +146,14 @@
           <div class="col-sm-offset-2 col-sm-2">
             <div class="checkbox">
               <label>
-                <input type="checkbox" formControlName="is_do" name="is_do"  [attr.disabled]="canEdit ? null : 1"> DO Required
+                <input type="checkbox" formControlName="is_do" name="is_do"  [attr.disabled]="canEdit && !isView ? null : 1"> DO Required
               </label>
             </div>
           </div>
           <div class="col-sm-2">
             <div class="checkbox">
               <label>
-                <input type="checkbox" formControlName="is_cod" name="is_cod"  [attr.disabled]="canEdit ? null : 1"> COD Enabled
+                <input type="checkbox" formControlName="is_cod" name="is_cod"  [attr.disabled]="canEdit && !isView ? null : 1"> COD Enabled
               </label>
             </div>
           </div>
@@ -157,14 +162,19 @@
         <div class="form-group">
           <label class="col-sm-2 control-label">Parent Company</label>
           <div class="col-sm-4">
-            <ng-select 
-              [items]="companyList" 
-              bindLabel="company_name" 
-              bindValue="account_code"
-              placeholder="Please select"
-              (change)="onParentCompanyChange()" 
-              formControlName="parent_company_account_code"
-              name="parent_company_account_code"></ng-select>
+            <ng-container *ngIf="isView">
+              <input type="text" class="form-control" disabled [value]="parent_company">
+            </ng-container>
+            <ng-container *ngIf="!isView">
+              <ng-select 
+                [items]="companyList" 
+                bindLabel="company_name" 
+                bindValue="account_code"
+                placeholder="Please select"
+                (change)="onParentCompanyChange()" 
+                formControlName="parent_company_account_code"
+                name="parent_company_account_code"></ng-select>
+            </ng-container>
           </div>
         </div>
 
@@ -173,14 +183,14 @@
           <div class="col-sm-1">
             <div class="radio">
               <label>
-                <input type="radio" formControlName="cdefault" name="cdefault" value="A4" [attr.disabled]="canEdit ? null : 1"> A4
+                <input type="radio" formControlName="cdefault" name="cdefault" value="A4" [attr.disabled]="canEdit && !isView ? null : 1"> A4
               </label>
             </div>
           </div>
           <div class="col-sm-2">
             <div class="radio">
               <label>
-                <input type="radio" formControlName="cdefault" name="cdefault" value="Shipping_Label" [attr.disabled]="canEdit ? null : 1"> Shipping Label
+                <input type="radio" formControlName="cdefault" name="cdefault" value="Shipping_Label" [attr.disabled]="canEdit && !isView ? null : 1"> Shipping Label
               </label>
             </div>
           </div>
@@ -193,6 +203,7 @@
 
       <div class="box-footer" *ngIf="canEdit">
         <div class="pull-right">
+          <button type="button" class="btn btn-primary btn-edit" (click)="isView = false" *ngIf="isView">Edit</button>
           <button type="submit" class="btn btn-primary" [disabled]="mform.invalid">Save Changes</button>
         </div>
       </div>
