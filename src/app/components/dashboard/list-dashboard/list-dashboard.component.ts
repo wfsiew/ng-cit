@@ -53,7 +53,7 @@ export class ListDashboardComponent implements OnInit, OnDestroy {
     });
     this.route.queryParams.subscribe(params => {
       this.daterx = [new Date(params['s_date']), new Date(params['e_date'])];
-  });
+    });
   }
 
   ngOnDestroy() {
