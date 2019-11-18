@@ -477,13 +477,13 @@ export class CreateShipmentComponent implements OnInit {
         uom: f.uom.value,
         product_list: []
       }
-   });
-   let orderamt = 0;
-   _.each(this.listGood, (x) => {
-     orderamt += x.value * x.quantity
-   });
+    });
+    let orderamt = 0;
+    _.each(this.listGood, (x) => {
+      orderamt += x.value * x.quantity
+    });
    
-    const o = {
+    let o = {
       id: 0,
       customer_reference: f.customer_reference.value,
       origin_address_id: f.origin_address_id.value,
@@ -557,11 +557,11 @@ export class CreateShipmentComponent implements OnInit {
     }
     
     else {
-      o.id = Number(this.id);
+      o.id = this.datax.id;
       this.shipmentService.updateShipment(o).subscribe(res => {
         this.isloading = false;
         this.toastr.success('Shipment successfully updated', 'Update Shipment');
-        this.onBack();
+        this.router.navigate(['/cit/shipment/detail', o.id, 0]);
       },
       (error) => {
         this.isloading = false;

@@ -152,7 +152,7 @@ export class CreateAddressBookComponent implements OnInit {
 
   onSubmit() {
     const f = this.mform.value;
-    const o = {
+    let o = {
       id: 0,
       type: '',
       country: f.country,
