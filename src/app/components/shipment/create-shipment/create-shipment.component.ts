@@ -557,7 +557,7 @@ export class CreateShipmentComponent implements OnInit {
     }
     
     else {
-      o.id = this.data.id;
+      o.id = this.id;
       this.shipmentService.updateShipment(o).subscribe(res => {
         this.isloading = false;
         this.toastr.success('Shipment successfully updated', 'Update Shipment');
