@@ -499,6 +499,7 @@ export class CreateShipmentComponent implements OnInit {
       origin_shipper_name: f.origin_shipper_name.value,
       origin_shipper_phone_no: f.origin_shipper_phone_no.value,
       origin_shipper_mobile_no: f.origin_shipper_phone_no.value,
+      origin_shipper_contact_name: f.origin_shipper_contact_name.value,
       origin_shipper_email: '',
 
       dest_address_id: f.dest_address_id.value,
@@ -514,6 +515,7 @@ export class CreateShipmentComponent implements OnInit {
       dest_receiver_name: f.dest_receiver_name.value,
       dest_receiver_phone_no: f.dest_receiver_phone_no.value,
       dest_receiver_mobile_no: '-',
+      dest_receiver_contact_name: f.dest_receiver_contact_name.value,
       dest_receiver_email: '',
 
       cod: f.is_cod.value,
