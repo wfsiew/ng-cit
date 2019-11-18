@@ -453,7 +453,7 @@
           <div class="col-sm-2">
             <button type="submit" class="btn btn-primary" [disabled]="mform.invalid || isView">Save Changes</button>
           </div>
-          <div class="col-sm-2" *ngIf="isView">
+          <div class="col-sm-2" *ngIf="isEdit">
             <button type="button" class="btn btn-primary" (click)="onPrintShipment()" [disabled]="isPrintDisabled">Print Shipment</button>
           </div>
         </div>
