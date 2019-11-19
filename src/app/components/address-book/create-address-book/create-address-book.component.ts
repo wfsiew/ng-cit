@@ -3,10 +3,10 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Subscription } from 'rxjs';
-import { LookupService } from '../../../services/lookup.service';
-import { AddressBookService } from '../../../services/address-book.service';
-import { MessageService } from '../../../services/message.service';
-import { Helper } from '../../../shared/utils/helper';
+import { LookupService } from 'src/app/services/lookup.service';
+import { AddressBookService } from 'src/app/services/address-book.service';
+import { MessageService } from 'src/app/services/message.service';
+import { Helper } from 'src/app/shared/utils/helper';
 import _ from 'lodash';
 import { ToastrService } from 'ngx-toastr';
 

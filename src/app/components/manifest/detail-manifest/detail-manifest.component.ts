@@ -1,11 +1,11 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ManifestService } from '../../../services/manifest.service';
+import { ManifestService } from 'src/app/services/manifest.service';
 import { Location } from '@angular/common';
-import { AppConstant } from '../../../shared/constants/app.constant';
+import { AppConstant } from 'src/app/shared/constants/app.constant';
 import _ from 'lodash';
 import { ToastrService } from 'ngx-toastr';
-import { Helper } from '../../../shared/utils/helper';
+import { Helper } from 'src/app/shared/utils/helper';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({

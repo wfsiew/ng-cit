@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { AddressBookService } from '../../../services/address-book.service';
-import { MessageService } from '../../../services/message.service';
-import { AppConstant } from '../../../shared/constants/app.constant';
+import { AddressBookService } from 'src/app/services/address-book.service';
+import { MessageService } from 'src/app/services/message.service';
+import { AppConstant } from 'src/app/shared/constants/app.constant';
 import _ from 'lodash';
 import { ToastrService } from 'ngx-toastr';
-import { Helper } from '../../../shared/utils/helper';
+import { Helper } from 'src/app/shared/utils/helper';
 
 @Component({
   selector: 'app-list-address-book',

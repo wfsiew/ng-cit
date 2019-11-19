@@ -1,13 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { DashboardService } from '../../../services/dashboard.service';
-import { CompanyService } from '../../../services/company.service';
+import { DashboardService } from 'src/app/services/dashboard.service';
+import { CompanyService } from 'src/app/services/company.service';
 import { Location } from '@angular/common';
-import { MessageService } from '../../../services/message.service';
+import { MessageService } from 'src/app/services/message.service';
 import _ from 'lodash';
 import { ToastrService } from 'ngx-toastr';
-import { Helper } from '../../../shared/utils/helper';
+import { Helper } from 'src/app/shared/utils/helper';
 
 @Component({
   selector: 'app-list-dashboard',

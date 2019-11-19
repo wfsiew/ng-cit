@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { DashboardService } from '../../../services/dashboard.service';
+import { DashboardService } from 'src/app/services/dashboard.service';
 import { Location } from '@angular/common';
 import _ from 'lodash';
 import { ToastrService } from 'ngx-toastr';
