@@ -23,6 +23,7 @@
     "bootstrap": "^4.3.1",
     "file-saver": "^2.0.2",
     "lodash": "^4.17.15",
+    "ng2-pdf-viewer": "^6.0.2",
     "ngx-bootstrap": "^5.3.2",
     "ngx-toastr": "^10.2.0",
     "ngx-ui-loader": "^8.0.0",

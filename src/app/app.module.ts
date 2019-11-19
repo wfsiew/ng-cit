@@ -7,6 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { PaginationModule, ModalModule, BsDatepickerModule } from 'ngx-bootstrap';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 import {
   NgxUiLoaderModule, NgxUiLoaderConfig, SPINNER, POSITION,
   PB_DIRECTION, NgxUiLoaderRouterModule, NgxUiLoaderHttpModule
@@ -38,8 +39,8 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { ChangePwdComponent } from './components/user-profile/change-pwd/change-pwd.component';
 import { CreateShipmentComponent } from './components/shipment/create-shipment/create-shipment.component';
 import { CreateMultipleShipmentComponent } from './components/shipment/create-multiple-shipment/create-multiple-shipment.component';
-import { DetailShipmentComponent } from './components/shipment/detail-shipment/detail-shipment.component';
 import { ListShipmentComponent } from './components/shipment/list-shipment/list-shipment.component';
+import { PrintShipmentModalComponent } from './components/shipment/print-shipment-modal/print-shipment-modal.component';
 import { ListManifestComponent } from './components/manifest/list-manifest/list-manifest.component';
 import { DetailManifestComponent } from './components/manifest/detail-manifest/detail-manifest.component';
 import { CreateAddressBookComponent } from './components/address-book/create-address-book/create-address-book.component';
@@ -83,8 +84,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     UserProfileComponent,
     CreateShipmentComponent,
     CreateMultipleShipmentComponent,
-    DetailShipmentComponent,
     ListShipmentComponent,
+    PrintShipmentModalComponent,
     ListManifestComponent,
     DetailManifestComponent,
     CreateAddressBookComponent,
@@ -97,7 +98,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     ListDashboardComponent,
     ListUserComponent,
     CreateUserModalComponent,
-    ChangePwdComponent
+    ChangePwdComponent,
+    PrintShipmentModalComponent
   ],
   imports: [
     BrowserModule,
@@ -106,6 +108,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    PdfViewerModule,
     NgSelectModule,
     PaginationModule.forRoot(),
     ModalModule .forRoot(),
@@ -138,7 +141,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   ],
   entryComponents: [
     AddressBookModalComponent,
-    CreateUserModalComponent
+    CreateUserModalComponent,
+    PrintShipmentModalComponent
   ],
   bootstrap: [AppComponent]
 })
