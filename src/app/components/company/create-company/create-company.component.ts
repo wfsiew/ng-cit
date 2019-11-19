@@ -191,7 +191,13 @@ export class CreateCompanyComponent implements OnInit {
   onParentCompanyChange() {
     const x = this.f.parent_company_account_code.value;
     let o = _.find(this.companyList, { account_code: x });
-    this.parent_company_id = o.company_id;
+    if (!_.isUndefined(o)) {
+      this.parent_company_id = o.company_id;
+    }
+
+    else {
+      this.parent_company_id = null;
+    }
   }
 
   setPostcodeValidator(country_code, field) {

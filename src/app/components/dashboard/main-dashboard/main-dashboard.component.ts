@@ -145,6 +145,10 @@ export class MainDashboardComponent implements OnInit, OnDestroy {
   }
 
   onViewDetails(o) {
+    this.msService.send('main-dashboard', {
+      company_id: this.company_id,
+      daterx: this.datex
+    });
     this.router.navigate(['/cit/company/edit', o.company_id]);
     return false;
   }
