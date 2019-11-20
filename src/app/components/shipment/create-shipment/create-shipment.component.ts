@@ -618,7 +618,7 @@ export class CreateShipmentComponent implements OnInit {
   }
 
   get isPrintDisabled() {
-    return false;
+    return this.isloading;
   }
 
   get service_type() {
