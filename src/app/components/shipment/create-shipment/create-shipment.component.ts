@@ -38,6 +38,7 @@ export class CreateShipmentComponent implements OnInit {
   isEdit = false;
   isView = false;
   title = 'Create';
+  pdfstate = null;
 
   readonly isEmpty = Helper.isEmpty;
 
@@ -579,20 +580,27 @@ export class CreateShipmentComponent implements OnInit {
       return;
     }
 
-    this.isloading = true;
-    this.shipmentService.printLabel(this.datax.consignment_no, AppConstant.PRINT_TYPE.NEWCONSIGNMENTNOTE).subscribe((res: any) => {
-      this.isloading = false;
-      const state = {
-        pdfsrc: URL.createObjectURL(res),
-        pdfblob: res,
-        filename: `${this.datax.consignment_no}.pdf`
-      };
-      this.bsModalRef = this.modalService.show(PrintShipmentModalComponent, { initialState: state });
-    },
-    (error) => {
-      this.isloading = false;
-      this.toastr.error('Print Shipment Faled');
-    });
+    if (!this.pdfstate) {
+      this.isloading = true;
+      this.shipmentService.printLabel(this.datax.consignment_no, AppConstant.PRINT_TYPE.NEWCONSIGNMENTNOTE).subscribe((res: any) => {
+        this.isloading = false;
+        const state = {
+          pdfsrc: URL.createObjectURL(res),
+          pdfblob: res,
+          filename: `${this.datax.consignment_no}.pdf`
+        };
+        this.pdfstate = state;
+        this.bsModalRef = this.modalService.show(PrintShipmentModalComponent, { initialState: state });
+      },
+      (error) => {
+        this.isloading = false;
+        this.toastr.error('Print Shipment Faled');
+      });
+    }
+
+    else {
+      this.bsModalRef = this.modalService.show(PrintShipmentModalComponent, { initialState: this.pdfstate });
+    }
   }
 
   onBack() {
