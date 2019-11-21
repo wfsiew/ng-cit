@@ -11,7 +11,6 @@ import { UserProfileComponent } from 'src/app/components/user-profile/user-profi
 import { ChangePwdComponent } from 'src/app/components/user-profile/change-pwd/change-pwd.component';
 import { CreateShipmentComponent } from 'src/app/components/shipment/create-shipment/create-shipment.component';
 import { CreateMultipleShipmentComponent } from 'src/app/components/shipment/create-multiple-shipment/create-multiple-shipment.component';
-import { DetailShipmentComponent } from 'src/app/components/shipment/detail-shipment/detail-shipment.component';
 import { ListShipmentComponent } from 'src/app/components/shipment/list-shipment/list-shipment.component';
 import { ListManifestComponent } from 'src/app/components/manifest/list-manifest/list-manifest.component';
 import { DetailManifestComponent } from 'src/app/components/manifest/detail-manifest/detail-manifest.component';
