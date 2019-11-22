@@ -28,12 +28,12 @@
     </div>
 
     <div class="box-body">
-      <div class="row">
+      <div class="row hidden-print">
         <div class="col-xs-12 col-sm-6 col-md-6">
           <button type="button" class="btn btn-primary btn-space">Copy</button>
-          <button type="button" class="btn btn-primary btn-space">CSV</button>
-          <button type="button" class="btn btn-primary btn-space">Excel</button>
-          <button type="button" class="btn btn-primary btn-space">Print</button>
+          <button type="button" class="btn btn-primary btn-space" (click)="onCSV()" [disabled]="isEmpty(list)">CSV</button>
+          <button type="button" class="btn btn-primary btn-space" (click)="onExcel()" [disabled]="isEmpty(list)">Excel</button>
+          <button type="button" class="btn btn-primary btn-space" (click)="onPrint()" [disabled]="isEmpty(list)">Print</button>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-6 pull-right">
           <div class="input-group">
@@ -63,7 +63,7 @@
                   <th>Receiver HP</th>
                   <th>Weight</th>
                   <th>Status</th>
-                  <th>Details</th>
+                  <th class="hidden-print">Details</th>
                 </tr>
               </thead>
               <tbody>
@@ -75,7 +75,7 @@
                   <td>{{ o.cn_TelNo }}</td>
                   <td>{{ o.weight }}</td>
                   <td class="text-uppercase">{{ o.status }}</td>
-                  <td>
+                  <td class="hidden-print">
                     <a href="#" (click)="onView(o)">View</a>
                   </td>
                 </tr>

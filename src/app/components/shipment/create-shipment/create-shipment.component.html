@@ -86,7 +86,7 @@
                 <input type="checkbox" formControlName="is_insurance_req" name="is_insurance_req"> Additional Insurance Required
               </label>
             </div>
-            <i>*Please contact our Customer Service</i>
+            <i>You will be contacted by our CS /you can call us at 1700-818-369</i>
           </div>
         </div>
 
@@ -146,6 +146,8 @@
             <small class="label label-danger" *ngIf="invalid('total_package_no') && f.total_package_no.hasError('required')">Total Package Quantity is required</small>
             <small class="label label-danger" *ngIf="invalid('total_package_no') && f.total_package_no.hasError('pattern')">Total Package Quantity is
               invalid</small>
+            <small class="label label-danger" *ngIf="invalid('total_package_no') && f.total_package_no.hasError('max')">Max Total Package Quantity is
+              999</small>
           </div>
         </div>
 
@@ -158,6 +160,8 @@
               Weight is required</small>
             <small class="label label-danger" *ngIf="invalid('total_weight') && f.total_weight.hasError('pattern')">Total
               Weight is invalid</small>
+            <small class="label label-danger" *ngIf="invalid('total_weight') && f.total_weight.hasError('max')">Max Total
+              Weight is 9999</small>
           </div>
         </div>
 
@@ -186,6 +190,8 @@
                 Goods Quantity is required</small>
               <small class="label label-danger" *ngIf="invalidg('quantity') && fg.quantity.hasError('pattern')">Goods Quantity is
                 invalid</small>
+              <small class="label label-danger" *ngIf="invalidg('quantity') && fg.quantity.hasError('max')">Max Goods Quantity is
+                9999</small>
             </div>
           </div>
           
@@ -198,6 +204,8 @@
                 Goods Value is required</small>
               <small class="label label-danger" *ngIf="invalidg('value') && fg.value.hasError('pattern')">Goods Value is
                 invalid</small>
+              <small class="label label-danger" *ngIf="invalidg('value') && fg.value.hasError('max')">Max Goods Value is
+                99999</small>
             </div>
           </div>
           
@@ -251,7 +259,7 @@
         </div>
 
         <div class="form-group">
-          <label class="col-sm-2 control-label">Shipper Name</label>
+          <label class="col-sm-2 control-label">*Shipper Name</label>
           <div class="col-sm-4">
             <input type="text" class="form-control" placeholder="Shipper Name" formControlName="origin_shipper_name"
               name="origin_shipper_name" [attr.disabled]="isView ? 1 : null">
@@ -261,9 +269,9 @@
         </div>
 
         <div class="form-group">
-          <label class="col-sm-2 control-label">Address</label>
+          <label class="col-sm-2 control-label">*Address</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" placeholder="Address 1" formControlName="origin_shipper_address1"
+            <input type="text" class="form-control" placeholder="*Address 1" formControlName="origin_shipper_address1"
               name="origin_shipper_address1" [attr.disabled]="isView ? 1 : null">
             <small class="label label-danger"
               *ngIf="invalid('origin_shipper_address1') && f.origin_shipper_address1.hasError('required')">Address 1 is required</small>
@@ -283,7 +291,7 @@
 
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-4">
-            <input type="text" class="form-control" placeholder="Postcode" formControlName="origin_shipper_postcode"
+            <input type="text" class="form-control" placeholder="*Postcode" formControlName="origin_shipper_postcode"
               name="origin_shipper_postcode" [attr.disabled]="isView ? 1 : null">
             <small class="label label-danger"
               *ngIf="invalid('origin_shipper_postcode') && f.origin_shipper_postcode.hasError('required')">Postcode is
@@ -292,7 +300,7 @@
               invalid</small>
           </div>
           <div class="col-sm-4">
-            <input type="text" class="form-control" placeholder="City" formControlName="origin_shipper_city"
+            <input type="text" class="form-control" placeholder="*City" formControlName="origin_shipper_city"
               name="origin_shipper_city" [attr.disabled]="isView ? 1 : null">
             <small class="label label-danger"
               *ngIf="invalid('origin_shipper_city') && f.origin_shipper_city.hasError('required')">City is
@@ -302,7 +310,7 @@
 
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-4">
-            <input type="text" class="form-control" placeholder="State" formControlName="origin_shipper_state_province"
+            <input type="text" class="form-control" placeholder="*State" formControlName="origin_shipper_state_province"
               name="origin_shipper_state_province" [attr.disabled]="isView ? 1 : null">
             <small class="label label-danger"
               *ngIf="invalid('origin_shipper_state_province') && f.origin_shipper_state_province.hasError('required')">State is
@@ -317,7 +325,7 @@
                 [items]="countryList" 
                 bindLabel="country_name" 
                 bindValue="country_code" 
-                placeholder="Please select"
+                placeholder="*Please select"
                 (change)="onCountryChangeShipper()"
                 formControlName="origin_shipper_country"
                 name="origin_shipper_country"></ng-select>
@@ -329,12 +337,15 @@
         </div>
 
         <div class="form-group">
-          <label class="col-sm-2 control-label">Shipper Contact Name</label>
+          <label class="col-sm-2 control-label">*Shipper Contact Name</label>
           <div class="col-sm-4">
             <input type="text" class="form-control" placeholder="Shipper Name" formControlName="origin_shipper_contact_name"
               name="origin_shipper_contact_name" [attr.disabled]="isView ? 1 : null">
+            <small class="label label-danger"
+              *ngIf="invalid('origin_shipper_contact_name') && f.origin_shipper_contact_name.hasError('required')">Shipper Contact Name 
+              is required</small>
           </div>
-          <label class="col-sm-2 control-label">Shipper Contact</label>
+          <label class="col-sm-2 control-label">*Shipper Contact</label>
           <div class="col-sm-4">
             <input type="text" class="form-control" placeholder="Shipper Contact" formControlName="origin_shipper_phone_no"
               name="origin_shipper_phone_no" [attr.disabled]="isView ? 1 : null">
@@ -347,7 +358,7 @@
         <hr />
 
         <div class="form-group">
-          <label class="col-sm-2 control-label">Receiver Name</label>
+          <label class="col-sm-2 control-label">*Receiver Name</label>
           <div class="col-sm-4">
             <input type="text" class="form-control" placeholder="Receiver Name" formControlName="dest_receiver_name"
               name="dest_receiver_name" [attr.disabled]="isView ? 1 : null">
@@ -357,9 +368,9 @@
         </div>
         
         <div class="form-group">
-          <label class="col-sm-2 control-label">Address</label>
+          <label class="col-sm-2 control-label">*Address</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" placeholder="Address 1" formControlName="dest_receiver_address1"
+            <input type="text" class="form-control" placeholder="*Address 1" formControlName="dest_receiver_address1"
               name="dest_receiver_address1" [attr.disabled]="isView ? 1 : null">
             <small class="label label-danger"
               *ngIf="invalid('dest_receiver_address1') && f.dest_receiver_address1.hasError('required')">Address 1 is required</small>
@@ -379,7 +390,7 @@
         
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-4">
-            <input type="text" class="form-control" placeholder="Postcode" formControlName="dest_receiver_postcode"
+            <input type="text" class="form-control" placeholder="*Postcode" formControlName="dest_receiver_postcode"
               name="dest_receiver_postcode" [attr.disabled]="isView ? 1 : null">
             <small class="label label-danger"
               *ngIf="invalid('dest_receiver_postcode') && f.dest_receiver_postcode.hasError('required')">Postcode is
@@ -388,7 +399,7 @@
               invalid</small>
           </div>
           <div class="col-sm-4">
-            <input type="text" class="form-control" placeholder="City" formControlName="dest_receiver_city"
+            <input type="text" class="form-control" placeholder="*City" formControlName="dest_receiver_city"
               name="dest_receiver_city" [attr.disabled]="isView ? 1 : null">
             <small class="label label-danger"
               *ngIf="invalid('dest_receiver_city') && f.dest_receiver_city.hasError('required')">City is
@@ -398,7 +409,7 @@
         
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-4">
-            <input type="text" class="form-control" placeholder="State" formControlName="dest_receiver_state_province"
+            <input type="text" class="form-control" placeholder="*State" formControlName="dest_receiver_state_province"
               name="dest_receiver_state_province" [attr.disabled]="isView ? 1 : null">
             <small class="label label-danger"
               *ngIf="invalid('dest_receiver_state_province') && f.dest_receiver_state_province.hasError('required')">State is
@@ -413,7 +424,7 @@
                 [items]="countryList" 
                 bindLabel="country_name" 
                 bindValue="country_code" 
-                placeholder="Please select"
+                placeholder="*Please select"
                 (change)="onCountryChangeReceiver()" 
                 formControlName="dest_receiver_country" 
                 name="dest_receiver_country"></ng-select>
@@ -425,12 +436,15 @@
         </div>
         
         <div class="form-group">
-          <label class="col-sm-2 control-label">Receiver Contact Name</label>
+          <label class="col-sm-2 control-label">*Receiver Contact Name</label>
           <div class="col-sm-4">
             <input type="text" class="form-control" placeholder="Receiver Name" formControlName="dest_receiver_contact_name"
               name="dest_receiver_contact_name" [attr.disabled]="isView ? 1 : null">
+            <small class="label label-danger"
+              *ngIf="invalid('dest_receiver_contact_name') && f.dest_receiver_contact_name.hasError('required')">Receiver Contact Name 
+              is required</small>
           </div>
-          <label class="col-sm-2 control-label">Receiver Contact</label>
+          <label class="col-sm-2 control-label">*Receiver Contact</label>
           <div class="col-sm-4">
             <input type="text" class="form-control" placeholder="Receiver Contact" formControlName="dest_receiver_phone_no"
               name="dest_receiver_phone_no" [attr.disabled]="isView ? 1 : null">

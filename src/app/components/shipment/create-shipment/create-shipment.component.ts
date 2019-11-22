@@ -83,8 +83,8 @@ export class CreateShipmentComponent implements OnInit {
       is_do: [false],
       is_cod: [false],
       cod_value: ['0.00', [Validators.required, Validators.pattern(AppConstant.VALIDATE.AMOUNT)]],
-      total_package_no: ['', [Validators.required, Validators.pattern(AppConstant.VALIDATE.NUMBER)]],
-      total_weight: ['', [Validators.required, Validators.pattern(AppConstant.VALIDATE.AMOUNT)]],
+      total_package_no: ['', [Validators.required, Validators.max(999), Validators.pattern(AppConstant.VALIDATE.NUMBER)]],
+      total_weight: ['0.5', [Validators.required, Validators.max(9999), Validators.pattern(AppConstant.VALIDATE.AMOUNT)]],
 
       origin_address_id: [''],
       origin_shipper_name: ['', [Validators.required]],
@@ -94,7 +94,7 @@ export class CreateShipmentComponent implements OnInit {
       origin_shipper_city: ['', [Validators.required]],
       origin_shipper_state_province: ['', [Validators.required]],
       origin_shipper_country: ['MY', [Validators.required]],
-      origin_shipper_contact_name: [''],
+      origin_shipper_contact_name: ['', [Validators.required]],
       origin_shipper_phone_no: ['', [Validators.required]],
 
       dest_address_id: [''],
@@ -105,14 +105,14 @@ export class CreateShipmentComponent implements OnInit {
       dest_receiver_city: ['', [Validators.required]],
       dest_receiver_state_province: ['', [Validators.required]],
       dest_receiver_country: ['MY', [Validators.required]],
-      dest_receiver_contact_name: [''],
+      dest_receiver_contact_name: ['', [Validators.required]],
       dest_receiver_phone_no: ['', [Validators.required]]
     });
 
     this.gform = this.fb.group({
       description: ['', [Validators.required]],
-      quantity: ['1', [Validators.required, Validators.pattern(AppConstant.VALIDATE.NUMBER)]],
-      value: ['0.00', [Validators.required, Validators.pattern(AppConstant.VALIDATE.AMOUNT)]],
+      quantity: ['1', [Validators.required, Validators.max(9999), Validators.pattern(AppConstant.VALIDATE.NUMBER)]],
+      value: ['0.00', [Validators.required, Validators.max(99999), Validators.pattern(AppConstant.VALIDATE.AMOUNT)]],
       currency: ['MYR', [Validators.required]]
     });
   }
@@ -466,6 +466,11 @@ export class CreateShipmentComponent implements OnInit {
 }
     */
     const f = this.f;
+    if (f.is_insurance_req.value && Helper.isEmpty(this.listGood)) {
+      this.toastr.error('Please add at least 1 Goods Information', 'Create Shipment');
+      return;
+    }
+
     let lp = _.map(this.listGood, (x) => {
       return {
         description: x.description,

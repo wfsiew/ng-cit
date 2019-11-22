@@ -3,9 +3,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { DashboardService } from 'src/app/services/dashboard.service';
 import { CompanyService } from 'src/app/services/company.service';
-import { Location } from '@angular/common';
+import { Location, formatDate } from '@angular/common';
 import { MessageService } from 'src/app/services/message.service';
 import _ from 'lodash';
+import * as XLSX from 'xlsx';
+import * as FileSaver from 'file-saver';
 import { ToastrService } from 'ngx-toastr';
 import { Helper } from 'src/app/shared/utils/helper';
 
@@ -104,6 +106,38 @@ export class ListDashboardComponent implements OnInit, OnDestroy {
   onView(o) {
     this.router.navigate(['/cit/dashboard/detail', o.ConsignmentNo]);
     return false;
+  }
+
+  onCSV() {
+    const ls = this.list;
+    const replacer = (key, value) => value === null ? '' : value;
+    const header = Object.keys(ls[0]);
+    let csv = ls.map(row => header.map(fieldName => JSON.stringify(row[fieldName], replacer)).join(','));
+    csv.unshift(header.join(','));
+    const lx = csv.join('\r\n');
+
+    const blob = new Blob([lx], { type: 'text/csv' });
+    const dt = formatDate(new Date(), 'yyyyMMdd-HHmmss', 'en');
+    const filename = `${dt}.csv`;
+
+    FileSaver.saveAs(blob, filename);
+  }
+
+  onExcel() {
+    const ls = this.list;
+    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(ls);
+    const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+    const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+
+    const blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8' });
+    const dt = formatDate(new Date(), 'yyyyMMdd-HHmmss', 'en');
+    const filename = `${dt}_export_${new Date().getTime()}.xlsx`;
+
+    FileSaver.saveAs(blob, filename);
+  }
+
+  onPrint() {
+    print();
   }
 
   onBack() {
