@@ -21,4 +21,8 @@ export class PrintShipmentModalComponent implements OnInit {
   onDownload() {
     FileSaver.saveAs(this.pdfblob, this.filename);
   }
+
+  onOpenNew() {
+    open(this.pdfsrc, '_blank');
+  }
 }
