@@ -26,6 +26,7 @@ export class ListAddressBookComponent implements OnInit, OnDestroy {
   search = '';
   sort = 'full_name';
   sort_dir = '';
+  onSearchDbKeyup: any;
   subs: Subscription;
 
   readonly isEmpty = Helper.isEmpty;
@@ -37,7 +38,8 @@ export class ListAddressBookComponent implements OnInit, OnDestroy {
     private addressBookService: AddressBookService,
     private msService: MessageService,
     private toastr: ToastrService
-  ) { 
+  ) {
+    this.onSearchDbKeyup = _.debounce(this.onSearchKeyup, 400);
     this.subs = this.msService.get().subscribe(res => {
       if (res.name === 'list-address-book') {
         const o = res.data;
@@ -99,7 +101,7 @@ export class ListAddressBookComponent implements OnInit, OnDestroy {
     if (!o.selected) {
       this.listSelected = this.listSelected.filter(x => x !== o.id);
     }
-    
+
     else {
       this.listSelected.push(o.id);
     }
@@ -160,6 +162,10 @@ export class ListAddressBookComponent implements OnInit, OnDestroy {
 
   onSearch() {
     this.load();
+  }
+
+  onSearchKeyup(event) {
+    this.onSearch();
   }
 
   onSearchKeypress(event) {

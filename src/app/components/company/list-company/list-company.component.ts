@@ -25,6 +25,7 @@ export class ListCompanyComponent implements OnInit, OnDestroy {
   sort = 'company_account_code';
   sort_dir = 'desc';
   user: User;
+  onSearchDbKeyup: any;
   subs: Subscription;
 
   readonly isEmpty = Helper.isEmpty;
@@ -39,6 +40,7 @@ export class ListCompanyComponent implements OnInit, OnDestroy {
     private msService: MessageService,
     private toastr: ToastrService
   ) {
+    this.onSearchDbKeyup = _.debounce(this.onSearchKeyup, 400);
     this.subs = this.msService.get().subscribe(res => {
       if (res.name === 'list-company') {
         const o = res.data;
@@ -82,7 +84,7 @@ export class ListCompanyComponent implements OnInit, OnDestroy {
   onCreateNew() {
     this.router.navigate(['/cit/company/create']);
   }
-  
+
   onViewDetails(o) {
     this.router.navigate(['/cit/company/edit', o.company_id]);
     return false;
@@ -100,6 +102,10 @@ export class ListCompanyComponent implements OnInit, OnDestroy {
 
   onSearch() {
     this.load();
+  }
+
+  onSearchKeyup(event) {
+    this.onSearch();
   }
 
   onSearchKeypress(event) {

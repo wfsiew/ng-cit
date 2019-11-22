@@ -13,7 +13,7 @@
             </div>
             <div class="col-xs-9 col-sm-5 col-md-5 pull-right">
               <div class="input-group">
-                <input type="text" [(ngModel)]="search" (keydown.enter)="onSearchKeypress($event)" name="q" class="form-control"
+                <input type="text" [(ngModel)]="search" (keyup)="onSearchDbKeyup($event)" (keydown.enter)="onSearchKeypress($event)" name="q" class="form-control"
                   placeholder="Search...">
                 <span class="input-group-btn">
                   <button type="button" name="search" class="btn btn-flat" (click)="onSearch()"><i class="fa fa-search"></i>
@@ -42,7 +42,7 @@
                     <input type="checkbox" [checked]="selectAll" (change)="onChangeSelectAll()" />
                   </th>
                   <th>
-                    <a href="#" (click)="sortBy('full_name')">Name</a> <i *ngIf="sort === 'full_name'" class="fa" 
+                    <a href="#" (click)="sortBy('full_name')">Name</a> <i *ngIf="sort === 'full_name'" class="fa"
                       [ngClass]="{'fa-chevron-up': isSortBy('full_name', ''), 'fa-chevron-down': isSortBy('full_name', 'desc')}"></i>
                   </th>
                   <th>

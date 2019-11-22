@@ -22,6 +22,7 @@ export class ListShipmentComponent implements OnInit, OnDestroy {
   search = '';
   sort = 'id';
   sort_dir = '';
+  onSearchDbKeyup: any;
   subs: Subscription;
 
   readonly isEmpty = Helper.isEmpty;
@@ -34,6 +35,7 @@ export class ListShipmentComponent implements OnInit, OnDestroy {
     private msService: MessageService,
     private toastr: ToastrService
   ) {
+    this.onSearchDbKeyup = _.debounce(this.onSearchKeyup, 400);
     this.subs = this.msService.get().subscribe(res => {
       if (res.name === 'list-shipment') {
         const o = res.data;
@@ -115,7 +117,7 @@ export class ListShipmentComponent implements OnInit, OnDestroy {
 
   onPrintLabel(o) {
     this.shipmentService.printLabel(o.consignment_no, AppConstant.PRINT_TYPE.SHIPPING_LABEL).subscribe(res => {
-      
+
     },
     (error) => {
       console.log(error);
@@ -128,6 +130,10 @@ export class ListShipmentComponent implements OnInit, OnDestroy {
 
   onSearch() {
     this.load();
+  }
+
+  onSearchKeyup(event) {
+    this.onSearch();
   }
 
   onSearchKeypress(event) {
