@@ -85,7 +85,7 @@
 
     <div class="box-footer">
       <div class="pull-right" *ngIf="itemsCount">
-        <pagination [totalItems]="itemsCount" [itemsPerPage]="PAGE_SIZE" [(ngModel)]="page" (pageChanged)="pageChanged($event)"></pagination>
+        <pagination [totalItems]="itemsCount" [itemsPerPage]="PAGE_SIZE" [maxSize]="MAX_PAGE_NUMBERS" [(ngModel)]="page" (pageChanged)="pageChanged($event)"></pagination>
       </div>
     </div>
   </div>

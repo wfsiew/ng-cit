@@ -37,6 +37,7 @@ export class ListManifestComponent implements OnInit, OnDestroy {
 
   readonly isEmpty = Helper.isEmpty;
   readonly PAGE_SIZE = AppConstant.PAGE_SIZE;
+  readonly MAX_PAGE_NUMBERS = AppConstant.MAX_PAGE_NUMBERS;
 
   constructor(
     private router: Router,
