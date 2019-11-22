@@ -34,6 +34,7 @@ export class ListUserComponent implements OnInit, OnDestroy {
   company_name: string;
   canEdit = false;
   user: User;
+  onSearchDbKeyup: any;
 
   readonly isEmpty = Helper.isEmpty;
   readonly PAGE_SIZE = AppConstant.PAGE_SIZE;
@@ -47,6 +48,7 @@ export class ListUserComponent implements OnInit, OnDestroy {
     private toastr: ToastrService,
     private modalService: BsModalService
   ) {
+    this.onSearchDbKeyup = _.debounce(this.onSearchKeyup, 400);
     this.subs = this.msService.get().subscribe(res => {
       if (res.name === 'list-user') {
         const o = res.data;
@@ -147,6 +149,10 @@ export class ListUserComponent implements OnInit, OnDestroy {
 
   onSearch() {
     this.load();
+  }
+
+  onSearchKeyup(event) {
+    this.onSearch();
   }
 
   onSearchKeypress(event) {

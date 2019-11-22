@@ -1,5 +1,5 @@
 <section class="content-header">
-  
+
 </section>
 <section class="content">
   <div class="box">
@@ -11,7 +11,7 @@
           <button type="button" class="btn btn-primary" *ngIf="canEdit" (click)="onCreateNew()"><i class="fa fa-plus"></i> Add User</button>
         </div>
       </div>
-      
+
       <!-- <div class="pull-right">
         <div class="input-group">
           <input type="text" [(ngModel)]="search" (keydown.enter)="onSearchKeypress($event)" name="q" class="form-control"
@@ -29,7 +29,7 @@
         <h4 class="box-title col-xs-7">User Listing for {{ company_name }}</h4>
         <div class="col-xs-5 pull-right">
           <div class="input-group">
-            <input type="text" [(ngModel)]="search" (keydown.enter)="onSearchKeypress($event)" name="q" class="form-control"
+            <input type="text" [(ngModel)]="search" (keyup)="onSearchDbKeyup($event)" (keydown.enter)="onSearchKeypress($event)" name="q" class="form-control"
               placeholder="Search...">
             <span class="input-group-btn">
               <button type="button" name="search" class="btn btn-flat" (click)="onSearch()"><i class="fa fa-search"></i>
@@ -47,7 +47,7 @@
       <div class="text-center" *ngIf="isEmpty(list)">
         <h4 class="box-title">No records found</h4>
       </div>
-  
+
       <div class="table-responsive" *ngIf="!isEmpty(list)">
         <table class="table table-condensed table-bordered table-striped table-hover">
           <thead>
