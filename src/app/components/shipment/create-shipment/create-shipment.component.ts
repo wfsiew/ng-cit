@@ -94,7 +94,7 @@ export class CreateShipmentComponent implements OnInit {
       origin_shipper_city: ['', [Validators.required]],
       origin_shipper_state_province: ['', [Validators.required]],
       origin_shipper_country: ['MY', [Validators.required]],
-      origin_shipper_contact_name: ['', [Validators.required]],
+      origin_shipper_contact_name: [''],
       origin_shipper_phone_no: ['', [Validators.required]],
 
       dest_address_id: [''],
@@ -105,7 +105,7 @@ export class CreateShipmentComponent implements OnInit {
       dest_receiver_city: ['', [Validators.required]],
       dest_receiver_state_province: ['', [Validators.required]],
       dest_receiver_country: ['MY', [Validators.required]],
-      dest_receiver_contact_name: ['', [Validators.required]],
+      dest_receiver_contact_name: [''],
       dest_receiver_phone_no: ['', [Validators.required]]
     });
 
