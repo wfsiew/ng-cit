@@ -341,9 +341,6 @@
           <div class="col-sm-4">
             <input type="text" class="form-control" placeholder="Shipper Name" formControlName="origin_shipper_contact_name"
               name="origin_shipper_contact_name" [attr.disabled]="isView ? 1 : null">
-            <small class="label label-danger"
-              *ngIf="invalid('origin_shipper_contact_name') && f.origin_shipper_contact_name.hasError('required')">Shipper Contact Name 
-              is required</small>
           </div>
           <label class="col-sm-2 control-label">*Shipper Contact</label>
           <div class="col-sm-4">
@@ -440,9 +437,6 @@
           <div class="col-sm-4">
             <input type="text" class="form-control" placeholder="Receiver Name" formControlName="dest_receiver_contact_name"
               name="dest_receiver_contact_name" [attr.disabled]="isView ? 1 : null">
-            <small class="label label-danger"
-              *ngIf="invalid('dest_receiver_contact_name') && f.dest_receiver_contact_name.hasError('required')">Receiver Contact Name 
-              is required</small>
           </div>
           <label class="col-sm-2 control-label">*Receiver Contact</label>
           <div class="col-sm-4">
