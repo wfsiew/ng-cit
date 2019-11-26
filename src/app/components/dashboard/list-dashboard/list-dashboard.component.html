@@ -67,7 +67,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let o of list">
+                <tr *ngFor="let o of slist">
                   <td>{{ o.ConsignmentNo }}</td>
                   <td>{{ o.Customer_ref1 }}</td>
                   <td>{{ o.shipper_name }}</td>
@@ -87,6 +87,12 @@
 
       <div class="overlay" *ngIf="isloading">
         <i class="fa fa-refresh fa-spin"></i>
+      </div>
+
+      <div class="box-footer hidden-print">
+        <div class="pull-right" *ngIf="itemsCount">
+          <pagination [totalItems]="itemsCount" [itemsPerPage]="PAGE_SIZE" [maxSize]="MAX_PAGE_NUMBERS" [(ngModel)]="page" (pageChanged)="pageChanged($event)"></pagination>
+        </div>
       </div>
     </div>
   </div>

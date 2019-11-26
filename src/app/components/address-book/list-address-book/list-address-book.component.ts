@@ -27,6 +27,8 @@ export class ListAddressBookComponent implements OnInit, OnDestroy {
   sort = 'full_name';
   sort_dir = '';
   onSearchDbKeyup: any;
+  sx = 0;
+  sy = 0;
   subs: Subscription;
 
   readonly isEmpty = Helper.isEmpty;
@@ -49,6 +51,8 @@ export class ListAddressBookComponent implements OnInit, OnDestroy {
         this.search = o.search;
         this.tab = o.tab;
         this.is_private = this.tab === 0 ? false : true;
+        this.sx = o.sx;
+        this.sy = o.sy;
       }
     });
   }
@@ -67,6 +71,9 @@ export class ListAddressBookComponent implements OnInit, OnDestroy {
       this.list = res.status ? res.data : [];
       this.itemsCount = res.status ? res.recordsTotal : 0;
       this.isloading = false;
+      setTimeout(() => {
+        window.scrollTo(this.sx, this.sy);
+      }, 200);
     },
     (error) => {
       this.isloading = false;
@@ -125,7 +132,9 @@ export class ListAddressBookComponent implements OnInit, OnDestroy {
       sort: this.sort,
       dir: this.sort_dir,
       search: this.search,
-      tab: this.tab
+      tab: this.tab,
+      sx: window.scrollX,
+      sy: window.scrollY
     });
     this.router.navigate(['/cit/address-book/edit', o.id], { queryParams: { private: this.is_private ? '1' : '0' } });
   }

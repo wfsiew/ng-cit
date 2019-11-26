@@ -23,6 +23,8 @@ export class ListShipmentComponent implements OnInit, OnDestroy {
   sort = 'id';
   sort_dir = '';
   onSearchDbKeyup: any;
+  sx = 0;
+  sy = 0;
   subs: Subscription;
 
   readonly isEmpty = Helper.isEmpty;
@@ -43,6 +45,8 @@ export class ListShipmentComponent implements OnInit, OnDestroy {
         this.sort = o.sort;
         this.sort_dir = o.dir;
         this.search = o.search;
+        this.sx = o.sx;
+        this.sy = o.sy;
       }
     });
   }
@@ -61,6 +65,9 @@ export class ListShipmentComponent implements OnInit, OnDestroy {
       this.list = res.status ? res.data : [];
       this.itemsCount = res.status ? res.recordsTotal : 0;
       this.isloading = false;
+      setTimeout(() => {
+        window.scrollTo(this.sx, this.sy);
+      }, 200);
     },
     (error) => {
       this.isloading = false;
@@ -80,7 +87,9 @@ export class ListShipmentComponent implements OnInit, OnDestroy {
       page: this.page,
       sort: this.sort,
       dir: this.sort_dir,
-      search: this.search
+      search: this.search,
+      sx: window.scrollX,
+      sy: window.scrollY
     });
     this.router.navigate(['/cit/shipment/edit', o.id]);
   }
@@ -95,7 +104,9 @@ export class ListShipmentComponent implements OnInit, OnDestroy {
       page: this.page,
       sort: this.sort,
       dir: this.sort_dir,
-      search: this.search
+      search: this.search,
+      sx: window.scrollX,
+      sy: window.scrollY
     });
     this.router.navigate([s]);
     return false;

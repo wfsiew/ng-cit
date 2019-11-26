@@ -5,6 +5,7 @@ import { DashboardService } from 'src/app/services/dashboard.service';
 import { CompanyService } from 'src/app/services/company.service';
 import { Location, formatDate } from '@angular/common';
 import { MessageService } from 'src/app/services/message.service';
+import { AppConstant } from 'src/app/shared/constants/app.constant';
 import _ from 'lodash';
 import * as XLSX from 'xlsx';
 import * as FileSaver from 'file-saver';
@@ -20,6 +21,9 @@ export class ListDashboardComponent implements OnInit, OnDestroy {
 
   isloading = false;
   list = [];
+  slist = [];
+  itemsCount = 0;
+  page = 1;
   search = '';
   id: string;
   company_id: string;
@@ -27,11 +31,16 @@ export class ListDashboardComponent implements OnInit, OnDestroy {
   title = '';
   daterx = [new Date(), new Date()];
   datex = this.daterx;
+  sx = 0;
+  sy = 0;
+  subs: Subscription;
 
   TITLE = ['NEW', 'PENDING', 'DELIVERED', 'CANCEL'];
   STATUS = ['new', 'pending', 'delivered', 'cancel'];
 
   readonly isEmpty = Helper.isEmpty;
+  readonly PAGE_SIZE = AppConstant.PAGE_SIZE;
+  readonly MAX_PAGE_NUMBERS = AppConstant.MAX_PAGE_NUMBERS;
 
   constructor(
     private route: ActivatedRoute,
@@ -41,7 +50,17 @@ export class ListDashboardComponent implements OnInit, OnDestroy {
     private companyService: CompanyService,
     private msService: MessageService,
     private toastr: ToastrService
-  ) { }
+  ) {
+    this.subs = this.msService.get().subscribe(res => {
+      if (res.name === 'list-dashboard') {
+        const o = res.data;
+        this.page = o.page;
+        this.sx = o.sx;
+        this.sy = o.sy;
+        this.list = o.list;
+      }
+    });
+  }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -69,6 +88,15 @@ export class ListDashboardComponent implements OnInit, OnDestroy {
   }
 
   loadList() {
+    if (!_.isEmpty(this.list)) {
+      this.itemsCount = this.list.length;
+      this.setList();
+      setTimeout(() => {
+        window.scrollTo(this.sx, this.sy);
+      }, 200);
+      return;
+    }
+
     this.isloading = true;
     const o = {
       company_id: this.company_id,
@@ -78,12 +106,33 @@ export class ListDashboardComponent implements OnInit, OnDestroy {
     }
     this.dashboardService.listShipment(o).subscribe((res: any) => {
       this.list = res.status ? res.data.list : [];
+      this.itemsCount = this.list.length;
+      this.setList();
       this.isloading = false;
+      setTimeout(() => {
+        window.scrollTo(this.sx, this.sy);
+      }, 200);
     },
     (error) => {
       this.isloading = false;
       this.toastr.error('Load Shipment Failed');
     });
+  }
+
+  setList() {
+    let a = (this.page - 1) * this.PAGE_SIZE;
+    let b = a + this.PAGE_SIZE;
+
+    if (b > this.itemsCount) {
+      b = this.itemsCount;
+    }
+    
+    let lx = [];
+    for (let i = a; i < b; i++) {
+      lx.push(this.list[i]);
+    }
+
+    this.slist = lx;
   }
 
   onDateChange(val) {
@@ -95,15 +144,27 @@ export class ListDashboardComponent implements OnInit, OnDestroy {
     this.loadList();
   }
 
+  pageChanged(event: any) {
+    this.page = event.page;
+    this.setList();
+  }
+
   onSearch() {
+    this.list = [];
     this.loadList();
   }
 
   onSearchKeypress(event) {
-    this.loadList();
+    this.onSearch();
   }
 
   onView(o) {
+    this.msService.send('list-dashboard', {
+      page: this.page,
+      sx: window.scrollX,
+      sy: window.scrollY,
+      list: this.list
+    });
     this.router.navigate(['/cit/dashboard/detail', o.ConsignmentNo]);
     return false;
   }

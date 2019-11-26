@@ -26,6 +26,8 @@ export class ListCompanyComponent implements OnInit, OnDestroy {
   sort_dir = 'desc';
   user: User;
   onSearchDbKeyup: any;
+  sx = 0;
+  sy = 0;
   subs: Subscription;
 
   readonly isEmpty = Helper.isEmpty;
@@ -48,6 +50,8 @@ export class ListCompanyComponent implements OnInit, OnDestroy {
         // this.sort = o.sort;
         // this.sort_dir = o.dir;
         this.search = o.search;
+        this.sx = o.sx;
+        this.sy = o.sy;
       }
     });
   }
@@ -67,6 +71,9 @@ export class ListCompanyComponent implements OnInit, OnDestroy {
       this.list = res.status ? res.data : [];
       this.itemsCount = res.status ? res.recordsTotal : 0;
       this.isloading = false;
+      setTimeout(() => {
+        window.scrollTo(this.sx, this.sy);
+      }, 200);
     },
     (error) => {
       this.isloading = false;
@@ -82,15 +89,33 @@ export class ListCompanyComponent implements OnInit, OnDestroy {
   }
 
   onCreateNew() {
+    this.msService.send('list-company', {
+      page: this.page,
+      search: this.search,
+      sx: window.scrollX,
+      sy: window.scrollY
+    });
     this.router.navigate(['/cit/company/create']);
   }
 
   onViewDetails(o) {
+    this.msService.send('list-company', {
+      page: this.page,
+      search: this.search,
+      sx: window.scrollX,
+      sy: window.scrollY
+    });
     this.router.navigate(['/cit/company/edit', o.company_id]);
     return false;
   }
 
   onViewUser(o) {
+    this.msService.send('list-company', {
+      page: this.page,
+      search: this.search,
+      sx: window.scrollX,
+      sy: window.scrollY
+    });
     this.router.navigate(['/cit/company/user/list'], { queryParams: { company_id: o.company_id } });
     return false;
   }
