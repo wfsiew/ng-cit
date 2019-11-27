@@ -11,6 +11,8 @@ import * as XLSX from 'xlsx';
 import * as FileSaver from 'file-saver';
 import { ToastrService } from 'ngx-toastr';
 import { Helper } from 'src/app/shared/utils/helper';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
 
 @Component({
   selector: 'app-list-dashboard',
@@ -198,7 +200,81 @@ export class ListDashboardComponent implements OnInit, OnDestroy {
   }
 
   onPrint() {
-    print();
+    pdfMake.vfs = pdfFonts.pdfMake.vfs;
+    var dd = {
+      pageSize: 'A4',
+      pageMargins: [30, 40, 30, 40],
+      content: [
+        {
+          text: `${this.title}\t${this.company_name}`,
+          style: 'hd'
+        },
+        {
+          text: `${Helper.getDateStr(this.daterx[0])} - ${Helper.getDateStr(this.daterx[1])}`,
+          style: 'hdr'
+        },
+        {
+          style: 'tbl',
+          table: {
+            headerRows: 1,
+            body: this.getData()
+          }
+        }
+      ],
+      styles: {
+        hd: {
+          fontSize: 12,
+          bold: true,
+          margin: [5, 0, 0, 0]
+        },
+        hdr: {
+          fontSize: 9,
+          bold: true,
+          margin: [0, 0, 5, 0],
+          alignment: 'right',
+        },
+        tbl: {
+          margin: [5, 5, 5, 5]
+        },
+        tblHeader: {
+          bold: true,
+          fontSize: 12,
+          color: 'black'
+        },
+        tblText: {
+          fontSize: 10
+        }
+      }
+    }
+
+    pdfMake.createPdf(dd).open();
+  }
+
+  getData() {
+    const ls = this.list;
+    let lk = [
+      [{ text: 'Consignment', style: 'tblHeader' }, 
+      { text: 'Customer Ref', style: 'tblHeader' }, 
+      { text: 'Shipper Name', style: 'tblHeader' }, 
+      { text: 'Receiver Name', style: 'tblHeader' },
+      { text: 'Receiver HP', style: 'tblHeader' }, 
+      { text: 'Weight', style: 'tblHeader' }, 
+      { text: 'Status', style: 'tblHeader' }]
+    ];
+    for (let o of ls) {
+      let lx = [
+        { text: o.ConsignmentNo, style: 'tblText' },
+        { text: o.Customer_ref1, style: 'tblText' },
+        { text: o.shipper_name, style: 'tblText' },
+        { text: o.cn_name, style: 'tblText' },
+        { text: o.cn_TelNo, style: 'tblText' },
+        { text: o.weight, style: 'tblText' },
+        { text: o.status.toUpperCase(), style: 'tblText' }
+      ];
+      lk.push(lx);
+    }
+
+    return lk;
   }
 
   onBack() {
