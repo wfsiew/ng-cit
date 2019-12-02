@@ -175,9 +175,7 @@ export class CreateShipmentComponent implements OnInit {
       origin_shipper_state_province: o.company_state_province,
       origin_shipper_country: s,
       origin_shipper_contact_name: o.company_pic_full_name,
-      origin_shipper_phone_no: o.company_pic_phone_number,
-      is_do: o.is_do,
-      is_cod: o.is_cod
+      origin_shipper_phone_no: o.company_pic_phone_number
     });
   }
 
