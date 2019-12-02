@@ -4,6 +4,7 @@
 
 const server = {
   cloud: 'http://139.59.221.42:8001',
+  local: 'http://localhost:8100'
 };
 
 export const environment = {
