@@ -172,7 +172,7 @@ export class ListDashboardComponent implements OnInit, OnDestroy {
   }
 
   onCSV() {
-    const ls = this.list;
+    const ls = this.removeFields();
     const replacer = (key, value) => value === null ? '' : value;
     const header = Object.keys(ls[0]);
     let csv = ls.map(row => header.map(fieldName => JSON.stringify(row[fieldName], replacer)).join(','));
@@ -187,7 +187,7 @@ export class ListDashboardComponent implements OnInit, OnDestroy {
   }
 
   onExcel() {
-    const ls = this.list;
+    const ls = this.removeFields();
     const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(ls);
     const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
     const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
@@ -197,6 +197,20 @@ export class ListDashboardComponent implements OnInit, OnDestroy {
     const filename = `${dt}_export_${new Date().getTime()}.xlsx`;
 
     FileSaver.saveAs(blob, filename);
+  }
+
+  removeFields() {
+    let ls = ['Customer_ref2', 'cn_AddressId', 'isExt', 'pod_url', 'shipper_AddressId', 'taskId', 'taskname'];
+    let lx = [];
+    for (let o of this.list) {
+      let x = o;
+      for (let s of ls) {
+        delete x[s]
+      }
+
+      lx.push(x);
+    }
+    return lx;
   }
 
   onPrint() {
