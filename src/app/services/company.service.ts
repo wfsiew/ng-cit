@@ -75,7 +75,7 @@ export class CompanyService {
         .set('length', limit)
         .set('order', sort)
         .set('dir', dir)
-        .set('active', 'True')
+        .set('active', '1')
         .set('company_id', company_id)
         .set('value', value);
       return this.http.get(`${this.baseUrl}/api/company/user/list`, { params: prm });
@@ -86,7 +86,7 @@ export class CompanyService {
       .set('length', limit)
       .set('order', sort)
       .set('dir', dir)
-      .set('active', 'False')
+      .set('active', '0')
       .set('company_id', company_id)
       .set('value', value);
     return this.http.get(`${this.baseUrl}/api/company/user/list`, { params: prm });

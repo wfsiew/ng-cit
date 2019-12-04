@@ -9,7 +9,7 @@ const server = {
 
 export const environment = {
   production: false,
-  baseUrl: server.cloud
+  baseUrl: server.local
 };
 
 /*

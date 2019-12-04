@@ -18,6 +18,7 @@ import { Helper } from 'src/app/shared/utils/helper';
 export class CreateUserModalComponent implements OnInit {
 
   title: string;
+  user_id: string;
   email: string = '';
   roles: string = 'USER';
   type: number;
@@ -75,11 +76,37 @@ export class CreateUserModalComponent implements OnInit {
   }
 
   onDeactivate() {
+    this.userService.deleteUser(this.user_id).subscribe((res: any) => {
+      if (res.status === true) {
+        this.onClose.next({ result: true });
+        this.toastr.success('User succesfully deactivated');
+        this.bsModalRef.hide();
+      }
 
+      else {
+        this.toastr.error(`Deactivate User Failed: ${res.message}`);
+      }
+    },
+    (error) => {
+      this.toastr.error(`Deactivate User Failed`);
+    });
   }
 
   onActivate() {
-    
+    this.userService.activateUser(this.user_id).subscribe((res: any) => {
+      if (res.status === true) {
+        this.onClose.next({ result: true });
+        this.toastr.success('User succesfully activated');
+        this.bsModalRef.hide();
+      }
+
+      else {
+        this.toastr.error(`Activate User Failed: ${res.message}`);
+      }
+    },
+    (error) => {
+      this.toastr.error(`Deactivate User Failed`);
+    });
   }
 
   get f() {
