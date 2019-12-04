@@ -23,4 +23,12 @@ export class UserService {
   changePwd(o) {
     return this.http.put(`${this.baseUrl}/api/user/change-password`, o);
   }
+
+  deleteUser(id) {
+    return this.http.post(`${this.baseUrl}/api/user/delete`, { user_id: id });
+  }
+
+  activateUser(id) {
+    return this.http.post(`${this.baseUrl}/api/user/activate`, { user_id: id });
+  }
 }

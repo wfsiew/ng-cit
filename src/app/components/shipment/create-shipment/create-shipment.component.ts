@@ -530,6 +530,7 @@ export class CreateShipmentComponent implements OnInit {
       total_package_no: f.total_package_no.value,
       service_type: f.service_type.value,
       order_amount : orderamt,
+      is_insurance: f.is_insurance_req,
       insurance_amount: 30.00,
       chargeable_weight: f.total_weight.value,
       chargeable_weight_uom: 'KG',

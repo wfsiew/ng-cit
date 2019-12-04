@@ -55,16 +55,38 @@ export class CompanyService {
     return this.http.put(`${this.baseUrl}/api/company/update`, o);
   }
 
-  listUser(company_id, pending: boolean = false, value = '') {
+  listUser(page, limit, sort, dir, company_id, pending: boolean = false, active = false, value = '') {
+    let i = Helper.getStart(page, limit);
     if (pending === true) {
       let prm = new HttpParams()
+        .set('start', `${i}`)
+        .set('length', limit)
+        .set('order', sort)
+        .set('dir', dir)
         .set('pending', '1')
+        .set('company_id', company_id)
+        .set('value', value);
+      return this.http.get(`${this.baseUrl}/api/company/user/list`, { params: prm });
+    }
+
+    if (active === true) {
+      let prm = new HttpParams()
+        .set('start', `${i}`)
+        .set('length', limit)
+        .set('order', sort)
+        .set('dir', dir)
+        .set('active', 'True')
         .set('company_id', company_id)
         .set('value', value);
       return this.http.get(`${this.baseUrl}/api/company/user/list`, { params: prm });
     }
     
     let prm = new HttpParams()
+      .set('start', `${i}`)
+      .set('length', limit)
+      .set('order', sort)
+      .set('dir', dir)
+      .set('active', 'False')
       .set('company_id', company_id)
       .set('value', value);
     return this.http.get(`${this.baseUrl}/api/company/user/list`, { params: prm });

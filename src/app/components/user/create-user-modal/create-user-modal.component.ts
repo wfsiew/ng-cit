@@ -20,6 +20,7 @@ export class CreateUserModalComponent implements OnInit {
   title: string;
   email: string = '';
   roles: string = 'USER';
+  type: number;
   company_id: string = '';
   edit = false;
   canEdit = false;
@@ -71,6 +72,14 @@ export class CreateUserModalComponent implements OnInit {
 
   onDelete() {
     this.bsModalRef.hide();
+  }
+
+  onDeactivate() {
+
+  }
+
+  onActivate() {
+    
   }
 
   get f() {

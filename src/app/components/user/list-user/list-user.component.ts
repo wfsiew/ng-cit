@@ -23,11 +23,12 @@ export class ListUserComponent implements OnInit, OnDestroy {
   list = [];
   itemsCount = 0;
   pending = false;
+  active = true;
   tab = 0;
   page = 1;
   search = '';
-  sort = '';
-  sort_dir = '';
+  sort = 'create_date';
+  sort_dir = 'desc';
   subs: Subscription;
   bsModalRef: BsModalRef;
   company_id: string;
@@ -38,6 +39,7 @@ export class ListUserComponent implements OnInit, OnDestroy {
 
   readonly isEmpty = Helper.isEmpty;
   readonly PAGE_SIZE = AppConstant.PAGE_SIZE;
+  readonly MAX_PAGE_NUMBERS = AppConstant.MAX_PAGE_NUMBERS;
 
   constructor(
     private route: ActivatedRoute,
@@ -79,7 +81,8 @@ export class ListUserComponent implements OnInit, OnDestroy {
 
   load() {
     this.isloading = true;
-    this.companyService.listUser(this.company_id, this.pending, this.search).subscribe((res: any) => {
+    this.companyService.listUser(this.page, AppConstant.PAGE_SIZE, this.sort, this.sort_dir, this.company_id, 
+      this.pending, this.active, this.search).subscribe((res: any) => {
       this.list = res.status ? res.data : [];
       //this.itemsCount = res.status ? res.recordsTotal : 0;
       this.isloading = false;
@@ -123,7 +126,9 @@ export class ListUserComponent implements OnInit, OnDestroy {
 
   onTab(i) {
     this.tab = i;
-    this.pending = i === 0 ? false : true;
+    this.pending = i === 1 ? true : false;
+    this.active = i === 0 ? true : false;
+
     this.load();
     return false;
   }
@@ -134,20 +139,20 @@ export class ListUserComponent implements OnInit, OnDestroy {
       title: 'Edit User',
       email: x.Email,
       roles: x.Roles,
-      canEdit: this.canEdit
+      canEdit: this.canEdit,
+      type: this.tab
     };
     this.bsModalRef = this.modalService.show(CreateUserModalComponent, { initialState: state });
     this.bsModalRef.content.onClose.subscribe(res => {
       if (res.result === true) {
-        if (this.tab === 1) {
-          this.load();
-        }
+        this.load();
       }
     });
     return false;
   }
 
   onSearch() {
+    this.page = 1;
     this.load();
   }
 
@@ -156,6 +161,6 @@ export class ListUserComponent implements OnInit, OnDestroy {
   }
 
   onSearchKeypress(event) {
-    this.load();
+    this.onSearch();
   }
 }

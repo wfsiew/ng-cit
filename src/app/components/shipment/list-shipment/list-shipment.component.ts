@@ -140,6 +140,7 @@ export class ListShipmentComponent implements OnInit, OnDestroy {
   }
 
   onSearch() {
+    this.page = 1;
     this.load();
   }
 
@@ -148,6 +149,6 @@ export class ListShipmentComponent implements OnInit, OnDestroy {
   }
 
   onSearchKeypress(event) {
-    this.load();
+    this.onSearch();
   }
 }

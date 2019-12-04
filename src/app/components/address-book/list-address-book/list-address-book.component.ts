@@ -170,6 +170,7 @@ export class ListAddressBookComponent implements OnInit, OnDestroy {
   }
 
   onSearch() {
+    this.page = 1;
     this.load();
   }
 
@@ -178,6 +179,6 @@ export class ListAddressBookComponent implements OnInit, OnDestroy {
   }
 
   onSearchKeypress(event) {
-    this.load();
+    this.onSearch();
   }
 }

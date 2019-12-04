@@ -42,6 +42,7 @@
       <ul class="nav nav-tabs">
         <li [ngClass]="{ 'active': tab === 0 }"><a href="#" (click)="onTab(0)">Active</a></li>
         <li [ngClass]="{ 'active': tab === 1 }"><a href="#" (click)="onTab(1)">Pending Invitation</a></li>
+        <li [ngClass]="{ 'active': tab === 2 }"><a href="#" (click)="onTab(2)">Deactivated</a></li>
       </ul>
 
       <div class="text-center" *ngIf="isEmpty(list)">
@@ -80,6 +81,12 @@
 
     <div class="overlay" *ngIf="isloading">
       <i class="fa fa-refresh fa-spin"></i>
+    </div>
+
+    <div class="box-footer">
+      <div class="pull-right" *ngIf="itemsCount">
+        <pagination [totalItems]="itemsCount" [itemsPerPage]="PAGE_SIZE" [maxSize]="MAX_PAGE_NUMBERS" [(ngModel)]="page" (pageChanged)="pageChanged($event)"></pagination>
+      </div>
     </div>
   </div>
 </section>
