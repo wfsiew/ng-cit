@@ -20,7 +20,7 @@
         <select class="form-control" formControlName="user_type" name="user_type">
           <option value="USER">USER</option>
           <option value="SUPERUSER">SUPERUSER</option>
-          <option value="ADMIN">ADMIN</option>
+          <option value="ADMIN" *ngIf="user.role === ROLE.ADMIN">ADMIN</option>
         </select>
       </div>
     </div>

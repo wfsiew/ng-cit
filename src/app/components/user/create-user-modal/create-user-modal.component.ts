@@ -2,12 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { CompanyService } from 'src/app/services/company.service';
 import { UserService } from 'src/app/services/user.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { Subject } from 'rxjs';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 
 import { AppConstant } from 'src/app/shared/constants/app.constant';
 import _ from 'lodash';
 import { ToastrService } from 'ngx-toastr';
+import { User } from 'src/app/shared/models/user';
 import { Helper } from 'src/app/shared/utils/helper';
 
 @Component({
@@ -27,18 +29,22 @@ export class CreateUserModalComponent implements OnInit {
   edit = false;
   canEdit = false;
   mform: FormGroup;
+  user: User;
 
   public onClose: Subject<any>;
+  readonly ROLE = AppConstant.ROLE;
 
   constructor(
     private fb: FormBuilder,
     private companyService: CompanyService,
     private userService: UserService,
+    private authService: AuthService,
     public bsModalRef: BsModalRef,
     private toastr: ToastrService
   ) { }
 
   ngOnInit() {
+    this.user = this.authService.loadUser();
     this.onClose = new Subject();
     this.createForm();
   }
