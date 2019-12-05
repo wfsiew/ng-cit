@@ -138,6 +138,7 @@ export class ListUserComponent implements OnInit, OnDestroy {
     const state = {
       title: 'Edit User',
       user_id: x.user_id,
+      invitation_id: x.invitation_id,
       email: x.Email,
       roles: x.Roles,
       canEdit: this.canEdit,

@@ -24,6 +24,10 @@ export class UserService {
     return this.http.put(`${this.baseUrl}/api/user/change-password`, o);
   }
 
+  deletePendingUser(id) {
+    return this.http.post(`${this.baseUrl}/api/user/delete`, { invitation_id: id });
+  }
+
   deleteUser(id) {
     return this.http.post(`${this.baseUrl}/api/user/delete`, { user_id: id });
   }

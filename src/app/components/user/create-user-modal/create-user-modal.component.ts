@@ -19,6 +19,7 @@ export class CreateUserModalComponent implements OnInit {
 
   title: string;
   user_id: string;
+  invitation_id: string;
   email: string = '';
   roles: string = 'USER';
   type: number;
@@ -72,7 +73,26 @@ export class CreateUserModalComponent implements OnInit {
   }
 
   onDelete() {
-    this.bsModalRef.hide();
+    this.userService.deletePendingUser(this.invitation_id).subscribe((res: any) => {
+      if (res.status === true) {
+        this.onClose.next({ result: true });
+        this.toastr.success('User succesfully deleted');
+        this.bsModalRef.hide();
+      }
+
+      else {
+        this.toastr.error('Delete User Failed');
+      }
+    },
+    (error) => {
+      if (error.status === 400 && error.error && error.error.message) {
+        this.toastr.error(`Delete User Failed: ${error.error.message}`);
+      }
+
+      else {
+        this.toastr.error('Delete User Failed');
+      }
+    });
   }
 
   onDeactivate() {
@@ -84,11 +104,17 @@ export class CreateUserModalComponent implements OnInit {
       }
 
       else {
-        this.toastr.error(`Deactivate User Failed: ${res.message}`);
+        this.toastr.error('Deactivate User Failed');
       }
     },
     (error) => {
-      this.toastr.error(`Deactivate User Failed`);
+      if (error.status === 400 && error.error && error.error.message) {
+        this.toastr.error(`Deactivate User Failed: ${error.error.message}`);
+      }
+
+      else {
+        this.toastr.error('Deactivate User Failed');
+      }
     });
   }
 
