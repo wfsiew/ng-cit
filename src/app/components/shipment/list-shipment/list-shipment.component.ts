@@ -20,8 +20,8 @@ export class ListShipmentComponent implements OnInit, OnDestroy {
   itemsCount = 0;
   page = 1;
   search = '';
-  sort = 'id';
-  sort_dir = '';
+  sort = 'create_date';
+  sort_dir = 'desc';
   onSearchDbKeyup: any;
   sx = 0;
   sy = 0;
