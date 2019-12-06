@@ -4,7 +4,7 @@ export class AppConstant {
 
   public static PAGE_SIZE = 20;
   public static MAX_PAGE_NUMBERS = 10;
-  public static NETWORK_TIMEOUT = 16000;
+  public static NETWORK_TIMEOUT = 60000;
 
   public static ROLE = {
     ADMIN: 'ADMIN',

@@ -62,4 +62,11 @@ export class ShipmentService {
       .set('consignment_no', consignment_no);
     return this.http.get(`${this.baseUrl}/api/reports/labels/`, { params: prm, responseType: 'blob' });
   }
+
+  printLabels(consignment_no_list, type: string) {
+    const o = {
+      consignment_no_list: consignment_no_list
+    };
+    return this.http.post(`${this.baseUrl}/api/reports/labels/`, o, { responseType: 'blob' });
+  }
 }

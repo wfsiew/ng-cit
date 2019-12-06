@@ -30,13 +30,18 @@
         <div class="form-group">
           <label class="col-sm-2 control-label">*Delivery Service</label>
           <div class="col-sm-4">
-            <ng-select 
-              [items]="serviceList" 
-              bindLabel="service_description" 
-              bindValue="service_code"
-              placeholder="Please select"
-              formControlName="service_type"
-              name="service_type"></ng-select>
+            <ng-container *ngIf="isView">
+              <input type="text" class="form-control" disabled [value]="service_type">
+            </ng-container>
+            <ng-container *ngIf="!isView">
+              <ng-select 
+                [items]="serviceList" 
+                bindLabel="service_description" 
+                bindValue="service_code"
+                placeholder="Please select"
+                formControlName="service_type"
+                name="service_type"></ng-select>
+            </ng-container>
           </div>
           <div class="col-sm-3">
             <label class="control-label">Requested Pickup Date</label><br />
@@ -44,7 +49,10 @@
           </div>
           
           <div class="col-sm-3">
-            <div class="input-group">
+            <ng-container *ngIf="isView">
+              <input type="text" class="form-control" disabled [value]="f.pickup_date.value ? getDateStr(f.pickup_date.value) : ''">
+            </ng-container>
+            <div class="input-group" *ngIf="!isView">
               <input type="text" class="form-control" formControlName="pickup_date" name="pickup_date" bsDatepicker #dp="bsDatepicker"
                 [bsConfig]="{ containerClass: 'theme-blue', dateInputFormat: 'YYYY-MM-DD' }">
               <div class="input-group-btn">
@@ -59,13 +67,18 @@
         <div class="form-group">
           <label class="col-sm-2 control-label">*Goods Currency</label>
           <div class="col-sm-4">
-            <ng-select 
-              [items]="countryList" 
-              bindLabel="currency" 
-              bindValue="currency" 
-              placeholder="Please select"
-              formControlName="currency" 
-              name="currency"></ng-select>
+            <ng-container *ngIf="isView">
+              <input type="text" class="form-control" disabled [value]="currency">
+            </ng-container>
+            <ng-container *ngIf="!isView">
+              <ng-select 
+                [items]="countryList" 
+                bindLabel="currency" 
+                bindValue="currency" 
+                placeholder="Please select"
+                formControlName="currency" 
+                name="currency"></ng-select>
+            </ng-container>
           </div>
         </div>
 
@@ -82,7 +95,7 @@
           </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" *ngIf="!isView">
           <label class="col-sm-2 control-label">*Upload Document</label>
           <div class="col-sm-4">
             <input type="file" class="form-control" placeholder="Upload Shipment" formControlName="file"
@@ -90,6 +103,12 @@
           </div>
           <div class="col-sm-1">
             <button type="submit" class="btn btn-primary" [disabled]="mform.invalid">Upload</button>
+          </div>
+        </div>
+
+        <div class="form-group" *ngIf="!isEmpty(consignment_noList)">
+          <div class="col-sm-5 col-sm-offset-2">
+            <button type="button" class="btn btn-primary" (click)="onPrintShipment()">Print Shipment</button>
           </div>
         </div>
 

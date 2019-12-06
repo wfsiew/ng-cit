@@ -123,8 +123,8 @@
             <ng-container *ngIf="isView">
               <input type="text" class="form-control" disabled [value]="packaging_type">
             </ng-container>
-              <ng-container *ngIf="!isView">
-                <ng-select
+            <ng-container *ngIf="!isView">
+              <ng-select
                 [items]="uomList" 
                 bindLabel="description" 
                 bindValue="code" 

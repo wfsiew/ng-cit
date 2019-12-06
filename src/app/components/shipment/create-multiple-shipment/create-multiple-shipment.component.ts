@@ -11,6 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Helper } from 'src/app/shared/utils/helper';
 import { AddressBookModalComponent } from 'src/app/shared/components/address-book-modal/address-book-modal.component';
+import { PrintShipmentModalComponent } from '../print-shipment-modal/print-shipment-modal.component';
 
 @Component({
   selector: 'app-create-multiple-shipment',
@@ -22,11 +23,17 @@ export class CreateMultipleShipmentComponent implements OnInit {
   isloading = false;
   serviceList = [];
   countryList = [];
+  consignment_noList = [];
   mform: FormGroup;
   data: any;
   bsModalRef: BsModalRef;
   selectedAddressShipper: any;
   uploadResponse: any = { status: '', message: '', filePath: '' };
+  isView = false;
+  pdfstate = null;
+
+  readonly isEmpty = Helper.isEmpty;
+  readonly getDateStr = Helper.getDateStr;
 
   constructor(
     private fb: FormBuilder,
@@ -127,7 +134,7 @@ export class CreateMultipleShipmentComponent implements OnInit {
   }
 
   onFileChange(event) {
-    if (event.target.files && event.target.files.length) {
+    if (event.target.files && event.target.files.length > 0) {
       const file = event.target.files[0];
       this.mform.patchValue({
         file: file
@@ -167,18 +174,45 @@ export class CreateMultipleShipmentComponent implements OnInit {
 
       else if (res.gotError === false) {
         this.isloading = false;
+        this.isView = true;
+        this.consignment_noList = res.data.consignment_no_list;
         this.toastr.success('Upload Shipment successful', 'Upload Shipment');
-        this.onBack();
+        //this.onBack();
       }
     },
     (error) => {
       this.isloading = false;
+      console.log(error)
       this.toastr.error('Upload Shipment Failed', 'Upload Shipment');
     })
   }
 
   onBack() {
     this.loc.back();
+  }
+
+  onPrintShipment() {
+    if (!this.pdfstate) {
+      this.isloading = true;
+      this.shipmentService.printLabels(this.consignment_noList, AppConstant.PRINT_TYPE.NEWCONSIGNMENTNOTE).subscribe((res: any) => {
+        this.isloading = false;
+        const state = {
+          pdfsrc: URL.createObjectURL(res),
+          pdfblob: res,
+          filename: `shipment-labels.pdf`
+        };
+        this.pdfstate = state;
+        this.bsModalRef = this.modalService.show(PrintShipmentModalComponent, { initialState: state });
+      },
+      (error) => {
+        this.isloading = false;
+        this.toastr.error('Print Shipment Faled');
+      });
+    }
+
+    else {
+      this.bsModalRef = this.modalService.show(PrintShipmentModalComponent, { initialState: this.pdfstate });
+    }
   }
 
   get f() {
@@ -188,5 +222,35 @@ export class CreateMultipleShipmentComponent implements OnInit {
   invalid(s: string) {
     const m = this.mform.controls[s];
     return m.invalid && (m.dirty || m.touched);
+  }
+
+  get service_type() {
+    let p = this.f.service_type.value;
+    let s = p;
+    if (Helper.isEmpty(p)) {
+      return p;
+    }
+
+    let o = _.find(this.serviceList, { service_code: p });
+    if (!_.isUndefined(o)) {
+      s = o.service_description;
+    }
+
+    return s;
+  }
+
+  get currency() {
+    let p = this.f.currency.value;
+    let s = p;
+    if (Helper.isEmpty(p)) {
+      return p;
+    }
+
+    let o = _.find(this.countryList, { currency: p });
+    if (!_.isUndefined(o)) {
+      s = o.currency;
+    }
+
+    return s;
   }
 }
