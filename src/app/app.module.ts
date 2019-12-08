@@ -16,6 +16,7 @@ import {
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { RegisterComponent } from './components/register/register.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';
@@ -75,6 +76,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   declarations: [
     AppComponent,
     LoginComponent,
+    ForgotPasswordComponent,
     RegisterComponent,
     FooterComponent,
     HomeComponent,

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from 'src/app/components/login/login.component';
+import { ForgotPasswordComponent } from '../components/forgot-password/forgot-password.component';
 import { RegisterComponent } from 'src/app/components/register/register.component';
 import { HomeComponent } from 'src/app/components/home/home.component';
 import { MainDashboardComponent } from 'src/app/components/dashboard/main-dashboard/main-dashboard.component';
@@ -24,7 +25,7 @@ import { AuthGuardService } from 'src/app/services/auth-guard.service';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'register/:serial_id', component: RegisterComponent },
+  { path: 'forgot-password', component: ForgotPasswordComponent },
   {
     path: 'cit', component: HomeComponent, canActivate: [AuthGuardService],
     children: [

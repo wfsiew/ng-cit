@@ -73,4 +73,8 @@ export class AuthService {
 
     return user;
   }
+
+  resetPasswordEmail(email) {
+    return this.http.post(`${this.baseUrl}/api/user/password-reset/`, { email: email });
+  }
 }
