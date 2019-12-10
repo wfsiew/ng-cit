@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { DashboardService } from 'src/app/services/dashboard.service';
 import { CompanyService } from 'src/app/services/company.service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -34,10 +33,10 @@ export class MainDashboardComponent implements OnInit, OnDestroy {
     company_name: ''
   }
   company_id: string;
+  company_name: string;
   role: string;
   daterx = [new Date(), new Date()];
   datex = this.daterx;
-  subs: Subscription;
 
   readonly isEmpty = Helper.isEmpty;
 
@@ -49,29 +48,35 @@ export class MainDashboardComponent implements OnInit, OnDestroy {
     private msService: MessageService,
     private toastr: ToastrService
   ) {
-    this.subs = this.msService.get().subscribe(res => {
-      if (res.name === 'main-dashboard') {
-        const o = res.data;
-        this.company_id = o.company_id;
-        this.daterx = o.daterx;
-      }
-    });
   }
 
   ngOnInit() {
     let user = this.authService.loadUser();
     this.role = user.role;
+    const s = localStorage.getItem('main-dashboard');
+    if (!_.isNull(s)) {
+      const o = JSON.parse(s);
+      this.company_id = o.company_id;
+      this.company_name = o.company_name;
+      this.daterx = [new Date(o.daterx[0]), new Date(o.daterx[1])];
+      localStorage.removeItem('main-dashboard');
+    }
+
     this.load();
   }
 
   ngOnDestroy() {
-    this.subs.unsubscribe();
+
   }
 
   load() {
     this.authService.getUserDetails().subscribe((res: any) => {
       this.user = !_.isEmpty(res.data) ? res.data[0] : {};
-      this.company_id = this.user.company_id;
+      if (Helper.isEmpty(this.company_id)) {
+        this.company_id = this.user.company_id;
+        this.company_name = this.user.company_name;
+      }
+      
       this.loadDashboard();
       this.loadCompany();
     },
@@ -136,25 +141,29 @@ export class MainDashboardComponent implements OnInit, OnDestroy {
   }
 
   onKPI(i) {
-    this.msService.send('main-dashboard', {
+    localStorage.removeItem('list-dashboard');
+    localStorage.setItem('main-dashboard', JSON.stringify({
       company_id: this.company_id,
+      company_name: this.company_name,
       daterx: this.datex
-    });
+    }));
     this.router.navigate(['/cit/dashboard/list', i, this.company_id], { queryParams: { s_date: Helper.getDateStr(this.datex[0]), e_date: Helper.getDateStr(this.datex[1]) } });
     return false;
   }
 
   onViewDetails(o) {
-    this.msService.send('main-dashboard', {
+    localStorage.setItem('main-dashboard', JSON.stringify({
       company_id: this.company_id,
+      company_name: this.company_name,
       daterx: this.datex
-    });
+    }));
     this.router.navigate(['/cit/company/edit', o.company_id]);
     return false;
   }
 
   onViewDashboard(o) {
     this.company_id = o.company_id;
+    this.company_name = o.company_name;
     this.loadDashboard();
     return false;
   }

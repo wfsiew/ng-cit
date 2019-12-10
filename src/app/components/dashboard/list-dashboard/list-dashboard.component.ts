@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { DashboardService } from 'src/app/services/dashboard.service';
 import { CompanyService } from 'src/app/services/company.service';
 import { Location, formatDate } from '@angular/common';
@@ -35,7 +34,6 @@ export class ListDashboardComponent implements OnInit, OnDestroy {
   datex = this.daterx;
   sx = 0;
   sy = 0;
-  subs: Subscription;
 
   TITLE = ['NEW', 'PENDING', 'DELIVERED', 'CANCEL'];
   STATUS = ['new', 'pending', 'delivered', 'cancel'];
@@ -53,15 +51,6 @@ export class ListDashboardComponent implements OnInit, OnDestroy {
     private msService: MessageService,
     private toastr: ToastrService
   ) {
-    this.subs = this.msService.get().subscribe(res => {
-      if (res.name === 'list-dashboard') {
-        const o = res.data;
-        this.page = o.page;
-        this.sx = o.sx;
-        this.sy = o.sy;
-        this.list = o.list;
-      }
-    });
   }
 
   ngOnInit() {
@@ -72,6 +61,15 @@ export class ListDashboardComponent implements OnInit, OnDestroy {
       }
 
       this.company_id = params.get('company_id');
+      const s = localStorage.getItem('list-dashboard');
+      if (!_.isNull(s)) {
+        const o = JSON.parse(s);
+        this.page = o.page;
+        this.sx = o.sx;
+        this.sy = o.sy;
+        this.list = o.list;
+        localStorage.removeItem('list-dashboard');
+      }
       this.load();
     });
     this.route.queryParams.subscribe(params => {
@@ -161,12 +159,12 @@ export class ListDashboardComponent implements OnInit, OnDestroy {
   }
 
   onView(o) {
-    this.msService.send('list-dashboard', {
+    localStorage.setItem('list-dashboard', JSON.stringify({
       page: this.page,
       sx: window.scrollX,
       sy: window.scrollY,
       list: this.list
-    });
+    }));
     this.router.navigate(['/cit/dashboard/detail', o.ConsignmentNo]);
     return false;
   }
