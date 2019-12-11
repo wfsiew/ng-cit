@@ -60,6 +60,6 @@ export class ChangePwdComponent implements OnInit {
 
   invalid(s: string) {
     const m = this.mform.controls[s];
-    return m.invalid && (m.dirty || m.touched);
+    return m.invalid;
   }
 }

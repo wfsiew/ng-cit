@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { UserService } from 'src/app/services/user.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { CustomValidator } from 'src/app/shared/validators/custom-validator';
 
@@ -12,10 +12,11 @@ import { CustomValidator } from 'src/app/shared/validators/custom-validator';
 export class ResetPasswordComponent implements OnInit {
 
   mform: FormGroup;
+  isView = false;
 
   constructor(
     private fb: FormBuilder,
-    private userService: UserService,
+    private authService: AuthService,
     private toastr: ToastrService
   ) {
     this.createForm();
@@ -36,7 +37,19 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   onSubmit() {
-
+    const f = this.mform.value;
+    let o = {
+      email: f.email,
+      new_password: f.pwd,
+      confirm_password: f.cpwd
+    };
+    this.authService.resetPassword(o).subscribe(res => {
+      this.toastr.success('Your password successfully changed');
+      this.isView = true;
+    },
+    (error) => {
+      this.toastr.error('Your password failed to be changed');
+    });
   }
 
   get f() {
@@ -45,6 +58,6 @@ export class ResetPasswordComponent implements OnInit {
 
   invalid(s: string) {
     const m = this.mform.controls[s];
-    return m.invalid && (m.dirty || m.touched);
+    return m.invalid;
   }
 }
