@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { CustomValidator } from 'src/app/shared/validators/custom-validator';
@@ -12,22 +13,26 @@ import { CustomValidator } from 'src/app/shared/validators/custom-validator';
 export class ResetPasswordComponent implements OnInit {
 
   mform: FormGroup;
+  id: string;
   isView = false;
 
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private route: ActivatedRoute
   ) {
     this.createForm();
   }
 
   ngOnInit() {
+    this.route.paramMap.subscribe(params => {
+      this.id = params.get('id');
+    });
   }
 
   createForm() {
     this.mform = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
       pwd: ['', [Validators.required]],
       cpwd: ['', [Validators.required]]
     },
@@ -39,7 +44,7 @@ export class ResetPasswordComponent implements OnInit {
   onSubmit() {
     const f = this.mform.value;
     let o = {
-      email: f.email,
+      uid: this.id,
       new_password: f.pwd,
       confirm_password: f.cpwd
     };

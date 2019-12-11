@@ -27,7 +27,7 @@ import { AuthGuardService } from 'src/app/services/auth-guard.service';
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
-  { path: 'reset-password', component: ResetPasswordComponent },
+  { path: 'reset-password/:id', component: ResetPasswordComponent },
   {
     path: 'cit', component: HomeComponent, canActivate: [AuthGuardService],
     children: [
