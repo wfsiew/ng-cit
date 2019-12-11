@@ -24,8 +24,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     private toastr: ToastrService
   ) {
     this.mform = this.fb.group({
-      username: ['admin', Validators.required],
-      password: ['admin123', Validators.required]
+      username: ['jason', Validators.required],
+      password: ['jason', Validators.required]
     });
   }
 
