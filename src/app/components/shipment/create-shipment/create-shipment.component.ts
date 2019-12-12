@@ -119,6 +119,10 @@ export class CreateShipmentComponent implements OnInit {
 
   setFormEdit() {
     const o = this.datax;
+    if (o.status !== 'NEW' && o.status !== 'CONFIRM') {
+      this.isView = true;
+    }
+    
     this.mform.patchValue({
       consignment_no: o.consignment_no,
       service_type: o.service_type,
