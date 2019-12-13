@@ -57,7 +57,7 @@
               <td class="text-center">{{ o.is_confirm ? 'CONFIRM': 'NOT CONFIRM' }}</td>
               <td>
                 <button type="button" class="btn" (click)="onConfirmConsignment(o)" [ngClass]="{ 'btn-success': !o.is_confirm, 'btn-danger': o.is_confirm }">{{ o.is_confirm ? 'Unconfirm': 'Confirm' }}</button>
-                <button type="button" class="btn btn-default" (click)="onCheckIn(o)">Check In</button>
+                <!-- <button type="button" class="btn btn-default" (click)="onCheckIn(o)">Check In</button> -->
               </td>
             </tr>
           </tbody>
