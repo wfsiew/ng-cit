@@ -17,6 +17,21 @@ Content-Type: application/json
 
 ###
 
+GET http://citflask.fmx.asia/dashboard/S000211/list/new/2019-10-01/2019-11-30
+Authorization: Bearer {{token}}
+
+###
+
+GET http://citflask.fmx.asia/dashboard/S000211/list/pending/2019-10-01/2019-11-30
+Authorization: Bearer {{token}}
+
+###
+
+GET http://citflask.fmx.asia/dashboard/S000211/list/delivered/2019-10-01/2019-11-30
+Authorization: Bearer {{token}}
+
+###
+
 POST {{base}}/api/user/password-reset/
 Content-Type: application/json
 
