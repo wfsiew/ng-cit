@@ -70,8 +70,7 @@ const routes: Routes = [
           { path: 'create', component: CreateShipmentComponent, canActivate: [AuthGuardService] },
           { path: 'create/multiple', component: CreateMultipleShipmentComponent, canActivate: [AuthGuardService] },
           { path: 'list', component: ListShipmentComponent, canActivate: [AuthGuardService] },
-          { path: 'edit/:id', component: CreateShipmentComponent, canActivate: [AuthGuardService] },
-          { path: 'detail/:id/:view', component: CreateShipmentComponent, canActivate: [AuthGuardService] }
+          { path: 'detail/:id', component: CreateShipmentComponent, canActivate: [AuthGuardService] }
         ]
       },
       { path: 'address-book',

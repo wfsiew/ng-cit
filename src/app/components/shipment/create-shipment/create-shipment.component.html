@@ -455,10 +455,10 @@
 
       <div class="box-footer">
         <div class="row">
-          <div class="col-sm-2" *ngIf="isView">
+          <div class="col-sm-2" *ngIf="isView && allowEdit">
             <button type="button" class="btn btn-primary btn-edit" (click)="isView = false">Edit</button>
           </div>
-          <div class="col-sm-2">
+          <div class="col-sm-2" *ngIf="allowEdit">
             <button type="submit" class="btn btn-primary" [disabled]="mform.invalid || isView">Save Changes</button>
           </div>
           <div class="col-sm-2" *ngIf="isEdit">

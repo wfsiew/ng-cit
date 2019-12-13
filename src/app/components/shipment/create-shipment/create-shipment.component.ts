@@ -37,6 +37,7 @@ export class CreateShipmentComponent implements OnInit {
   selectedAddressReceiver: any;
   isEdit = false;
   isView = false;
+  allowEdit = true;
   title = 'Create';
   pdfstate = null;
 
@@ -60,9 +61,10 @@ export class CreateShipmentComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.id = params.get('id');
-      this.isView = params.get('view') === '0' ? true : false;
+      // this.isView = params.get('view') === '0' ? true : false;
       if (!_.isNull(this.id)) {
         this.isEdit = true;
+        this.isView = true;
         this.title = 'Edit';
       }
 
@@ -119,8 +121,8 @@ export class CreateShipmentComponent implements OnInit {
 
   setFormEdit() {
     const o = this.datax;
-    if (o.status !== 'NEW' && o.status !== 'CONFIRM') {
-      this.isView = true;
+    if (o.status !== 'NEW') {
+      this.allowEdit = false;
     }
     
     this.mform.patchValue({
@@ -555,7 +557,7 @@ export class CreateShipmentComponent implements OnInit {
       this.shipmentService.createShipment(o).subscribe((res: any) => {
         this.isloading = false;
         this.toastr.success('New Shipment successfully created', 'Create Shipment');
-        this.router.navigate(['/cit/shipment/detail', res.shipment_id, 0]);
+        this.router.navigate(['/cit/shipment/detail', res.shipment_id]);
       },
       (error) => {
         this.isloading = false;
@@ -574,7 +576,8 @@ export class CreateShipmentComponent implements OnInit {
       this.shipmentService.updateShipment(o).subscribe(res => {
         this.isloading = false;
         this.toastr.success('Shipment successfully updated', 'Update Shipment');
-        this.router.navigate(['/cit/shipment/detail', o.id, 0]);
+        this.isView = true;
+        this.load();
       },
       (error) => {
         this.isloading = false;

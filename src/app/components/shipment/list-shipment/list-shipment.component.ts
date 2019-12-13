@@ -82,7 +82,7 @@ export class ListShipmentComponent implements OnInit, OnDestroy {
     });
   }
 
-  onEdit(o) {
+  onDetails(o) {
     this.msService.send('list-shipment', {
       page: this.page,
       sort: this.sort,
@@ -91,7 +91,7 @@ export class ListShipmentComponent implements OnInit, OnDestroy {
       sx: window.scrollX,
       sy: window.scrollY
     });
-    this.router.navigate(['/cit/shipment/edit', o.id]);
+    this.router.navigate(['/cit/shipment/detail', o.id]);
   }
 
   pageChanged(event: any) {
