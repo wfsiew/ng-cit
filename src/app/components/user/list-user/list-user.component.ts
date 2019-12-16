@@ -153,6 +153,11 @@ export class ListUserComponent implements OnInit, OnDestroy {
     return false;
   }
 
+  pageChanged(event: any) {
+    this.page = event.page;
+    this.load();
+  }
+
   onSearch() {
     this.page = 1;
     this.load();
