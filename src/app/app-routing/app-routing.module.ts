@@ -90,7 +90,7 @@ const routes: Routes = [
   declarations: [],
   imports: [
     CommonModule,
-    RouterModule.forRoot(routes, { useHash: false })
+    RouterModule.forRoot(routes, { useHash: true })
   ],
   exports: [RouterModule]
 })
