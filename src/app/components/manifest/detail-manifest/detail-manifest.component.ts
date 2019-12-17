@@ -7,6 +7,7 @@ import _ from 'lodash';
 import { ToastrService } from 'ngx-toastr';
 import { Helper } from 'src/app/shared/utils/helper';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { PrintShipmentModalComponent } from '../../shipment/print-shipment-modal/print-shipment-modal.component';
 
 @Component({
   selector: 'app-detail-manifest',
@@ -20,12 +21,13 @@ export class DetailManifestComponent implements OnInit {
   manifest_no: string;
   company_id: string;
   data: any = {};
-  modalRef: BsModalRef;
+  bsModalRef: BsModalRef;
   itemsCount = 0;
   page = 1;
   search = '';
   sort = 'id';
   sort_dir = '';
+  pdfstate = null;
 
   readonly isEmpty = Helper.isEmpty;
   readonly PAGE_SIZE = AppConstant.PAGE_SIZE;
@@ -68,7 +70,7 @@ export class DetailManifestComponent implements OnInit {
   }
 
   onConfirmCloseManifest(tp: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(tp, {class: 'modal-sm'});
+    this.bsModalRef = this.modalService.show(tp, {class: 'modal-sm'});
   }
 
   _onConfirmClose() {
@@ -90,7 +92,7 @@ export class DetailManifestComponent implements OnInit {
   }
 
   onCancel() {
-    this.modalRef.hide();
+    this.bsModalRef.hide();
   }
 
   onConfirmConsignment(consignment) {
@@ -140,5 +142,40 @@ export class DetailManifestComponent implements OnInit {
 
   onBack() {
     this.loc.back();
+  }
+
+  onPrintManifest() {
+    if (_.isEmpty(this.data)) {
+      return;
+    }
+
+    const manifest = this.data;
+    let s = manifest.created_date;
+    const dt = s.substring(0, 10);
+    const a = dt.split('-');
+    const y = a[0].substring(2);
+    //const dx = `${a[2]}/${a[1]}/${y}`;
+
+    if (!this.pdfstate) {
+      this.isloading = true;
+      this.manifestService.printLabel(manifest.company_id, dt).subscribe((res: any) => {
+        this.isloading = false;
+        const state = {
+          pdfsrc: URL.createObjectURL(res),
+          pdfblob: res,
+          filename: `${manifest.manifest_no}.pdf`
+        };
+        this.pdfstate = state;
+        this.bsModalRef = this.modalService.show(PrintShipmentModalComponent, { initialState: state });
+      },
+      (error) => {
+        this.isloading = false;
+        this.toastr.error('Print Manifest Faled');
+      })
+    }
+
+    else {
+      this.bsModalRef = this.modalService.show(PrintShipmentModalComponent, { initialState: this.pdfstate });
+    }
   }
 }

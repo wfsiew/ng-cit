@@ -78,4 +78,11 @@ export class ManifestService {
   checkinConsignment(o) {
     return this.http.post(`${this.baseUrl}/api/checkin/consignment`, o);
   }
+
+  printLabel(company_id: string, dt: string) {
+    let prm: HttpParams = new HttpParams()
+      .set('company_id', company_id)
+      .set('create_date', dt);
+    return this.http.get(`${this.baseUrl}/api/reports/manifests`, { params: prm, responseType: 'blob' });
+  }
 }

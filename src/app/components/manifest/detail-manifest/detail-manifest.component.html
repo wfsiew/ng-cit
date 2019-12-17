@@ -15,7 +15,7 @@
         <div class="col-sm-4"><b>{{ manifest_no }}</b></div>
         <div class="pull-right">
           <button *ngIf="!data.is_close" type="button" class="btn btn-success" (click)="onConfirmCloseManifest(confirm_close)">Manifest CLOSE</button>&nbsp;
-          <button type="button" class="btn btn-info">Print</button>
+          <button type="button" class="btn btn-info" (click)="onPrintManifest()">Print</button>
         </div>
       </div>
     </div>
