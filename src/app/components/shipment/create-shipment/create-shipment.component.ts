@@ -129,6 +129,7 @@ export class CreateShipmentComponent implements OnInit {
       consignment_no: o.consignment_no,
       service_type: o.service_type,
       uom: o.packaging_type,
+      pickup_date: o.pickup_date,
       customer_reference: o.customer_reference,
       is_insurance_req: o.is_insurance,
       is_cod: o.cod,
@@ -548,7 +549,7 @@ export class CreateShipmentComponent implements OnInit {
       shipment_package_list: lp
     };
 
-    if (!Helper.isEmpty(f.pickup_date.value) && !_.isNull(f.pickup_date.value) && !_.isUndefined(f.pickup_date.value)) {
+    if (!_.isNull(f.pickup_date.value) && !_.isUndefined(f.pickup_date.value)) {
       o['pickup_date'] = Helper.getDateStr(f.pickup_date.value);
     }
 
