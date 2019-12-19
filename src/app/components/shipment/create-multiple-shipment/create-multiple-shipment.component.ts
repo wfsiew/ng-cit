@@ -182,8 +182,13 @@ export class CreateMultipleShipmentComponent implements OnInit {
     },
     (error) => {
       this.isloading = false;
-      console.log(error)
-      this.toastr.error('Upload Shipment Failed', 'Upload Shipment');
+      if (error.status === 400 && error.error && error.error.message) {
+        this.toastr.error(`Upload Shipment Failed: ${error.error.message}`, 'Upload Shipment');
+      }
+
+      else {
+        this.toastr.error('Upload Shipment Failed', 'Upload Shipment');
+      }
     })
   }
 
