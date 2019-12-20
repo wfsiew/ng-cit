@@ -98,8 +98,8 @@
         <div class="form-group" *ngIf="!isView">
           <label class="col-sm-2 control-label">*Upload Document</label>
           <div class="col-sm-4">
-            <input type="file" class="form-control" placeholder="Upload Shipment" formControlName="file"
-              name="file" (change)="onFileChange($event)">
+            <input type="file" class="form-control" placeholder="Upload Shipment"
+              (change)="onFileChange($event)">
           </div>
           <div class="col-sm-1">
             <button type="submit" class="btn btn-primary" [disabled]="mform.invalid">Upload</button>
