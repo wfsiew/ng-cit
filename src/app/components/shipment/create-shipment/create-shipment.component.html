@@ -83,7 +83,7 @@
           <div class="col-sm-6">
             <div class="checkbox">
               <label>
-                <input type="checkbox" formControlName="is_insurance_req" name="is_insurance_req"> Additional Insurance Required
+                <input type="checkbox" formControlName="is_insurance" name="is_insurance" [attr.disabled]="isView ? 1 : null"> Additional Insurance Required
               </label>
             </div>
             <i>You will be contacted by our CS /you can call us at 1700-818-369</i>

@@ -81,7 +81,7 @@ export class CreateShipmentComponent implements OnInit {
       uom: ['', [Validators.required]],
       pickup_date: [null],
       customer_reference: ['', [Validators.required]],
-      is_insurance_req: [false],
+      is_insurance: [false],
       is_do: [false],
       is_cod: [false],
       cod_value: ['0.00', [Validators.required, Validators.pattern(AppConstant.VALIDATE.AMOUNT)]],
@@ -131,7 +131,8 @@ export class CreateShipmentComponent implements OnInit {
       uom: o.packaging_type,
       pickup_date: o.pickup_date,
       customer_reference: o.customer_reference,
-      is_insurance_req: o.is_insurance,
+      is_insurance: o.is_insurance,
+      is_do: o.is_do,
       is_cod: o.cod,
       cod_value: o.cod_value,
       total_package_no: o.total_package_no,
@@ -471,7 +472,7 @@ export class CreateShipmentComponent implements OnInit {
 }
     */
     const f = this.f;
-    if (f.is_insurance_req.value && Helper.isEmpty(this.listGood)) {
+    if (f.is_insurance.value && Helper.isEmpty(this.listGood)) {
       this.toastr.error('Please add at least 1 Goods Information', 'Create Shipment');
       return;
     }
@@ -531,14 +532,14 @@ export class CreateShipmentComponent implements OnInit {
       dest_receiver_contact_name: f.dest_receiver_contact_name.value,
       dest_receiver_email: '',
 
+      is_do: f.is_do.value,
       cod: f.is_cod.value,
       cod_value: f.cod_value.value,
       carton_box_code: f.uom.value,
       total_package_no: f.total_package_no.value,
       service_type: f.service_type.value,
-      order_amount : orderamt,
-      is_insurance: f.is_insurance_req.value,
-      insurance_amount: 30.00,
+      order_amount: orderamt,
+      is_insurance: f.is_insurance.value,
       chargeable_weight: f.total_weight.value,
       chargeable_weight_uom: 'KG',
       order_amount_currency: 'MYR',

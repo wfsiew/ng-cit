@@ -83,6 +83,19 @@
         </div>
 
         <div class="form-group">
+          <div class="col-sm-2">
+            <div class="checkbox pull-right" *ngIf="data.is_do">
+              <label>
+                <input type="checkbox" formControlName="is_do" name="is_do" [attr.disabled]="isView ? 1 : null"> DO Required
+              </label>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            
+          </div>
+        </div>
+
+        <div class="form-group">
           <div class="col-sm-2 text-right">
             <a class="btn btn-app" (click)="onGetAddressShipper()">
               <i class="fa fa-address-card"></i> Address Book
