@@ -25,7 +25,7 @@ export class CreateMultipleShipmentComponent implements OnInit {
   countryList = [];
   consignment_noList = [];
   mform: FormGroup;
-  data: any;
+  data: any = {};
   bsModalRef: BsModalRef;
   selectedAddressShipper: any;
   uploadResponse: any = { status: '', message: '', filePath: '' };
