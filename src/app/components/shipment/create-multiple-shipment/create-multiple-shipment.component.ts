@@ -212,7 +212,7 @@ export class CreateMultipleShipmentComponent implements OnInit {
       },
       (error) => {
         this.isloading = false;
-        this.toastr.error('Print Shipment Faled');
+        this.toastr.error('Print Shipment Failed');
       });
     }
 
