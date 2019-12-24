@@ -76,7 +76,7 @@ export class CreateShipmentComponent implements OnInit {
     this.mform = this.fb.group({
       company_account_code: new FormControl({ value: '', disabled: true }),
       company_name: new FormControl({ value: '', disabled: true }),
-      consignment_no: new FormControl({ value: '', disabled: true }),
+      consignment_no: new FormControl({ value: '', disabled: false }),
       service_type: ['', [Validators.required]],
       uom: ['', [Validators.required]],
       pickup_date: [null],
