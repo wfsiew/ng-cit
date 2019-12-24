@@ -83,7 +83,7 @@ const routes: Routes = [
       }
     ]
   },
-  { path: '**', redirectTo: '/cit' }
+  { path: '**', redirectTo: '/cit/dashboard' }
 ]
 
 @NgModule({
