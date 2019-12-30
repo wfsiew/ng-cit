@@ -247,7 +247,12 @@ export class CreateShipmentComponent implements OnInit {
       return;
     }
 
-    _.each(ls, (x) => {
+    const lx = ls[0].product_list;
+    if (Helper.isEmpty(lx)) {
+      return;
+    }
+    
+    _.each(lx, (x) => {
       this.listGood.push({
         description: `${x.description}`,
         quantity: x.quantity,
@@ -479,19 +484,47 @@ export class CreateShipmentComponent implements OnInit {
 
     let lp = _.map(this.listGood, (x) => {
       return {
-        description: x.description,
-        weight: 0.00,
-        volume: 0.00,
-        height: 0.00,
-        length: 0.00,
-        width: 0.00,
         value: x.value,
         currency: x.currency,
         quantity: x.quantity,
-        uom: f.uom.value,
-        product_list: []
+        description: x.description
       }
     });
+    let lsp = [];
+    if (lp.length > 0) {
+      let x = lp[0];
+      lsp = [
+        {
+          description: x.description,
+          weight: 0.00,
+          volume: 0.00,
+          height: 0.00,
+          length: 0.00,
+          width: 0.00,
+          value: x.value,
+          currency: x.currency,
+          quantity: x.quantity,
+          uom: f.uom.value,
+          product_list: lp
+        }
+      ];
+    }
+
+    // let lpp = _.map(this.listGood, (x) => {
+    //   return {
+    //     description: x.description,
+    //     weight: 0.00,
+    //     volume: 0.00,
+    //     height: 0.00,
+    //     length: 0.00,
+    //     width: 0.00,
+    //     value: x.value,
+    //     currency: x.currency,
+    //     quantity: x.quantity,
+    //     uom: f.uom.value,
+    //     product_list: []
+    //   }
+    // });
     let orderamt = 0;
     _.each(this.listGood, (x) => {
       orderamt += x.value * x.quantity
@@ -547,7 +580,7 @@ export class CreateShipmentComponent implements OnInit {
 
       // chargeable_weight: f.total_weight.value,
       // chargeable_weight_uom: 'KG',
-      shipment_package_list: lp
+      shipment_package_list: lsp
     };
 
     if (!_.isNull(f.pickup_date.value) && !_.isUndefined(f.pickup_date.value)) {
