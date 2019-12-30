@@ -344,13 +344,12 @@
             <input type="text" class="form-control" placeholder="Shipper Name" formControlName="origin_shipper_contact_name"
               name="origin_shipper_contact_name" [attr.disabled]="isView ? 1 : null">
           </div>
-          <label class="col-sm-2 control-label">*Shipper Contact</label>
+          <label class="col-sm-2 control-label">*Shipper Contact No</label>
           <div class="col-sm-4">
             <input type="text" class="form-control" placeholder="Shipper Contact" formControlName="origin_shipper_phone_no"
               name="origin_shipper_phone_no" [attr.disabled]="isView ? 1 : null">
             <small class="label label-danger"
-              *ngIf="invalid('origin_shipper_phone_no') && f.origin_shipper_phone_no.hasError('required')">Shipper Contact 
-              is required</small>
+              *ngIf="invalid('origin_shipper_phone_no') && f.origin_shipper_phone_no.hasError('required')">Shipper Contact No is required</small>
           </div>
         </div>
 
@@ -440,13 +439,12 @@
             <input type="text" class="form-control" placeholder="Receiver Name" formControlName="dest_receiver_contact_name"
               name="dest_receiver_contact_name" [attr.disabled]="isView ? 1 : null">
           </div>
-          <label class="col-sm-2 control-label">*Receiver Contact</label>
+          <label class="col-sm-2 control-label">*Receiver Contact No</label>
           <div class="col-sm-4">
             <input type="text" class="form-control" placeholder="Receiver Contact" formControlName="dest_receiver_phone_no"
               name="dest_receiver_phone_no" [attr.disabled]="isView ? 1 : null">
             <small class="label label-danger"
-              *ngIf="invalid('dest_receiver_phone_no') && f.dest_receiver_phone_no.hasError('required')">Receiver Contact
-              is required</small>
+              *ngIf="invalid('dest_receiver_phone_no') && f.dest_receiver_phone_no.hasError('required')">Receiver Contact No is required</small>
           </div>
         </div>
       </div>
