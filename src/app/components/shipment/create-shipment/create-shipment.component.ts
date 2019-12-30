@@ -121,7 +121,7 @@ export class CreateShipmentComponent implements OnInit {
 
   setFormEdit() {
     const o = this.datax;
-    if (o.status !== 'NEW') {
+    if (o.status !== 'NEW' && o.status !== 'CONFIRM') {
       this.allowEdit = false;
     }
     
@@ -251,7 +251,7 @@ export class CreateShipmentComponent implements OnInit {
     if (Helper.isEmpty(lx)) {
       return;
     }
-    
+
     _.each(lx, (x) => {
       this.listGood.push({
         description: `${x.description}`,
