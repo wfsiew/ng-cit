@@ -352,37 +352,36 @@ export class CreateShipmentComponent implements OnInit {
     });
   }
 
-  setPostcodeValidator(country_code, field) {
-    let o = _.find(this.countryList, { country_code: country_code });
-    if (_.isUndefined(o)) {
+  setPostcodeValidator(country_code, regrex, field) {
+    if (_.isNull(country_code) || _.isUndefined(country_code)) {
       this.mform.get(field).setValidators([
         Validators.required
       ]);
       this.mform.updateValueAndValidity();
     }
 
-    else if (!o.regrex) {
+    else if (!regrex) {
       this.mform.get(field).setValidators([
         Validators.required
       ]);
       this.mform.updateValueAndValidity();
     }
 
-    else if (o.regrex) {
+    else if (regrex) {
       this.mform.get(field).setValidators([
         Validators.required,
-        Validators.pattern(o.regrex)
+        Validators.pattern(regrex)
       ]);
       this.mform.updateValueAndValidity();
     }
   }
 
-  onCountryChangeShipper() {
-    this.setPostcodeValidator(this.f.origin_shipper_country.value, 'origin_shipper_postcode');
+  onCountryChangeShipper(event) {
+    this.setPostcodeValidator(event.country_code, event.regrex, 'origin_shipper_postcode');
   }
 
-  onCountryChangeReceiver() {
-    this.setPostcodeValidator(this.f.dest_receiver_country.value, 'dest_receiver_postcode');
+  onCountryChangeReceiver(event) {
+    this.setPostcodeValidator(event.country_code, event.regrex, 'dest_receiver_postcode');
   }
 
   onAddGoods() {

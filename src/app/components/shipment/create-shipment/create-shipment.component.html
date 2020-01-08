@@ -426,7 +426,7 @@
                 bindLabel="country_name" 
                 bindValue="country_code" 
                 placeholder="*Please select"
-                (change)="onCountryChangeReceiver()" 
+                (change)="onCountryChangeReceiver($event)" 
                 formControlName="dest_receiver_country" 
                 name="dest_receiver_country"></ng-select>
               <small class="label label-danger"
