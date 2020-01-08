@@ -331,7 +331,7 @@
                 bindLabel="country_name" 
                 bindValue="country_code" 
                 placeholder="*Please select"
-                (change)="onCountryChangeShipper()"
+                (change)="onCountryChangeShipper($event)"
                 formControlName="origin_shipper_country"
                 name="origin_shipper_country"></ng-select>
             </ng-container>
