@@ -13,7 +13,7 @@
       <div class="box-body">
         <div class="form-group">
           <label class="col-sm-2 control-label">Company Account</label>
-          <div class="col-sm-4">
+          <div class="col-sm-2">
             <input type="text" class="form-control" placeholder="Company Account" formControlName="company_account_code"
               name="company_account_code">
           </div>
@@ -21,6 +21,9 @@
           <div class="col-sm-4">
             <input type="text" class="form-control" placeholder="Company Name" formControlName="company_name"
               name="company_name">
+          </div>
+          <div class="col-sm-2" *ngIf="isView">
+            <button type="button" class="btn btn-default" (click)="onViewTracking()">View Tracking</button>
           </div>
         </div>
 

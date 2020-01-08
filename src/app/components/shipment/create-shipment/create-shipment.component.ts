@@ -242,6 +242,7 @@ export class CreateShipmentComponent implements OnInit {
   }
 
   loadProductList() {
+    this.listGood = [];
     const ls = this.shipmentPackage;
     if (Helper.isEmpty(ls)) {
       return;
@@ -254,6 +255,7 @@ export class CreateShipmentComponent implements OnInit {
 
     _.each(lx, (x) => {
       this.listGood.push({
+        id: x.id,
         description: `${x.description}`,
         quantity: x.quantity,
         value: x.value,
@@ -484,6 +486,7 @@ export class CreateShipmentComponent implements OnInit {
 
     let lp = _.map(this.listGood, (x) => {
       return {
+        id: x.id,
         value: x.value,
         currency: x.currency,
         quantity: x.quantity,
@@ -584,7 +587,14 @@ export class CreateShipmentComponent implements OnInit {
     };
 
     if (!_.isNull(f.pickup_date.value) && !_.isUndefined(f.pickup_date.value)) {
-      o['pickup_date'] = Helper.getDateStr(f.pickup_date.value);
+      let pickup_date = f.pickup_date.value;
+      if (typeof pickup_date === 'string' || pickup_date instanceof String) {
+        o['pickup_date'] = pickup_date;
+      }
+
+      else {
+        o['pickup_date'] = Helper.getDateStr(f.pickup_date.value);
+      }
     }
 
     this.isloading = true;
@@ -651,6 +661,11 @@ export class CreateShipmentComponent implements OnInit {
 
   onBack() {
     this.loc.back();
+  }
+
+  onViewTracking() {
+    const o = this.datax;
+    this.router.navigate(['/cit/dashboard/detail', o.consignment_no]);
   }
 
   get f() {

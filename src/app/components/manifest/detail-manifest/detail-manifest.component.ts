@@ -101,7 +101,7 @@ export class DetailManifestComponent implements OnInit {
       manifest_id: manifest.manifest_id,
       'list-cons': [
         {
-          consignment: consignment.consignment,
+          consignment: consignment.consignment_no,
           is_confirm: !consignment.is_confirm
         }
       ]
