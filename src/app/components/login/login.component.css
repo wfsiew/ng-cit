@@ -30,7 +30,7 @@ body, html {
 }
 
 .bg {
-  background: url('/assets/img/a5.jpg') no-repeat center center fixed;
+  background: url('~src/assets/img/a5.jpg') no-repeat center center fixed;
   width: 100%;
   height: auto;
   -webkit-background-size: cover;
