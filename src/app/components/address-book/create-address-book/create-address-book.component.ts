@@ -74,6 +74,7 @@ export class CreateAddressBookComponent implements OnInit {
   createForm() {
     this.mform = this.fb.group({
       name: ['', [Validators.required]],
+      email: ['', [Validators.required]],
       phone: ['', [Validators.required]],
       addr1: ['', [Validators.required]],
       addr2: [''],
@@ -90,6 +91,7 @@ export class CreateAddressBookComponent implements OnInit {
     const o = this.data;
     this.mform.patchValue({
       name: o.full_name,
+      email: o.email,
       phone: o.phone_number,
       addr1: o.address1,
       addr2: o.address2,
@@ -163,6 +165,7 @@ export class CreateAddressBookComponent implements OnInit {
       city: f.city,
       district: '',
       full_name: f.name,
+      email: f.email,
       phone_number: f.phone,
       is_default: f.isdefault,
       is_private: f.isprivate
