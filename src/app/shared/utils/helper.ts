@@ -36,4 +36,15 @@ export class Helper {
 
     return s;
   }
+
+  public static replaceNone(s: string) {
+    let r = s;
+    if (_.isNull(s)) return s;
+
+    if (s.toLowerCase() === 'none') {
+      r = '';
+    }
+
+    return r;
+  }
 }

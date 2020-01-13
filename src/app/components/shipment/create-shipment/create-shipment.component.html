@@ -356,6 +356,14 @@
           </div>
         </div>
 
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Shipper Email</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" placeholder="Shipper Email" formControlName="origin_shipper_email"
+              name="origin_shipper_email" [attr.disabled]="isView ? 1 : null">
+          </div>
+        </div>
+
         <hr />
 
         <div class="form-group">
@@ -448,6 +456,14 @@
               name="dest_receiver_phone_no" [attr.disabled]="isView ? 1 : null">
             <small class="label label-danger"
               *ngIf="invalid('dest_receiver_phone_no') && f.dest_receiver_phone_no.hasError('required')">Receiver Contact No is required</small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Receiver Email</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" placeholder="Receiver Email" formControlName="dest_receiver_email"
+              name="dest_receiver_email" [attr.disabled]="isView ? 1 : null">
           </div>
         </div>
       </div>

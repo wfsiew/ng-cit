@@ -98,6 +98,7 @@ export class CreateShipmentComponent implements OnInit {
       origin_shipper_country: ['MY', [Validators.required]],
       origin_shipper_contact_name: [''],
       origin_shipper_phone_no: ['', [Validators.required]],
+      origin_shipper_email: [''],
 
       dest_address_id: [''],
       dest_receiver_name: ['', [Validators.required]],
@@ -108,7 +109,8 @@ export class CreateShipmentComponent implements OnInit {
       dest_receiver_state_province: ['', [Validators.required]],
       dest_receiver_country: ['MY', [Validators.required]],
       dest_receiver_contact_name: [''],
-      dest_receiver_phone_no: ['', [Validators.required]]
+      dest_receiver_phone_no: ['', [Validators.required]],
+      dest_receiver_email: ['']
     });
 
     this.gform = this.fb.group({
@@ -148,6 +150,7 @@ export class CreateShipmentComponent implements OnInit {
       origin_shipper_country: o.origin_shipper_country,
       origin_shipper_contact_name: o.origin_shipper_contact_name,
       origin_shipper_phone_no: o.origin_shipper_phone_no,
+      origin_shipper_email: Helper.replaceNone(o.origin_shipper_email),
 
       dest_address_id: o.dest_address_id,
       dest_receiver_name: o.dest_receiver_name,
@@ -158,7 +161,8 @@ export class CreateShipmentComponent implements OnInit {
       dest_receiver_state_province: o.dest_receiver_state_province,
       dest_receiver_country: o.dest_receiver_country,
       dest_receiver_contact_name: o.dest_receiver_contact_name,
-      dest_receiver_phone_no: o.dest_receiver_phone_no
+      dest_receiver_phone_no: o.dest_receiver_phone_no,
+      dest_receiver_email: Helper.replaceNone(o.dest_receiver_email)
     });
   }
 
@@ -327,7 +331,8 @@ export class CreateShipmentComponent implements OnInit {
       origin_shipper_city: o.city,
       origin_shipper_state_province: o.state_province,
       origin_shipper_country: s,
-      origin_shipper_phone_no: o.phone_number
+      origin_shipper_phone_no: o.phone_number,
+      origin_shipper_email: o.email
     });
   }
 
@@ -348,7 +353,8 @@ export class CreateShipmentComponent implements OnInit {
       dest_receiver_city: o.city,
       dest_receiver_state_province: o.state_province,
       dest_receiver_country: s,
-      dest_receiver_phone_no: o.phone_number
+      dest_receiver_phone_no: o.phone_number,
+      dest_receiver_email: o.email
     });
   }
 
@@ -549,7 +555,7 @@ export class CreateShipmentComponent implements OnInit {
       origin_shipper_phone_no: f.origin_shipper_phone_no.value,
       origin_shipper_mobile_no: f.origin_shipper_phone_no.value,
       origin_shipper_contact_name: f.origin_shipper_contact_name.value,
-      origin_shipper_email: '',
+      origin_shipper_email: f.origin_shipper_email.value,
 
       dest_address_id: f.dest_address_id.value,
       dest_receiver_address1: f.dest_receiver_address1.value,
@@ -565,7 +571,7 @@ export class CreateShipmentComponent implements OnInit {
       dest_receiver_phone_no: f.dest_receiver_phone_no.value,
       dest_receiver_mobile_no: '-',
       dest_receiver_contact_name: f.dest_receiver_contact_name.value,
-      dest_receiver_email: '',
+      dest_receiver_email: f.dest_receiver_email.value,
 
       is_do: f.is_do.value,
       cod: f.is_cod.value,
