@@ -75,7 +75,21 @@ export class CreateUserModalComponent implements OnInit {
   }
 
   onConfirm() {
-    this.bsModalRef.hide();
+    const f = this.mform.value;
+    const o = {
+      company_id: this.company_id,
+      user_id: this.user_id,
+      user_role: f.user_type
+    };
+    console.log(o)
+    this.userService.updateRole(o).subscribe((res: any) => {
+      this.onClose.next({ result: true });
+      this.toastr.success('User Role successfully updated');
+      this.bsModalRef.hide();
+    },
+    (error) => {
+      this.toastr.error('Update User Role Failed', 'Update User Role');
+    });
   }
 
   onDelete() {

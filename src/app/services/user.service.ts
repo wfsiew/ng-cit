@@ -35,4 +35,8 @@ export class UserService {
   activateUser(id) {
     return this.http.post(`${this.baseUrl}/api/user/activate`, { user_id: id });
   }
+
+  updateRole(o) {
+    return this.http.put(`${this.baseUrl}/api/user/update-role`, o);
+  }
 }
