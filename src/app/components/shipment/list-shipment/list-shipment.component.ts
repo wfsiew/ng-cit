@@ -20,6 +20,7 @@ export class ListShipmentComponent implements OnInit, OnDestroy {
   itemsCount = 0;
   page = 1;
   search = '';
+  is_own = true;
   sort = 'create_date';
   sort_dir = 'desc';
   onSearchDbKeyup: any;
@@ -45,6 +46,7 @@ export class ListShipmentComponent implements OnInit, OnDestroy {
         this.sort = o.sort;
         this.sort_dir = o.dir;
         this.search = o.search;
+        this.is_own = o.is_own;
         this.sx = o.sx;
         this.sy = o.sy;
       }
@@ -61,7 +63,7 @@ export class ListShipmentComponent implements OnInit, OnDestroy {
 
   load() {
     this.isloading = true;
-    this.shipmentService.listShipment(this.page, AppConstant.PAGE_SIZE, this.sort, this.sort_dir, this.search).subscribe((res: any) => {
+    this.shipmentService.listShipment(this.page, AppConstant.PAGE_SIZE, this.sort, this.sort_dir, this.search, this.is_own).subscribe((res: any) => {
       this.list = res.status ? res.data : [];
       this.itemsCount = res.status ? res.recordsTotal : 0;
       this.isloading = false;
@@ -88,10 +90,16 @@ export class ListShipmentComponent implements OnInit, OnDestroy {
       sort: this.sort,
       dir: this.sort_dir,
       search: this.search,
+      is_own: this.is_own,
       sx: window.scrollX,
       sy: window.scrollY
     });
     this.router.navigate(['/cit/shipment/detail', o.id]);
+  }
+
+  onChangeIsOwn(event) {
+    this.is_own = !this.is_own;
+    this.load();
   }
 
   pageChanged(event: any) {
@@ -105,6 +113,7 @@ export class ListShipmentComponent implements OnInit, OnDestroy {
       sort: this.sort,
       dir: this.sort_dir,
       search: this.search,
+      is_own: this.is_own,
       sx: window.scrollX,
       sy: window.scrollY
     });

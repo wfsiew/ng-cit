@@ -17,14 +17,15 @@ export class ShipmentService {
     return this.http.post(`${this.baseUrl}/api/shipment/create`, o);
   }
 
-  listShipment(page, limit, sort, dir, value) {
+  listShipment(page, limit, sort, dir, value, is_own) {
     let i = Helper.getStart(page, limit);
     let prm: HttpParams = new HttpParams()
       .set('start', `${i}`)
       .set('length', limit)
       .set('order', sort)
       .set('dir', dir)
-      .set('value', value);
+      .set('value', value)
+      .set('own', is_own ? '1' : '0');
     return this.http.get(`${this.baseUrl}/api/shipment/list/`, { params: prm });
   }
 

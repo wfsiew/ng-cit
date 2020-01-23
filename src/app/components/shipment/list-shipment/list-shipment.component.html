@@ -20,7 +20,14 @@
   <div class="box">
     <div class="box-header">
       <div class="row">
-        <div class="col-xs-12 col-sm-5 col-md-5 col-sm-offset-7 col-md-offset-7">
+        <div class="col-sm-7 col-md-7">
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" [checked]="is_own" (change)="onChangeIsOwn($event)"> My Shipments Only
+            </label>
+          </div>
+        </div>
+        <div class="col-sm-5 col-md-5">
           <div class="input-group">
             <input type="text" [(ngModel)]="search" (keyup)="onSearchDbKeyup($event)" (keydown.enter)="onSearchKeypress($event)" name="q" class="form-control"
               placeholder="Search...">
