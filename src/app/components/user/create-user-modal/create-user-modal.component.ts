@@ -81,7 +81,6 @@ export class CreateUserModalComponent implements OnInit {
       user_id: this.user_id,
       user_role: f.user_type
     };
-    console.log(o)
     this.userService.updateRole(o).subscribe((res: any) => {
       this.onClose.next({ result: true });
       this.toastr.success('User Role successfully updated');
