@@ -87,6 +87,7 @@ export class CreateShipmentComponent implements OnInit {
       cod_value: ['0.00', [Validators.required, Validators.pattern(AppConstant.VALIDATE.AMOUNT)]],
       total_package_no: ['', [Validators.required, Validators.max(999), Validators.pattern(AppConstant.VALIDATE.NUMBER)]],
       total_weight: ['0.5', [Validators.required, Validators.max(9999), Validators.pattern(AppConstant.VALIDATE.AMOUNT)]],
+      remark: [''],
 
       origin_address_id: [''],
       origin_shipper_name: ['', [Validators.required]],
@@ -139,6 +140,7 @@ export class CreateShipmentComponent implements OnInit {
       cod_value: o.cod_value,
       total_package_no: o.total_package_no,
       total_weight: o.chargeable_weigth,
+      remark: o.remark,
 
       origin_address_id: o.origin_address_id,
       origin_shipper_name: o.origin_shipper_name,
@@ -585,6 +587,7 @@ export class CreateShipmentComponent implements OnInit {
       chargeable_weight_uom: 'KG',
       order_amount_currency: 'MYR',
       company_id: this.data.company_id,
+      remark: f.remark.value,
 
       // chargeable_weight: f.total_weight.value,
       // chargeable_weight_uom: 'KG',
@@ -626,6 +629,7 @@ export class CreateShipmentComponent implements OnInit {
       this.shipmentService.updateShipment(o).subscribe(res => {
         this.isloading = false;
         this.toastr.success('Shipment successfully updated', 'Update Shipment');
+        this.pdfstate = null;
         this.isView = true;
         this.load();
       },
@@ -634,6 +638,19 @@ export class CreateShipmentComponent implements OnInit {
         this.toastr.error('Update Shipment Failed', 'Update Shipment');
       });
     }
+  }
+
+  onCancelShipment() {
+    this.isloading = true;
+    this.shipmentService.cancelShipment(this.datax.id).subscribe((res: any) => {
+      this.isloading = false;
+      this.toastr.success('Shipment successfully cancelled');
+      this.load();
+    },
+    (error) => {
+      this.isloading = false;
+      this.toastr.error('Cancel Shipment Failed');
+    });
   }
 
   onPrintShipment() {

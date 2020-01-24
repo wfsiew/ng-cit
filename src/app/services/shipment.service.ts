@@ -58,6 +58,11 @@ export class ShipmentService {
     }));
   }
 
+  cancelShipment(id) {
+    const ls = [{ shipment_id: id }];
+    return this.http.post(`${this.baseUrl}/api/shipment/cancel`, ls);
+  }
+
   printLabel(consignment_no: string, type: string) {
     let prm: HttpParams = new HttpParams()
       .set('consignment_no', consignment_no);
