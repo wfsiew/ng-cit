@@ -127,6 +127,10 @@ export class CreateCompanyComponent implements OnInit {
   load() {
     this.companyService.listCompany(1, 100000, 'company_account_code', '').subscribe((res: any) => {
       this.companyList = res.data;
+      this.companyList = res.data.map((k) => {
+        k.label = `${k.account_code} - ${k.company_name}`;
+        return k;
+      });
     });
     this.lookupService.listService().subscribe((res: any) => {
       this.serviceList = res.data;
