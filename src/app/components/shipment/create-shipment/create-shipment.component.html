@@ -487,16 +487,16 @@
       <div class="box-footer">
         <div class="row">
           <div class="col-sm-2" *ngIf="isView && allowEdit">
-            <button type="button" class="btn btn-primary btn-edit" (click)="isView = false">Edit</button>
+            <button type="button" class="btn btn-primary btn-edit" (click)="isView = false"><i class="fa fa-edit"></i> Edit</button>
           </div>
           <div class="col-sm-2" *ngIf="isView && allowEdit">
             <button type="button" class="btn btn-primary" (click)="onCancelShipment()">Cancel Shipment</button>
           </div>
           <div class="col-sm-2" *ngIf="allowEdit">
-            <button type="submit" class="btn btn-primary" [disabled]="mform.invalid || isView">Save Changes</button>
+            <button type="submit" class="btn btn-primary" [disabled]="mform.invalid || isView"><i class="fa fa-save"></i> Save Changes</button>
           </div>
           <div class="col-sm-2" *ngIf="isEdit">
-            <button type="button" class="btn btn-primary" (click)="onPrintShipment()" [disabled]="isPrintDisabled">Print Shipment</button>
+            <button type="button" class="btn btn-primary" (click)="onPrintShipment()" [disabled]="isPrintDisabled"><i class="fa fa-print"></i> Print Shipment</button>
           </div>
         </div>
       </div>
