@@ -144,11 +144,14 @@ export class CreateCompanyComponent implements OnInit {
   }
 
   loadCompanyProfile() {
+    this.isloading = true;
     this.companyService.getCompany(this.id).subscribe((res: any) => {
+      this.isloading = false;
       this.data = !_.isEmpty(res.data) ? res.data[0] : {};
       this.setForm();
     },
     (error) => {
+      this.isloading = false;
       this.toastr.error('Load Company Failed', 'Edit Company');
     });
   }

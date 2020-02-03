@@ -234,7 +234,9 @@ export class CreateShipmentComponent implements OnInit {
       return;
     }
 
+    this.isloading = true;
     this.shipmentService.getShipment(this.id).subscribe((res: any) => {
+      this.isloading = false;
       this.datax = !_.isEmpty(res.data) ? res.data[0] : {};
       this.setFormEdit();
       if (!Helper.isEmpty(this.datax)) {
@@ -243,6 +245,7 @@ export class CreateShipmentComponent implements OnInit {
       }
     },
     (error) => {
+      this.isloading = false;
       this.toastr.error('Load Shipment Detail Failed', 'Create Shipment');
     });
   }
