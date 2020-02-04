@@ -163,6 +163,10 @@ export class ListAddressBookComponent implements OnInit, OnDestroy {
   }
 
   onTab(i) {
+    if (this.tab !== i) {
+      this.page = 1;
+    }
+    
     this.tab = i;
     this.is_private = i === 0 ? false : true;
     this.load();
