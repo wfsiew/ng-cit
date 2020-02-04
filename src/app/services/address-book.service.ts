@@ -27,7 +27,7 @@ export class AddressBookService {
       .set('dir', dir)
       .set('value', value)
       .set('private', privateval);
-    return this.http.get(`${this.baseUrl}/api/address/list`, { params: prm });
+    return this.http.get(`${this.baseUrl}/api/address/list/`, { params: prm });
   }
 
   getAddressBook(id, privateval) {
@@ -36,7 +36,7 @@ export class AddressBookService {
     if (privateval === '1') {
       prm = prm.append('private', privateval);
     }
-    return this.http.get(`${this.baseUrl}/api/address/list`, { params: prm });
+    return this.http.get(`${this.baseUrl}/api/address/list/`, { params: prm });
   }
 
   deleteAddressBook(lx: string[]) {
