@@ -22,6 +22,7 @@ export class AddressBookModalComponent implements OnInit {
   search = '';
   sort = 'full_name';
   sort_dir = '';
+  onSearchDbKeyup: any;
 
   public onClose: Subject<any>;
 
@@ -32,7 +33,9 @@ export class AddressBookModalComponent implements OnInit {
     public bsModalRef: BsModalRef,
     private addressBookService: AddressBookService,
     private toastr: ToastrService
-  ) { }
+  ) {
+    this.onSearchDbKeyup = _.debounce(this.onSearchKeyup, 400);
+  }
 
   ngOnInit() {
     this.onClose = new Subject();
@@ -91,6 +94,7 @@ export class AddressBookModalComponent implements OnInit {
   }
 
   onSearch() {
+    this.page = 1;
     this.load();
   }
 
