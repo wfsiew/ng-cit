@@ -96,11 +96,14 @@ export class UserProfileComponent implements OnInit {
   }
 
   loadUserProfile() {
+    this.isloading = true;
     this.authService.getUserDetails().subscribe((res: any) => {
+      this.isloading = false;
       this.data = !_.isEmpty(res.data) ? res.data[0] : {};
       this.setForm();
     },
     (error) => {
+      this.isloading = false;
       this.toastr.error('Load User Profile Failed', 'User Profile');
     });
   }
