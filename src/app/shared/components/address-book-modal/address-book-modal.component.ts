@@ -94,7 +94,11 @@ export class AddressBookModalComponent implements OnInit {
     this.load();
   }
 
+  onSearchKeyup(event) {
+    this.onSearch();
+  }
+
   onSearchKeypress(event) {
-    this.load();
+    this.onSearch();
   }
 }
