@@ -11,7 +11,14 @@
         </div>
         <div class="form-group">
           <label class="control-label">Password:</label>
-          <input type="password" class="form-control" name="password" placeholder="Password" required formControlName="password">
+          <div class="input-group">
+            <input [type]="viewpwd ? 'text' : 'password'" class="form-control" name="password" placeholder="Password" required formControlName="password">
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-flat" (click)="onTogglePassword()" [title]="viewpwd ? 'Hide password': 'Show password'">
+                <i [ngClass]="{'fa-eye': viewpwd, 'fa-eye-slash': !viewpwd}" class="fa"></i>
+              </button>
+            </span>
+          </div>
         </div>
         <div class="form-group">
           <button

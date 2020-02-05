@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   mform: FormGroup;
   nextUrl: any;
+  viewpwd = false;
   subscription: Subscription;
 
   constructor(
@@ -66,6 +67,10 @@ export class LoginComponent implements OnInit, OnDestroy {
       token => this.onSuccess(token),
       error => this.onError(error)
     );
+  }
+
+  onTogglePassword() {
+    this.viewpwd = !this.viewpwd;
   }
 
   invalid(s: string) {
