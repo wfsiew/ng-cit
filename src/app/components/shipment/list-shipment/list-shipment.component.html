@@ -92,7 +92,8 @@
               <td>{{ o.customer_reference }}</td>
               <td>{{ o.service_type }}</td>
               <td>{{ o.dest_receiver_name }}</td>
-              <td class="text-uppercase">{{ o.status }}</td>
+              <td *ngIf="o.is_cancel === true" class="text-uppercase">Cancelled</td>
+              <td *ngIf="!o.is_cancel" class="text-uppercase">{{ o.status }}</td>
               <td>{{ o.dest_receiver_city }}</td>
               <td>{{ o.account_code }}</td>
               <td>{{ o.packaging_type }}</td>

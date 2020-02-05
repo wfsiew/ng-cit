@@ -11,6 +11,9 @@
     </div>
     <form [formGroup]="mform" (ngSubmit)="onSubmit()" class="form-horizontal">
       <div class="box-body">
+        <div class="callout callout-danger" *ngIf="datax.is_cancel === true">
+          <h4>CANCELLED</h4>
+        </div>
         <div class="form-group">
           <label class="col-sm-2 control-label">Company Account</label>
           <div class="col-sm-2">
@@ -22,7 +25,7 @@
             <input type="text" class="form-control" placeholder="Company Name" formControlName="company_name"
               name="company_name">
           </div>
-          <div class="col-sm-2" *ngIf="isView">
+          <div class="col-sm-2" *ngIf="isView && !datax.is_cancel">
             <button type="button" class="btn btn-default" (click)="onViewTracking()">View Tracking</button>
           </div>
         </div>
@@ -486,16 +489,16 @@
 
       <div class="box-footer">
         <div class="row">
-          <div class="col-sm-2" *ngIf="isView && allowEdit">
+          <div class="col-sm-2" *ngIf="isView && allowEdit && !datax.is_cancel">
             <button type="button" class="btn btn-primary btn-edit" (click)="isView = false"><i class="fa fa-edit"></i> Edit</button>
           </div>
-          <div class="col-sm-2" *ngIf="isView && allowEdit">
+          <div class="col-sm-2" *ngIf="isView && allowEdit && !datax.is_cancel">
             <button type="button" class="btn btn-primary" (click)="onCancelShipment()">Cancel Shipment</button>
           </div>
-          <div class="col-sm-2" *ngIf="allowEdit">
+          <div class="col-sm-2" *ngIf="allowEdit && !datax.is_cancel">
             <button type="submit" class="btn btn-primary" [disabled]="mform.invalid || isView"><i class="fa fa-save"></i> Save Changes</button>
           </div>
-          <div class="col-sm-2" *ngIf="isEdit">
+          <div class="col-sm-2" *ngIf="isEdit && !datax.is_cancel">
             <button type="button" class="btn btn-primary" (click)="onPrintShipment()" [disabled]="isPrintDisabled"><i class="fa fa-print"></i> Print Shipment</button>
           </div>
         </div>
