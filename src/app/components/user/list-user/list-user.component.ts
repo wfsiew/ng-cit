@@ -29,7 +29,7 @@ export class ListUserComponent implements OnInit, OnDestroy {
   search = '';
   sort = 'create_date';
   sort_dir = 'desc';
-  isCardView = true;
+  isCardView = false;
   subs: Subscription;
   bsModalRef: BsModalRef;
   company_id: string;
