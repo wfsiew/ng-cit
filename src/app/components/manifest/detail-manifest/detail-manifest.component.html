@@ -19,23 +19,30 @@
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="box">
-      <div class="box-header">
-        <div class="row">
-          <div class="col-xs-5 col-xs-offset-7">
-            <div class="input-group">
-              <input type="text" [(ngModel)]="search" (keydown.enter)="onSearchKeypress($event)" name="q" class="form-control"
-                placeholder="Search...">
-              <span class="input-group-btn">
-                <button type="button" name="search" class="btn btn-flat" (click)="onSearch()"><i class="fa fa-search"></i>
-                </button>
-              </span>
-            </div>
+  <div class="box">
+    <div class="box-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-8 col-md-5 col-sm-offset-4 col-md-offset-7">
+          <div class="input-group">
+            <input type="text" [(ngModel)]="search" (keydown.enter)="onSearchKeypress($event)" name="q" class="form-control"
+              placeholder="Search...">
+            <span class="input-group-btn">
+              <button type="button" name="search" class="btn btn-flat" (click)="onSearch()"><i class="fa fa-search"></i>
+              </button>
+            </span>
           </div>
         </div>
       </div>
     </div>
+
+    <div class="overlay" *ngIf="isloading">
+      <i class="fa fa-refresh fa-spin"></i>
+    </div>
+  </div>
+
+  <div class="box">
     <div class="box-body">
       <div class="text-center" *ngIf="isEmpty(list)">
         <h4 class="box-title">No records found</h4>
@@ -63,10 +70,6 @@
           </tbody>
         </table>
       </div>
-    </div>
-
-    <div class="overlay" *ngIf="isloading">
-      <i class="fa fa-refresh fa-spin"></i>
     </div>
 
     <div class="box-footer">

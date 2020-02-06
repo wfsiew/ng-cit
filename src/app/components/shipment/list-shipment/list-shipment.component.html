@@ -20,20 +20,20 @@
   <div class="box">
     <div class="box-header">
       <div class="row">
-        <div class="col-sm-2 col-md-2">
+        <div class="col-sm-4 col-md-3">
           <div class="checkbox">
             <label>
               <input type="checkbox" [checked]="is_own" (change)="onChangeIsOwn($event)"> My Shipments Only
             </label>
           </div>
         </div>
-        <div class="col-sm-5 col-md-5">
+        <div class="col-sm-5 col-md-4">
           <div class="btn-group">
             <button type="button" class="btn btn-default btn-flat" (click)="isCardView = false"><i class="fa fa-th-list"></i></button>
             <button type="button" class="btn btn-default btn-flat" (click)="isCardView = true"><i class="fa fa-th"></i></button>
           </div>
         </div>
-        <div class="col-sm-5 col-md-5">
+        <div class="col-sm-12 col-md-5">
           <div class="input-group">
             <input type="text" [(ngModel)]="search" (keyup)="onSearchDbKeyup($event)" (keydown.enter)="onSearchKeypress($event)" name="q" class="form-control"
               placeholder="Search...">
@@ -45,53 +45,21 @@
         </div>
       </div>
     </div>
+
     <div class="box-body">
       <div class="text-center" *ngIf="isEmpty(list)">
         <h4 class="box-title">No records found</h4>
       </div>
+    </div>
 
-      <div class="row" *ngIf="!isEmpty(list) && isCardView">
-        <div class="col-md-3" *ngFor="let o of list">
-          <div class="box box-solid" [ngClass]="{'box-danger': o.is_cancel === true, 'box-info': !o.is_cancel && o.status !== 'CONFIRM', 'box-success': !o.is_cancel && o.status === 'CONFIRM'}">
-            <div class="box-header with-border">
-              <h4 class="box-title">{{ o.consignment_no }}</h4>
-              <h5>{{ o.created_date }}</h5>
-              <div class="box-tools pull-right">
-                <span class="badge" [ngClass]="{'bg-red': o.is_cancel === true, 'bg-light-blue': !o.is_cancel && o.status !== 'CONFIRM', 'bg-green': !o.is_cancel && o.status === 'CONFIRM'}">{{ o.is_cancel === true ? 'CANCELLED' : o.status }}</span>
-                <button type="button" class="btn btn-box-tool" title="Details" (click)="onDetails(o)">
-                  <i class="fa fa-eye"></i>
-                </button>
-              </div>
-            </div>
-            <div class="box-body">
-              <span class="info-box-text">Order Ref: {{ o.customer_reference }}</span>
-              <div class="row">
-                <div class="col-sm-4 border-right">
-                  <div class="description-block">
-                    <span class="description-text">{{ o.packaging_type }}</span>
-                  </div>
-                </div>
-                <div class="col-sm-4 border-right">
-                  <div class="description-block">
-                    <span class="description-text">{{ o.service_type }}</span>
-                  </div>
-                </div>
-                <div class="col-sm-4">
-                  <div class="description-block">
-                    <span class="description-text">{{ o.account_code }}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="box-footer">
-              <span class="info-box-text">Receiver: {{ o.dest_receiver_name }}</span>
-              <span class="info-box-text">{{ o.dest_receiver_city }}</span>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="overlay" *ngIf="isloading">
+      <i class="fa fa-refresh fa-spin"></i>
+    </div>
+  </div>
 
-      <div class="table-responsive" *ngIf="!isEmpty(list) && !isCardView">
+  <div class="box" *ngIf="!isEmpty(list) && !isCardView">
+    <div class="box-body">
+      <div class="table-responsive">
         <table class="table table-bordered table-condensed table-striped table-hover">
           <thead>
             <tr>
@@ -155,13 +123,38 @@
         </table>
       </div>
     </div>
+  </div>
 
-    <div class="overlay" *ngIf="isloading">
-      <i class="fa fa-refresh fa-spin"></i>
+  <div class="row" *ngIf="!isEmpty(list) && isCardView">
+    <div class="col-md-3" *ngFor="let o of list">
+      <div class="box box-solid" [ngClass]="{'box-danger': o.is_cancel === true, 'box-default': !o.is_cancel && o.status !== 'CONFIRM', 'box-success': !o.is_cancel && o.status === 'CONFIRM'}">
+        <div class="box-header with-border">
+          <h4 class="box-title">{{ o.consignment_no }}</h4>
+          <h5>{{ o.created_date }}</h5>
+          <div class="box-tools pull-right">
+            <span class="badge" [ngClass]="{'bg-red': o.is_cancel === true, 'bg-light-blue': !o.is_cancel && o.status !== 'CONFIRM', 'bg-green': !o.is_cancel && o.status === 'CONFIRM'}">{{ o.is_cancel === true ? 'CANCELLED' : o.status }}</span>
+            <button type="button" class="btn btn-box-tool" title="Details" (click)="onDetails(o)">
+              <i class="fa fa-eye"></i>
+            </button>
+          </div>
+        </div>
+        <div class="box-body">
+          <span class="info-box-text">Order Ref: {{ o.customer_reference }}</span>
+          <span class="info-box-text">{{ o.account_code }}</span>
+          <span class="info-box-text">{{ o.packaging_type }}</span>
+          <span class="info-box-text">{{ o.service_type }}</span>
+        </div>
+        <div class="box-footer">
+          <span class="info-box-text">Receiver: {{ o.dest_receiver_name }}</span>
+          <span class="info-box-text">{{ o.dest_receiver_city }}</span>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <div class="box-footer">
-      <div class="pull-right" *ngIf="itemsCount">
+  <div class="box" *ngIf="itemsCount">
+    <div class="box-header">
+      <div class="pull-right">
         <pagination [totalItems]="itemsCount" [itemsPerPage]="PAGE_SIZE" [maxSize]="MAX_PAGE_NUMBERS" [(ngModel)]="page" (pageChanged)="pageChanged($event)"></pagination>
       </div>
     </div>

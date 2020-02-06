@@ -2,140 +2,140 @@
   <h1>Address Book</h1>
 </section>
 <section class="content">
-  <div class="row">
-    <div class="col-xs-12">
-      <div class="box">
-        <div class="box-header">
-          <div class="row">
-            <div class="col-xs-3 col-sm-2 col-md-2">
-              <button type="button" class="btn btn-danger" (click)="onDeleteSelected()" [disabled]="isEmpty(listSelected)"
-                *ngIf="!isEmpty(list)">Delete</button>
-            </div>
-            <div class="col-xs-4 col-sm-3 col-md-3">
-              <div class="btn-group">
-                <button type="button" class="btn btn-default btn-flat" (click)="isCardView = false"><i class="fa fa-th-list"></i></button>
-                <button type="button" class="btn btn-default btn-flat" (click)="isCardView = true"><i class="fa fa-th"></i></button>
-              </div>
-            </div>
-            <div class="col-xs-5 col-sm-5 col-md-5 pull-right">
-              <div class="input-group">
-                <input type="text" [(ngModel)]="search" (keyup)="onSearchDbKeyup($event)" (keydown.enter)="onSearchKeypress($event)" name="q" class="form-control"
-                  placeholder="Search...">
-                <span class="input-group-btn">
-                  <button type="button" name="search" class="btn btn-flat" (click)="onSearch()"><i class="fa fa-search"></i>
-                  </button>
-                </span>
-              </div>
-            </div>
+  <div class="box">
+    <div class="box-header">
+      <div class="row">
+        <div class="col-xs-3 col-sm-3 col-md-2">
+          <button type="button" class="btn btn-danger" (click)="onDeleteSelected()" [disabled]="isEmpty(listSelected)"
+            *ngIf="!isEmpty(list)">Delete</button>
+        </div>
+        <div class="col-xs-5 col-sm-3 col-md-3">
+          <div class="btn-group">
+            <button type="button" class="btn btn-default btn-flat" (click)="isCardView = false"><i class="fa fa-th-list"></i></button>
+            <button type="button" class="btn btn-default btn-flat" (click)="isCardView = true"><i class="fa fa-th"></i></button>
           </div>
         </div>
+        <div class="col-xs-12 col-sm-6 col-md-5 pull-right">
+          <div class="input-group">
+            <input type="text" [(ngModel)]="search" (keyup)="onSearchDbKeyup($event)" (keydown.enter)="onSearchKeypress($event)" name="q" class="form-control"
+              placeholder="Search...">
+            <span class="input-group-btn">
+              <button type="button" name="search" class="btn btn-flat" (click)="onSearch()"><i class="fa fa-search"></i>
+              </button>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
 
+    <div class="overlay" *ngIf="isloading">
+      <i class="fa fa-refresh fa-spin"></i>
+    </div>
+  </div>
+
+  <div class="box">
+    <div class="box-body">
+      <div class="nav-tabs-custom">
+        <ul class="nav nav-tabs">
+          <li [ngClass]="{ 'active': tab === 0 }"><a href="#" (click)="onTab(0)">Public</a></li>
+          <li [ngClass]="{ 'active': tab === 1 }"><a href="#" (click)="onTab(1)">Private</a></li>
+        </ul>
+      </div>
+
+      <div class="text-center" *ngIf="isEmpty(list)">
+        <h4 class="box-title">No records found</h4>
+      </div>
+
+      <div class="table-responsive" *ngIf="!isEmpty(list) && !isCardView">
+        <table class="table table-bordered table-condensed table-striped table-hover">
+          <thead>
+            <tr>
+              <th>
+                <input type="checkbox" [checked]="selectAll" (change)="onChangeSelectAll()" />
+              </th>
+              <th>
+                <a href="#" (click)="sortBy('full_name')">Name</a> <i *ngIf="sort === 'full_name'" class="fa"
+                  [ngClass]="{'fa-chevron-up': isSortBy('full_name', ''), 'fa-chevron-down': isSortBy('full_name', 'desc')}"></i>
+              </th>
+              <th>
+                <a href="#" (click)="sortBy('address1')">Address 1</a> <i *ngIf="sort === 'address1'" class="fa"
+                  [ngClass]="{'fa-chevron-up': isSortBy('address1', ''), 'fa-chevron-down': isSortBy('address1', 'desc')}"></i>
+              </th>
+              <th>
+                <a href="#" (click)="sortBy('address2')">Address 2</a> <i *ngIf="sort === 'address2'" class="fa"
+                  [ngClass]="{'fa-chevron-up': isSortBy('address2', ''), 'fa-chevron-down': isSortBy('address2', 'desc')}"></i>
+              </th>
+              <th>
+                <a href="#" (click)="sortBy('postcode')">Postcode</a> <i *ngIf="sort === 'postcode'" class="fa"
+                  [ngClass]="{'fa-chevron-up': isSortBy('postcode', ''), 'fa-chevron-down': isSortBy('postcode', 'desc')}"></i>
+              </th>
+              <th>
+                <a href="#" (click)="sortBy('city')">City</a> <i *ngIf="sort === 'city'" class="fa"
+                  [ngClass]="{'fa-chevron-up': isSortBy('city', ''), 'fa-chevron-down': isSortBy('city', 'desc')}"></i>
+              </th>
+              <th>
+                <a href="#" (click)="sortBy('state_province')">State</a> <i *ngIf="sort === 'state_province'" class="fa"
+                  [ngClass]="{'fa-chevron-up': isSortBy('state_province', ''), 'fa-chevron-down': isSortBy('state_province', 'desc')}"></i>
+              </th>
+              <th>
+                <a href="#" (click)="sortBy('country')">Country</a> <i *ngIf="sort === 'country'" class="fa"
+                  [ngClass]="{'fa-chevron-up': isSortBy('country', ''), 'fa-chevron-down': isSortBy('country', 'desc')}"></i>
+              </th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let o of list">
+              <td>
+                <input type="checkbox" [checked]="o.selected" (change)="onChangeSelect(o)" />
+              </td>
+              <td>{{ o.full_name }}</td>
+              <td>{{ o.address1 }}</td>
+              <td>{{ o.address2 }}</td>
+              <td>{{ o.postcode }}</td>
+              <td>{{ o.city }}</td>
+              <td>{{ o.state_province }}</td>
+              <td>{{ o.country }}</td>
+              <td>
+                <button type="button" class="btn btn-primary" (click)="onEdit(o)">
+                  <i class="fa fa-edit"></i> Edit
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="!isEmpty(list) && isCardView">
+    <div class="col-md-3" *ngFor="let o of list">
+      <div class="box box-solid">
+        <div class="box-header with-border">
+          <h3 class="box-title">{{ o.full_name }}</h3>
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" title="Edit" (click)="onEdit(o)">
+              <i class="fa fa-edit"></i>
+            </button>
+            <input type="checkbox" [checked]="o.selected" (change)="onChangeSelect(o)" />
+          </div>
+        </div>
         <div class="box-body">
-          <div class="nav-tabs-custom">
-            <ul class="nav nav-tabs">
-              <li [ngClass]="{ 'active': tab === 0 }"><a href="#" (click)="onTab(0)">Public</a></li>
-              <li [ngClass]="{ 'active': tab === 1 }"><a href="#" (click)="onTab(1)">Private</a></li>
-            </ul>
-          </div>
-
-          <div class="text-center" *ngIf="isEmpty(list)">
-            <h4 class="box-title">No records found</h4>
-          </div>
-
-          <div class="row" *ngIf="!isEmpty(list) && isCardView">
-            <div class="col-md-3" *ngFor="let o of list">
-              <div class="box box-solid box-info">
-                <div class="box-header with-border">
-                  <h3 class="box-title">{{ o.full_name }}</h3>
-                  <div class="box-tools pull-right">
-                    <button type="button" class="btn btn-box-tool" title="Edit" (click)="onEdit(o)">
-                      <i class="fa fa-edit"></i>
-                    </button>
-                    <input type="checkbox" [checked]="o.selected" (change)="onChangeSelect(o)" />
-                  </div>
-                </div>
-                <div class="box-body">
-                  <span class="info-box-text">{{ o.address1 }}</span>
-                  <span class="info-box-text">{{ o.address2 }}</span>
-                  <span class="info-box-text">{{ o.postcode }}</span>
-                  <span class="info-box-text">{{ o.city }}</span>
-                  <span class="info-box-text">{{ o.state_province }}</span>
-                  <span class="info-box-text">{{ o.country }}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="table-responsive" *ngIf="!isEmpty(list) && !isCardView">
-            <table class="table table-bordered table-condensed table-striped table-hover">
-              <thead>
-                <tr>
-                  <th>
-                    <input type="checkbox" [checked]="selectAll" (change)="onChangeSelectAll()" />
-                  </th>
-                  <th>
-                    <a href="#" (click)="sortBy('full_name')">Name</a> <i *ngIf="sort === 'full_name'" class="fa"
-                      [ngClass]="{'fa-chevron-up': isSortBy('full_name', ''), 'fa-chevron-down': isSortBy('full_name', 'desc')}"></i>
-                  </th>
-                  <th>
-                    <a href="#" (click)="sortBy('address1')">Address 1</a> <i *ngIf="sort === 'address1'" class="fa"
-                      [ngClass]="{'fa-chevron-up': isSortBy('address1', ''), 'fa-chevron-down': isSortBy('address1', 'desc')}"></i>
-                  </th>
-                  <th>
-                    <a href="#" (click)="sortBy('address2')">Address 2</a> <i *ngIf="sort === 'address2'" class="fa"
-                      [ngClass]="{'fa-chevron-up': isSortBy('address2', ''), 'fa-chevron-down': isSortBy('address2', 'desc')}"></i>
-                  </th>
-                  <th>
-                    <a href="#" (click)="sortBy('postcode')">Postcode</a> <i *ngIf="sort === 'postcode'" class="fa"
-                      [ngClass]="{'fa-chevron-up': isSortBy('postcode', ''), 'fa-chevron-down': isSortBy('postcode', 'desc')}"></i>
-                  </th>
-                  <th>
-                    <a href="#" (click)="sortBy('city')">City</a> <i *ngIf="sort === 'city'" class="fa"
-                      [ngClass]="{'fa-chevron-up': isSortBy('city', ''), 'fa-chevron-down': isSortBy('city', 'desc')}"></i>
-                  </th>
-                  <th>
-                    <a href="#" (click)="sortBy('state_province')">State</a> <i *ngIf="sort === 'state_province'" class="fa"
-                      [ngClass]="{'fa-chevron-up': isSortBy('state_province', ''), 'fa-chevron-down': isSortBy('state_province', 'desc')}"></i>
-                  </th>
-                  <th>
-                    <a href="#" (click)="sortBy('country')">Country</a> <i *ngIf="sort === 'country'" class="fa"
-                      [ngClass]="{'fa-chevron-up': isSortBy('country', ''), 'fa-chevron-down': isSortBy('country', 'desc')}"></i>
-                  </th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let o of list">
-                  <td>
-                    <input type="checkbox" [checked]="o.selected" (change)="onChangeSelect(o)" />
-                  </td>
-                  <td>{{ o.full_name }}</td>
-                  <td>{{ o.address1 }}</td>
-                  <td>{{ o.address2 }}</td>
-                  <td>{{ o.postcode }}</td>
-                  <td>{{ o.city }}</td>
-                  <td>{{ o.state_province }}</td>
-                  <td>{{ o.country }}</td>
-                  <td>
-                    <button type="button" class="btn btn-primary" (click)="onEdit(o)">
-                      <i class="fa fa-edit"></i> Edit
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          <span class="info-box-text">{{ o.address1 }}</span>
+          <span class="info-box-text">{{ o.address2 }}</span>
+          <span class="info-box-text">{{ o.postcode }}</span>
+          <span class="info-box-text">{{ o.city }}</span>
+          <span class="info-box-text">{{ o.state_province }}</span>
+          <span class="info-box-text">{{ o.country }}</span>
         </div>
+      </div>
+    </div>
+  </div>
 
-        <div class="overlay" *ngIf="isloading">
-          <i class="fa fa-refresh fa-spin"></i>
-        </div>
-
-        <div class="box-footer">
-          <div class="pull-right" *ngIf="itemsCount">
-            <pagination [totalItems]="itemsCount" [itemsPerPage]="PAGE_SIZE" [maxSize]="MAX_PAGE_NUMBERS" [(ngModel)]="page" (pageChanged)="pageChanged($event)"></pagination>
-          </div>
-        </div>
+  <div class="box" *ngIf="itemsCount">
+    <div class="box-header">
+      <div class="pull-right">
+        <pagination [totalItems]="itemsCount" [itemsPerPage]="PAGE_SIZE" [maxSize]="MAX_PAGE_NUMBERS" [(ngModel)]="page" (pageChanged)="pageChanged($event)"></pagination>
       </div>
     </div>
   </div>

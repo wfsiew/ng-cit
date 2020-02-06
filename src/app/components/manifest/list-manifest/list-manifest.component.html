@@ -53,35 +53,21 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="box">
+
     <div class="box-body">
       <div class="text-center" *ngIf="isEmpty(list)">
         <h4 class="box-title">No records found</h4>
       </div>
+    </div>
 
-      <div class="row" *ngIf="!isEmpty(list) && isCardView">
-        <div class="col-md-3" *ngFor="let o of list">
-          <div class="box box-solid box-info">
-            <div class="box-header with-border">
-              <h3 class="box-title"></h3>
-              <div class="box-tools pull-right">
-                <span class="badge bg-light-blue">{{ o.is_close ? 'CLOSED' : 'OPEN' }}</span>
-                <span class="badge bg-green" [title]="o.count + ' Consignment(s)'">{{ o.count }}</span>
-                <button type="button" class="btn btn-box-tool" title="View" (click)="onView(o)">
-                  <i class="fa fa-eye"></i>
-                </button>
-              </div>
-            </div>
-            <div class="box-body">
-              <span class="info-box-text">{{ o.manifest_no }}</span>
-              <span class="info-box-text">{{ o.created_date }}</span>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="overlay" *ngIf="isloading">
+      <i class="fa fa-refresh fa-spin"></i>
+    </div>
+  </div>
 
-      <div class="table-responsive" *ngIf="!isEmpty(list) && !isCardView">
+  <div class="box" *ngIf="!isEmpty(list) && !isCardView">
+    <div class="box-body">
+      <div class="table-responsive">
         <table class="table table-bordered table-condensed table-striped table-hover">
           <thead>
             <tr>
@@ -106,13 +92,32 @@
         </table>
       </div>
     </div>
+  </div>
 
-    <div class="overlay" *ngIf="isloading">
-      <i class="fa fa-refresh fa-spin"></i>
+  <div class="row" *ngIf="!isEmpty(list) && isCardView">
+    <div class="col-md-3" *ngFor="let o of list">
+      <div class="box box-solid">
+        <div class="box-header with-border">
+          <h3 class="box-title"></h3>
+          <div class="box-tools pull-right">
+            <span class="badge bg-light-blue">{{ o.is_close ? 'CLOSED' : 'OPEN' }}</span>
+            <span class="badge bg-green" [title]="o.count + ' Consignment(s)'">{{ o.count }}</span>
+            <button type="button" class="btn btn-box-tool" title="View" (click)="onView(o)">
+              <i class="fa fa-eye"></i>
+            </button>
+          </div>
+        </div>
+        <div class="box-body">
+          <span class="info-box-text">{{ o.manifest_no }}</span>
+          <span class="info-box-text">{{ o.created_date }}</span>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <div class="box-footer">
-      <div class="pull-right" *ngIf="itemsCount">
+  <div class="box" *ngIf="itemsCount">
+    <div class="box-header">
+      <div class="pull-right">
         <pagination [totalItems]="itemsCount" [itemsPerPage]="PAGE_SIZE" [maxSize]="MAX_PAGE_NUMBERS" [(ngModel)]="page" (pageChanged)="pageChanged($event)"></pagination>
       </div>
     </div>
