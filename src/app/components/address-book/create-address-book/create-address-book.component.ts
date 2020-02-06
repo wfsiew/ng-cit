@@ -114,11 +114,14 @@ export class CreateAddressBookComponent implements OnInit {
   }
 
   loadAddressBook() {
+    this.isloading = true;
     this.addressBookService.getAddressBook(this.id, this.privateval).subscribe((res: any) => {
+      this.isloading = false;
       this.data = !_.isEmpty(res.data) ? res.data[0] : {};
       this.setForm();
     },
     (error) => {
+      this.isloading = false;
       this.toastr.error('Load Address Book Failed', 'Edit Address Book');
     });
   }

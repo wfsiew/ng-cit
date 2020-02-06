@@ -11,7 +11,13 @@
               <button type="button" class="btn btn-danger" (click)="onDeleteSelected()" [disabled]="isEmpty(listSelected)"
                 *ngIf="!isEmpty(list)">Delete</button>
             </div>
-            <div class="col-xs-9 col-sm-5 col-md-5 pull-right">
+            <div class="col-xs-4 col-sm-3 col-md-3">
+              <div class="btn-group">
+                <button type="button" class="btn btn-default btn-flat" (click)="tableView = true"><i class="fa fa-th-list"></i></button>
+                <button type="button" class="btn btn-default btn-flat" (click)="tableView = false"><i class="fa fa-th"></i></button>
+              </div>
+            </div>
+            <div class="col-xs-5 col-sm-5 col-md-5 pull-right">
               <div class="input-group">
                 <input type="text" [(ngModel)]="search" (keyup)="onSearchDbKeyup($event)" (keydown.enter)="onSearchKeypress($event)" name="q" class="form-control"
                   placeholder="Search...">
@@ -34,7 +40,33 @@
             <h4 class="box-title">No records found</h4>
           </div>
 
-          <div class="table-responsive" *ngIf="!isEmpty(list)">
+          <div class="row" *ngIf="!isEmpty(list) && isCardView">
+            <div class="col-md-3" *ngFor="let o of list">
+              <div class="box box-solid">
+                <div class="box-header with-border">
+                  <h3 class="box-title">{{ o.full_name }}</h3>
+                  <div class="box-tools pull-right">
+                    <input type="checkbox" [checked]="o.selected" (change)="onChangeSelect(o)" />
+                  </div>
+                </div>
+                <div class="box-body">
+                  <span class="info-box-text">{{ o.address1 }}</span>
+                  <span class="info-box-text">{{ o.address2 }}</span>
+                  <span class="info-box-text">{{ o.postcode }}</span>
+                  <span class="info-box-text">{{ o.city }}</span>
+                  <span class="info-box-text">{{ o.state_province }}</span>
+                  <span class="info-box-text">{{ o.country }}</span>
+                </div>
+                <div class="box-footer">
+                  <button type="button" class="btn btn-primary" (click)="onEdit(o)">
+                    <i class="fa fa-edit"></i> Edit
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="table-responsive" *ngIf="!isEmpty(list) && !isCardView">
             <table class="table table-bordered table-condensed table-striped table-hover">
               <thead>
                 <tr>

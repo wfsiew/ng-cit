@@ -26,6 +26,7 @@ export class ListAddressBookComponent implements OnInit, OnDestroy {
   search = '';
   sort = 'full_name';
   sort_dir = '';
+  isCardView = false;
   onSearchDbKeyup: any;
   sx = 0;
   sy = 0;
@@ -51,6 +52,7 @@ export class ListAddressBookComponent implements OnInit, OnDestroy {
         this.search = o.search;
         this.tab = o.tab;
         this.is_private = this.tab === 0 ? false : true;
+        this.isCardView = o.isCardView;
         this.sx = o.sx;
         this.sy = o.sy;
       }
@@ -132,6 +134,7 @@ export class ListAddressBookComponent implements OnInit, OnDestroy {
       sort: this.sort,
       dir: this.sort_dir,
       search: this.search,
+      isCardView: this.isCardView,
       tab: this.tab,
       sx: window.scrollX,
       sy: window.scrollY
