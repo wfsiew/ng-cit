@@ -33,6 +33,9 @@ export class ListManifestComponent implements OnInit, OnDestroy {
   search = '';
   sort = 'id';
   sort_dir = '';
+  isCardView = false;
+  sx = 0;
+  sy = 0;
   subs: Subscription;
 
   readonly isEmpty = Helper.isEmpty;
@@ -58,6 +61,9 @@ export class ListManifestComponent implements OnInit, OnDestroy {
         this.manifest_no = o.manifest_no;
         this.daterx = [o.s_date, o.e_date];
         this.datex = this.daterx;
+        this.isCardView = o.isCardView;
+        this.sx = o.sx;
+        this.sy = o.sy;
       }
     });
   }
@@ -115,6 +121,9 @@ export class ListManifestComponent implements OnInit, OnDestroy {
       this.list = res.status ? res.data : [];
       this.itemsCount = this.list.length;
       this.isloading = false;
+      setTimeout(() => {
+        window.scrollTo(this.sx, this.sy);
+      }, 200);
     },
     (error) => {
       this.isloading = false;
@@ -146,7 +155,10 @@ export class ListManifestComponent implements OnInit, OnDestroy {
       search: this.search,
       manifest_no: this.manifest_no,
       s_date: this.daterx[0],
-      e_date: this.daterx[1]
+      e_date: this.daterx[1],
+      isCardView: this.isCardView,
+      sx: window.scrollX,
+      sy: window.scrollY
     });
     this.router.navigate(['/cit/manifest/detail', o.manifest_no, this.company.company_id]);
     return false;
@@ -201,6 +213,7 @@ export class ListManifestComponent implements OnInit, OnDestroy {
   }
 
   onSearch() {
+    this.page = 1;
     this.load();
   }
 

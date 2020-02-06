@@ -90,7 +90,7 @@ const routes: Routes = [
   declarations: [],
   imports: [
     CommonModule,
-    RouterModule.forRoot(routes, { useHash: true })
+    RouterModule.forRoot(routes, { useHash: true, scrollPositionRestoration: 'top' })
   ],
   exports: [RouterModule]
 })

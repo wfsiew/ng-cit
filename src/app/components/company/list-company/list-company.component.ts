@@ -24,6 +24,7 @@ export class ListCompanyComponent implements OnInit, OnDestroy {
   search = '';
   sort = 'company_account_code';
   sort_dir = 'desc';
+  isCardView = false;
   user: User;
   onSearchDbKeyup: any;
   sx = 0;
@@ -50,6 +51,7 @@ export class ListCompanyComponent implements OnInit, OnDestroy {
         // this.sort = o.sort;
         // this.sort_dir = o.dir;
         this.search = o.search;
+        this.isCardView = o.isCardView;
         this.sx = o.sx;
         this.sy = o.sy;
       }
@@ -113,6 +115,7 @@ export class ListCompanyComponent implements OnInit, OnDestroy {
     this.msService.send('list-company', {
       page: this.page,
       search: this.search,
+      isCardView: this.isCardView,
       sx: window.scrollX,
       sy: window.scrollY
     });

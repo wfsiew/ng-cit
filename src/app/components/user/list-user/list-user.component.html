@@ -7,8 +7,14 @@
       <h1 class="box-title">User Listing</h1>
       <span class="company-name">{{ company_name }}</span>
       <div class="row">
-        <div class="col-xs-4">
+        <div class="col-xs-1">
           <button type="button" class="btn btn-primary" *ngIf="canEdit" (click)="onCreateNew()"><i class="fa fa-plus"></i> Add User</button>
+        </div>
+        <div class="col-xs-4 col-sm-3 col-md-3">
+          <div class="btn-group">
+            <button type="button" class="btn btn-default btn-flat" (click)="isCardView = false"><i class="fa fa-th-list"></i></button>
+            <button type="button" class="btn btn-default btn-flat" (click)="isCardView = true"><i class="fa fa-th"></i></button>
+          </div>
         </div>
       </div>
 
@@ -49,7 +55,30 @@
         <h4 class="box-title">No records found</h4>
       </div>
 
-      <div class="table-responsive" *ngIf="!isEmpty(list)">
+      <div class="row" *ngIf="!isEmpty(list) && isCardView">
+        <div class="col-md-3" *ngFor="let o of list">
+          <div class="box box-solid box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">{{ o['list-user'] ? o['list-user'].Email : '' }}</h3>
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" title="View" (click)="onView(o)">
+                  <i class="fa fa-edit"></i>
+                </button>
+              </div>
+            </div>
+            <div class="box-body">
+              <span class="info-box-text">{{ o['list-user'] ? o['list-user'].Name : '' }}</span>
+              <span class="info-box-text">{{ o['list-user'] ? o['list-user'].username : '' }}</span>
+              <span class="info-box-text">{{ o['list-user'] ? o['list-user'].phone_no : '' }}</span>
+            </div>
+            <div class="box-footer bg-black">
+              <div class="info-box-text text-center">{{ o['list-user'] ? o['list-user'].Roles : '' }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-responsive" *ngIf="!isEmpty(list) && !isCardView">
         <table class="table table-condensed table-bordered table-striped table-hover">
           <thead>
             <tr>

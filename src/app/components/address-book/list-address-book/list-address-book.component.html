@@ -42,10 +42,13 @@
 
           <div class="row" *ngIf="!isEmpty(list) && isCardView">
             <div class="col-md-3" *ngFor="let o of list">
-              <div class="box box-solid">
+              <div class="box box-solid box-info">
                 <div class="box-header with-border">
                   <h3 class="box-title">{{ o.full_name }}</h3>
                   <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" title="Edit" (click)="onEdit(o)">
+                      <i class="fa fa-edit"></i>
+                    </button>
                     <input type="checkbox" [checked]="o.selected" (change)="onChangeSelect(o)" />
                   </div>
                 </div>
@@ -56,11 +59,6 @@
                   <span class="info-box-text">{{ o.city }}</span>
                   <span class="info-box-text">{{ o.state_province }}</span>
                   <span class="info-box-text">{{ o.country }}</span>
-                </div>
-                <div class="box-footer">
-                  <button type="button" class="btn btn-primary" (click)="onEdit(o)">
-                    <i class="fa fa-edit"></i> Edit
-                  </button>
                 </div>
               </div>
             </div>

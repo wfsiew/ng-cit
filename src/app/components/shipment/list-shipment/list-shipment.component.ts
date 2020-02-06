@@ -23,6 +23,7 @@ export class ListShipmentComponent implements OnInit, OnDestroy {
   is_own = true;
   sort = 'create_date';
   sort_dir = 'desc';
+  isCardView = false;
   onSearchDbKeyup: any;
   sx = 0;
   sy = 0;
@@ -47,6 +48,7 @@ export class ListShipmentComponent implements OnInit, OnDestroy {
         this.sort_dir = o.dir;
         this.search = o.search;
         this.is_own = o.is_own;
+        this.isCardView = o.isCardView;
         this.sx = o.sx;
         this.sy = o.sy;
       }
@@ -91,6 +93,7 @@ export class ListShipmentComponent implements OnInit, OnDestroy {
       dir: this.sort_dir,
       search: this.search,
       is_own: this.is_own,
+      isCardView: this.isCardView,
       sx: window.scrollX,
       sy: window.scrollY
     });
@@ -114,6 +117,7 @@ export class ListShipmentComponent implements OnInit, OnDestroy {
       dir: this.sort_dir,
       search: this.search,
       is_own: this.is_own,
+      isCardView: this.isCardView,
       sx: window.scrollX,
       sy: window.scrollY
     });
