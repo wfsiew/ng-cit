@@ -104,6 +104,7 @@ export class ListCompanyComponent implements OnInit, OnDestroy {
     this.msService.send('list-company', {
       page: this.page,
       search: this.search,
+      isCardView: this.isCardView,
       sx: window.scrollX,
       sy: window.scrollY
     });
