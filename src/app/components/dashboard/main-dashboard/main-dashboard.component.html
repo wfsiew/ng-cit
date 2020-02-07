@@ -105,5 +105,10 @@
         </tbody>
       </table>
     </div>
+    <div class="box-footer" *ngIf="itemsCount">
+      <div class="pull-right">
+        <pagination [totalItems]="itemsCount" [itemsPerPage]="PAGE_SIZE" [maxSize]="MAX_PAGE_NUMBERS" [(ngModel)]="page" (pageChanged)="pageChanged($event)"></pagination>
+      </div>
+    </div>
   </div>
 </section>

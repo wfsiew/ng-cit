@@ -39,6 +39,8 @@ export class MainDashboardComponent implements OnInit, OnDestroy {
   datex = this.daterx;
 
   readonly isEmpty = Helper.isEmpty;
+  readonly PAGE_SIZE = AppConstant.PAGE_SIZE;
+  readonly MAX_PAGE_NUMBERS = AppConstant.MAX_PAGE_NUMBERS;
 
   constructor(
     private router: Router,
@@ -88,9 +90,17 @@ export class MainDashboardComponent implements OnInit, OnDestroy {
   loadCompany() {
     this.companyService.listCompany(this.page, AppConstant.PAGE_SIZE, this.sort, this.sort_dir).subscribe((res: any) => {
       this.list = res.status ? res.data : [];
+      this.itemsCount = res.status ? res.recordsTotal : 0;
     },
     (error) => {
-      this.toastr.error('Load Company Failed');
+      if (error.status === 400) {
+        this.list = [];
+        this.itemsCount = 0;
+      }
+
+      else {
+        this.toastr.error('Load Company Failed');
+      }
     });
   }
 
@@ -166,5 +176,10 @@ export class MainDashboardComponent implements OnInit, OnDestroy {
     this.company_name = o.company_name;
     this.loadDashboard();
     return false;
+  }
+
+  pageChanged(event: any) {
+    this.page = event.page;
+    this.loadCompany();
   }
 }
