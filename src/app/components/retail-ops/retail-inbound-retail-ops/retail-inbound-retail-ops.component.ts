@@ -16,7 +16,7 @@ import { Helper } from 'src/app/shared/utils/helper';
 export class RetailInboundRetailOpsComponent implements OnInit, OnDestroy {
 
   isloading = false;
-  data = {
+  data: any = {
     charges: '',
     dropoff_point: '',
     tax: '',

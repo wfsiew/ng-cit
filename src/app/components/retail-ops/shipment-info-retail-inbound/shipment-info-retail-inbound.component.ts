@@ -78,6 +78,9 @@ export class ShipmentInfoRetailInboundComponent implements OnInit {
       total_weight: ['0.5', [Validators.required, Validators.max(9999), Validators.pattern(AppConstant.VALIDATE.AMOUNT)]],
       dim_weight: ['0', [Validators.required, Validators.max(9999), Validators.pattern(AppConstant.VALIDATE.AMOUNT)]],
       actual_weight: ['0', [Validators.required, Validators.max(9999), Validators.pattern(AppConstant.VALIDATE.AMOUNT)]],
+      total_order_amount: ['0', [Validators.required]],
+      tax: ['0', [Validators.required]],
+      charges: ['0', [Validators.required]],
 
       origin_shipper_name: ['', [Validators.required]],
       origin_shipper_address1: ['', [Validators.required]],
@@ -127,6 +130,9 @@ export class ShipmentInfoRetailInboundComponent implements OnInit {
       payment_type: _.isNull(o.payment_type) || o.payment_type === '' ? 'cash' : o.payment_type,
       total_package_no: o.total_package_no,
       total_weight: o.chargeable_weigth,
+      total_order_amount: o.total_order_amount,
+      tax: o.tax,
+      charges: o.charges,
 
       origin_shipper_name: o.origin_shipper_name,
       origin_shipper_address1: o.origin_shipper_address1,
@@ -223,6 +229,8 @@ export class ShipmentInfoRetailInboundComponent implements OnInit {
       height: x.height
     });
 
+    this.setWeight(x.width, x.length, x.height);
+
     const lx = ls[0].product_list;
     if (Helper.isEmpty(lx)) {
       return;
@@ -236,6 +244,46 @@ export class ShipmentInfoRetailInboundComponent implements OnInit {
         value: x.value,
         currency: x.currency
       });
+    });
+  }
+
+  onWidthLengthHeightChange() {
+    let width = this.f.width.value;
+    let length = this.f.length.value;
+    let height = this.f.height.value;
+    this.setWeight(width, length, height);
+  }
+
+  setWeight(width, length, height) {
+    if (_.isNull(width) || width === '' || !AppConstant.VALIDATE.AMOUNT.test(width) ||
+      _.isNull(length) || length === '' || !AppConstant.VALIDATE.AMOUNT.test(length) ||
+      _.isNull(height) || height === '' || !AppConstant.VALIDATE.AMOUNT.test(height)) {
+      return;
+    }
+
+    const o = this.data;
+    let dim_weight = 0;
+    let actual_weight = _.isNull(o.chargeable_weigth) ? 0 : o.chargeable_weigth;
+
+    if (o.origin_shipper_country === 'MY' && o.dest_receiver_country === 'MY') {
+      dim_weight = Number(width) * Number(length) * Number(height) / 6000;
+    }
+
+    else {
+      dim_weight = Number(width) * Number(length) * Number(height) / 5000;
+    }
+
+    if (o.chargeable_weigth > dim_weight) {
+      actual_weight = o.chargeable_weigth;
+    }
+
+    else {
+      actual_weight = dim_weight;
+    }
+
+    this.mform.patchValue({
+      dim_weight: dim_weight.toFixed(2),
+      actual_weight: actual_weight.toFixed(2)
     });
   }
 
