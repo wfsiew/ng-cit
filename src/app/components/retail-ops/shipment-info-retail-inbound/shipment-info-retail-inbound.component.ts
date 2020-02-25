@@ -72,15 +72,16 @@ export class ShipmentInfoRetailInboundComponent implements OnInit {
       company_name: ['', [Validators.required]],
       consignment_no: new FormControl({ value: '', disabled: false }, [Validators.required]),
       service_type: ['', [Validators.required]],
+      uom: ['', [Validators.required]],
       customer_reference: ['', [Validators.required]],
       payment_type: ['cash', [Validators.required]],
       total_package_no: ['', [Validators.required, Validators.max(999), Validators.pattern(AppConstant.VALIDATE.NUMBER)]],
       total_weight: ['0.5', [Validators.required, Validators.max(9999), Validators.pattern(AppConstant.VALIDATE.AMOUNT)]],
       dim_weight: ['0', [Validators.required, Validators.max(9999), Validators.pattern(AppConstant.VALIDATE.AMOUNT)]],
       actual_weight: ['0', [Validators.required, Validators.max(9999), Validators.pattern(AppConstant.VALIDATE.AMOUNT)]],
-      total_order_amount: ['0', [Validators.required]],
+      total_order_amount: ['0', [Validators.required, Validators.pattern(AppConstant.VALIDATE.NUMBER)]],
       tax: ['0', [Validators.required]],
-      charges: ['0', [Validators.required]],
+      charges: ['0', [Validators.required, Validators.pattern(AppConstant.VALIDATE.NUMBER)]],
 
       origin_shipper_name: ['', [Validators.required]],
       origin_shipper_address1: ['', [Validators.required]],
@@ -126,6 +127,7 @@ export class ShipmentInfoRetailInboundComponent implements OnInit {
       company_name: c.company_name,
       consignment_no: o.consignment_no,
       service_type: o.service_type,
+      uom: o.packaging_type,
       customer_reference: o.customer_reference,
       payment_type: _.isNull(o.payment_type) || o.payment_type === '' ? 'cash' : o.payment_type,
       total_package_no: o.total_package_no,
@@ -345,11 +347,88 @@ export class ShipmentInfoRetailInboundComponent implements OnInit {
   }
 
   onSave() {
+    const f = this.f;
+    let lp = _.map(this.listGood, (x) => {
+      return {
+        id: x.id,
+        value: x.value,
+        currency: x.currency,
+        quantity: x.quantity,
+        description: x.description
+      }
+    });
+    let lsp = [];
+    if (lp.length > 0) {
+      let x = lp[0];
+      lsp = [
+        {
+          description: x.description,
+          weight: 0.00,
+          volume: 0.00,
+          height: f.height.value,
+          length: f.length.value,
+          width: f.width.value,
+          value: x.value,
+          currency: x.currency,
+          quantity: x.quantity,
+          uom: f.uom.value,
+          product_list: lp
+        }
+      ];
+    }
 
+    let o = {
+      id: this.data.id,
+      customer_reference: f.customer_reference.value,
+
+      origin_shipper_address1: f.origin_shipper_address1.value,
+      origin_shipper_address2: f.origin_shipper_address2.value,
+      origin_shipper_postcode: f.origin_shipper_postcode.value,
+      origin_shipper_city: f.origin_shipper_city.value,
+      origin_shipper_state_province: f.origin_shipper_state_province.value,
+      origin_shipper_country: f.origin_shipper_country.value,
+      origin_shipper_phone_no: f.origin_shipper_phone_no.value,
+      origin_shipper_contact_name: f.origin_shipper_contact_name.value,
+      origin_shipper_email: f.origin_shipper_email.value,
+
+      dest_receiver_address1: f.dest_receiver_address1.value,
+      dest_receiver_address2: f.dest_receiver_address2.value,
+      dest_receiver_postcode: f.dest_receiver_postcode.value,
+      dest_receiver_city: f.dest_receiver_city.value,
+      dest_receiver_state_province: f.dest_receiver_state_province.value,
+      dest_receiver_country: f.dest_receiver_country.value,
+      dest_receiver_phone_no: f.dest_receiver_phone_no.value,
+      dest_receiver_contact_name: f.dest_receiver_contact_name.value,
+      dest_receiver_email: f.dest_receiver_email.value,
+
+      total_package_no: f.total_package_no.value,
+      service_type: f.service_type.value,
+      company_id: this.data.company_id,
+      shipment_package_list: lsp
+    };
+
+    this.isloading = true;
+    this.shipmentService.updateShipmentRetailInbound(o).subscribe((res: any) => {
+      this.isloading = false;
+      this.toastr.success('Shipment successfully updated', 'Retail Inbound');
+    },
+    (error) => {
+      this.isloading = false;
+      this.toastr.error('Update Shipment Failed', 'Retail Inbound');
+    });
   }
 
   onConfirm() {
-
+    this.isloading = true;
+    this.shipmentService.confirmShipment(this.data.id).subscribe((res: any) => {
+      this.isloading = false;
+      this.toastr.success('Shipment confirmed');
+      this.data.is_confirm = true;
+    },
+    (error) => {
+      this.isloading = false;
+      this.toastr.error('Confirm Shipment Failed');
+    });
   }
 
   onClose() {

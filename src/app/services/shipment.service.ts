@@ -46,6 +46,10 @@ export class ShipmentService {
     return this.http.put(`${this.baseUrl}/api/shipment/update`, o);
   }
 
+  updateShipmentRetailInbound(o) {
+    return this.http.put(`${this.baseUrl}/api/shipment/retail-inbound`, o);
+  }
+
   uploadShipment(o: FormData) {
     return this.http.post(`${this.baseUrl}/file/confirm_upload/`, o, {
       reportProgress: true,
@@ -68,6 +72,11 @@ export class ShipmentService {
   cancelShipment(id) {
     const ls = [{ shipment_id: id }];
     return this.http.post(`${this.baseUrl}/api/shipment/cancel`, ls);
+  }
+
+  confirmShipment(id) {
+    const o = { shipment_id: id };
+    return this.http.post(`${this.baseUrl}/api/shipment/confirm`, o)
   }
 
   getRetailInbound(num) {

@@ -16,8 +16,8 @@
 
       <div class="row">
         <div class="col-sm-12">
-          <button type="button" class="btn btn-primary"><i class="fa fa-save"></i> Save</button>&nbsp;&nbsp;
-          <button type="button" class="btn btn-success">Confirm</button>&nbsp;&nbsp;
+          <button type="button" class="btn btn-primary" (click)="onSave()"><i class="fa fa-save"></i> Save</button>&nbsp;&nbsp;
+          <button type="button" class="btn btn-success" (click)="onConfirm()">Confirm</button>&nbsp;&nbsp;
           <button type="button" class="btn btn-flat" (click)="onClose()"><i class="fa fa-close"></i></button>
           <button type="button" class="btn btn-flat pull-right" ><i class="fa fa-print"></i></button>
         </div>
@@ -27,7 +27,7 @@
 
   <div class="box">
     <div class="box-body">
-      <div class="callout callout-info">
+      <div class="callout callout-info" *ngIf="data.is_confirm">
         <h4 class="text-center">CONFIRMED</h4>
       </div>
       <form [formGroup]="mform" class="form-horizontal">
@@ -50,6 +50,7 @@
           <label class="col-sm-2 control-label">Customer Ref</label>
           <div class="col-sm-2">
             <input type="text" class="form-control" placeholder="Customer Ref" formControlName="customer_reference" name="customer_ref">
+            <small class="label label-danger" *ngIf="invalid('customer_reference') && f.customer_reference.hasError('required')">Order Reference is required</small>
           </div>
           <label class="col-sm-2 control-label">Payment Type</label>
           <div class="col-sm-3">
@@ -215,6 +216,11 @@
               <label class="col-sm-2 control-label">Total Package</label>
               <div class="col-sm-1">
                 <input type="text" class="form-control" placeholder="Total Package" formControlName="total_package_no" name="total_package_no">
+                <small class="label label-danger" *ngIf="invalid('total_package_no') && f.total_package_no.hasError('required')">Total Package Quantity is required</small>
+                <small class="label label-danger" *ngIf="invalid('total_package_no') && f.total_package_no.hasError('pattern')">Total Package Quantity is
+                  invalid</small>
+                <small class="label label-danger" *ngIf="invalid('total_package_no') && f.total_package_no.hasError('max')">Max Total Package Quantity is
+                  999</small>
               </div>
               <label class="col-sm-2 control-label">Actual Weight</label>
               <div class="col-sm-2">
@@ -222,15 +228,33 @@
                   <input type="text" class="form-control" placeholder="Actual Weight" formControlName="actual_weight" name="actual_weight">
                   <span class="input-group-addon">KG</span>
                 </div>
+                <small class="label label-danger" *ngIf="invalid('actual_weight') && f.actual_weight.hasError('required')">Actual
+                  Weight is required</small>
+                <small class="label label-danger" *ngIf="invalid('actual_weight') && f.actual_weight.hasError('pattern')">Actual
+                  Weight is invalid</small>
+                <small class="label label-danger" *ngIf="invalid('actual_weight') && f.actual_weight.hasError('max')">Max Actual
+                  Weight is 9999</small>
               </div>
               <div class="col-sm-1">
-                <input type="text" class="form-control" placeholder="W" formControlName="width" name="width" (change)="onWidthLengthHeightChange()">
+                <input type="text" class="form-control" title="Width" placeholder="W" formControlName="width" name="width" (change)="onWidthLengthHeightChange()">
+                <small class="label label-danger" *ngIf="invalid('width') && f.width.hasError('required')">Width
+                  is required</small>
+                <small class="label label-danger" *ngIf="invalid('width') && f.width.hasError('pattern')">Width
+                  is invalid</small>
               </div>
               <div class="col-sm-1">
-                <input type="text" class="form-control" placeholder="L" formControlName="length" name="length" (change)="onWidthLengthHeightChange()">
+                <input type="text" class="form-control" title="Length" placeholder="L" formControlName="length" name="length" (change)="onWidthLengthHeightChange()">
+                <small class="label label-danger" *ngIf="invalid('length') && f.length.hasError('required')">Length
+                  is required</small>
+                <small class="label label-danger" *ngIf="invalid('length') && f.length.hasError('pattern')">Length
+                  is invalid</small>
               </div>
               <div class="col-sm-1">
-                <input type="text" class="form-control" placeholder="H" formControlName="height" name="height" (change)="onWidthLengthHeightChange()">
+                <input type="text" class="form-control" title="Height" placeholder="H" formControlName="height" name="height" (change)="onWidthLengthHeightChange()">
+                <small class="label label-danger" *ngIf="invalid('height') && f.height.hasError('required')">Height
+                  is required</small>
+                <small class="label label-danger" *ngIf="invalid('height') && f.height.hasError('pattern')">Height
+                  is invalid</small>
               </div>
             </div>
 
@@ -242,6 +266,12 @@
               <label class="col-sm-2 control-label">Charge Weight</label>
               <div class="col-sm-1">
                 <input type="text" class="form-control" placeholder="Charge Weight" formControlName="total_weight" name="total_weight">
+                <small class="label label-danger" *ngIf="invalid('total_weight') && f.total_weight.hasError('required')">Charge
+                  Weight is required</small>
+                <small class="label label-danger" *ngIf="invalid('total_weight') && f.total_weight.hasError('pattern')">Charge
+                  Weight is invalid</small>
+                <small class="label label-danger" *ngIf="invalid('total_weight') && f.total_weight.hasError('max')">Max Charge
+                  Weight is 9999</small>
               </div>
             </div>
           </div>

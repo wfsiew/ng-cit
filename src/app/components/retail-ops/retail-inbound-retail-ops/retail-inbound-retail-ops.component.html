@@ -89,7 +89,7 @@
               <td>{{ o.weight }}</td>
               <td>{{ o.total_order_amount }}</td>
               <td>
-                <i class="fa" [ngClass]="{ 'fa-check checked': o.is_completed, 'fa-remove unchecked': !o.is_completed }"></i>
+                <i class="fa" [ngClass]="{ 'fa-check checked': o.is_confirm, 'fa-remove unchecked': !o.is_confirm }"></i>
               </td>
               <td>
                 <button type="button" class="btn btn-danger" (click)="onRemoveConsignment(o)">
