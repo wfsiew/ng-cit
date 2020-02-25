@@ -322,9 +322,7 @@
               <td class="text-center">{{ o.currency }}</td>
               <td class="text-right">{{ o.quantity * o.value | currency:' ' }}</td>
               <td>
-                <ng-container *ngIf="!isView">
-                  <input type="checkbox" [checked]="o.selected" (change)="onChangeSelect(o)" />
-                </ng-container>
+                <input type="checkbox" [checked]="o.selected" (change)="onChangeSelect(o)" />
               </td>
             </tr>
           </tbody>

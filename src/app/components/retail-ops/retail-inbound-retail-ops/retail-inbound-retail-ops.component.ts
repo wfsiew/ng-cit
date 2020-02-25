@@ -16,7 +16,13 @@ import { Helper } from 'src/app/shared/utils/helper';
 export class RetailInboundRetailOpsComponent implements OnInit, OnDestroy {
 
   isloading = false;
-  data = {};
+  data = {
+    charges: '',
+    dropoff_point: '',
+    tax: '',
+    payment_type: '',
+    total: ''
+  };
   list = [];
   search = 'CIT1001013841';
   onSearchDbKeyup: any;
@@ -56,7 +62,13 @@ export class RetailInboundRetailOpsComponent implements OnInit, OnDestroy {
     (error) => {
       this.isloading = false;
       if (error.status === 400) {
-        this.data = {};
+        this.data = {
+          charges: '',
+          dropoff_point: '',
+          tax: '',
+          payment_type: '',
+          total: ''
+        };
         this.list = [];
       }
       
