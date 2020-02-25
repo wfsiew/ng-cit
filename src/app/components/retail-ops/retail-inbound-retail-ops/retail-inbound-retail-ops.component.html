@@ -1,0 +1,108 @@
+<section class="content-header">
+  <h1>Retail Inbound Scan</h1>
+</section>
+<section class="content">
+  <div class="box">
+    <div class="box-header">
+      <div class="row">
+        <label class="col-sm-3 control-label">Consignment No / Drop-off Number:</label>
+        <div class="col-sm-4">
+          <input type="text" [(ngModel)]="search" (keyup)="onSearchDbKeyup($event)" (keydown.enter)="onSearchKeypress($event)" name="q" class="form-control"
+              placeholder="">
+        </div>
+        <div class="col-sm-1">
+          <button type="button" class="btn btn-flat"><i class="fa fa-barcode"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="box-body">
+      <div class="row">
+        <div class="col-sm-2 col-sm-offset-10 text-right">
+          <button type="button" class="btn btn-primary">Confirm Payment</button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="">
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-flat btn-primary"><i class="fa fa-plus"></i></button>
+            </span>
+          </div>
+        </div>
+        <div class="col-sm-5">
+          <button type="button" class="btn btn-flat pull-right"><i class="fa fa-print"></i></button>
+        </div>
+        <label class="col-sm-1 control-label text-right">Charges</label>
+        <div class="col-sm-2 pull-right">
+          <input type="text" [(ngModel)]="data.charges" class="form-control" placeholder="Charges">
+        </div>
+      </div>
+
+      <div class="row">
+        <label class="col-sm-4 control-label">Drop Off Point: {{ data.dropoff_point }}</label>
+        <label class="col-sm-1 col-sm-offset-5 control-label text-right">Tax:</label>
+        <div class="col-sm-2 pull-right">
+          <input type="text" [(ngModel)]="data.tax" class="form-control" placeholder="Tax">
+        </div>
+      </div>
+
+      <div class="row">
+        <label class="col-sm-4 control-label">Payment Type: {{ data.payment_type }}</label>
+        <label class="col-sm-5 control-label text-uppercase">Unpaid</label>
+        <label class="col-sm-1 control-label text-right">Total:</label>
+        <div class="col-sm-2 pull-right">
+          <input type="text" [(ngModel)]="data.total" class="form-control" placeholder="Total">
+        </div>
+      </div>
+    </div>
+
+    <div class="overlay" *ngIf="isloading">
+      <i class="fa fa-refresh fa-spin"></i>
+    </div>
+  </div>
+
+  <div class="box">
+    <div class="box-body">
+      <div class="table-responsive">
+        <table class="table table-condensed table-striped table-hover">
+          <thead>
+            <tr>
+              <th>Consignment No</th>
+              <th>Origin Station</th>
+              <th>Destination Station</th>
+              <th>Service</th>
+              <th>Weight</th>
+              <th>Total</th>
+              <th>Completed</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let o of list">
+              <td>{{ o.consignment_no }}</td>
+              <td class="text-uppercase">{{ o.src_station }}</td>
+              <td class="text-uppercase">{{ o.dest_station }}</td>
+              <td>{{ o.service }}</td>
+              <td>{{ o.weight }}</td>
+              <td>{{ o.total_order_amount }}</td>
+              <td>
+                <i class="fa" [ngClass]="{ 'fa-check checked': o.is_completed, 'fa-remove unchecked': !o.is_completed }"></i>
+              </td>
+              <td>
+                <button type="button" class="btn btn-danger" (click)="onRemoveConsignment(o)">
+                  <i class="fa fa-remove"></i>
+                </button>&nbsp;&nbsp;
+                <button type="button" class="btn btn-primary" (click)="onEdit(o)">
+                  <i class="fa fa-edit"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>

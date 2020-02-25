@@ -265,7 +265,7 @@ export class CreateShipmentComponent implements OnInit {
     _.each(lx, (x) => {
       this.listGood.push({
         id: x.id,
-        description: `${x.description}`,
+        description: x.description,
         quantity: x.quantity,
         value: x.value,
         currency: x.currency

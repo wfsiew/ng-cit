@@ -35,6 +35,13 @@ export class ShipmentService {
     return this.http.get(`${this.baseUrl}/api/shipment/list/`, { params: prm });
   }
 
+  getShipmentRetailInbound(id) {
+    let prm: HttpParams = new HttpParams()
+      .set('shipment_id', `${id}`)
+      .set('retail_inbound', '1');
+    return this.http.get(`${this.baseUrl}/api/shipment/list/`, { params: prm });
+  }
+
   updateShipment(o) {
     return this.http.put(`${this.baseUrl}/api/shipment/update`, o);
   }
@@ -61,6 +68,12 @@ export class ShipmentService {
   cancelShipment(id) {
     const ls = [{ shipment_id: id }];
     return this.http.post(`${this.baseUrl}/api/shipment/cancel`, ls);
+  }
+
+  getRetailInbound(num) {
+    let prm: HttpParams = new HttpParams()
+      .set('num', num);
+    return this.http.get(`${this.baseUrl}/api/shipment/retail-inbound`, { params: prm });
   }
 
   printLabel(consignment_no: string, type: string) {

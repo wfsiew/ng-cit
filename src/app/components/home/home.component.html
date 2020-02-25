@@ -108,6 +108,21 @@
             <i class="fa fa-user-circle-o"></i> <span>Company</span>
           </a>
         </li>
+
+        <li class="treeview" [ngClass]="{'active': retail_ops === true}">
+          <a href="#" (click)="onRetailOpsClick()">
+            <i class="fa fa-shopping-bag"></i> <span>Retail Ops</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li [ngClass]="{'active': menu === 'retail-ops-retail-inbound'}"><a href="#"
+                (click)="goto('retail-ops-retail-inbound', 'retail-ops/retail-inbound')"><i class="fa fa-shopping-bag"></i> Retail Inbound</a></li>
+            <li [ngClass]="{'active': menu === 'retail-ops-loadsheet'}"><a href="#"
+                (click)="goto('retail-ops-loadsheet', 'retail-ops/loadsheet')"><i class="fa fa-list-alt"></i> Loadsheet</a></li>
+          </ul>
+        </li>
       </ul>
     </section>
   </aside>

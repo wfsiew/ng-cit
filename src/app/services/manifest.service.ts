@@ -26,6 +26,10 @@ export class ManifestService {
     return this.http.get(`${this.baseUrl}/api/manifest/${company_id}/list/`, { params: prm });
   }
 
+  getManifestLoad(num: string) {
+    return this.http.get(`${this.baseUrl}/api/manifest/load/${num}`);
+  }
+
   getManifestDetail(company_id: string, manifest_no: string, page, limit, sort, dir, value) {
     let i = Helper.getStart(page, limit);
     let prm: HttpParams = new HttpParams()

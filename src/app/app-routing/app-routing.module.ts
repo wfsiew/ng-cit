@@ -22,6 +22,9 @@ import { CreateCompanyComponent } from 'src/app/components/company/create-compan
 import { ListCompanyComponent } from 'src/app/components/company/list-company/list-company.component';
 import { ListUserComponent } from 'src/app/components/user/list-user/list-user.component';
 import { CreateCompanyProfileComponent } from 'src/app/components/company-profile/create-company-profile/create-company-profile.component';
+import { RetailInboundRetailOpsComponent } from 'src/app/components/retail-ops/retail-inbound-retail-ops/retail-inbound-retail-ops.component'
+import { LoadsheetRetailOpsComponent } from 'src/app/components/retail-ops/loadsheet-retail-ops/loadsheet-retail-ops.component';
+import { ShipmentInfoRetailInboundComponent } from '../components/retail-ops/shipment-info-retail-inbound/shipment-info-retail-inbound.component';
 import { AuthGuardService } from 'src/app/services/auth-guard.service';
 
 const routes: Routes = [
@@ -79,6 +82,14 @@ const routes: Routes = [
           { path: 'list', component: ListAddressBookComponent, canActivate: [AuthGuardService] },
           { path: 'edit/:id', component: CreateAddressBookComponent, canActivate: [AuthGuardService] },
           { path: 'detail/:id/:view', component: CreateAddressBookComponent, canActivate: [AuthGuardService] }
+        ]
+      },
+      { path: 'retail-ops',
+        children: [
+          { path: 'retail-inbound', component: RetailInboundRetailOpsComponent, canActivate: [AuthGuardService] },
+          { path: 'loadsheet', component: LoadsheetRetailOpsComponent, canActivate: [AuthGuardService] },
+          { path: 'retail-inbound-shipment/create', component: ShipmentInfoRetailInboundComponent, canActivate: [AuthGuardService] },
+          { path: 'retail-inbound-shipment/edit/:id', component: ShipmentInfoRetailInboundComponent, canActivate: [AuthGuardService] }
         ]
       }
     ]

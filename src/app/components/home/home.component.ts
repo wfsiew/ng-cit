@@ -14,6 +14,7 @@ export class HomeComponent implements OnInit {
 
   menu: string;
   address_book: boolean;
+  retail_ops: boolean;
   data: any = {};
   user: User;
 
@@ -56,6 +57,16 @@ export class HomeComponent implements OnInit {
       this.menu = 'address-book-list';
       this.address_book = true;
     }
+
+    else if (x === '/cit/retail-ops/retail-inbound' || x.indexOf('/cit/retail-ops/retail-inbound/shipment') >= 0) {
+      this.menu = 'retail-ops-retail-inbound';
+      this.retail_ops = true;
+    }
+
+    else if (x === '/cit/retail-ops/loadsheet') {
+      this.menu = 'retail-ops-loadsheet';
+      this.retail_ops = true;
+    }
   }
 
   load() {
@@ -77,6 +88,10 @@ export class HomeComponent implements OnInit {
   onAddressBookClick() {
     this.address_book = !this.address_book;
     return false;
+  }
+
+  onRetailOpsClick() {
+    this.retail_ops = !this.retail_ops;
   }
 
   goto(s, link) {

@@ -53,6 +53,9 @@ import { ListCompanyComponent } from './components/company/list-company/list-com
 import { CreateCompanyProfileComponent } from './components/company-profile/create-company-profile/create-company-profile.component';
 import { ListUserComponent } from './components/user/list-user/list-user.component';
 import { CreateUserModalComponent } from './components/user/create-user-modal/create-user-modal.component';
+import { RetailInboundRetailOpsComponent } from './components/retail-ops/retail-inbound-retail-ops/retail-inbound-retail-ops.component';
+import { LoadsheetRetailOpsComponent } from './components/retail-ops/loadsheet-retail-ops/loadsheet-retail-ops.component';
+import { ShipmentInfoRetailInboundComponent } from './components/retail-ops/shipment-info-retail-inbound/shipment-info-retail-inbound.component';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   bgsColor: 'blue',
@@ -103,7 +106,12 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     ListUserComponent,
     CreateUserModalComponent,
     ChangePwdComponent,
-    PrintShipmentModalComponent
+    PrintShipmentModalComponent,
+    RetailInboundRetailOpsComponent,
+    LoadsheetRetailOpsComponent,
+    RetailInboundRetailOpsComponent,
+    LoadsheetRetailOpsComponent,
+    ShipmentInfoRetailInboundComponent
   ],
   imports: [
     BrowserModule,

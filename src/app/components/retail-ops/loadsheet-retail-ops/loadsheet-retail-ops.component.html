@@ -1,0 +1,105 @@
+<section class="content-header">
+  <h1>Loadsheet</h1>
+</section>
+<section class="content">
+  <div class="box">
+    <div class="box-header">
+      <div class="row">
+        <label class="col-sm-2 control-label">Loadsheet Number</label>
+        <div class="col-sm-6">
+          <div class="input-group">
+            <input type="text" [(ngModel)]="search" (keyup)="onSearchDbKeyup($event)" (keydown.enter)="onSearchKeypress($event)" name="q" class="form-control"
+              placeholder="Search...">
+            <span class="input-group-btn">
+              <button type="button" name="search" class="btn btn-primary" (click)="onSearch()">Retrieve</button>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="box-body">
+      <div class="row">
+        <label class="col-sm-1 control-label">Origin</label>
+        <div class="col-sm-2">{{ data.Origin }}</div>
+        <label class="col-sm-1 control-label">Destination</label>
+        <div class="col-sm-2">{{ data.Destination }}</div>
+      </div>
+
+      <div class="row">
+        <label class="col-sm-1 control-label">Driver ID</label>
+        <div class="col-sm-2">{{ data.DriverId }}</div>
+        <label class="col-sm-1 control-label">Driver Name</label>
+        <div class="col-sm-2">{{ data.DriverName }}</div>
+      </div>
+
+      <div class="row">
+        <label class="col-sm-2 control-label">Cargo Weight</label>
+        <div class="col-sm-1">{{ data.CargoWeight }} KG</div>
+      </div>
+
+      <div class="row">
+        <label class="col-sm-2 control-label">Total Package</label>
+        <div class="col-sm-1">{{ data.TotalPackage }}</div>
+      </div>
+
+      <div class="row">
+        <label class="col-sm-2 control-label">Created Date</label>
+        <div class="col-sm-2">{{ data.CreateDate }}</div>
+        <label class="col-sm-1 col-sm-offset-4 control-label">Total Con</label>
+        <div class="col-sm-1">{{ data.TotalCon }}</div>
+        <label class="col-sm-1 control-label">Total Drop</label>
+        <div class="col-sm-1">{{ data.TotalDrop }}</div>
+      </div>
+    </div>
+
+    <div class="overlay" *ngIf="isloading">
+      <i class="fa fa-refresh fa-spin"></i>
+    </div>
+  </div>
+
+  <div class="box">
+    <div class="box-body">
+      <div class="text-center" *ngIf="isEmpty(list)">
+        <h4 class="box-title">No records found</h4>
+      </div>
+
+      <div class="table-responsive" *ngIf="!isEmpty(list)">
+        <table class="table table-bordered table-condensed table-striped table-hover">
+          <thead>
+            <tr>
+              <th>Consignment No</th>
+              <th>Shipper Name</th>
+              <th>Consignee Name</th>
+              <th>Consignee Address</th>
+              <th>City</th>
+              <th>State</th>
+              <th>Total Package</th>
+              <th>COD</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let o of list">
+              <td>{{ o.ConsignmentNo }}</td>
+              <td>{{ o.ShipperName }}</td>
+              <td>{{ o.ConsigneeName }}</td>
+              <td>{{ o.Add1 }}&nbsp;{{ o.Add2 }}</td>
+              <td>{{ o.City }}</td>
+              <td>{{ o.State }}</td>
+              <td>{{ o.TotalNumOfPackages }}</td>
+              <td>{{ o.COD }}</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="8">
+                <button type="button" class="btn btn-primary" (click)="onPrintRunsheet()">Print Runsheet</button>&nbsp;&nbsp;
+                <button type="button" class="btn btn-primary" (click)="onPrintManifest()">Print Manifest</button>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>

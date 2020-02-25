@@ -47,4 +47,9 @@ export class Helper {
 
     return r;
   }
+
+  public static formatAmount(x: string) {
+    let s = parseFloat(x);
+    return s.toFixed(2);
+  }
 }

@@ -1,0 +1,335 @@
+<section class="content-header">
+  <h1>Retail Inbound</h1>
+</section>
+<section class="content">
+  <div class="box">
+    <div class="box-header">
+      <div class="row">
+        <label class="col-sm-3 control-label">Consignment No / Drop-off Number:</label>
+        <div class="col-sm-4">
+          <input type="text" [(ngModel)]="search" name="q" class="form-control" readonly placeholder="">
+        </div>
+        <div class="col-sm-1">
+          <button type="button" class="btn btn-flat"><i class="fa fa-barcode"></i></button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <button type="button" class="btn btn-primary"><i class="fa fa-save"></i> Save</button>&nbsp;&nbsp;
+          <button type="button" class="btn btn-success">Confirm</button>&nbsp;&nbsp;
+          <button type="button" class="btn btn-flat" (click)="onClose()"><i class="fa fa-close"></i></button>
+          <button type="button" class="btn btn-flat pull-right" ><i class="fa fa-print"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="box">
+    <div class="box-body">
+      <div class="callout callout-info">
+        <h4 class="text-center">CONFIRMED</h4>
+      </div>
+      <form [formGroup]="mform" class="form-horizontal">
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Account No</label>
+          <div class="col-sm-2">
+            <input type="text" class="form-control" placeholder="Account No" formControlName="company_account_code" name="company_account_code">
+          </div>
+          <label class="col-sm-2 control-label">Account Name</label>
+          <div class="col-sm-3">
+            <input type="text" class="form-control" placeholder="Account Name" formControlName="company_name" name="company_name">
+          </div>
+          <label class="col-sm-1 control-label">Charges</label>
+          <div class="col-sm-2">
+            <input type="text" class="form-control" placeholder="Charges"  name="charges">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Customer Ref</label>
+          <div class="col-sm-2">
+            <input type="text" class="form-control" placeholder="Customer Ref" formControlName="customer_reference" name="customer_ref">
+          </div>
+          <label class="col-sm-2 control-label">Payment Type</label>
+          <div class="col-sm-3">
+            <select class="form-control" formControlName="payment_type" name="payment_type">
+              <option value="prepaid">PREPAID</option>
+              <option value="cash">CASH</option>
+            </select>
+          </div>
+          <label class="col-sm-1 control-label">Tax</label>
+          <div class="col-sm-2">
+            <input type="text" class="form-control" placeholder="Tax"  name="tax">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Service</label>
+          <div class="col-sm-2">
+            <ng-select 
+              [items]="serviceList" 
+              bindLabel="name" 
+              bindValue="code"
+              placeholder="Please select"
+              formControlName="service_type"
+              name="service_type"></ng-select>
+          </div>
+          <label class="col-sm-1 col-sm-offset-5 control-label">Total</label>
+          <div class="col-sm-2">
+            <input type="text" class="form-control" placeholder="Total"  name="total">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <fieldset>
+              <legend>Sender</legend>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Name</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" placeholder="Name" formControlName="origin_shipper_name" name="origin_shipper_name">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Contact No</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" placeholder="Contact No" formControlName="origin_shipper_phone_no" name="origin_shipper_phone_no">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Address</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" placeholder="Address 1" formControlName="origin_shipper_address1" name="origin_shipper_address1">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="col-sm-10 col-sm-offset-2">
+                  <input type="text" class="form-control" placeholder="Address 2" formControlName="origin_shipper_address2" name="origin_shipper_address2">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Postcode</label>
+                <div class="col-sm-4">
+                  <input type="text" class="form-control" placeholder="Postcode" formControlName="origin_shipper_postcode" name="origin_shipper_postcode">
+                </div>
+                <label class="col-sm-2 control-label">City</label>
+                <div class="col-sm-4">
+                  <input type="text" class="form-control" placeholder="City" formControlName="origin_shipper_city" name="origin_shipper_city">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label">State</label>
+                <div class="col-sm-4">
+                  <input type="text" class="form-control" placeholder="State" formControlName="origin_shipper_state_province" name="origin_shipper_state_province">
+                </div>
+                <label class="col-sm-2 control-label">Country</label>
+                <div class="col-sm-4">
+                  <ng-select
+                    [items]="countryList" 
+                    bindLabel="country_name" 
+                    bindValue="country_code" 
+                    placeholder="*Please select"
+                    (change)="onCountryChangeShipper($event)"
+                    formControlName="origin_shipper_country"
+                    name="origin_shipper_country"></ng-select>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="col-md-6">
+            <fieldset>
+              <legend>Receiver</legend>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Name</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" placeholder="Name" formControlName="dest_receiver_name" name="dest_receiver_name">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Contact No</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" placeholder="Contact No" formControlName="dest_receiver_phone_no" name="dest_receiver_phone_no">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Address</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" placeholder="Address 1" formControlName="dest_receiver_address1" name="dest_receiver_address1">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="col-sm-10 col-sm-offset-2">
+                  <input type="text" class="form-control" placeholder="Address 2" formControlName="dest_receiver_address2" name="dest_receiver_address2">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Postcode</label>
+                <div class="col-sm-4">
+                  <input type="text" class="form-control" placeholder="Postcode" formControlName="dest_receiver_postcode" name="dest_receiver_postcode">
+                </div>
+                <label class="col-sm-2 control-label">City</label>
+                <div class="col-sm-4">
+                  <input type="text" class="form-control" placeholder="City" formControlName="dest_receiver_city" name="dest_receiver_city">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label">State</label>
+                <div class="col-sm-4">
+                  <input type="text" class="form-control" placeholder="State" formControlName="dest_receiver_state_province" name="dest_receiver_state_province">
+                </div>
+                <label class="col-sm-2 control-label">Country</label>
+                <div class="col-sm-4">
+                  <ng-select 
+                    [items]="countryList" 
+                    bindLabel="country_name" 
+                    bindValue="country_code" 
+                    placeholder="*Please select"
+                    (change)="onCountryChangeReceiver($event)" 
+                    formControlName="dest_receiver_country" 
+                    name="dest_receiver_country"></ng-select>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="callout callout-info">
+              <h4>Shipment Information</h4>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-2 control-label">Total Package</label>
+              <div class="col-sm-1">
+                <input type="text" class="form-control" placeholder="Total Package" formControlName="total_package_no" name="total_package_no">
+              </div>
+              <label class="col-sm-2 control-label">Actual Weight</label>
+              <div class="col-sm-2">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Actual Weight" formControlName="actual_weight" name="actual_weight">
+                  <span class="input-group-addon">KG</span>
+                </div>
+              </div>
+              <div class="col-sm-1">
+                <input type="text" class="form-control" placeholder="W" formControlName="width" name="width">
+              </div>
+              <div class="col-sm-1">
+                <input type="text" class="form-control" placeholder="L" formControlName="length" name="length">
+              </div>
+              <div class="col-sm-1">
+                <input type="text" class="form-control" placeholder="H" formControlName="height" name="height">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-2 col-sm-offset-3 control-label">Dim Weight</label>
+              <div class="col-sm-1">
+                <input type="text" class="form-control" readonly placeholder="Dim Weight" formControlName="dim_weight" name="dim_weight">
+              </div>
+              <label class="col-sm-2 control-label">Charge Weight</label>
+              <div class="col-sm-1">
+                <input type="text" class="form-control" placeholder="Charge Weight" formControlName="total_weight" name="total_weight">
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <div class="callout callout-info">
+        <h4>Goods Information</h4>
+      </div>
+
+      <form [formGroup]="gform" class="form-horizontal">
+        <div class="form-group">
+          <label class="col-sm-1 control-label">Description</label>
+          <div class="col-sm-11">
+            <input type="text" class="form-control" placeholder="Description" formControlName="description" name="description">
+            <small class="label label-danger" 
+              *ngIf="invalidg('description') && fg.description.hasError('required')">
+              Description is required</small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-1 control-label">Quantity</label>
+          <div class="col-sm-2">
+            <input type="text" class="form-control" placeholder="Quantity" formControlName="quantity" name="quantity">
+            <small class="label label-danger" 
+              *ngIf="invalidg('quantity') && fg.quantity.hasError('required')">
+              Goods Quantity is required</small>
+            <small class="label label-danger" *ngIf="invalidg('quantity') && fg.quantity.hasError('pattern')">Goods Quantity is
+              invalid</small>
+            <small class="label label-danger" *ngIf="invalidg('quantity') && fg.quantity.hasError('max')">Max Goods Quantity is
+              9999</small>
+          </div>
+          <label class="col-sm-1 control-label">Total Price</label>
+          <div class="col-sm-2">
+            <input type="text" class="form-control" placeholder="Total Price" formControlName="value" name="value">
+            <small class="label label-danger" 
+              *ngIf="invalidg('value') && fg.value.hasError('required')">
+              Goods Value is required</small>
+            <small class="label label-danger" *ngIf="invalidg('value') && fg.value.hasError('pattern')">Goods Value is
+              invalid</small>
+            <small class="label label-danger" *ngIf="invalidg('value') && fg.value.hasError('max')">Max Goods Value is
+              99999</small>
+          </div>
+          <div class="col-sm-2">
+            <ng-select 
+              [items]="countryList" 
+              bindLabel="currency" 
+              bindValue="currency" 
+              placeholder="Please select"
+              formControlName="currency" 
+              name="currency"></ng-select>
+          </div>
+          <div class="col-sm-4 text-right">
+            <button type="button" class="btn btn-default" (click)="onRemoveGoods()" [disabled]="isEmpty(listGood)">Remove Goods</button>&nbsp;&nbsp;
+            <button type="button" class="btn btn-default" (click)="onAddGoods()" [disabled]="gform.invalid">Add to Goods</button>
+          </div>
+        </div>
+      </form>
+
+      <div class="table-responsive">
+        <table class="table table-bordered table-condensed table-striped table-hover">
+          <thead>
+            <tr>
+              <th>Goods Descriptions</th>
+              <th class="text-right">Goods Quantity</th>
+              <th class="text-right">Goods Value</th>
+              <th class="text-center">Goods Currency</th>
+              <th class="text-right">Total</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let o of listGood">
+              <td>{{ o.description }}</td>
+              <td class="text-right">{{ o.quantity }}</td>
+              <td class="text-right">{{ o.value }}</td>
+              <td class="text-center">{{ o.currency }}</td>
+              <td class="text-right">{{ o.quantity * o.value | currency:' ' }}</td>
+              <td>
+                <ng-container *ngIf="!isView">
+                  <input type="checkbox" [checked]="o.selected" (change)="onChangeSelect(o)" />
+                </ng-container>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
