@@ -5,3 +5,7 @@
 .checked {
   color: green;
 }
+
+.checked, .unchecked {
+  font-size: 24px;
+}

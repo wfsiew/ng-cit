@@ -267,7 +267,7 @@ export class Runsheet {
       let weight = parseFloat(o.CargoWeight);
       runsheet_total_weight += weight;
       total_weight += weight;
-      let bcodex = barcode(`${o.ConsignmentNo}`, 'code128', { width: 90, barHeight: 18, showHRI: false });
+      let bcodex = barcode(`${o.ConsignmentNo}`, 'code128', { width: 100, barHeight: 18, showHRI: false });
       let la = [`${o.Add1}`, `${o.Add2}`, `${o.Add3}`, `${o.City}`, `${o.State}`, `${o.Zip}`, `${o.Country}`];
       let address = la.join(', ');
       let r: any = [
@@ -299,26 +299,17 @@ export class Runsheet {
                 }
               ]
             },
+            { text: `${o.TelNo} /${o.MobileNo}`, style: 'fx' },
             { 
               text: `${address}`, style: 'fx', margin: [0, 5, 0, 0]
             },
             {
-              columns: [
-                {
-                  width: 90,
-                  svg: bcodex
-                },
-                {
-                  width: 'auto',
-                  text: `${o.TelNo} /${o.MobileNo}`, style: 'fx',
-                  margin: [5, 0, 0, 0]
-                }
-              ],
+              svg: bcodex,
               margin: [10, 5, 5, 5]
             }
           ]
         },
-        { text: '1234.56', style: 'fx' },
+        { text: `${Helper.formatAmount(o.COD)}`, style: 'fx', alignment: 'right' },
         { text: `${o.Remark}`, style: 'fx' }
       ];
       lr.push(r);

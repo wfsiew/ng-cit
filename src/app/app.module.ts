@@ -32,6 +32,7 @@ import { CompanyService } from './services/company.service';
 import { AddressBookService } from './services/address-book.service';
 import { ShipmentService } from './services/shipment.service';
 import { ManifestService } from './services/manifest.service';
+import { RetailInboundService } from './services/retail-inbound.service';
 import { UserService } from './services/user.service';
 
 import { MainDashboardComponent } from './components/dashboard/main-dashboard/main-dashboard.component';
@@ -139,6 +140,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     AddressBookService,
     ShipmentService,
     ManifestService,
+    RetailInboundService,
     UserService,
     {
       provide: HTTP_INTERCEPTORS,

@@ -58,7 +58,7 @@ export class HomeComponent implements OnInit {
       this.address_book = true;
     }
 
-    else if (x === '/cit/retail-ops/retail-inbound' || x.indexOf('/cit/retail-ops/retail-inbound/shipment') >= 0) {
+    else if (x === '/cit/retail-ops/retail-inbound' || x.indexOf('/cit/retail-ops/retail-inbound-shipment') >= 0) {
       this.menu = 'retail-ops-retail-inbound';
       this.retail_ops = true;
     }

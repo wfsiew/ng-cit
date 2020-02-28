@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { ShipmentService } from 'src/app/services/shipment.service';
+import { RetailInboundService } from 'src/app/services/retail-inbound.service';
 import { MessageService } from 'src/app/services/message.service';
 import { AppConstant } from 'src/app/shared/constants/app.constant';
 import _ from 'lodash';
@@ -17,20 +17,22 @@ export class RetailInboundRetailOpsComponent implements OnInit, OnDestroy {
 
   isloading = false;
   data: any = {
+    id: 0,
     charges: '',
     dropoff_point: '',
     tax: '',
     payment_type: '',
     total: ''
   };
+  consignment_no = '';
   list = [];
-  search = 'CIT1001013841';
+  search = 'DRP00000000011';
   onSearchDbKeyup: any;
   subs: Subscription;
 
   constructor(
     private router: Router,
-    private shipmentService: ShipmentService,
+    private retailInboundService: RetailInboundService,
     private msService: MessageService,
     private toastr: ToastrService
   ) {
@@ -54,7 +56,7 @@ export class RetailInboundRetailOpsComponent implements OnInit, OnDestroy {
   load() {
     if (!this.search) return;
     this.isloading = true;
-    this.shipmentService.getRetailInbound(this.search).subscribe((res: any) => {
+    this.retailInboundService.getRetailInbound(this.search).subscribe((res: any) => {
       this.data = res.status ? res.data : {};
       this.list = res.status ? res.data.list : [];
       this.isloading = false;
@@ -63,6 +65,7 @@ export class RetailInboundRetailOpsComponent implements OnInit, OnDestroy {
       this.isloading = false;
       if (error.status === 400) {
         this.data = {
+          id: 0,
           charges: '',
           dropoff_point: '',
           tax: '',
@@ -90,15 +93,42 @@ export class RetailInboundRetailOpsComponent implements OnInit, OnDestroy {
     this.onSearch();
   }
 
+  onConsignmentKeypress(event) {
+    this.onAddConsignment();
+  }
+
+  onAddConsignment() {
+    if (_.isNull(this.consignment_no) || this.consignment_no === '') {
+      return;
+    }
+    
+    let o = {
+      id: this.data.id,
+      consignment_no: this.consignment_no
+    };
+    this.retailInboundService.createRetailInboundShipment(o).subscribe((res: any) => {
+      this.consignment_no = '';
+      this.load();
+    },
+    (error) => {
+      this.toastr.error('Create Retail Inbound Shipment Failed', 'Create Retail Inbound Shipment')
+    });
+  }
+
   onEditConsignment(o) {
     this.msService.send('', o);
   }
 
   onRemoveConsignment(o) {
-    let ls = _.reject(this.list, (k) => {
-      return k.consignment_no === o.consignment_no;
+    this.retailInboundService.removeRetailInboundShipment(o.id).subscribe((res: any) => {
+      let ls = _.reject(this.list, (k) => {
+        return k.id === o.id;
+      },
+      (error) => {
+        this.toastr.error('Remove Retail Inbound Shipment Failed');
+      });
+      this.list = ls;
     });
-    this.list = ls;
   }
 
   onEdit(o) {
@@ -106,6 +136,6 @@ export class RetailInboundRetailOpsComponent implements OnInit, OnDestroy {
       search: this.search
     });
     localStorage.setItem('shipment-info-retail-inbound', this.search);
-    this.router.navigate(['/cit/retail-ops/retail-inbound-shipment/edit', o.shipment_id]);
+    this.router.navigate(['/cit/retail-ops/retail-inbound-shipment/edit', o.id]);
   }
 }

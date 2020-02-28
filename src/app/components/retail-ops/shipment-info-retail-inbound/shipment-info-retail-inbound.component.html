@@ -42,7 +42,7 @@
           </div>
           <label class="col-sm-1 control-label">Charges</label>
           <div class="col-sm-2">
-            <input type="text" class="form-control" readonly placeholder="Charges" formControlName="charges" name="charges">
+            <input type="text" class="form-control text-right" readonly placeholder="Charges" formControlName="charges_amount" name="charges_amount">
           </div>
         </div>
 
@@ -61,7 +61,7 @@
           </div>
           <label class="col-sm-1 control-label">Tax</label>
           <div class="col-sm-2">
-            <input type="text" class="form-control"readonly placeholder="Tax" formControlName="tax" name="tax">
+            <input type="text" class="form-control text-right" readonly placeholder="Tax" formControlName="tax_amount" name="tax_amount">
           </div>
         </div>
 
@@ -78,7 +78,17 @@
           </div>
           <label class="col-sm-1 col-sm-offset-5 control-label">Total</label>
           <div class="col-sm-2">
-            <input type="text" class="form-control" readonly placeholder="Total" formControlName="total_order_amount" name="total_order_amount">
+            <input type="text" class="form-control text-right" readonly placeholder="Total" formControlName="total_amount" name="total_amount">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-3 col-sm-offset-2">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" formControlName="is_insurance" name="is_insurance"> Additional Insurance Required
+              </label>
+            </div>
           </div>
         </div>
 
@@ -116,7 +126,7 @@
               <div class="form-group">
                 <label class="col-sm-2 control-label">Postcode</label>
                 <div class="col-sm-4">
-                  <input type="text" class="form-control" placeholder="Postcode" formControlName="origin_shipper_postcode" name="origin_shipper_postcode">
+                  <input type="text" class="form-control" placeholder="Postcode" formControlName="origin_shipper_postcode" name="origin_shipper_postcode" (change)="onPostcodeChange()">
                 </div>
                 <label class="col-sm-2 control-label">City</label>
                 <div class="col-sm-4">
@@ -127,7 +137,7 @@
               <div class="form-group">
                 <label class="col-sm-2 control-label">State</label>
                 <div class="col-sm-4">
-                  <input type="text" class="form-control" placeholder="State" formControlName="origin_shipper_state_province" name="origin_shipper_state_province">
+                  <input type="text" class="form-control" placeholder="State" formControlName="origin_shipper_state_province" name="origin_shipper_state_province" (change)="onPostcodeChange()">
                 </div>
                 <label class="col-sm-2 control-label">Country</label>
                 <div class="col-sm-4">
@@ -177,7 +187,7 @@
               <div class="form-group">
                 <label class="col-sm-2 control-label">Postcode</label>
                 <div class="col-sm-4">
-                  <input type="text" class="form-control" placeholder="Postcode" formControlName="dest_receiver_postcode" name="dest_receiver_postcode">
+                  <input type="text" class="form-control" placeholder="Postcode" formControlName="dest_receiver_postcode" name="dest_receiver_postcode" (change)="onPostcodeChange()">
                 </div>
                 <label class="col-sm-2 control-label">City</label>
                 <div class="col-sm-4">
@@ -188,7 +198,7 @@
               <div class="form-group">
                 <label class="col-sm-2 control-label">State</label>
                 <div class="col-sm-4">
-                  <input type="text" class="form-control" placeholder="State" formControlName="dest_receiver_state_province" name="dest_receiver_state_province">
+                  <input type="text" class="form-control" placeholder="State" formControlName="dest_receiver_state_province" name="dest_receiver_state_province" (change)="onPostcodeChange()">
                 </div>
                 <label class="col-sm-2 control-label">Country</label>
                 <div class="col-sm-4">
@@ -225,7 +235,7 @@
               <label class="col-sm-2 control-label">Actual Weight</label>
               <div class="col-sm-2">
                 <div class="input-group">
-                  <input type="text" class="form-control" placeholder="Actual Weight" formControlName="actual_weight" name="actual_weight">
+                  <input type="text" class="form-control" placeholder="Actual Weight" formControlName="actual_weight" name="actual_weight" (change)="onActualWeightChange()">
                   <span class="input-group-addon">KG</span>
                 </div>
                 <small class="label label-danger" *ngIf="invalid('actual_weight') && f.actual_weight.hasError('required')">Actual
@@ -265,7 +275,7 @@
               </div>
               <label class="col-sm-2 control-label">Charge Weight</label>
               <div class="col-sm-1">
-                <input type="text" class="form-control" placeholder="Charge Weight" formControlName="total_weight" name="total_weight">
+                <input type="text" class="form-control" readonly placeholder="Charge Weight" formControlName="total_weight" name="total_weight">
                 <small class="label label-danger" *ngIf="invalid('total_weight') && f.total_weight.hasError('required')">Charge
                   Weight is required</small>
                 <small class="label label-danger" *ngIf="invalid('total_weight') && f.total_weight.hasError('pattern')">Charge

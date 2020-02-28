@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { LookupService } from 'src/app/services/lookup.service';
-import { ShipmentService } from 'src/app/services/shipment.service';
+import { RetailInboundService } from 'src/app/services/retail-inbound.service';
 import { CompanyService } from 'src/app/services/company.service';
 import { MessageService } from 'src/app/services/message.service';
 import { AppConstant } from 'src/app/shared/constants/app.constant';
@@ -41,7 +41,7 @@ export class ShipmentInfoRetailInboundComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private lookupService: LookupService,
-    private shipmentService: ShipmentService,
+    private retailInboundService: RetailInboundService,
     private companyService: CompanyService,
     private msService: MessageService,
     private toastr: ToastrService,
@@ -74,14 +74,16 @@ export class ShipmentInfoRetailInboundComponent implements OnInit {
       service_type: ['', [Validators.required]],
       uom: ['', [Validators.required]],
       customer_reference: ['', [Validators.required]],
+      order_amount: ['0'],
+      is_insurance: [false],
       payment_type: ['cash', [Validators.required]],
       total_package_no: ['', [Validators.required, Validators.max(999), Validators.pattern(AppConstant.VALIDATE.NUMBER)]],
       total_weight: ['0.5', [Validators.required, Validators.max(9999), Validators.pattern(AppConstant.VALIDATE.AMOUNT)]],
       dim_weight: ['0', [Validators.required, Validators.max(9999), Validators.pattern(AppConstant.VALIDATE.AMOUNT)]],
       actual_weight: ['0', [Validators.required, Validators.max(9999), Validators.pattern(AppConstant.VALIDATE.AMOUNT)]],
-      total_order_amount: ['0', [Validators.required, Validators.pattern(AppConstant.VALIDATE.NUMBER)]],
-      tax: ['0', [Validators.required]],
-      charges: ['0', [Validators.required, Validators.pattern(AppConstant.VALIDATE.NUMBER)]],
+      total_amount: ['0', [Validators.required, Validators.pattern(AppConstant.VALIDATE.NUMBER)]],
+      tax_amount: ['0', [Validators.required]],
+      charges_amount: ['0', [Validators.required, Validators.pattern(AppConstant.VALIDATE.NUMBER)]],
 
       origin_shipper_name: ['', [Validators.required]],
       origin_shipper_address1: ['', [Validators.required]],
@@ -129,12 +131,14 @@ export class ShipmentInfoRetailInboundComponent implements OnInit {
       service_type: o.service_type,
       uom: o.packaging_type,
       customer_reference: o.customer_reference,
+      is_insurance: o.is_insurance,
       payment_type: _.isNull(o.payment_type) || o.payment_type === '' ? 'cash' : o.payment_type,
       total_package_no: o.total_package_no,
-      total_weight: o.chargeable_weigth,
-      total_order_amount: o.total_order_amount,
-      tax: o.tax,
-      charges: o.charges,
+      total_weight: o.chargeable_weight,
+      actual_weight: o.chargeable_weight,
+      total_amount: o.total_amount,
+      tax_amount: o.tax_amount,
+      charges_amount: o.charges_amount,
 
       origin_shipper_name: o.origin_shipper_name,
       origin_shipper_address1: o.origin_shipper_address1,
@@ -180,15 +184,64 @@ export class ShipmentInfoRetailInboundComponent implements OnInit {
   loadCompanyProfile(id) {
     if (_.isNull(id) || _.isUndefined(id)) {
       this.setFormEdit();
+      this.loadProductList();
       return;
     }
 
     this.companyService.getCompany(id).subscribe((res: any) => {
       this.company = !_.isEmpty(res.data) ? res.data[0] : {};
       this.setFormEdit();
+      this.loadProductList();
     },
     (error) => {
       this.toastr.error('Load Company Detail Failed', 'Retail Inbound');
+    });
+  }
+
+  loadAmount() {
+    let o = {
+      id: this.data.id,
+      amount: this.f.order_amount.value
+    };
+    this.retailInboundService.getCharges(o).subscribe((res: any) => {
+      const x = res.data;
+      this.mform.patchValue({
+        total_amount: x.total_amount,
+        tax_amount: x.tax_amount,
+        charges_amount: x.charges_amount
+      });
+    },
+    (error) => {
+      this.toastr.error('Load Charges Failed', 'Retail Inbound');
+    });
+  }
+
+  loadQuotations() {
+    const f = this.f;
+    let o = {
+      sender_post_code: f.origin_shipper_postcode.value,
+      receiver_post_code: f.dest_receiver_postcode.value,
+      sender_country: f.origin_shipper_country.value,
+      receiver_country: f.dest_receiver_country.value,
+      sender_state: f.origin_shipper_state_province.value,
+      receiver_state: f.dest_receiver_state_province.value,
+      weight: Number(f.total_weight.value)
+    };
+    this.retailInboundService.getQuotations(o).subscribe((res: any) => {
+      const lx = res.status ? res.data : [];
+      const ls = !_.isEmpty(lx) ? lx[0].service_list : {};
+      if (!Helper.isEmpty(ls)) {
+        let k = _.find(ls, (k) => {
+          return k.service_type === f.service_type.value;
+        });
+        this.mform.patchValue({
+          order_amount: k.price
+        });
+        this.loadAmount();
+      }
+    },
+    (error) => {
+      this.toastr.error('Load Quotations Failed', 'Retail Inbound');
     });
   }
 
@@ -198,12 +251,11 @@ export class ShipmentInfoRetailInboundComponent implements OnInit {
     }
 
     this.isloading = true;
-    this.shipmentService.getShipmentRetailInbound(this.id).subscribe((res: any) => {
+    this.retailInboundService.getRetailInboundShipment(this.id).subscribe((res: any) => {
       this.isloading = false;
-      this.data = !_.isEmpty(res.data) ? res.data[0] : {};
+      this.data = !_.isEmpty(res.data) ? res.data : {};
       if (!Helper.isEmpty(this.data)) {
         this.shipmentPackage = this.data.shipment_package_list;
-        this.loadProductList();
         this.loadCompanyProfile(this.data.company_id);
       }
     },
@@ -249,11 +301,40 @@ export class ShipmentInfoRetailInboundComponent implements OnInit {
     });
   }
 
+  onActualWeightChange() {
+    if (_.isNull(this.f.actual_weight.value) || this.f.actual_weight.value === '' || !AppConstant.VALIDATE.AMOUNT) {
+      return;
+    }
+    
+    let dim_weight = Number(this.f.dim_weight.value);
+    let actual_weight = Number(this.f.actual_weight.value);
+    let charge_weight = Number(this.f.total_weight.value);
+
+    if (actual_weight > dim_weight) {
+      charge_weight = actual_weight;
+    }
+
+    else {
+      charge_weight = dim_weight;
+    }
+
+    this.mform.patchValue({
+      actual_weight: actual_weight.toFixed(2),
+      total_weight: charge_weight.toFixed(2)
+    });
+
+    this.loadQuotations();
+  }
+
   onWidthLengthHeightChange() {
     let width = this.f.width.value;
     let length = this.f.length.value;
     let height = this.f.height.value;
     this.setWeight(width, length, height);
+  }
+
+  onPostcodeChange() {
+    this.loadQuotations();
   }
 
   setWeight(width, length, height) {
@@ -265,7 +346,8 @@ export class ShipmentInfoRetailInboundComponent implements OnInit {
 
     const o = this.data;
     let dim_weight = 0;
-    let actual_weight = _.isNull(o.chargeable_weigth) ? 0 : o.chargeable_weigth;
+    let actual_weight = _.isNull(o.chargeable_weight) ? 0 : o.chargeable_weight;
+    let charge_weight = 0;
 
     if (o.origin_shipper_country === 'MY' && o.dest_receiver_country === 'MY') {
       dim_weight = Number(width) * Number(length) * Number(height) / 6000;
@@ -275,18 +357,21 @@ export class ShipmentInfoRetailInboundComponent implements OnInit {
       dim_weight = Number(width) * Number(length) * Number(height) / 5000;
     }
 
-    if (o.chargeable_weigth > dim_weight) {
-      actual_weight = o.chargeable_weigth;
+    if (actual_weight > dim_weight) {
+      charge_weight = actual_weight;
     }
 
     else {
-      actual_weight = dim_weight;
+      charge_weight = dim_weight;
     }
 
     this.mform.patchValue({
       dim_weight: dim_weight.toFixed(2),
-      actual_weight: actual_weight.toFixed(2)
+      actual_weight: actual_weight.toFixed(2),
+      total_weight: charge_weight.toFixed(2)
     });
+
+    this.loadQuotations();
   }
 
   setPostcodeValidator(country_code, regrex, field) {
@@ -315,10 +400,12 @@ export class ShipmentInfoRetailInboundComponent implements OnInit {
 
   onCountryChangeShipper(event) {
     this.setPostcodeValidator(event.country_code, event.regrex, 'origin_shipper_postcode');
+    this.loadQuotations();
   }
 
   onCountryChangeReceiver(event) {
     this.setPostcodeValidator(event.country_code, event.regrex, 'dest_receiver_postcode');
+    this.loadQuotations();
   }
 
   onAddGoods() {
@@ -379,7 +466,17 @@ export class ShipmentInfoRetailInboundComponent implements OnInit {
 
     let o = {
       id: this.data.id,
+      service_type: f.service_type.value,
       customer_reference: f.customer_reference.value,
+      is_insurance: f.is_insurance.value,
+      payment_type: f.payment_type.value,
+      total_package_no: f.total_package_no.value,
+      chargeable_weight: f.total_weight.value,
+      dim_weight: f.dim_weight.value,
+      actual_weight: f.actual_weight.value,
+      total_amount: f.total_amount.value,
+      tax_amount: f.tax_amount.value,
+      charges_amount: f.charges_amount.value,
 
       origin_shipper_address1: f.origin_shipper_address1.value,
       origin_shipper_address2: f.origin_shipper_address2.value,
@@ -387,8 +484,8 @@ export class ShipmentInfoRetailInboundComponent implements OnInit {
       origin_shipper_city: f.origin_shipper_city.value,
       origin_shipper_state_province: f.origin_shipper_state_province.value,
       origin_shipper_country: f.origin_shipper_country.value,
+      origin_shipper_name: f.origin_shipper_name.value,
       origin_shipper_phone_no: f.origin_shipper_phone_no.value,
-      origin_shipper_contact_name: f.origin_shipper_contact_name.value,
       origin_shipper_email: f.origin_shipper_email.value,
 
       dest_receiver_address1: f.dest_receiver_address1.value,
@@ -397,18 +494,21 @@ export class ShipmentInfoRetailInboundComponent implements OnInit {
       dest_receiver_city: f.dest_receiver_city.value,
       dest_receiver_state_province: f.dest_receiver_state_province.value,
       dest_receiver_country: f.dest_receiver_country.value,
+      dest_receiver_name: f.dest_receiver_name.value,
       dest_receiver_phone_no: f.dest_receiver_phone_no.value,
-      dest_receiver_contact_name: f.dest_receiver_contact_name.value,
       dest_receiver_email: f.dest_receiver_email.value,
 
-      total_package_no: f.total_package_no.value,
-      service_type: f.service_type.value,
+      order_amount: 99,
+      order_amount_currency: 'MYR',
       company_id: this.data.company_id,
+      width: f.width.value,
+      length: f.length.value,
+      height: f.height.value,
       shipment_package_list: lsp
     };
 
     this.isloading = true;
-    this.shipmentService.updateShipmentRetailInbound(o).subscribe((res: any) => {
+    this.retailInboundService.updateRetailInboundShipment(o).subscribe((res: any) => {
       this.isloading = false;
       this.toastr.success('Shipment successfully updated', 'Retail Inbound');
     },
@@ -420,7 +520,8 @@ export class ShipmentInfoRetailInboundComponent implements OnInit {
 
   onConfirm() {
     this.isloading = true;
-    this.shipmentService.confirmShipment(this.data.id).subscribe((res: any) => {
+    let o = { id: this.data.id };
+    this.retailInboundService.confirmRetailInboundShipment(o).subscribe((res: any) => {
       this.isloading = false;
       this.toastr.success('Shipment confirmed');
       this.data.is_confirm = true;

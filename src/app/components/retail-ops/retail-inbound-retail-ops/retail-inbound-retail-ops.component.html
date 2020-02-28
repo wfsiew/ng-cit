@@ -5,7 +5,7 @@
   <div class="box">
     <div class="box-header">
       <div class="row">
-        <label class="col-sm-3 control-label">Consignment No / Drop-off Number:</label>
+        <label class="col-sm-3 control-label">Drop-off Number</label>
         <div class="col-sm-4">
           <input type="text" [(ngModel)]="search" (keyup)="onSearchDbKeyup($event)" (keydown.enter)="onSearchKeypress($event)" name="q" class="form-control"
               placeholder="">
@@ -26,9 +26,9 @@
       <div class="row">
         <div class="col-sm-4">
           <div class="input-group">
-            <input type="text" class="form-control" placeholder="">
+            <input type="text" [(ngModel)]="consignment_no" (keydown.enter)="onConsignmentKeypress($event)" class="form-control" placeholder="Consignment No">
             <span class="input-group-btn">
-              <button type="button" class="btn btn-flat btn-primary"><i class="fa fa-plus"></i></button>
+              <button type="button" class="btn btn-flat btn-primary" (click)="onAddConsignment()"><i class="fa fa-plus"></i></button>
             </span>
           </div>
         </div>
@@ -37,7 +37,7 @@
         </div>
         <label class="col-sm-1 control-label text-right">Charges</label>
         <div class="col-sm-2 pull-right">
-          <input type="text" [(ngModel)]="data.charges" class="form-control" placeholder="Charges">
+          <input type="text" [(ngModel)]="data.charges" class="form-control text-right" readonly placeholder="Charges">
         </div>
       </div>
 
@@ -45,7 +45,7 @@
         <label class="col-sm-4 control-label">Drop Off Point: {{ data.dropoff_point }}</label>
         <label class="col-sm-1 col-sm-offset-5 control-label text-right">Tax:</label>
         <div class="col-sm-2 pull-right">
-          <input type="text" [(ngModel)]="data.tax" class="form-control" placeholder="Tax">
+          <input type="text" [(ngModel)]="data.tax" class="form-control text-right" readonly placeholder="Tax">
         </div>
       </div>
 
@@ -54,7 +54,7 @@
         <label class="col-sm-5 control-label text-uppercase">Unpaid</label>
         <label class="col-sm-1 control-label text-right">Total:</label>
         <div class="col-sm-2 pull-right">
-          <input type="text" [(ngModel)]="data.total" class="form-control" placeholder="Total">
+          <input type="text" [(ngModel)]="data.total" class="form-control text-right" readonly placeholder="Total">
         </div>
       </div>
     </div>
@@ -87,9 +87,9 @@
               <td class="text-uppercase">{{ o.dest_station }}</td>
               <td>{{ o.service }}</td>
               <td>{{ o.weight }}</td>
-              <td>{{ o.total_order_amount }}</td>
+              <td>{{ o.total }}</td>
               <td>
-                <i class="fa" [ngClass]="{ 'fa-check checked': o.is_confirm, 'fa-remove unchecked': !o.is_confirm }"></i>
+                <i class="fa" [ngClass]="{ 'fa-check-circle checked': o.is_complete, 'fa-remove unchecked': !o.is_complete }"></i>
               </td>
               <td>
                 <button type="button" class="btn btn-danger" (click)="onRemoveConsignment(o)">
