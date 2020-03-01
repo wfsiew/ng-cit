@@ -52,7 +52,11 @@ export class RetailInboundRetailOpsComponent implements OnInit, OnDestroy {
     this.socketService.on('cit-start-retail-inbound').subscribe((data: any) => {
       this.search = data.barcode;
       this.load();
-    })
+    });
+    this.socketService.on('cit-payment-confirmed').subscribe((data: any) => {
+      this.isloading = false;
+      this.toastr.success('Payment Successful');
+    });
     this.load();
   }
 
@@ -152,7 +156,11 @@ export class RetailInboundRetailOpsComponent implements OnInit, OnDestroy {
     }
 
     else {
+      this.isloading = true;
       this.socketService.send('cit-confirm-payment', { barcode: this.search });
+      setTimeout(() => {
+        this.isloading = false;
+      }, 30000);
     }
   }
 
