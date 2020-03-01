@@ -19,7 +19,7 @@
     <div class="box-body">
       <div class="row">
         <div class="col-sm-2 col-sm-offset-10 text-right">
-          <button type="button" class="btn btn-primary">Confirm Payment</button>
+          <button type="button" class="btn btn-primary" (click)="onConfirmPayment()" [disabled]="isDisableConfirmPayment">Confirm Payment</button>
         </div>
       </div>
 

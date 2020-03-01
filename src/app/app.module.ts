@@ -34,6 +34,7 @@ import { ShipmentService } from './services/shipment.service';
 import { ManifestService } from './services/manifest.service';
 import { RetailInboundService } from './services/retail-inbound.service';
 import { UserService } from './services/user.service';
+import { SocketioService } from './services/socketio.service';
 
 import { MainDashboardComponent } from './components/dashboard/main-dashboard/main-dashboard.component';
 import { ListDashboardComponent } from './components/dashboard/list-dashboard/list-dashboard.component';
@@ -142,6 +143,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     ManifestService,
     RetailInboundService,
     UserService,
+    SocketioService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

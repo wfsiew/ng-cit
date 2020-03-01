@@ -7,9 +7,15 @@ const server = {
   local: 'http://localhost:8001'
 };
 
+const sock = {
+  cloud: 'http://139.59.221.42:3000',
+  local: 'http://localhost:3000'
+}
+
 export const environment = {
   production: false,
-  baseUrl: server.local
+  baseUrl: server.local,
+  baseSocketUrl: sock.local
 };
 
 /*

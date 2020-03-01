@@ -7,6 +7,7 @@ import { AppConstant } from 'src/app/shared/constants/app.constant';
 import _ from 'lodash';
 import { ToastrService } from 'ngx-toastr';
 import { Helper } from 'src/app/shared/utils/helper';
+import { SocketioService } from 'src/app/services/socketio.service';
 
 @Component({
   selector: 'app-retail-inbound-retail-ops',
@@ -26,7 +27,7 @@ export class RetailInboundRetailOpsComponent implements OnInit, OnDestroy {
   };
   consignment_no = '';
   list = [];
-  search = 'DRP00000000011';
+  search = ''; //'DRP00000000011';
   onSearchDbKeyup: any;
   subs: Subscription;
 
@@ -34,7 +35,8 @@ export class RetailInboundRetailOpsComponent implements OnInit, OnDestroy {
     private router: Router,
     private retailInboundService: RetailInboundService,
     private msService: MessageService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private socketService: SocketioService
   ) {
     this.onSearchDbKeyup = _.debounce(this.onSearchKeyup, 400);
     this.subs = this.msService.get().subscribe(res => {
@@ -46,6 +48,11 @@ export class RetailInboundRetailOpsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.socketService.setupSocketConnection();
+    this.socketService.on('cit-start-retail-inbound').subscribe((data: any) => {
+      this.search = data.barcode;
+      this.load();
+    })
     this.load();
   }
 
@@ -137,5 +144,22 @@ export class RetailInboundRetailOpsComponent implements OnInit, OnDestroy {
     });
     localStorage.setItem('shipment-info-retail-inbound', this.search);
     this.router.navigate(['/cit/retail-ops/retail-inbound-shipment/edit', o.id]);
+  }
+
+  onConfirmPayment() {
+    if (this.data.payment_type === 'CASH') {
+      
+    }
+
+    else {
+      this.socketService.send('cit-confirm-payment', { barcode: this.search });
+    }
+  }
+
+  get isDisableConfirmPayment() {
+    let b = _.some(this.list, (k) => {
+      return !k.is_complete;
+    });
+    return b;
   }
 }
