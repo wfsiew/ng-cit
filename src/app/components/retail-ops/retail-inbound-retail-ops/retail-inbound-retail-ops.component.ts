@@ -23,6 +23,7 @@ export class RetailInboundRetailOpsComponent implements OnInit, OnDestroy {
     dropoff_point: '',
     tax: '',
     payment_type: '',
+    is_complete: false,
     total: ''
   };
   consignment_no = '';
@@ -54,8 +55,16 @@ export class RetailInboundRetailOpsComponent implements OnInit, OnDestroy {
       this.load();
     });
     this.socketService.on('cit-payment-confirmed').subscribe((data: any) => {
-      this.isloading = false;
-      this.toastr.success('Payment Successful');
+      if (data.barcode === this.search) {
+        this.retailInboundService.confirmPayment({ num: this.search }).subscribe((res: any) => {
+          this.isloading = false;
+          this.data.is_complete = true;
+          this.toastr.success('Payment Successful');
+        },
+        (error) => {
+          this.toastr.error('Confirm Payment Failed', 'Retail Inbound Confirm Payment');
+        });
+      }
     });
     this.load();
   }
@@ -81,6 +90,7 @@ export class RetailInboundRetailOpsComponent implements OnInit, OnDestroy {
           dropoff_point: '',
           tax: '',
           payment_type: '',
+          is_complete: false,
           total: ''
         };
         this.list = [];
@@ -122,7 +132,7 @@ export class RetailInboundRetailOpsComponent implements OnInit, OnDestroy {
       this.load();
     },
     (error) => {
-      this.toastr.error('Create Retail Inbound Shipment Failed', 'Create Retail Inbound Shipment')
+      this.toastr.error('Create Retail Inbound Shipment Failed', 'Create Retail Inbound Shipment');
     });
   }
 
@@ -165,9 +175,21 @@ export class RetailInboundRetailOpsComponent implements OnInit, OnDestroy {
   }
 
   get isDisableConfirmPayment() {
+    if (this.data.is_complete === true) {
+      return true;
+    }
+
     let b = _.some(this.list, (k) => {
       return !k.is_complete;
     });
     return b;
+  }
+
+  get payment_status() {
+    if (this.data.is_complete === true) {
+      return 'PAID';
+    }
+
+    return 'UNPAID';
   }
 }

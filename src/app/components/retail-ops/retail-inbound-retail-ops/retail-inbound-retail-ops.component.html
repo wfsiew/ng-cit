@@ -51,7 +51,7 @@
 
       <div class="row">
         <label class="col-sm-4 control-label">Payment Type: {{ data.payment_type }}</label>
-        <label class="col-sm-5 control-label text-uppercase">Unpaid</label>
+        <label class="col-sm-5 control-label text-uppercase">{{ payment_status }}</label>
         <label class="col-sm-1 control-label text-right">Total:</label>
         <div class="col-sm-2 pull-right">
           <input type="text" [(ngModel)]="data.total" class="form-control text-right" readonly placeholder="Total">
@@ -103,6 +103,9 @@
           </tbody>
         </table>
       </div>
+    </div>
+
+    <div class="overlay" *ngIf="isloading">
     </div>
   </div>
 </section>
