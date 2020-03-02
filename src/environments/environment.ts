@@ -8,14 +8,14 @@ const server = {
 };
 
 const sock = {
-  cloud: 'http://139.59.221.42:3000',
+  cloud: 'http://139.59.221.42:9000',
   local: 'http://localhost:3000'
 }
 
 export const environment = {
   production: false,
-  baseUrl: server.local,
-  baseSocketUrl: sock.local
+  baseUrl: server.cloud,
+  baseSocketUrl: sock.cloud
 };
 
 /*
