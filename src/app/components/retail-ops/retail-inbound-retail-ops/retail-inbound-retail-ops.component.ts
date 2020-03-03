@@ -54,7 +54,7 @@ export class RetailInboundRetailOpsComponent implements OnInit, OnDestroy {
       this.search = data.barcode;
       this.load();
     });
-    this.socketService.on('cit-payment-confirmed').subscribe((data: any) => {
+    this.socketService.on('cit-confirm-payment-success').subscribe((data: any) => {
       if (data.barcode === this.search) {
         this.retailInboundService.confirmPayment({ num: this.search }).subscribe((res: any) => {
           this.isloading = false;
@@ -62,8 +62,15 @@ export class RetailInboundRetailOpsComponent implements OnInit, OnDestroy {
           this.toastr.success('Payment Successful');
         },
         (error) => {
+          this.isloading = false;
           this.toastr.error('Confirm Payment Failed', 'Retail Inbound Confirm Payment');
         });
+      }
+    });
+    this.socketService.on('cit-confirm-payment-fail').subscribe((data: any) => {
+      if (data.barcode === this.search) {
+        this.isloading = false;
+        this.toastr.error('Confirm Payment Failed', 'Retail Inbound Confirm Paymen');
       }
     });
     this.load();

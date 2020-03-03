@@ -9,7 +9,7 @@ const server = {
 
 const sock = {
   cloud: 'http://139.59.221.42:9000',
-  local: 'http://localhost:3000'
+  local: 'http://localhost:9000'
 }
 
 export const environment = {
