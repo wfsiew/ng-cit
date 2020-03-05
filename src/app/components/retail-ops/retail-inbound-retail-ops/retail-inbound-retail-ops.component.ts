@@ -50,10 +50,6 @@ export class RetailInboundRetailOpsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.socketService.setupSocketConnection();
-    this.socketService.on('cit-start-retail-inbound').subscribe((data: any) => {
-      this.search = data.barcode;
-      this.load();
-    });
     this.socketService.on('cit-confirm-payment-success').subscribe((data: any) => {
       if (data.barcode === this.search) {
         this.retailInboundService.confirmPayment({ num: this.search }).subscribe((res: any) => {
@@ -174,7 +170,9 @@ export class RetailInboundRetailOpsComponent implements OnInit, OnDestroy {
 
     else {
       this.isloading = true;
-      this.socketService.send('cit-confirm-payment', { barcode: this.search });
+      this.socketService.send('cit-confirm-payment', {
+        barcode: this.search
+      });
       setTimeout(() => {
         this.isloading = false;
       }, 30000);
