@@ -48,6 +48,10 @@ export class RetailInboundService {
     return this.http.post(`${this.baseUrl}/api/retail-inbound/confirm-payment`, o);
   }
 
+  cashPayment(o) {
+    return this.http.post(`${this.baseUrl}/api/retail-inbound/cash-payment`, o);
+  }
+
   getCharges(o) {
     return this.http.post(`${this.baseUrl}/api/retail-inbound/shipment/charges`, o);
   }

@@ -165,7 +165,16 @@ export class RetailInboundRetailOpsComponent implements OnInit, OnDestroy {
 
   onConfirmPayment() {
     if (this.data.payment_type === 'CASH') {
-      
+      this.isloading = true;
+      this.retailInboundService.cashPayment({ num: this.search }).subscribe((res: any) => {
+        this.isloading = false;
+        this.data.is_complete = true;
+        this.toastr.success('Payment Successful');
+      },
+      (error) => {
+        this.isloading = false;
+        this.toastr.error('Confirm Payment Failed', 'Retail Inbound Confirm Payment');
+      });
     }
 
     else {
