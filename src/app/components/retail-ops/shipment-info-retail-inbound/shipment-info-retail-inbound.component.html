@@ -76,7 +76,11 @@
               formControlName="service_type"
               name="service_type"></ng-select>
           </div>
-          <label class="col-sm-1 col-sm-offset-5 control-label">Total</label>
+          <label class="col-sm-2 control-label">Insurance Amount</label>
+          <div class="col-sm-3">
+            <input type="text" class="form-control text-right" readonly placeholder="Insurance Amount" formControlName="insurance_amount" name="insurance_amount">
+          </div>
+          <label class="col-sm-1 control-label">Total</label>
           <div class="col-sm-2">
             <input type="text" class="form-control text-right" readonly placeholder="Total" formControlName="total_amount" name="total_amount">
           </div>
@@ -247,6 +251,7 @@
               </div>
               <div class="col-sm-1">
                 <input type="text" class="form-control" title="Width" placeholder="W" formControlName="width" name="width" (change)="onWidthLengthHeightChange()">
+                <small class="label label-info">Width</small>
                 <small class="label label-danger" *ngIf="invalid('width') && f.width.hasError('required')">Width
                   is required</small>
                 <small class="label label-danger" *ngIf="invalid('width') && f.width.hasError('pattern')">Width
@@ -254,6 +259,7 @@
               </div>
               <div class="col-sm-1">
                 <input type="text" class="form-control" title="Length" placeholder="L" formControlName="length" name="length" (change)="onWidthLengthHeightChange()">
+                <small class="label label-info">Length</small>
                 <small class="label label-danger" *ngIf="invalid('length') && f.length.hasError('required')">Length
                   is required</small>
                 <small class="label label-danger" *ngIf="invalid('length') && f.length.hasError('pattern')">Length
@@ -261,6 +267,7 @@
               </div>
               <div class="col-sm-1">
                 <input type="text" class="form-control" title="Height" placeholder="H" formControlName="height" name="height" (change)="onWidthLengthHeightChange()">
+                <small class="label label-info">Height</small>
                 <small class="label label-danger" *ngIf="invalid('height') && f.height.hasError('required')">Height
                   is required</small>
                 <small class="label label-danger" *ngIf="invalid('height') && f.height.hasError('pattern')">Height
