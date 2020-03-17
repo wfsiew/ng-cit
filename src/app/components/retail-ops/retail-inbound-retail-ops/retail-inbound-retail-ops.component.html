@@ -7,7 +7,7 @@
       <div class="row">
         <label class="col-sm-3 control-label">Drop-off Number</label>
         <div class="col-sm-4">
-          <input type="text" [(ngModel)]="search" (keyup)="onSearchDbKeyup($event)" (keydown.enter)="onSearchKeypress($event)" name="q" class="form-control"
+          <input type="text" [(ngModel)]="search" (keydown.enter)="onSearchKeypress($event)" name="q" class="form-control"
               placeholder="">
         </div>
         <div class="col-sm-1">
@@ -109,3 +109,19 @@
     </div>
   </div>
 </section>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Confirm Payment Failed</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    Payment Confirmation has failed. Do you want to retry ?
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" (click)="onConfirmPaymentRetry()">Yes</button>&nbsp;
+    <button type="button" class="btn btn-default" (click)="modalRef.hide()">No</button>
+  </div>
+</ng-template>

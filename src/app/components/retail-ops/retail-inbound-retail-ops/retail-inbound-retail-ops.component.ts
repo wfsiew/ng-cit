@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, TemplateRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { RetailInboundService } from 'src/app/services/retail-inbound.service';
@@ -6,6 +6,7 @@ import { MessageService } from 'src/app/services/message.service';
 import { AppConstant } from 'src/app/shared/constants/app.constant';
 import _ from 'lodash';
 import { ToastrService } from 'ngx-toastr';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Helper } from 'src/app/shared/utils/helper';
 import { SocketioService } from 'src/app/services/socketio.service';
 
@@ -16,6 +17,7 @@ import { SocketioService } from 'src/app/services/socketio.service';
 })
 export class RetailInboundRetailOpsComponent implements OnInit, OnDestroy {
 
+  @ViewChild('template', { static: false }) template: TemplateRef<any>;
   isloading = false;
   data: any = {
     id: 0,
@@ -29,17 +31,22 @@ export class RetailInboundRetailOpsComponent implements OnInit, OnDestroy {
   consignment_no = '';
   list = [];
   search = ''; //'DRP00000000011';
-  onSearchDbKeyup: any;
   subs: Subscription;
+  modalRef: BsModalRef;
+  modalConfig = {
+    backdrop: true,
+    ignoreBackdropClick: true,
+    keyboard: false
+  };
 
   constructor(
     private router: Router,
     private retailInboundService: RetailInboundService,
     private msService: MessageService,
     private toastr: ToastrService,
+    private modalService: BsModalService,
     private socketService: SocketioService
   ) {
-    this.onSearchDbKeyup = _.debounce(this.onSearchKeyup, 400);
     this.subs = this.msService.get().subscribe(res => {
       if (res.name === 'retail-inbound-retail-ops') {
         const o = res.data;
@@ -107,10 +114,6 @@ export class RetailInboundRetailOpsComponent implements OnInit, OnDestroy {
 
   onSearch() {
     this.load();
-  }
-
-  onSearchKeyup(event) {
-    this.onSearch();
   }
 
   onSearchKeypress(event) {
@@ -184,8 +187,18 @@ export class RetailInboundRetailOpsComponent implements OnInit, OnDestroy {
       });
       setTimeout(() => {
         this.isloading = false;
+        this.openConfirmPaymentRetryModal(this.template);
       }, 30000);
     }
+  }
+
+  onConfirmPaymentRetry() {
+    this.modalRef.hide();
+    this.onConfirmPayment();
+  }
+
+  openConfirmPaymentRetryModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template, this.modalConfig);
   }
 
   get isDisableConfirmPayment() {

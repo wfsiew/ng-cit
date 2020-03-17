@@ -520,19 +520,19 @@ export class ShipmentInfoRetailInboundComponent implements OnInit {
     });
   }
 
-  onConfirm() {
-    this.isloading = true;
-    let o = { id: this.data.id };
-    this.retailInboundService.confirmRetailInboundShipment(o).subscribe((res: any) => {
-      this.isloading = false;
-      this.toastr.success('Shipment confirmed');
-      this.data.is_confirm = true;
-    },
-    (error) => {
-      this.isloading = false;
-      this.toastr.error('Confirm Shipment Failed');
-    });
-  }
+  // onConfirm() {
+  //   this.isloading = true;
+  //   let o = { id: this.data.id };
+  //   this.retailInboundService.confirmRetailInboundShipment(o).subscribe((res: any) => {
+  //     this.isloading = false;
+  //     this.toastr.success('Shipment confirmed');
+  //     this.data.is_confirm = true;
+  //   },
+  //   (error) => {
+  //     this.isloading = false;
+  //     this.toastr.error('Confirm Shipment Failed');
+  //   });
+  // }
 
   onClose() {
     this.loc.back();
