@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, TemplateRef, ViewChild } from '@angular/c
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { RetailInboundService } from 'src/app/services/retail-inbound.service';
+import { ShipmentService } from 'src/app/services/shipment.service';
 import { MessageService } from 'src/app/services/message.service';
 import { AppConstant } from 'src/app/shared/constants/app.constant';
 import _ from 'lodash';
@@ -9,6 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Helper } from 'src/app/shared/utils/helper';
 import { SocketioService } from 'src/app/services/socketio.service';
+import { PrintShipmentModalComponent } from '../../shipment/print-shipment-modal/print-shipment-modal.component';
 
 @Component({
   selector: 'app-retail-inbound-retail-ops',
@@ -31,6 +33,7 @@ export class RetailInboundRetailOpsComponent implements OnInit, OnDestroy {
   consignment_no = '';
   list = [];
   search = ''; //'DRP00000000011';
+  pdfstate = null;
   subs: Subscription;
   modalRef: BsModalRef;
   modalConfig = {
@@ -42,6 +45,7 @@ export class RetailInboundRetailOpsComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private retailInboundService: RetailInboundService,
+    private shipmentService: ShipmentService,
     private msService: MessageService,
     private toastr: ToastrService,
     private modalService: BsModalService,
@@ -113,6 +117,7 @@ export class RetailInboundRetailOpsComponent implements OnInit, OnDestroy {
   }
 
   onSearch() {
+    this.pdfstate = null;
     this.load();
   }
 
@@ -164,6 +169,39 @@ export class RetailInboundRetailOpsComponent implements OnInit, OnDestroy {
     });
     localStorage.setItem('shipment-info-retail-inbound', this.search);
     this.router.navigate(['/cit/retail-ops/retail-inbound-shipment/edit', o.id]);
+  }
+
+  onPrintShipment() {
+    if (Helper.isEmpty(this.list)) {
+      return;
+    }
+
+    if (!this.pdfstate) {
+      this.isloading = true;
+
+      let ls = _.map(this.list, (x) => {
+        return x.consignment_no;
+      });
+
+      this.shipmentService.printLabels(ls, AppConstant.PRINT_TYPE.NEWCONSIGNMENTNOTE).subscribe((res: any) => {
+        this.isloading = false;
+        const state = {
+          pdfsrc: URL.createObjectURL(res),
+          pdfblob: res,
+          filename: `${this.search}.pdf`
+        };
+        this.pdfstate = state;
+        this.modalRef = this.modalService.show(PrintShipmentModalComponent, { initialState: state });
+      },
+      (error) => {
+        this.isloading = false;
+        this.toastr.error('Print Shipment Failed');
+      });
+    }
+
+    else {
+      this.modalRef = this.modalService.show(PrintShipmentModalComponent, { initialState: this.pdfstate });
+    }
   }
 
   onConfirmPayment() {
