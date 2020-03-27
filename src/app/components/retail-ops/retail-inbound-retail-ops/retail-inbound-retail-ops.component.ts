@@ -11,10 +11,16 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Helper } from 'src/app/shared/utils/helper';
 import { SocketioService } from 'src/app/services/socketio.service';
 import { PrintShipmentModalComponent } from '../../shipment/print-shipment-modal/print-shipment-modal.component';
+import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-retail-inbound-retail-ops',
   templateUrl: './retail-inbound-retail-ops.component.html',
+  styles: [`
+    :host /deep/ .ui-steps .ui-steps-item {
+      width: 33%;
+    }
+  `],
   styleUrls: ['./retail-inbound-retail-ops.component.css']
 })
 export class RetailInboundRetailOpsComponent implements OnInit, OnDestroy {
@@ -41,6 +47,14 @@ export class RetailInboundRetailOpsComponent implements OnInit, OnDestroy {
     ignoreBackdropClick: true,
     keyboard: false
   };
+
+  items: MenuItem[] = [
+    { label: 'Shipment Details' },
+    { label: 'Confirm Payment' },
+    { label: 'Complete' }
+  ];
+
+  readonly isEmpty = Helper.isEmpty;
 
   constructor(
     private router: Router,
@@ -256,5 +270,23 @@ export class RetailInboundRetailOpsComponent implements OnInit, OnDestroy {
     }
 
     return 'UNPAID';
+  }
+
+  get current_progress() {
+    let x = 0;
+
+    if (Helper.isEmpty(this.search)) {
+      return x;
+    }
+
+    if (this.isDisableConfirmPayment === false) {
+      x = 1;
+    }
+
+    else if (this.data.is_complete === true) {
+      x = 2;
+    }
+
+    return x;
   }
 }
