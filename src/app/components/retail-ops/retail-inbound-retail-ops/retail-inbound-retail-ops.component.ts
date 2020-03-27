@@ -40,6 +40,7 @@ export class RetailInboundRetailOpsComponent implements OnInit, OnDestroy {
   list = [];
   search = ''; //'DRP00000000011';
   pdfstate = null;
+  current_progress = 0;
   subs: Subscription;
   modalRef: BsModalRef;
   modalConfig = {
@@ -102,11 +103,13 @@ export class RetailInboundRetailOpsComponent implements OnInit, OnDestroy {
   }
 
   load() {
+    this.setProgress();
     if (!this.search) return;
     this.isloading = true;
     this.retailInboundService.getRetailInbound(this.search).subscribe((res: any) => {
       this.data = res.status ? res.data : {};
       this.list = res.status ? res.data.list : [];
+      this.setProgress();
       this.isloading = false;
     },
     (error) => {
@@ -224,6 +227,7 @@ export class RetailInboundRetailOpsComponent implements OnInit, OnDestroy {
       this.retailInboundService.cashPayment({ num: this.search }).subscribe((res: any) => {
         this.isloading = false;
         this.data.is_complete = true;
+        this.setProgress();
         this.toastr.success('Payment Successful');
       },
       (error) => {
@@ -253,6 +257,21 @@ export class RetailInboundRetailOpsComponent implements OnInit, OnDestroy {
     this.modalRef = this.modalService.show(template, this.modalConfig);
   }
 
+  setProgress() {
+    if (Helper.isEmpty(this.search)) {
+      this.current_progress = 0;
+      return;
+    }
+
+    if (this.isDisableConfirmPayment === false) {
+      this.current_progress = 1;
+    }
+
+    else if (this.data.is_complete === true) {
+      this.current_progress = 2;
+    }
+  }
+
   get isDisableConfirmPayment() {
     if (this.data.is_complete === true) {
       return true;
@@ -270,23 +289,5 @@ export class RetailInboundRetailOpsComponent implements OnInit, OnDestroy {
     }
 
     return 'UNPAID';
-  }
-
-  get current_progress() {
-    let x = 0;
-
-    if (Helper.isEmpty(this.search)) {
-      return x;
-    }
-
-    if (this.isDisableConfirmPayment === false) {
-      x = 1;
-    }
-
-    else if (this.data.is_complete === true) {
-      x = 2;
-    }
-
-    return x;
   }
 }
