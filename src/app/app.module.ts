@@ -8,7 +8,6 @@ import { ToastrModule } from 'ngx-toastr';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { PaginationModule, ModalModule, BsDatepickerModule } from 'ngx-bootstrap';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
-import { StepsModule } from 'primeng/steps';
 import {
   NgxUiLoaderModule, NgxUiLoaderConfig, SPINNER, POSITION,
   PB_DIRECTION, NgxUiLoaderRouterModule, NgxUiLoaderHttpModule
@@ -86,9 +85,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     ReactiveFormsModule,
     PdfViewerModule,
     NgSelectModule,
-    StepsModule,
     PaginationModule.forRoot(),
-    ModalModule .forRoot(),
+    ModalModule.forRoot(),
     BsDatepickerModule.forRoot(),
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
     NgxUiLoaderRouterModule,
