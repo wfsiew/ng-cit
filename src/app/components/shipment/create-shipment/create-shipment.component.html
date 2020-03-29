@@ -489,17 +489,19 @@
 
       <div class="box-footer">
         <div class="row">
-          <div class="col-sm-2" *ngIf="isView && allowEdit && !datax.is_cancel">
-            <button type="button" class="btn btn-primary btn-edit" (click)="isView = false"><i class="fa fa-edit"></i> Edit</button>
-          </div>
-          <div class="col-sm-2" *ngIf="isView && allowEdit && !datax.is_cancel">
-            <button type="button" class="btn btn-primary" (click)="onCancelShipment()">Cancel Shipment</button>
-          </div>
-          <div class="col-sm-2" *ngIf="allowEdit && !datax.is_cancel">
-            <button type="submit" class="btn btn-primary" [disabled]="mform.invalid || isView"><i class="fa fa-save"></i> Save Changes</button>
-          </div>
-          <div class="col-sm-2" *ngIf="isEdit && !datax.is_cancel">
-            <button type="button" class="btn btn-primary" (click)="onPrintShipment()" [disabled]="isPrintDisabled"><i class="fa fa-print"></i> Print Shipment</button>
+          <div class="col-sm-12">
+            <ng-container *ngIf="isView && allowEdit && !datax.is_cancel">
+              <button type="button" class="btn btn-primary btn-edit" (click)="isView = false"><i class="fa fa-edit"></i> Edit</button>&nbsp;
+            </ng-container>
+            <ng-container *ngIf="isView && allowEdit && !datax.is_cancel">
+              <button type="button" class="btn btn-primary" (click)="onCancelShipment()">Cancel Shipment</button>&nbsp;
+            </ng-container>
+            <ng-container *ngIf="allowEdit && !datax.is_cancel">
+              <button type="submit" class="btn btn-primary" [disabled]="mform.invalid || isView"><i class="fa fa-save"></i> Save Changes</button>&nbsp;
+            </ng-container>
+            <ng-container *ngIf="isEdit && !datax.is_cancel">
+              <button type="button" class="btn btn-primary" (click)="onPrintShipment()" [disabled]="isPrintDisabled"><i class="fa fa-print"></i> Print Shipment</button>
+            </ng-container>
           </div>
         </div>
       </div>
