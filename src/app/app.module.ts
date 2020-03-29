@@ -37,28 +37,12 @@ import { RetailInboundService } from './services/retail-inbound.service';
 import { UserService } from './services/user.service';
 import { SocketioService } from './services/socketio.service';
 
-import { MainDashboardComponent } from './components/dashboard/main-dashboard/main-dashboard.component';
-import { ListDashboardComponent } from './components/dashboard/list-dashboard/list-dashboard.component';
-import { DetailDashboardComponent } from './components/dashboard/detail-dashboard/detail-dashboard.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { ChangePwdComponent } from './components/user-profile/change-pwd/change-pwd.component';
-import { CreateShipmentComponent } from './components/shipment/create-shipment/create-shipment.component';
-import { CreateMultipleShipmentComponent } from './components/shipment/create-multiple-shipment/create-multiple-shipment.component';
-import { ListShipmentComponent } from './components/shipment/list-shipment/list-shipment.component';
 import { PrintShipmentModalComponent } from './components/shipment/print-shipment-modal/print-shipment-modal.component';
-import { ListManifestComponent } from './components/manifest/list-manifest/list-manifest.component';
-import { DetailManifestComponent } from './components/manifest/detail-manifest/detail-manifest.component';
-import { CreateAddressBookComponent } from './components/address-book/create-address-book/create-address-book.component';
-import { ListAddressBookComponent } from './components/address-book/list-address-book/list-address-book.component';
 import { AddressBookModalComponent } from './shared/components/address-book-modal/address-book-modal.component';
-import { CreateCompanyComponent } from './components/company/create-company/create-company.component';
-import { ListCompanyComponent } from './components/company/list-company/list-company.component';
 import { CreateCompanyProfileComponent } from './components/company-profile/create-company-profile/create-company-profile.component';
-import { ListUserComponent } from './components/user/list-user/list-user.component';
 import { CreateUserModalComponent } from './components/user/create-user-modal/create-user-modal.component';
-import { RetailInboundRetailOpsComponent } from './components/retail-ops/retail-inbound-retail-ops/retail-inbound-retail-ops.component';
-import { LoadsheetRetailOpsComponent } from './components/retail-ops/loadsheet-retail-ops/loadsheet-retail-ops.component';
-import { ShipmentInfoRetailInboundComponent } from './components/retail-ops/shipment-info-retail-inbound/shipment-info-retail-inbound.component';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   bgsColor: 'blue',
@@ -88,33 +72,12 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     RegisterComponent,
     FooterComponent,
     HomeComponent,
-    MainDashboardComponent,
-    ListDashboardComponent,
-    DetailDashboardComponent,
     UserProfileComponent,
-    CreateShipmentComponent,
-    CreateMultipleShipmentComponent,
-    ListShipmentComponent,
     PrintShipmentModalComponent,
-    ListManifestComponent,
-    DetailManifestComponent,
-    CreateAddressBookComponent,
-    ListAddressBookComponent,
     AddressBookModalComponent,
-    CreateCompanyComponent,
-    ListCompanyComponent,
     CreateCompanyProfileComponent,
-    MainDashboardComponent,
-    ListDashboardComponent,
-    ListUserComponent,
     CreateUserModalComponent,
-    ChangePwdComponent,
-    PrintShipmentModalComponent,
-    RetailInboundRetailOpsComponent,
-    LoadsheetRetailOpsComponent,
-    RetailInboundRetailOpsComponent,
-    LoadsheetRetailOpsComponent,
-    ShipmentInfoRetailInboundComponent
+    ChangePwdComponent
   ],
   imports: [
     BrowserModule,
