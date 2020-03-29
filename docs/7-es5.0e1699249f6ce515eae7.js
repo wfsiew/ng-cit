@@ -1,0 +1,1 @@
+function _classCallCheck(n,a){if(!(n instanceof a))throw new TypeError("Cannot call a class as a function")}(window.webpackJsonp=window.webpackJsonp||[]).push([[7],{sCIA:function(n,a,c){"use strict";c.r(a),c.d(a,"CompanyModule",(function(){return o}));var o=function n(){_classCallCheck(this,n)}}}]);
