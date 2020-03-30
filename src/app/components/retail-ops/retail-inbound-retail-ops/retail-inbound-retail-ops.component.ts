@@ -258,8 +258,9 @@ export class RetailInboundRetailOpsComponent implements OnInit, OnDestroy {
   }
 
   setProgress() {
+    this.current_progress = 0;
+
     if (Helper.isEmpty(this.search)) {
-      this.current_progress = 0;
       return;
     }
 
@@ -267,12 +268,8 @@ export class RetailInboundRetailOpsComponent implements OnInit, OnDestroy {
       this.current_progress = 1;
     }
 
-    else if (this.data.is_complete === true) {
+    if (this.data.is_complete === true) {
       this.current_progress = 2;
-    }
-    
-    else {
-      this.current_progress = 0;
     }
   }
 
