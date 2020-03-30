@@ -270,6 +270,10 @@ export class RetailInboundRetailOpsComponent implements OnInit, OnDestroy {
     else if (this.data.is_complete === true) {
       this.current_progress = 2;
     }
+    
+    else {
+      this.current_progress = 0;
+    }
   }
 
   get isDisableConfirmPayment() {
