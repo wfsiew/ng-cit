@@ -144,6 +144,11 @@
 
     <div *ngIf="uploadResponse.gotError === true" class="callout callout-danger">
       <ng-container *ngFor="let o of uploadResponse.data; let k = index">
+        <div class="alert alert-danger">
+          <div>{{ o | json }}</div>
+        </div>
+      </ng-container>
+      <ng-container *ngFor="let o of uploadResponse.data; let k = index">
         <div *ngFor="let i of o.error" class="alert alert-danger">
           <div *ngFor="let e of i">{{ e }}</div>
         </div>
