@@ -27,6 +27,7 @@ export class RetailInboundRetailOpsComponent implements OnInit, OnDestroy {
 
   @ViewChild('template', { static: false }) template: TemplateRef<any>;
   isloading = false;
+  tid: any;
   data: any = {
     id: 0,
     charges: '',
@@ -79,8 +80,10 @@ export class RetailInboundRetailOpsComponent implements OnInit, OnDestroy {
     this.socketService.on('cit-confirm-payment-success').subscribe((data: any) => {
       if (data.barcode === this.search) {
         this.retailInboundService.confirmPayment({ num: this.search }).subscribe((res: any) => {
+          clearTimeout(this.tid);
           this.isloading = false;
           this.data.is_complete = true;
+          this.setProgress();
           this.toastr.success('Payment Successful');
         },
         (error) => {
@@ -225,6 +228,7 @@ export class RetailInboundRetailOpsComponent implements OnInit, OnDestroy {
     if (this.data.payment_type === 'CASH') {
       this.isloading = true;
       this.retailInboundService.cashPayment({ num: this.search }).subscribe((res: any) => {
+        clearTimeout(this.tid);
         this.isloading = false;
         this.data.is_complete = true;
         this.setProgress();
@@ -241,8 +245,12 @@ export class RetailInboundRetailOpsComponent implements OnInit, OnDestroy {
       this.socketService.send('cit-confirm-payment', {
         barcode: this.search
       });
-      setTimeout(() => {
+      this.tid = setTimeout(() => {
         this.isloading = false;
+        if (this.data.is_complete === true) {
+          return;
+        }
+        
         this.openConfirmPaymentRetryModal(this.template);
       }, 30000);
     }
@@ -274,7 +282,7 @@ export class RetailInboundRetailOpsComponent implements OnInit, OnDestroy {
   }
 
   get isDisableConfirmPayment() {
-    if (this.data.is_complete === true) {
+    if (this.data.is_complete === true || Helper.isEmpty(this.search) || Helper.isEmpty(this.list)) {
       return true;
     }
 
