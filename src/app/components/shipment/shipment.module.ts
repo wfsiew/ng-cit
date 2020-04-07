@@ -25,7 +25,7 @@ import { ListShipmentComponent } from './list-shipment/list-shipment.component';
     PdfViewerModule,
     NgSelectModule,
     PaginationModule.forRoot(),
-    ModalModule .forRoot(),
+    ModalModule.forRoot(),
     BsDatepickerModule.forRoot(),
     ToastrModule.forRoot(),
     ShipmentRoutingModule
