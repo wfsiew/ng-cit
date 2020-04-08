@@ -20,6 +20,7 @@ export class MainDashboardComponent implements OnInit, OnDestroy {
   list = [];
   itemsCount = 0;
   page = 1;
+  search = '';
   sort = 'company_account_code';
   sort_dir = 'desc';
   data = {
@@ -32,6 +33,7 @@ export class MainDashboardComponent implements OnInit, OnDestroy {
     company_id: '',
     company_name: ''
   }
+  onSearchDbKeyup: any;
   company_id: string;
   company_name: string;
   role: string;
@@ -50,6 +52,7 @@ export class MainDashboardComponent implements OnInit, OnDestroy {
     private msService: MessageService,
     private toastr: ToastrService
   ) {
+    this.onSearchDbKeyup = _.debounce(this.onSearchKeyup, 400);
   }
 
   ngOnInit() {
@@ -61,6 +64,7 @@ export class MainDashboardComponent implements OnInit, OnDestroy {
       this.company_id = o.company_id;
       this.company_name = o.company_name;
       this.daterx = [new Date(o.daterx[0]), new Date(o.daterx[1])];
+      this.search = _.isNull(o.search) || _.isUndefined(o.search) ? '' : o.search;
       localStorage.removeItem('main-dashboard');
     }
 
@@ -88,7 +92,7 @@ export class MainDashboardComponent implements OnInit, OnDestroy {
   }
 
   loadCompany() {
-    this.companyService.listCompany(this.page, AppConstant.PAGE_SIZE, this.sort, this.sort_dir).subscribe((res: any) => {
+    this.companyService.listCompany(this.page, AppConstant.PAGE_SIZE, this.sort, this.sort_dir, this.search).subscribe((res: any) => {
       this.list = res.status ? res.data : [];
       this.itemsCount = res.status ? res.recordsTotal : 0;
     },
@@ -155,7 +159,8 @@ export class MainDashboardComponent implements OnInit, OnDestroy {
     localStorage.setItem('main-dashboard', JSON.stringify({
       company_id: this.company_id,
       company_name: this.company_name,
-      daterx: this.datex
+      daterx: this.datex,
+      search: this.search
     }));
     this.router.navigate(['/cit/dashboard/list', i, this.company_id], { queryParams: { s_date: Helper.getDateStr(this.datex[0]), e_date: Helper.getDateStr(this.datex[1]) } });
     return false;
@@ -165,7 +170,8 @@ export class MainDashboardComponent implements OnInit, OnDestroy {
     localStorage.setItem('main-dashboard', JSON.stringify({
       company_id: this.company_id,
       company_name: this.company_name,
-      daterx: this.datex
+      daterx: this.datex,
+      search: this.search
     }));
     this.router.navigate(['/cit/company/edit', o.company_id]);
     return false;
@@ -181,5 +187,18 @@ export class MainDashboardComponent implements OnInit, OnDestroy {
   pageChanged(event: any) {
     this.page = event.page;
     this.loadCompany();
+  }
+
+  onSearch() {
+    this.page = 1;
+    this.loadCompany();
+  }
+
+  onSearchKeyup(event) {
+    this.onSearch();
+  }
+
+  onSearchKeypress(event) {
+    this.onSearch();
   }
 }
