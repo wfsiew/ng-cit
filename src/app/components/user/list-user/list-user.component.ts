@@ -77,7 +77,9 @@ export class ListUserComponent implements OnInit, OnDestroy {
 
   loadUser() {
     this.user = this.authService.loadUser();
-    this.canEdit = this.user.role === AppConstant.ROLE.ADMIN || this.user.role === AppConstant.ROLE.SUPERUSER;
+    this.canEdit = this.user.role === AppConstant.ROLE.ADMIN || 
+      this.user.role === AppConstant.ROLE.SUPERUSER || 
+      this.user.role === AppConstant.ROLE.AGENT;
     this.load();
   }
 

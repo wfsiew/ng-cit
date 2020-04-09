@@ -52,22 +52,22 @@
   <aside class="main-sidebar">
     <section class="sidebar">
       <ul class="sidebar-menu" data-widget="tree">
-        <li [ngClass]="{'active': menu === 'dashboard'}" *ngIf="user.role !== ROLE.AGENT">
+        <li [ngClass]="{'active': menu === 'dashboard'}">
           <a href="#" (click)="goto('dashboard', 'dashboard')">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
           </a>
         </li>
-        <li [ngClass]="{'active': menu === 'user-profile'}" *ngIf="user.role !== ROLE.AGENT">
+        <li [ngClass]="{'active': menu === 'user-profile'}">
           <a href="#" (click)="goto('user-profile', 'user-profile')">
             <i class="fa fa-user-circle-o"></i> <span>User Profile</span>
           </a>
         </li>
-        <li [ngClass]="{'active': menu === 'shipment'}" *ngIf="user.role !== ROLE.AGENT">
+        <li [ngClass]="{'active': menu === 'shipment'}">
           <a href="#" (click)="goto('shipment', 'shipment/list')">
             <i class="fa fa-user-circle-o"></i> <span>Shipment</span>
           </a>
         </li>
-        <li [ngClass]="{'active': menu === 'manifest'}" *ngIf="user.role !== ROLE.AGENT">
+        <li [ngClass]="{'active': menu === 'manifest'}">
           <a href="#" (click)="goto('manifest', 'manifest/list')">
             <i class="fa fa-file-text"></i> <span>Manifest</span>
           </a>
@@ -88,7 +88,7 @@
           </ul>
         </li> -->
 
-        <li class="treeview" [ngClass]="{'active': address_book === true}" *ngIf="user.role !== ROLE.AGENT">
+        <li class="treeview" [ngClass]="{'active': address_book === true}">
           <a href="#" (click)="onAddressBookClick()">
             <i class="fa fa-address-book"></i> <span>Address Book</span>
             <span class="pull-right-container">
@@ -96,10 +96,14 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li [ngClass]="{'active': menu === 'address-book-create'}"><a href="#"
-                (click)="goto('address-book-create', 'address-book/create')"><i class="fa fa-address-card"></i> Create New Address Book</a></li>
-            <li [ngClass]="{'active': menu === 'address-book-list'}"><a href="#"
-                (click)="goto('address-book-list', 'address-book/list')"><i class="fa fa-list-alt"></i> Address Book List</a></li>
+            <li [ngClass]="{'active': menu === 'address-book-create'}">
+              <a href="#" (click)="goto('address-book-create', 'address-book/create')">
+                <i class="fa fa-address-card"></i> Create New Address Book
+              </a>
+            </li>
+            <li [ngClass]="{'active': menu === 'address-book-list'}">
+              <a href="#" (click)="goto('address-book-list', 'address-book/list')"><i class="fa fa-list-alt"></i> Address Book List</a>
+            </li>
           </ul>
         </li>
 
@@ -117,10 +121,12 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li [ngClass]="{'active': menu === 'retail-ops-retail-inbound'}"><a href="#"
-                (click)="goto('retail-ops-retail-inbound', 'retail-ops/retail-inbound')"><i class="fa fa-shopping-bag"></i> Retail Inbound</a></li>
-            <li [ngClass]="{'active': menu === 'retail-ops-loadsheet'}"><a href="#"
-                (click)="goto('retail-ops-loadsheet', 'retail-ops/loadsheet')"><i class="fa fa-list-alt"></i> Loadsheet</a></li>
+            <li [ngClass]="{'active': menu === 'retail-ops-retail-inbound'}">
+              <a href="#" (click)="goto('retail-ops-retail-inbound', 'retail-ops/retail-inbound')"><i class="fa fa-shopping-bag"></i> Retail Inbound</a>
+            </li>
+            <li [ngClass]="{'active': menu === 'retail-ops-loadsheet'}">
+              <a href="#" (click)="goto('retail-ops-loadsheet', 'retail-ops/loadsheet')"><i class="fa fa-list-alt"></i> Loadsheet</a>
+            </li>
           </ul>
         </li>
       </ul>
