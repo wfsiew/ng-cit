@@ -9,7 +9,8 @@ export class AppConstant {
   public static ROLE = {
     ADMIN: 'ADMIN',
     SUPERUSER: 'SUPERUSER',
-    USER: 'USER'
+    USER: 'USER',
+    AGENT: 'AGENT'
   }
 
   public static PRINT_TYPE = {

@@ -52,22 +52,22 @@
   <aside class="main-sidebar">
     <section class="sidebar">
       <ul class="sidebar-menu" data-widget="tree">
-        <li [ngClass]="{'active': menu === 'dashboard'}">
+        <li [ngClass]="{'active': menu === 'dashboard'}" *ngIf="user.role !== ROLE.AGENT">
           <a href="#" (click)="goto('dashboard', 'dashboard')">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
           </a>
         </li>
-        <li [ngClass]="{'active': menu === 'user-profile'}">
+        <li [ngClass]="{'active': menu === 'user-profile'}" *ngIf="user.role !== ROLE.AGENT">
           <a href="#" (click)="goto('user-profile', 'user-profile')">
             <i class="fa fa-user-circle-o"></i> <span>User Profile</span>
           </a>
         </li>
-        <li [ngClass]="{'active': menu === 'shipment'}">
+        <li [ngClass]="{'active': menu === 'shipment'}" *ngIf="user.role !== ROLE.AGENT">
           <a href="#" (click)="goto('shipment', 'shipment/list')">
             <i class="fa fa-user-circle-o"></i> <span>Shipment</span>
           </a>
         </li>
-        <li [ngClass]="{'active': menu === 'manifest'}">
+        <li [ngClass]="{'active': menu === 'manifest'}" *ngIf="user.role !== ROLE.AGENT">
           <a href="#" (click)="goto('manifest', 'manifest/list')">
             <i class="fa fa-file-text"></i> <span>Manifest</span>
           </a>
@@ -88,7 +88,7 @@
           </ul>
         </li> -->
 
-        <li class="treeview" [ngClass]="{'active': address_book === true}">
+        <li class="treeview" [ngClass]="{'active': address_book === true}" *ngIf="user.role !== ROLE.AGENT">
           <a href="#" (click)="onAddressBookClick()">
             <i class="fa fa-address-book"></i> <span>Address Book</span>
             <span class="pull-right-container">
@@ -103,13 +103,13 @@
           </ul>
         </li>
 
-        <li [ngClass]="{'active': menu === 'company'}" *ngIf="user.role !== ROLE.USER">
+        <li [ngClass]="{'active': menu === 'company'}" *ngIf="user.role !== ROLE.USER && user.role !== ROLE.AGENT">
           <a href="#" (click)="goto('company-list', 'company/list')">
             <i class="fa fa-user-circle-o"></i> <span>Company</span>
           </a>
         </li>
 
-        <li class="treeview" [ngClass]="{'active': retail_ops === true}">
+        <li class="treeview" [ngClass]="{'active': retail_ops === true}" *ngIf="user.role === ROLE.AGENT">
           <a href="#" (click)="onRetailOpsClick()">
             <i class="fa fa-shopping-bag"></i> <span>Retail Ops</span>
             <span class="pull-right-container">

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { LoginComponent } from 'src/app/components/login/login.component';
 import { ForgotPasswordComponent } from '../components/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from '../components/reset-password/reset-password.component';
@@ -40,7 +40,7 @@ const routes: Routes = [
   declarations: [],
   imports: [
     CommonModule,
-    RouterModule.forRoot(routes, { useHash: true, scrollPositionRestoration: 'top' })
+    RouterModule.forRoot(routes, { useHash: true, scrollPositionRestoration: 'top', preloadingStrategy: PreloadAllModules })
   ],
   exports: [RouterModule]
 })

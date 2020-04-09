@@ -58,6 +58,11 @@ export class MainDashboardComponent implements OnInit, OnDestroy {
   ngOnInit() {
     let user = this.authService.loadUser();
     this.role = user.role;
+    if (this.role === AppConstant.ROLE.AGENT) {
+      this.router.navigate(['/cit/retail-ops/retail-inbound']);
+      return;
+    }
+
     const s = localStorage.getItem('main-dashboard');
     if (!_.isNull(s)) {
       const o = JSON.parse(s);

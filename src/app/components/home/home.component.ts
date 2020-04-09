@@ -74,6 +74,11 @@ export class HomeComponent implements OnInit {
     this.authService.getUserDetails().subscribe((res: any) => {
       this.data = !_.isEmpty(res.data) ? res.data[0] : {};
     });
+
+    if (this.user.role === this.ROLE.AGENT) {
+      this.menu = 'retail-ops-retail-inbound';
+      this.retail_ops = true;
+    }
   }
 
   logout() {
@@ -92,6 +97,7 @@ export class HomeComponent implements OnInit {
 
   onRetailOpsClick() {
     this.retail_ops = !this.retail_ops;
+    return false;
   }
 
   goto(s, link) {

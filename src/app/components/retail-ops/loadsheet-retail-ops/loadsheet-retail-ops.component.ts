@@ -19,7 +19,7 @@ export class LoadsheetRetailOpsComponent implements OnInit {
   list = [];
   data: any = {};
   bsModalRef: BsModalRef;
-  search = 'LDFX17000134';
+  search = ''; //'LDFX17000134';
   username: string;
   company_id: string;
   onSearchDbKeyup: any;
@@ -37,10 +37,10 @@ export class LoadsheetRetailOpsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.load();
   }
 
   load() {
+    if (!this.search) return;
     this.loadUserDetails();
     this.isloading = true;
     this.manifestService.getManifestLoad(this.search).subscribe((res: any) => {
