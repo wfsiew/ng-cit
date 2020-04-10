@@ -107,13 +107,13 @@
           </ul>
         </li>
 
-        <li [ngClass]="{'active': menu === 'company'}" *ngIf="user.role !== ROLE.USER && user.role !== ROLE.AGENT">
+        <li [ngClass]="{'active': menu === 'company'}" *ngIf="user.role !== ROLE.USER">
           <a href="#" (click)="goto('company-list', 'company/list')">
             <i class="fa fa-user-circle-o"></i> <span>Company</span>
           </a>
         </li>
 
-        <li class="treeview" [ngClass]="{'active': retail_ops === true}" *ngIf="user.role === ROLE.AGENT">
+        <li class="treeview" [ngClass]="{'active': retail_ops === true}" *ngIf="user.role === ROLE.AGENT || user.role === ROLE.ADMIN">
           <a href="#" (click)="onRetailOpsClick()">
             <i class="fa fa-shopping-bag"></i> <span>Retail Ops</span>
             <span class="pull-right-container">
