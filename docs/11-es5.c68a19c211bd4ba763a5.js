@@ -1,1 +1,0 @@
-function _classCallCheck(n,c){if(!(n instanceof c))throw new TypeError("Cannot call a class as a function")}(window.webpackJsonp=window.webpackJsonp||[]).push([[11],{t5UX:function(n,c,a){"use strict";a.r(c),a.d(c,"ShipmentModule",(function(){return o}));var o=function n(){_classCallCheck(this,n)}}}]);
